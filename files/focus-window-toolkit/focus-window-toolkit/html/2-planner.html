@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Focus Window</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a1710;--bg2:#0e1f16;--panel:#12241a;--panel2:#162c20;--line:#254234;
+    --gold:#e8c86a;--gold-deep:#d4af37;--cream:#f3ead6;--sage:#8fae97;--sage-dim:#6a8873;
+    --work:#2f7d52;--work-lo:#1f5c3b;--break:#d4af37;--spare:#3a4a40;--clay:#c47a45;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:radial-gradient(120% 80% at 50% -10%, #123322 0%, var(--bg) 55%) fixed;
+    color:var(--cream);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.45;
+    padding:22px 16px 70px;max-width:640px;margin:0 auto;
+  }
+  .eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:700;margin:0 0 6px}
+  h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:2.15rem;line-height:1.02;margin:0 0 8px;letter-spacing:-.01em}
+  h1 span{color:var(--gold)}
+  .sub{color:var(--sage);font-size:.92rem;margin:0 0 22px}
+
+  .card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:16px 15px;margin-bottom:14px}
+  .lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);font-weight:700;margin:0 0 12px}
+
+  /* segmented mode toggle */
+  .seg-tog{display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:11px;padding:3px;margin-bottom:14px}
+  .seg-tog button{flex:1;appearance:none;border:0;background:transparent;color:var(--sage);font:inherit;font-weight:600;font-size:.86rem;padding:8px;border-radius:8px;cursor:pointer}
+  .seg-tog button.on{background:var(--gold);color:#1c1405}
+
+  .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  input[type="time"],.num{
+    background:var(--bg2);border:1px solid var(--line);color:var(--cream);font:inherit;
+    font-size:1.05rem;font-weight:600;padding:10px 12px;border-radius:11px;
+  }
+  input[type="time"]{color-scheme:dark}
+  .num{width:74px;text-align:center}
+  .hint{color:var(--sage-dim);font-size:.82rem}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{appearance:none;border:1px solid var(--line);background:var(--bg2);color:var(--cream);font:inherit;font-size:.88rem;font-weight:600;padding:8px 12px;border-radius:999px;cursor:pointer;transition:transform .06s,background .15s,border-color .15s;-webkit-tap-highlight-color:transparent}
+  .chip:active{transform:scale(.96)}
+  .chip.on{background:var(--gold);color:#1c1405;border-color:var(--gold)}
+  .chip .s{font-weight:600;font-size:.72rem;opacity:.7;margin-left:4px}
+  .chip.on .s{opacity:.85}
+
+  .toggle{display:flex;align-items:center;gap:11px;margin-top:14px;color:var(--sage);font-size:.85rem;cursor:pointer;user-select:none}
+  .switch{position:relative;width:44px;height:25px;border-radius:999px;background:var(--spare);border:1px solid var(--line);flex:none;transition:background .18s}
+  .switch::after{content:"";position:absolute;top:2px;left:2px;width:19px;height:19px;border-radius:50%;background:var(--cream);transition:left .18s}
+  .toggle.on .switch{background:var(--gold)}
+  .toggle.on .switch::after{left:21px}
+
+  .window-line{font-size:.92rem;color:var(--sage);margin:2px 0 0}
+  .window-line b{color:var(--gold)}
+  .window-line.warn b{color:var(--clay)}
+
+  /* blocks */
+  .add-row{display:flex;gap:9px}
+  .add-row input.text{flex:1;background:var(--bg2);border:1px solid var(--line);color:var(--cream);font:inherit;font-size:.98rem;padding:11px 13px;border-radius:11px}
+  .add-row input.text::placeholder{color:var(--sage-dim)}
+  .add-btn{appearance:none;border:0;background:var(--gold);color:#1c1405;font:inherit;font-weight:800;font-size:.9rem;padding:0 16px;border-radius:11px;cursor:pointer}
+  .add-btn:active{transform:scale(.97)}
+
+  ul.blocks{list-style:none;margin:13px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+  ul.blocks li{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--line);border-radius:11px;padding:9px 10px 9px 12px}
+  ul.blocks .idx{font-variant-numeric:tabular-nums;font-weight:800;color:var(--gold-deep);font-size:.9rem;min-width:16px}
+  ul.blocks .txt{flex:1;font-size:.95rem;color:var(--cream);word-break:break-word}
+  ul.blocks .mini{appearance:none;border:1px solid var(--line);background:transparent;color:var(--sage);width:30px;height:30px;border-radius:8px;font-size:1rem;line-height:1;cursor:pointer;flex:none}
+  ul.blocks .mini:active{transform:scale(.92)}
+  ul.blocks .mini.del{color:var(--clay)}
+  .empty-blocks{color:var(--sage-dim);font-size:.86rem;font-style:italic;margin:13px 0 0}
+  .blocks-foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+  .clearall{appearance:none;border:0;background:transparent;color:var(--sage-dim);font:inherit;font-size:.78rem;text-decoration:underline;cursor:pointer}
+  .held{color:var(--sage-dim);font-size:.75rem}
+
+  /* plan */
+  .plan-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:4px}
+  .plan-sum{color:var(--sage);font-size:.86rem;margin:0 0 14px}
+  .plan-sum b{color:var(--gold)}
+  ol.plan{list-style:none;margin:0;padding:0;position:relative}
+  ol.plan li{display:flex;gap:13px;padding:0 0 2px}
+  .time{font-variant-numeric:tabular-nums;font-size:.8rem;color:var(--sage);min-width:118px;padding-top:11px;white-space:nowrap}
+  .time .to{color:var(--sage-dim)}
+  .body{flex:1;padding:10px 0 12px;border-bottom:1px solid var(--line)}
+  li:last-child .body{border-bottom:0}
+  .b-work{display:flex;align-items:center;gap:9px}
+  .dot{width:9px;height:9px;border-radius:50%;flex:none}
+  .dot.w{background:var(--work)}.dot.b{background:var(--break)}
+  .b-label{font-size:1rem;font-weight:600;color:var(--cream)}
+  .b-label.open{color:var(--sage-dim);font-weight:500;font-style:italic}
+  .b-tag{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--sage-dim);font-weight:700;margin-top:1px}
+  .b-break{display:flex;align-items:center;gap:9px;color:var(--gold-deep);font-size:.85rem;font-weight:600}
+  .overflow{background:var(--bg2);border:1px dashed var(--clay);border-radius:12px;padding:12px 13px;margin-top:14px;color:var(--clay);font-size:.86rem}
+  .overflow b{color:var(--cream)}
+  .overflow ul{margin:7px 0 0;padding-left:18px;color:var(--cream)}
+  .msg{color:var(--sage-dim);font-size:.92rem;font-style:italic;padding:6px 0}
+
+  .note{color:var(--sage-dim);font-size:.77rem;line-height:1.55;margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+  .note b{color:var(--sage)}
+</style>
+</head>
+<body>
+  <p class="eyebrow">Plan the window</p>
+  <h1>Focus <span>Window</span></h1>
+  <p class="sub">Set when you have to stop. List what you want to get through. It lays them onto timed sessions and holds your list for next time.</p>
+
+  <!-- WINDOW -->
+  <div class="card">
+    <p class="lbl">The window</p>
+    <div class="seg-tog" id="modeTog">
+      <button data-mode="until" class="on">Until a time</button>
+      <button data-mode="length">For a length</button>
+    </div>
+
+    <div id="untilPane" class="row">
+      <span class="hint">Free until</span>
+      <input type="time" id="untilInput">
+    </div>
+    <div id="lengthPane" class="row" style="display:none">
+      <span class="hint">I have</span>
+      <input class="num" id="hh" type="number" min="0" max="24" inputmode="numeric" aria-label="hours"><span class="hint">h</span>
+      <input class="num" id="mm" type="number" min="0" max="59" inputmode="numeric" aria-label="minutes"><span class="hint">m</span>
+    </div>
+
+    <div style="margin-top:14px">
+      <p class="lbl" style="margin-bottom:9px">Buffer at the end</p>
+      <div class="chips" id="bufChips"></div>
+    </div>
+
+    <p class="window-line" id="windowLine" style="margin-top:15px"></p>
+  </div>
+
+  <!-- STYLE -->
+  <div class="card">
+    <p class="lbl">Session style</p>
+    <div class="chips" id="cfgChips"></div>
+    <div class="toggle" id="restToggle" role="switch" aria-checked="false" tabindex="0">
+      <span class="switch"></span><span>Rest after the last session too</span>
+    </div>
+  </div>
+
+  <!-- BLOCKS -->
+  <div class="card">
+    <p class="lbl">Your blocks</p>
+    <div class="add-row">
+      <input class="text" id="blockInput" placeholder="What's a session for?" enterkeyhint="done" maxlength="80">
+      <button class="add-btn" id="addBtn">Add</button>
+    </div>
+    <ul class="blocks" id="blockList"></ul>
+    <p class="empty-blocks" id="emptyBlocks">No blocks yet. Add what you want to get through — top of the list runs first.</p>
+    <div class="blocks-foot">
+      <span class="held" id="heldNote"></span>
+      <button class="clearall" id="clearAll" style="display:none">Clear all</button>
+    </div>
+  </div>
+
+  <!-- PLAN -->
+  <div class="card">
+    <div class="plan-head"><p class="lbl" style="margin:0">The run</p></div>
+    <p class="plan-sum" id="planSum"></p>
+    <div id="planBody"></div>
+  </div>
+
+  <p class="note">
+    <b>How it fills:</b> sessions run from now to your stop time, back to back with a break between each. Your blocks drop onto them in order — first block, first session. Leftover sessions read <i>open focus</i>; blocks that don't fit get flagged to carry into the next window. The trailing break is dropped by default so you're not resting on the way out the door.
+    <br><br><b>Holding your list:</b> blocks save in this browser and reload when you come back. Open or host this as a real page and they stick; some in-app previews won't keep them.
+  </p>
+
+<script>
+  const CONFIGS = [
+    {name:"Sprint",    work:15, brk:5},
+    {name:"Classic",   work:25, brk:5},
+    {name:"Half hour", work:30, brk:5},
+    {name:"Deep 45",   work:45, brk:15},
+    {name:"Deep 50",   work:50, brk:10},
+    {name:"52 / 17",   work:52, brk:17},
+    {name:"Long haul", work:90, brk:20},
+  ];
+  const BUFFERS = [0,5,10,15];
+
+  // ---- tiny persistent store (localStorage, memory fallback) ----
+  const mem = {};
+  const store = {
+    get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v);}catch(e){ return (k in mem)?mem[k]:d; } },
+    set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){ mem[k]=v; } }
+  };
+
+  const state = {
+    mode:  store.get("pf.mode","until"),
+    lenH:  store.get("pf.lenH",1),
+    lenM:  store.get("pf.lenM",50),
+    until: store.get("pf.until",""),
+    buffer:store.get("pf.buffer",10),
+    cfg:   store.get("pf.cfg",1),          // index into CONFIGS
+    restLast: store.get("pf.restLast",false),
+    blocks: store.get("pf.blocks",[]),
+  };
+
+  const fmt = m => { m=Math.round(m); const h=Math.floor(m/60),r=m%60;
+    return h&&r?`${h}h ${r}m`:h?`${h}h`:`${r}m`; };
+  const addMin = (d,m)=> new Date(d.getTime()+m*60000);
+  const clock = d => d.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+
+  // window in minutes from now
+  function windowMinutes(){
+    if(state.mode==="length"){
+      return Math.max(state.lenH*60 + state.lenM - state.buffer, 0);
+    }
+    if(!state.until) return null;
+    const now = new Date();
+    const [H,M] = state.until.split(":").map(Number);
+    const target = new Date(now); target.setHours(H,M,0,0);
+    const raw = (target - now)/60000;
+    return raw; // may be <=0; handled by caller
+  }
+
+  function compute(work,brk,T,restLast){
+    if(work<=0||T<=0) return {n:0,breaks:0};
+    let n = restLast ? Math.floor(T/(work+brk)) : Math.floor((T+brk)/(work+brk));
+    if(n<0) n=0;
+    return {n, breaks: restLast?n:Math.max(n-1,0)};
+  }
+
+  function render(){
+    renderWindow();
+    renderBlocks();
+    renderPlan();
+  }
+
+  // ---------- window card ----------
+  function renderWindow(){
+    document.querySelectorAll("#modeTog button").forEach(b=>b.classList.toggle("on",b.dataset.mode===state.mode));
+    document.getElementById("untilPane").style.display  = state.mode==="until" ?"flex":"none";
+    document.getElementById("lengthPane").style.display = state.mode==="length"?"flex":"none";
+    document.getElementById("untilInput").value = state.until;
+    if(document.activeElement!==document.getElementById("hh")) document.getElementById("hh").value = state.lenH||"";
+    if(document.activeElement!==document.getElementById("mm")) document.getElementById("mm").value = (state.lenM||state.lenM===0)?state.lenM:"";
+
+    document.querySelectorAll("#bufChips .chip").forEach(c=>c.classList.toggle("on",+c.dataset.b===state.buffer));
+    document.querySelectorAll("#cfgChips .chip").forEach(c=>c.classList.toggle("on",+c.dataset.i===state.cfg));
+    document.getElementById("restToggle").classList.toggle("on",state.restLast);
+
+    const line = document.getElementById("windowLine");
+    const raw = windowMinutes();
+    if(raw===null){ line.className="window-line"; line.innerHTML="Set a stop time to build the run."; return; }
+    if(state.mode==="until" && raw<=0){ line.className="window-line warn"; line.innerHTML="That time's already gone by today — pick a later one, or switch to <b>For a length</b>."; return; }
+    if(state.mode==="until"){
+      const usable = Math.max(raw - state.buffer,0);
+      const stop = addMin(new Date(), usable);
+      line.className="window-line";
+      line.innerHTML = state.buffer
+        ? `Now → stop by <b>${clock(new Date(new Date().getTime()+raw*60000))}</b>, minus ${state.buffer}m buffer = <b>${fmt(usable)}</b> to work.`
+        : `Now → <b>${clock(new Date(new Date().getTime()+raw*60000))}</b> = <b>${fmt(usable)}</b> to work.`;
+    } else {
+      line.className="window-line";
+      line.innerHTML = `<b>${fmt(raw)}</b> to work${state.buffer?` (after a ${state.buffer}m buffer)`:``}.`;
+    }
+  }
+
+  // ---------- blocks card ----------
+  function renderBlocks(){
+    const ul=document.getElementById("blockList");
+    ul.innerHTML = state.blocks.map((b,i)=>`
+      <li>
+        <span class="idx">${i+1}</span>
+        <span class="txt">${escapeHtml(b)}</span>
+        <button class="mini" data-up="${i}" ${i===0?'disabled style="opacity:.3"':''} aria-label="move up">▲</button>
+        <button class="mini del" data-del="${i}" aria-label="remove">✕</button>
+      </li>`).join("");
+    document.getElementById("emptyBlocks").style.display = state.blocks.length?"none":"block";
+    document.getElementById("clearAll").style.display = state.blocks.length?"inline":"none";
+    document.getElementById("heldNote").textContent = state.blocks.length?`${state.blocks.length} held`:"";
+  }
+
+  // ---------- plan card ----------
+  function renderPlan(){
+    const sum=document.getElementById("planSum"), body=document.getElementById("planBody");
+    const W = windowMinutes();
+    const usable = W===null?null:Math.max((state.mode==="until"?W:W) - (state.mode==="until"?state.buffer:0),0);
+    if(usable===null || (state.mode==="until"&&W<=0)){ sum.textContent=""; body.innerHTML=`<p class="msg">Set the window above and this fills in.</p>`; return; }
+
+    const c=CONFIGS[state.cfg];
+    const {n,breaks}=compute(c.work,c.brk,usable,state.restLast);
+    if(n===0){ sum.textContent=""; body.innerHTML=`<p class="msg">One ${c.work}-minute session won't fit in ${fmt(usable)}. Shorten the style or widen the window.</p>`; return; }
+
+    // build timed segments starting now
+    let t=new Date();
+    let out=[]; const assigned=Math.min(n,state.blocks.length);
+    for(let i=0;i<n;i++){
+      const wEnd=addMin(t,c.work);
+      const label = state.blocks[i] || null;
+      out.push(`<li>
+        <div class="time">${clock(t)} <span class="to">– ${clock(wEnd)}</span></div>
+        <div class="body">
+          <div class="b-work"><span class="dot w"></span>
+            <div><div class="b-label ${label?'':'open'}">${label?escapeHtml(label):'Open focus'}</div>
+            <div class="b-tag">Session ${i+1} · ${c.work}m</div></div>
+          </div>
+        </div></li>`);
+      t=wEnd;
+      const needBreak = state.restLast ? true : (i<n-1);
+      if(needBreak){
+        const bEnd=addMin(t,c.brk);
+        out.push(`<li>
+          <div class="time">${clock(t)} <span class="to">– ${clock(bEnd)}</span></div>
+          <div class="body"><div class="b-break"><span class="dot b"></span>Break · ${c.brk}m</div></div>
+        </li>`);
+        t=bEnd;
+      }
+    }
+
+    sum.innerHTML = `<b>${n}</b> session${n>1?'s':''} · <b>${breaks}</b> break${breaks!==1?'s':''} · <b>${fmt(n*c.work)}</b> focus · done by <b>${clock(t)}</b>`;
+
+    let overflow="";
+    const left = state.blocks.length - n;
+    if(left>0){
+      overflow=`<div class="overflow"><b>${left} block${left>1?'s':''} won't fit this window</b> — carry into the next one:
+        <ul>${state.blocks.slice(n).map(b=>`<li>${escapeHtml(b)}</li>`).join("")}</ul></div>`;
+    } else if(state.blocks.length>0 && assigned<n){
+      overflow=`<div class="overflow" style="border-color:var(--line);color:var(--sage)">${n-assigned} open session${n-assigned>1?'s':''} past your list — spare focus, or add more blocks above.</div>`;
+    }
+
+    body.innerHTML = `<ol class="plan">${out.join("")}</ol>${overflow}`;
+  }
+
+  function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+  // ---- build static chips ----
+  document.getElementById("bufChips").innerHTML = BUFFERS.map(b=>`<button class="chip" data-b="${b}">${b?b+'m':'None'}</button>`).join("");
+  document.getElementById("cfgChips").innerHTML = CONFIGS.map((c,i)=>`<button class="chip" data-i="${i}">${c.name}<span class="s">${c.work}/${c.brk}</span></button>`).join("");
+
+  // ---- events ----
+  document.getElementById("modeTog").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;state.mode=b.dataset.mode;store.set("pf.mode",state.mode);render();});
+  document.getElementById("untilInput").addEventListener("input",e=>{state.until=e.target.value;store.set("pf.until",state.until);render();});
+  document.getElementById("hh").addEventListener("input",e=>{state.lenH=Math.max(0,Math.min(24,+e.target.value||0));store.set("pf.lenH",state.lenH);render();});
+  document.getElementById("mm").addEventListener("input",e=>{state.lenM=Math.max(0,Math.min(59,+e.target.value||0));store.set("pf.lenM",state.lenM);render();});
+  document.getElementById("bufChips").addEventListener("click",e=>{const c=e.target.closest(".chip");if(!c)return;state.buffer=+c.dataset.b;store.set("pf.buffer",state.buffer);render();});
+  document.getElementById("cfgChips").addEventListener("click",e=>{const c=e.target.closest(".chip");if(!c)return;state.cfg=+c.dataset.i;store.set("pf.cfg",state.cfg);render();});
+
+  const rt=document.getElementById("restToggle");
+  function togRest(){state.restLast=!state.restLast;rt.setAttribute("aria-checked",state.restLast);store.set("pf.restLast",state.restLast);render();}
+  rt.addEventListener("click",togRest);
+  rt.addEventListener("keydown",e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();togRest();}});
+
+  const input=document.getElementById("blockInput");
+  function addBlock(){const v=input.value.trim();if(!v)return;state.blocks.push(v);store.set("pf.blocks",state.blocks);input.value="";input.focus();render();}
+  document.getElementById("addBtn").addEventListener("click",addBlock);
+  input.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();addBlock();}});
+
+  document.getElementById("blockList").addEventListener("click",e=>{
+    const del=e.target.closest("[data-del]"), up=e.target.closest("[data-up]");
+    if(del){const i=+del.dataset.del;state.blocks.splice(i,1);}
+    else if(up){const i=+up.dataset.up;if(i>0){[state.blocks[i-1],state.blocks[i]]=[state.blocks[i],state.blocks[i-1]];}}
+    else return;
+    store.set("pf.blocks",state.blocks);render();
+  });
+  document.getElementById("clearAll").addEventListener("click",()=>{state.blocks=[];store.set("pf.blocks",state.blocks);render();});
+
+  // default the time input to +2h rounded if nothing saved
+  if(state.mode==="until" && !state.until){
+    const d=addMin(new Date(),110); d.setSeconds(0,0);
+    state.until=`${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+  }
+
+  render();
+  // keep clock-relative lines honest if the tab sits open
+  setInterval(()=>{ if(!document.querySelector("input:focus")) render(); }, 30000);
+</script>
+</body>
+</html>
