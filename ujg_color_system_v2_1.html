@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UJG Color System v2.0</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0A0A0A; color:#E8E6E1; font-family:'Segoe UI',system-ui,-apple-system,sans-serif; padding:48px 44px 72px; line-height:1.45; }
+  .kicker { font-size:11px; letter-spacing:4px; text-transform:uppercase; color:#A8A5A0; }
+  h1 { font-size:34px; letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-top:8px; }
+  h1 .g { color:#F2B01E; }
+  .lead { color:#A8A5A0; font-size:14px; margin-top:10px; max-width:760px; }
+  h2 { font-size:13px; letter-spacing:3px; text-transform:uppercase; color:#F2B01E; margin:56px 0 22px; font-weight:600; border-bottom:1px solid #262626; padding-bottom:11px; }
+  /* core cards */
+  .cards { display:flex; flex-direction:column; gap:18px; }
+  .card { display:flex; border:1px solid #232323; border-radius:14px; overflow:hidden; background:#111; }
+  .chip { width:220px; flex:none; position:relative; }
+  .chip .nm { position:absolute; left:18px; bottom:16px; font-size:19px; font-weight:700; letter-spacing:.3px; }
+  .chip .rl { position:absolute; left:18px; top:16px; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; opacity:.85; }
+  .vals { flex:1; padding:18px 22px; display:grid; grid-template-columns:repeat(2,1fr); gap:7px 30px; align-content:center; }
+  .v { display:flex; justify-content:space-between; gap:14px; font-size:12.5px; border-bottom:1px dotted #262626; padding-bottom:5px; }
+  .v .l { color:#8f8c86; letter-spacing:.5px; }
+  .v .d { font-family:ui-monospace,'SF Mono',monospace; color:#E8E6E1; text-align:right; }
+  .v .d.approx { color:#c9b98f; }
+  /* small functional */
+  .mini { display:flex; gap:16px; flex-wrap:wrap; }
+  .minicard { width:340px; border:1px solid #232323; border-radius:12px; overflow:hidden; background:#111; }
+  .minichip { height:64px; display:flex; align-items:center; padding-left:18px; font-weight:600; }
+  .minivals { padding:12px 16px; display:grid; grid-template-columns:repeat(2,1fr); gap:5px 22px; }
+  /* mapping */
+  table.map { width:100%; border-collapse:collapse; font-size:13px; }
+  table.map td { padding:9px 12px; border-bottom:1px solid #1e1e1e; }
+  table.map td:first-child { color:#A8A5A0; width:230px; }
+  .dot { display:inline-block; width:13px; height:13px; border-radius:3px; margin-right:9px; vertical-align:-1px; border:1px solid rgba(255,255,255,.15); }
+  .mono { font-family:ui-monospace,monospace; }
+  /* trios */
+  .trio { display:flex; flex-wrap:wrap; gap:20px; }
+  .tcard { width:320px; border:1px solid #232323; border-radius:12px; overflow:hidden; }
+  .tbars { display:flex; height:88px; }
+  .tbars span { flex:1; display:flex; align-items:flex-end; justify-content:center; padding-bottom:6px; font-size:9px; font-family:ui-monospace,monospace; }
+  .tlbl { padding:12px 15px 15px; background:#111; }
+  .tlbl .t { font-weight:600; font-size:14px; }
+  .tlbl .d { font-size:11px; color:#8f8c86; margin-top:4px; }
+  /* gradients */
+  .grid { display:flex; flex-wrap:wrap; gap:18px; }
+  .gcard { width:340px; border:1px solid #232323; border-radius:12px; overflow:hidden; }
+  .gband { height:82px; }
+  .glbl { padding:11px 15px 14px; background:#111; }
+  .glbl .t { font-weight:600; font-size:13.5px; }
+  .glbl .d { font-size:11px; color:#8f8c86; margin-top:3px; }
+  .glbl .r { font-size:10.5px; color:#6f6c66; margin-top:5px; font-family:ui-monospace,monospace; }
+  /* seasonal */
+  .season { display:flex; flex-wrap:wrap; gap:20px; }
+  .scard { width:340px; border:1px solid #232323; border-radius:12px; overflow:hidden; background:#111; }
+  .sbars { display:flex; height:60px; }
+  .sbars span { flex:1; }
+  .slbl { padding:11px 15px 14px; }
+  .slbl .t { font-weight:600; font-size:13.5px; }
+  .slbl .d { font-size:11px; color:#8f8c86; margin-top:3px; }
+  .note { font-size:12px; color:#8f8c86; background:#121212; border:1px solid #232323; border-left:3px solid #F2B01E; border-radius:8px; padding:14px 18px; margin-top:22px; max-width:900px; }
+  .rule { font-size:13px; color:#E8E6E1; background:rgba(242,176,30,.08); border:1px solid rgba(242,176,30,.3); border-radius:8px; padding:13px 18px; margin-top:20px; }
+</style>
+</head>
+<body>
+  <div class="kicker">Book 3 · The Canopy · 3B.1</div>
+  <h1>Urban Jungle <span class="g">Goddess</span> — Color System v2.0</h1>
+  <div class="lead">Locked Jul 29, 2026. Six core colors, each specified across ten value systems. Math systems (HEX, RGB, CMYK, HSB, HUE, LAB) are exact. RAL, Copic, HKS, and Prismacolor are nearest physical matches — verify on a fan deck before production.</div>
+
+  <h2>Core Palette — Full Values</h2>
+  <div class="cards">
+
+    <div class="card">
+      <div class="chip" style="background:#0A0A0A; border-right:1px solid #222;"><span class="rl" style="color:#A8A5A0;">Primary Base</span><span class="nm">Night</span></div>
+      <div class="vals">
+        <div class="v"><span class="l">HEX</span><span class="d">#0A0A0A</span></div>
+        <div class="v"><span class="l">HSB</span><span class="d">0&deg;, 0%, 4%</span></div>
+        <div class="v"><span class="l">RGB</span><span class="d">10, 10, 10</span></div>
+        <div class="v"><span class="l">HUE</span><span class="d">0&deg;</span></div>
+        <div class="v"><span class="l">CMYK</span><span class="d">0, 0, 0, 96</span></div>
+        <div class="v"><span class="l">LAB</span><span class="d">3, 0, 0</span></div>
+        <div class="v"><span class="l">RAL</span><span class="d approx">9005 Jet Black</span></div>
+        <div class="v"><span class="l">Copic</span><span class="d approx">100 Black</span></div>
+        <div class="v"><span class="l">HKS</span><span class="d approx">Process Black</span></div>
+        <div class="v"><span class="l">Prismacolor</span><span class="d approx">PC 935 Black</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chip" style="background:#47107D;"><span class="rl" style="color:#E8E6E1;">Tech &amp; Royal</span><span class="nm">Deep Amethyst</span></div>
+      <div class="vals">
+        <div class="v"><span class="l">HEX</span><span class="d">#47107D</span></div>
+        <div class="v"><span class="l">HSB</span><span class="d">270&deg;, 87%, 49%</span></div>
+        <div class="v"><span class="l">RGB</span><span class="d">71, 16, 125</span></div>
+        <div class="v"><span class="l">HUE</span><span class="d">270&deg;</span></div>
+        <div class="v"><span class="l">CMYK</span><span class="d">43, 87, 0, 51</span></div>
+        <div class="v"><span class="l">LAB</span><span class="d">21, 46, -50</span></div>
+        <div class="v"><span class="l">RAL</span><span class="d approx">4007 Purple Violet</span></div>
+        <div class="v"><span class="l">Copic</span><span class="d approx">V09 Violet</span></div>
+        <div class="v"><span class="l">HKS</span><span class="d approx">37 N</span></div>
+        <div class="v"><span class="l">Prismacolor</span><span class="d approx">PC 931 Dark Purple</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chip" style="background:#D9531A;"><span class="rl" style="color:#0A0A0A;">Energy &amp; Action</span><span class="nm" style="color:#0A0A0A;">Sunset Ember</span></div>
+      <div class="vals">
+        <div class="v"><span class="l">HEX</span><span class="d">#D9531A</span></div>
+        <div class="v"><span class="l">HSB</span><span class="d">18&deg;, 88%, 85%</span></div>
+        <div class="v"><span class="l">RGB</span><span class="d">217, 83, 26</span></div>
+        <div class="v"><span class="l">HUE</span><span class="d">18&deg;</span></div>
+        <div class="v"><span class="l">CMYK</span><span class="d">0, 62, 88, 15</span></div>
+        <div class="v"><span class="l">LAB</span><span class="d">53, 50, 56</span></div>
+        <div class="v"><span class="l">RAL</span><span class="d approx">2001 Red Orange</span></div>
+        <div class="v"><span class="l">Copic</span><span class="d approx">YR09 Chinese Orange</span></div>
+        <div class="v"><span class="l">HKS</span><span class="d approx">7 N</span></div>
+        <div class="v"><span class="l">Prismacolor</span><span class="d approx">PC 921 Pale Vermilion</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chip" style="background:#F2B01E;"><span class="rl" style="color:#0A0A0A;">Wealth &amp; Legacy</span><span class="nm" style="color:#0A0A0A;">Luminous Gold</span></div>
+      <div class="vals">
+        <div class="v"><span class="l">HEX</span><span class="d">#F2B01E</span></div>
+        <div class="v"><span class="l">HSB</span><span class="d">41&deg;, 88%, 95%</span></div>
+        <div class="v"><span class="l">RGB</span><span class="d">242, 176, 30</span></div>
+        <div class="v"><span class="l">HUE</span><span class="d">41&deg;</span></div>
+        <div class="v"><span class="l">CMYK</span><span class="d">0, 27, 88, 5</span></div>
+        <div class="v"><span class="l">LAB</span><span class="d">76, 13, 75</span></div>
+        <div class="v"><span class="l">RAL</span><span class="d approx">1028 Melon Yellow</span></div>
+        <div class="v"><span class="l">Copic</span><span class="d approx">Y17 Golden Yellow</span></div>
+        <div class="v"><span class="l">HKS</span><span class="d approx">5 N</span></div>
+        <div class="v"><span class="l">Prismacolor</span><span class="d approx">PC 1003 Spanish Orange</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chip" style="background:#0D5E39;"><span class="rl" style="color:#E8E6E1;">Nature Core</span><span class="nm">Rich Forest</span></div>
+      <div class="vals">
+        <div class="v"><span class="l">HEX</span><span class="d">#0D5E39</span></div>
+        <div class="v"><span class="l">HSB</span><span class="d">153&deg;, 86%, 37%</span></div>
+        <div class="v"><span class="l">RGB</span><span class="d">13, 94, 57</span></div>
+        <div class="v"><span class="l">HUE</span><span class="d">153&deg;</span></div>
+        <div class="v"><span class="l">CMYK</span><span class="d">86, 0, 39, 63</span></div>
+        <div class="v"><span class="l">LAB</span><span class="d">35, -33, 15</span></div>
+        <div class="v"><span class="l">RAL</span><span class="d approx">6016 Turquoise Green</span></div>
+        <div class="v"><span class="l">Copic</span><span class="d approx">G28 Ocean Green</span></div>
+        <div class="v"><span class="l">HKS</span><span class="d approx">58 N</span></div>
+        <div class="v"><span class="l">Prismacolor</span><span class="d approx">PC 908 Dark Green</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chip" style="background:#E8E6E1;"><span class="rl" style="color:#6f6c66;">Neutral &amp; Contrast</span><span class="nm" style="color:#0A0A0A;">Platinum</span></div>
+      <div class="vals">
+        <div class="v"><span class="l">HEX</span><span class="d">#E8E6E1</span></div>
+        <div class="v"><span class="l">HSB</span><span class="d">43&deg;, 3%, 91%</span></div>
+        <div class="v"><span class="l">RGB</span><span class="d">232, 230, 225</span></div>
+        <div class="v"><span class="l">HUE</span><span class="d">43&deg;</span></div>
+        <div class="v"><span class="l">CMYK</span><span class="d">0, 1, 3, 9</span></div>
+        <div class="v"><span class="l">LAB</span><span class="d">91, 0, 3</span></div>
+        <div class="v"><span class="l">RAL</span><span class="d approx">9003 Signal White</span></div>
+        <div class="v"><span class="l">Copic</span><span class="d approx">W-1 Warm Gray</span></div>
+        <div class="v"><span class="l">HKS</span><span class="d approx">Paper White</span></div>
+        <div class="v"><span class="l">Prismacolor</span><span class="d approx">PC 938 White</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <h2>Functional Support Colors</h2>
+  <div class="mini">
+    <div class="minicard">
+      <div class="minichip" style="background:#A8A5A0; color:#0A0A0A;">Muted Platinum · secondary text</div>
+      <div class="minivals">
+        <div class="v"><span class="l">HEX</span><span class="d">#A8A5A0</span></div>
+        <div class="v"><span class="l">HSB</span><span class="d">38&deg;, 5%, 66%</span></div>
+        <div class="v"><span class="l">RGB</span><span class="d">168,165,160</span></div>
+        <div class="v"><span class="l">CMYK</span><span class="d">0,2,5,34</span></div>
+        <div class="v"><span class="l">LAB</span><span class="d">68, 0, 3</span></div>
+        <div class="v"><span class="l">RAL</span><span class="d approx">7038 Agate Grey</span></div>
+      </div>
+    </div>
+    <div class="minicard">
+      <div class="minichip" style="background:#2E6B4F; color:#E8E6E1;">Rich Jungle Green · success</div>
+      <div class="minivals">
+        <div class="v"><span class="l">HEX</span><span class="d">#2E6B4F</span></div>
+        <div class="v"><span class="l">HSB</span><span class="d">152&deg;, 57%, 42%</span></div>
+        <div class="v"><span class="l">RGB</span><span class="d">46,107,79</span></div>
+        <div class="v"><span class="l">CMYK</span><span class="d">57,0,26,58</span></div>
+        <div class="v"><span class="l">LAB</span><span class="d">41, -27, 10</span></div>
+        <div class="v"><span class="l">RAL</span><span class="d approx">6000 Patina Green</span></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Extended Palette — Earth Tones (Secondary)</h2>
+  <div class="legend">A warm, organic secondary set for the Amazonia register, wellness / ancestral collateral, and the Fall mood. Held distinct from the core 6 so the tech-forward core stays tight. Math systems exact; RAL / Copic / HKS / Prismacolor are nearest matches — confirm on a fan deck.</div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="chip" style="background:#042F1E;"><span class="rl" style="color:#E8E6E1;">Deepest Forest</span><span class="nm">Midnight Forest</span></div>
+      <div class="vals">
+        <div class="v"><span class="l">HEX</span><span class="d">#042F1E</span></div>
+        <div class="v"><span class="l">HSB</span><span class="d">156, 91, 18</span></div>
+        <div class="v"><span class="l">RGB</span><span class="d">4, 47, 30</span></div>
+        <div class="v"><span class="l">HSL</span><span class="d">156, 84, 10</span></div>
+        <div class="v"><span class="l">CMYK</span><span class="d">84, 51, 81, 68</span></div>
+        <div class="v"><span class="l">LAB</span><span class="d">16, -18, 7</span></div>
+        <div class="v"><span class="l">RAL</span><span class="d approx">6009 Fir Green</span></div>
+        <div class="v"><span class="l">Copic</span><span class="d approx">G99 Olive</span></div>
+        <div class="v"><span class="l">HKS</span><span class="d approx">63 N</span></div>
+        <div class="v"><span class="l">Prismacolor</span><span class="d approx">PC908 Dark Green</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chip" style="background:#C15C27;"><span class="rl" style="color:#0A0A0A;">Burnt Clay</span><span class="nm" style="color:#0A0A0A;">Clay Ember</span></div>
+      <div class="vals">
+        <div class="v"><span class="l">HEX</span><span class="d">#C15C27</span></div>
+        <div class="v"><span class="l">HSB</span><span class="d">21, 80, 76</span></div>
+        <div class="v"><span class="l">RGB</span><span class="d">193, 92, 39</span></div>
+        <div class="v"><span class="l">HSL</span><span class="d">21, 66, 54</span></div>
+        <div class="v"><span class="l">CMYK</span><span class="d">18, 75, 100, 6</span></div>
+        <div class="v"><span class="l">LAB</span><span class="d">51, 39, 49</span></div>
+        <div class="v"><span class="l">RAL</span><span class="d approx">8023 Orange Brown</span></div>
+        <div class="v"><span class="l">Copic</span><span class="d approx">YR07 Cadmium Orange</span></div>
+        <div class="v"><span class="l">HKS</span><span class="d approx">8 N</span></div>
+        <div class="v"><span class="l">Prismacolor</span><span class="d approx">PC943 Burnt Ochre</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chip" style="background:#E1A443;"><span class="rl" style="color:#0A0A0A;">Soft Amber</span><span class="nm" style="color:#0A0A0A;">Harvest Gold</span></div>
+      <div class="vals">
+        <div class="v"><span class="l">HEX</span><span class="d">#E1A443</span></div>
+        <div class="v"><span class="l">HSB</span><span class="d">37, 70, 88</span></div>
+        <div class="v"><span class="l">RGB</span><span class="d">225, 164, 67</span></div>
+        <div class="v"><span class="l">HSL</span><span class="d">37, 72, 57</span></div>
+        <div class="v"><span class="l">CMYK</span><span class="d">11, 38, 87, 0</span></div>
+        <div class="v"><span class="l">LAB</span><span class="d">72, 17, 58</span></div>
+        <div class="v"><span class="l">RAL</span><span class="d approx">1024 Ochre Yellow</span></div>
+        <div class="v"><span class="l">Copic</span><span class="d approx">Y17 Golden Yellow</span></div>
+        <div class="v"><span class="l">HKS</span><span class="d approx">4 N</span></div>
+        <div class="v"><span class="l">Prismacolor</span><span class="d approx">PC942 Yellow Ochre</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chip" style="background:#587156;"><span class="rl" style="color:#E8E6E1;">Herbal Neutral</span><span class="nm">Sage</span></div>
+      <div class="vals">
+        <div class="v"><span class="l">HEX</span><span class="d">#587156</span></div>
+        <div class="v"><span class="l">HSB</span><span class="d">116, 24, 44</span></div>
+        <div class="v"><span class="l">RGB</span><span class="d">88, 113, 86</span></div>
+        <div class="v"><span class="l">HSL</span><span class="d">116, 14, 39</span></div>
+        <div class="v"><span class="l">CMYK</span><span class="d">65, 39, 71, 21</span></div>
+        <div class="v"><span class="l">LAB</span><span class="d">45, -13, 12</span></div>
+        <div class="v"><span class="l">RAL</span><span class="d approx">6013 Reed Green</span></div>
+        <div class="v"><span class="l">Copic</span><span class="d approx">G85 Verdigris</span></div>
+        <div class="v"><span class="l">HKS</span><span class="d approx">61 N</span></div>
+        <div class="v"><span class="l">Prismacolor</span><span class="d approx">PC1090 Kelp Green</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chip" style="background:#E28D1F;"><span class="rl" style="color:#0A0A0A;">Warm Accent</span><span class="nm" style="color:#0A0A0A;">Marigold</span></div>
+      <div class="vals">
+        <div class="v"><span class="l">HEX</span><span class="d">#E28D1F</span></div>
+        <div class="v"><span class="l">HSB</span><span class="d">34, 86, 89</span></div>
+        <div class="v"><span class="l">RGB</span><span class="d">226, 141, 31</span></div>
+        <div class="v"><span class="l">HSL</span><span class="d">34, 77, 50</span></div>
+        <div class="v"><span class="l">CMYK</span><span class="d">9, 51, 100, 0</span></div>
+        <div class="v"><span class="l">LAB</span><span class="d">67, 28, 66</span></div>
+        <div class="v"><span class="l">RAL</span><span class="d approx">2000 Yellow Orange</span></div>
+        <div class="v"><span class="l">Copic</span><span class="d approx">YR15 Pumpkin Yellow</span></div>
+        <div class="v"><span class="l">HKS</span><span class="d approx">5 N</span></div>
+        <div class="v"><span class="l">Prismacolor</span><span class="d approx">PC1003 Spanish Orange</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chip" style="background:#F7DFC0;"><span class="rl" style="color:#6f6c66;">Warm Light</span><span class="nm" style="color:#0A0A0A;">Warm Sand</span></div>
+      <div class="vals">
+        <div class="v"><span class="l">HEX</span><span class="d">#F7DFC0</span></div>
+        <div class="v"><span class="l">HSB</span><span class="d">34, 22, 97</span></div>
+        <div class="v"><span class="l">RGB</span><span class="d">247, 223, 192</span></div>
+        <div class="v"><span class="l">HSL</span><span class="d">34, 77, 86</span></div>
+        <div class="v"><span class="l">CMYK</span><span class="d">2, 13, 25, 0</span></div>
+        <div class="v"><span class="l">LAB</span><span class="d">90, 6, 19</span></div>
+        <div class="v"><span class="l">RAL</span><span class="d approx">1015 Light Ivory</span></div>
+        <div class="v"><span class="l">Copic</span><span class="d approx">E51 Milky White</span></div>
+        <div class="v"><span class="l">HKS</span><span class="d approx">84 N</span></div>
+        <div class="v"><span class="l">Prismacolor</span><span class="d approx">PC1012 Jasmine</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chip" style="background:#B04720;"><span class="rl" style="color:#E8E6E1;">Grounded Earth</span><span class="nm">Terracotta</span></div>
+      <div class="vals">
+        <div class="v"><span class="l">HEX</span><span class="d">#B04720</span></div>
+        <div class="v"><span class="l">HSB</span><span class="d">16, 82, 69</span></div>
+        <div class="v"><span class="l">RGB</span><span class="d">176, 71, 32</span></div>
+        <div class="v"><span class="l">HSL</span><span class="d">16, 69, 41</span></div>
+        <div class="v"><span class="l">CMYK</span><span class="d">22, 84, 100, 13</span></div>
+        <div class="v"><span class="l">LAB</span><span class="d">45, 43, 45</span></div>
+        <div class="v"><span class="l">RAL</span><span class="d approx">8004 Copper Brown</span></div>
+        <div class="v"><span class="l">Copic</span><span class="d approx">E08 Brown</span></div>
+        <div class="v"><span class="l">HKS</span><span class="d approx">9 N</span></div>
+        <div class="v"><span class="l">Prismacolor</span><span class="d approx">PC945 Sienna Brown</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <h2>Functional Mapping</h2>
+  <table class="map">
+    <tr><td>Primary — logos, headers</td><td><span class="dot" style="background:#0A0A0A;"></span>Night <span class="mono">#0A0A0A</span></td></tr>
+    <tr><td>Secondary — key UI, accents</td><td><span class="dot" style="background:#47107D;"></span>Deep Amethyst <span class="mono">#47107D</span></td></tr>
+    <tr><td>Accent — highlights, links</td><td><span class="dot" style="background:#F2B01E;"></span>Luminous Gold <span class="mono">#F2B01E</span></td></tr>
+    <tr><td>CTA / Action</td><td><span class="dot" style="background:#D9531A;"></span>Sunset Ember <span class="mono">#D9531A</span></td></tr>
+    <tr><td>Neutral Dark — text, borders</td><td><span class="dot" style="background:#0D5E39;"></span>Rich Forest <span class="mono">#0D5E39</span></td></tr>
+    <tr><td>Neutral Mid — secondary text</td><td><span class="dot" style="background:#A8A5A0;"></span>Muted Platinum <span class="mono">#A8A5A0</span></td></tr>
+    <tr><td>Neutral Light — backgrounds</td><td><span class="dot" style="background:#E8E6E1;"></span>Platinum <span class="mono">#E8E6E1</span></td></tr>
+    <tr><td>Success</td><td><span class="dot" style="background:#2E6B4F;"></span>Rich Jungle Green <span class="mono">#2E6B4F</span></td></tr>
+    <tr><td>Warning</td><td><span class="dot" style="background:#F2B01E;"></span>Luminous Gold <span class="mono">#F2B01E</span></td></tr>
+    <tr><td>Error / Urgent</td><td><span class="dot" style="background:#D9531A;"></span>Sunset Ember <span class="mono">#D9531A</span></td></tr>
+    <tr><td>Info</td><td><span class="dot" style="background:#47107D;"></span>Deep Amethyst <span class="mono">#47107D</span></td></tr>
+  </table>
+  <div class="rule">Golden Rule — Never use more than 3 colors in a single design element.</div>
+
+  <h2>Color Schemes — 20 Trios</h2>
+  <div class="trio">
+    <div class="tcard">
+      <div class="tbars"><span style="background:#47107D; color:#fff;">47107D</span><span style="background:#F2B01E; color:#0A0A0A;">F2B01E</span><span style="background:#0A0A0A; color:#fff;">0A0A0A</span></div>
+      <div class="tlbl"><div class="t">01 · Afro-Futurist Royal</div><div class="d">Amethyst + Gold + Night — flagship brand visuals, authority, decks</div></div>
+    </div>
+    <div class="tcard">
+      <div class="tbars"><span style="background:#0D5E39; color:#fff;">0D5E39</span><span style="background:#F2B01E; color:#0A0A0A;">F2B01E</span><span style="background:#E8E6E1; color:#0A0A0A;">E8E6E1</span></div>
+      <div class="tlbl"><div class="t">02 · Urban Jungle Grounded</div><div class="d">Rich Forest + Gold + Platinum — wellness, ancestral, eco, light collateral</div></div>
+    </div>
+    <div class="tcard">
+      <div class="tbars"><span style="background:#D9531A; color:#0A0A0A;">D9531A</span><span style="background:#47107D; color:#fff;">47107D</span><span style="background:#0A0A0A; color:#fff;">0A0A0A</span></div>
+      <div class="tlbl"><div class="t">03 · Sunset Rebellion</div><div class="d">Ember + Amethyst + Night — campaigns, launches, provocation</div></div>
+    </div>
+    <div class="tcard">
+      <div class="tbars"><span style="background:#47107D; color:#fff;">47107D</span><span style="background:#E8E6E1; color:#0A0A0A;">E8E6E1</span><span style="background:#0A0A0A; color:#fff;">0A0A0A</span></div>
+      <div class="tlbl"><div class="t">04 · Vibranium Court</div><div class="d">Amethyst + Platinum + Night — premium dark UI, nav bars, elegant tech surfaces</div></div>
+    </div>
+    <div class="tcard">
+      <div class="tbars"><span style="background:#F2B01E; color:#0A0A0A;">F2B01E</span><span style="background:#D9531A; color:#0A0A0A;">D9531A</span><span style="background:#0A0A0A; color:#fff;">0A0A0A</span></div>
+      <div class="tlbl"><div class="t">05 · Solar Harvest</div><div class="d">Gold + Ember + Night — warm CTAs, sales pages, product warmth</div></div>
+    </div>
+    <div class="tcard">
+      <div class="tbars"><span style="background:#0D5E39; color:#fff;">0D5E39</span><span style="background:#47107D; color:#fff;">47107D</span><span style="background:#0A0A0A; color:#fff;">0A0A0A</span></div>
+      <div class="tlbl"><div class="t">06 · Emerald Circuit</div><div class="d">Rich Forest + Amethyst + Night — spiritual tech, journaling, sacred interfaces</div></div>
+    </div>
+    <div class="tcard">
+      <div class="tbars"><span style="background:#0A0A0A; color:#fff;">0A0A0A</span><span style="background:#F2B01E; color:#0A0A0A;">F2B01E</span><span style="background:#E8E6E1; color:#0A0A0A;">E8E6E1</span></div>
+      <div class="tlbl"><div class="t">07 · Obsidian Gold</div><div class="d">Night + Gold + Platinum — luxe minimal, packaging, stationery, monograms</div></div>
+    </div>
+    <div class="tcard">
+      <div class="tbars"><span style="background:#D9531A; color:#0A0A0A;">D9531A</span><span style="background:#E8E6E1; color:#0A0A0A;">E8E6E1</span><span style="background:#0A0A0A; color:#fff;">0A0A0A</span></div>
+      <div class="tlbl"><div class="t">08 · Ember Ash</div><div class="d">Ember + Platinum + Night — bold editorial, posters, social headlines</div></div>
+    </div>
+    <div class="tcard">
+      <div class="tbars"><span style="background:#0D5E39; color:#fff;">0D5E39</span><span style="background:#47107D; color:#fff;">47107D</span><span style="background:#E8E6E1; color:#0A0A0A;">E8E6E1</span></div>
+      <div class="tlbl"><div class="t">09 · Sacred Grove</div><div class="d">Rich Forest + Amethyst + Platinum — airy sacred, light wellness, ceremony collateral</div></div>
+    </div>
+    <div class="tcard">
+      <div class="tbars"><span style="background:#D9531A; color:#0A0A0A;">D9531A</span><span style="background:#F2B01E; color:#0A0A0A;">F2B01E</span><span style="background:#47107D; color:#fff;">47107D</span></div>
+      <div class="tlbl"><div class="t">10 · Molten Crown</div><div class="d">Ember + Gold + Amethyst — rich reveal, hero art (ground on Night or Platinum)</div></div>
+    </div>
+    <div class="tcard">
+      <div class="tbars"><span style="background:#0D5E39; color:#fff;">0D5E39</span><span style="background:#D9531A; color:#0A0A0A;">D9531A</span><span style="background:#0A0A0A; color:#fff;">0A0A0A</span></div>
+      <div class="tlbl"><div class="t">11 · Circuit Grove</div><div class="d">Rich Forest + Ember + Night — eco-action campaigns, product</div></div>
+    </div>
+    <div class="tcard">
+      <div class="tbars"><span style="background:#0D5E39; color:#fff;">0D5E39</span><span style="background:#F2B01E; color:#0A0A0A;">F2B01E</span><span style="background:#0A0A0A; color:#fff;">0A0A0A</span></div>
+      <div class="tlbl"><div class="t">12 · Forest Signal</div><div class="d">Rich Forest + Gold + Night — wellness authority on dark</div></div>
+    </div>
+    <div class="tcard">
+      <div class="tbars"><span style="background:#0D5E39; color:#fff;">0D5E39</span><span style="background:#E8E6E1; color:#0A0A0A;">E8E6E1</span><span style="background:#0A0A0A; color:#fff;">0A0A0A</span></div>
+      <div class="tlbl"><div class="t">13 · Deep Canopy</div><div class="d">Rich Forest + Platinum + Night — calm reports, docs</div></div>
+    </div>
+    <div class="tcard">
+      <div class="tbars"><span style="background:#47107D; color:#fff;">47107D</span><span style="background:#0D5E39; color:#fff;">0D5E39</span><span style="background:#F2B01E; color:#0A0A0A;">F2B01E</span></div>
+      <div class="tlbl"><div class="t">14 · Royal Grove</div><div class="d">Amethyst + Rich Forest + Gold — three-jewel hero (ground on Night or Platinum)</div></div>
+    </div>
+    <div class="tcard">
+      <div class="tbars"><span style="background:#47107D; color:#fff;">47107D</span><span style="background:#F2B01E; color:#0A0A0A;">F2B01E</span><span style="background:#E8E6E1; color:#0A0A0A;">E8E6E1</span></div>
+      <div class="tlbl"><div class="t">15 · Amethyst Signal</div><div class="d">Amethyst + Gold + Platinum — premium light decks, one-pagers</div></div>
+    </div>
+    <div class="tcard"><div class="tbars"><span style="background:#47107D; color:#fff;">47107D</span><span style="background:#D9531A; color:#0A0A0A;">D9531A</span><span style="background:#0D5E39; color:#fff;">0D5E39</span></div><div class="tlbl"><div class="t">16 · Vibrant Jungle</div><div class="d">Amethyst + Ember + Rich Forest — bold multi-jewel (ground on Night)</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#47107D; color:#fff;">47107D</span><span style="background:#D9531A; color:#0A0A0A;">D9531A</span><span style="background:#E8E6E1; color:#0A0A0A;">E8E6E1</span></div><div class="tlbl"><div class="t">17 · Cosmic Ember</div><div class="d">Amethyst + Ember + Platinum — energetic premium light</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#D9531A; color:#0A0A0A;">D9531A</span><span style="background:#F2B01E; color:#0A0A0A;">F2B01E</span><span style="background:#0D5E39; color:#fff;">0D5E39</span></div><div class="tlbl"><div class="t">18 · Harvest Fire</div><div class="d">Ember + Gold + Rich Forest — food, eco, abundance campaigns</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#D9531A; color:#0A0A0A;">D9531A</span><span style="background:#F2B01E; color:#0A0A0A;">F2B01E</span><span style="background:#E8E6E1; color:#0A0A0A;">E8E6E1</span></div><div class="tlbl"><div class="t">19 · Solar Flare</div><div class="d">Ember + Gold + Platinum — bright warm light, launches</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#D9531A; color:#0A0A0A;">D9531A</span><span style="background:#0D5E39; color:#fff;">0D5E39</span><span style="background:#E8E6E1; color:#0A0A0A;">E8E6E1</span></div><div class="tlbl"><div class="t">20 · Ember Meadow</div><div class="d">Ember + Rich Forest + Platinum — warm on green, wellness</div></div></div>
+  </div>
+
+  <h2>Gradients</h2>
+  <div class="grid">
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#47107D,#F2B01E,#E8E6E1);"></div><div class="glbl"><div class="t">Quantum Royalty</div><div class="d">Digital banners, hero UI, profile frames</div><div class="r">Amethyst → Gold → Platinum</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#0D5E39,#D9531A,#0A0A0A);"></div><div class="glbl"><div class="t">Jungle Pulse</div><div class="d">Dashboards, presentations, reports</div><div class="r">Rich Forest → Ember → Night</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#D9531A,#47107D,#0A0A0A);"></div><div class="glbl"><div class="t">Vibranium Heat</div><div class="d">Motion graphics, glitch effects, banners</div><div class="r">Ember → Amethyst → Night</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#F2B01E,#E8E6E1,#0D5E39);"></div><div class="glbl"><div class="t">Solar Echo</div><div class="d">Onboarding flows, learning content</div><div class="r">Gold → Platinum → Rich Forest</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#0A0A0A,#E8E6E1,#47107D);"></div><div class="glbl"><div class="t">Ancestral Interface</div><div class="d">Scroll transitions, footers</div><div class="r">Night → Platinum → Amethyst</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#47107D,#E8E6E1,#D9531A);"></div><div class="glbl"><div class="t">Cyber Mirage</div><div class="d">Hero UI, app transitions</div><div class="r">Amethyst → Platinum → Ember</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#0A0A0A,#0D5E39,#F2B01E);"></div><div class="glbl"><div class="t">Obsidian Bloom</div><div class="d">Finance tools, storytelling sliders</div><div class="r">Night → Rich Forest → Gold</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#D9531A,#F2B01E,#47107D);"></div><div class="glbl"><div class="t">Panther Pulse</div><div class="d">Product reveals, CTA banners</div><div class="r">Ember → Gold → Amethyst</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#F2B01E,#D9531A,#E8E6E1);"></div><div class="glbl"><div class="t">Electric Clay</div><div class="d">Minimal UI, eBooks, merch packaging</div><div class="r">Gold → Ember → Platinum</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#0D5E39,#47107D,#0A0A0A);"></div><div class="glbl"><div class="t">Sacred Transmission</div><div class="d">Spiritual tech interfaces, journaling</div><div class="r">Rich Forest → Amethyst → Night</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#0A0A0A,#47107D,#F2B01E);"></div><div class="glbl"><div class="t">Nightfall Gold</div><div class="d">Footers, hero</div><div class="r">Night → Amethyst → Gold</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#0D5E39,#F2B01E,#E8E6E1);"></div><div class="glbl"><div class="t">Emerald Dawn</div><div class="d">Onboarding, light content</div><div class="r">Rich Forest → Gold → Platinum</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#47107D,#D9531A,#F2B01E);"></div><div class="glbl"><div class="t">Violet Sun</div><div class="d">Campaigns, motion</div><div class="r">Amethyst → Ember → Gold</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#0A0A0A,#0D5E39,#E8E6E1);"></div><div class="glbl"><div class="t">Deep Current</div><div class="d">Calm backgrounds</div><div class="r">Night → Rich Forest → Platinum</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#47107D,#A8A5A0,#0A0A0A);"></div><div class="glbl"><div class="t">Royal Ash</div><div class="d">UI depth, panels</div><div class="r">Amethyst → Muted Platinum → Night</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#D9531A,#47107D,#E8E6E1);"></div><div class="glbl"><div class="t">Ember Veil</div><div class="d">Banners</div><div class="r">Ember → Amethyst → Platinum</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#F2B01E,#0D5E39,#0A0A0A);"></div><div class="glbl"><div class="t">Goldstream</div><div class="d">Reports, finance</div><div class="r">Gold → Rich Forest → Night</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#0A0A0A,#47107D,#E8E6E1);"></div><div class="glbl"><div class="t">Platinum Rise</div><div class="d">Scroll transitions</div><div class="r">Night → Amethyst → Platinum</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#0D5E39,#D9531A,#F2B01E);"></div><div class="glbl"><div class="t">Forest Flare</div><div class="d">Product reveals</div><div class="r">Rich Forest → Ember → Gold</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#0A0A0A,#D9531A,#47107D);"></div><div class="glbl"><div class="t">Molten Night</div><div class="d">Motion graphics</div><div class="r">Night → Ember → Amethyst</div></div></div>
+  </div>
+
+  <h2>Mood Palettes — 20</h2>
+  <div class="legend">The four seasons plus sixteen emotional and energetic registers. Pull one when a piece needs a feeling, not just a scheme.</div>
+  <div class="season">
+    <div class="scard"><div class="sbars"><span style="background:#E8E6E1;"></span><span style="background:#F2B01E;"></span><span style="background:#0D5E39;"></span><span style="background:#47107D;"></span></div><div class="slbl"><div class="t">Spring · Awakening</div><div class="d">Platinum · Gold · Rich Forest · Amethyst — clean, fertile, new systems waking</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#D9531A;"></span><span style="background:#F2B01E;"></span><span style="background:#47107D;"></span><span style="background:#0A0A0A;"></span></div><div class="slbl"><div class="t">Summer · Activation</div><div class="d">Ember · Gold · Amethyst · Night — magnetic, celebratory, high energy</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#D9531A;"></span><span style="background:#0D5E39;"></span><span style="background:#F2B01E;"></span><span style="background:#47107D;"></span></div><div class="slbl"><div class="t">Fall · Strategy</div><div class="d">Ember · Rich Forest · Gold · Amethyst — legacy building, deep strategy</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#0A0A0A;"></span><span style="background:#E8E6E1;"></span><span style="background:#0D5E39;"></span><span style="background:#47107D;"></span></div><div class="slbl"><div class="t">Winter · Reflection</div><div class="d">Night · Platinum · Rich Forest · Amethyst — sacred silence, encrypted memory</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#0A0A0A;"></span><span style="background:#47107D;"></span><span style="background:#F2B01E;"></span><span style="background:#E8E6E1;"></span></div><div class="slbl"><div class="t">Sovereign · commanding</div><div class="d">Night · Amethyst · Gold · Platinum</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#042F1E;"></span><span style="background:#587156;"></span><span style="background:#F7DFC0;"></span><span style="background:#0D5E39;"></span></div><div class="slbl"><div class="t">Grounded · calm</div><div class="d">Midnight Forest · Sage · Warm Sand · Rich Forest</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#0A0A0A;"></span><span style="background:#D9531A;"></span><span style="background:#47107D;"></span><span style="background:#A8A5A0;"></span></div><div class="slbl"><div class="t">Rebellious · edgy</div><div class="d">Night · Ember · Amethyst · Muted Platinum</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#042F1E;"></span><span style="background:#47107D;"></span><span style="background:#E1A443;"></span><span style="background:#F7DFC0;"></span></div><div class="slbl"><div class="t">Sacred · reverent</div><div class="d">Midnight Forest · Amethyst · Harvest Gold · Warm Sand</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#0A0A0A;"></span><span style="background:#F2B01E;"></span><span style="background:#B04720;"></span><span style="background:#E8E6E1;"></span></div><div class="slbl"><div class="t">Luxe · abundant</div><div class="d">Night · Gold · Terracotta · Platinum</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#47107D;"></span><span style="background:#D9531A;"></span><span style="background:#F2B01E;"></span><span style="background:#0A0A0A;"></span></div><div class="slbl"><div class="t">Electric · high-energy</div><div class="d">Amethyst · Ember · Gold · Night</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#F7DFC0;"></span><span style="background:#E1A443;"></span><span style="background:#587156;"></span><span style="background:#E8E6E1;"></span></div><div class="slbl"><div class="t">Tender · soft</div><div class="d">Warm Sand · Harvest Gold · Sage · Platinum</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#0A0A0A;"></span><span style="background:#47107D;"></span><span style="background:#042F1E;"></span><span style="background:#A8A5A0;"></span></div><div class="slbl"><div class="t">Mystic · unseen</div><div class="d">Night · Amethyst · Midnight Forest · Muted Platinum</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#E1A443;"></span><span style="background:#C15C27;"></span><span style="background:#F7DFC0;"></span><span style="background:#0D5E39;"></span></div><div class="slbl"><div class="t">Warm · welcoming</div><div class="d">Harvest Gold · Clay Ember · Warm Sand · Rich Forest</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#0A0A0A;"></span><span style="background:#47107D;"></span><span style="background:#E8E6E1;"></span><span style="background:#A8A5A0;"></span></div><div class="slbl"><div class="t">Focused · precise</div><div class="d">Night · Amethyst · Platinum · Muted Platinum</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#D9531A;"></span><span style="background:#E28D1F;"></span><span style="background:#F2B01E;"></span><span style="background:#47107D;"></span></div><div class="slbl"><div class="t">Celebratory · magnetic</div><div class="d">Ember · Marigold · Gold · Amethyst</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#587156;"></span><span style="background:#0D5E39;"></span><span style="background:#F7DFC0;"></span><span style="background:#E1A443;"></span></div><div class="slbl"><div class="t">Healing · restorative</div><div class="d">Sage · Rich Forest · Warm Sand · Harvest Gold</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#D9531A;"></span><span style="background:#B04720;"></span><span style="background:#0A0A0A;"></span><span style="background:#F2B01E;"></span></div><div class="slbl"><div class="t">Bold · provocative</div><div class="d">Ember · Terracotta · Night · Gold</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#042F1E;"></span><span style="background:#587156;"></span><span style="background:#E8E6E1;"></span><span style="background:#A8A5A0;"></span></div><div class="slbl"><div class="t">Serene · still</div><div class="d">Midnight Forest · Sage · Platinum · Muted Platinum</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#47107D;"></span><span style="background:#F2B01E;"></span><span style="background:#B04720;"></span><span style="background:#0A0A0A;"></span></div><div class="slbl"><div class="t">Regal · ancestral</div><div class="d">Amethyst · Gold · Terracotta · Night</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#F7DFC0;"></span><span style="background:#E1A443;"></span><span style="background:#0D5E39;"></span><span style="background:#47107D;"></span></div><div class="slbl"><div class="t">Dawn · emerging</div><div class="d">Warm Sand · Harvest Gold · Rich Forest · Amethyst</div></div></div>
+  </div>
+
+  <h2>Tech + Earth Gradients</h2>
+  <div class="legend">Blends that carry the core across into the earth set — nature meeting machine. Twenty options.</div>
+  <div class="grid">
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#47107D,#B04720,#0A0A0A);"></div><div class="glbl"><div class="t">Vibranium Clay</div><div class="d">Royal tech grounded in earth — hero, packaging</div><div class="r">Deep Amethyst → Terracotta → Night</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#0D5E39,#E1A443,#F7DFC0);"></div><div class="glbl"><div class="t">Circuit Harvest</div><div class="d">Tech-green into organic light — onboarding, wellness</div><div class="r">Rich Forest → Harvest Gold → Warm Sand</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#47107D,#C15C27,#E28D1F);"></div><div class="glbl"><div class="t">Amethyst Ember</div><div class="d">Purple to warm clay — campaigns, motion</div><div class="r">Deep Amethyst → Clay Ember → Marigold</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#F2B01E,#E28D1F,#B04720);"></div><div class="glbl"><div class="t">Solar Loam</div><div class="d">Gold cascading into earth — product reveals</div><div class="r">Luminous Gold → Marigold → Terracotta</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#042F1E,#0D5E39,#587156);"></div><div class="glbl"><div class="t">Sacred Canopy</div><div class="d">Deep to living to soft green — journaling, spiritual</div><div class="r">Midnight Forest → Rich Forest → Sage</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#0A0A0A,#B04720,#F7DFC0);"></div><div class="glbl"><div class="t">Obsidian Terracotta</div><div class="d">Dark to clay to sand — editorial, print</div><div class="r">Night → Terracotta → Warm Sand</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#47107D,#587156,#F7DFC0);"></div><div class="glbl"><div class="t">Neon Sage</div><div class="d">Tech to herbal to light — calm UI, learning</div><div class="r">Deep Amethyst → Sage → Warm Sand</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#D9531A,#C15C27,#042F1E);"></div><div class="glbl"><div class="t">Ember Dusk</div><div class="d">Warm into deep green — banners, seasonal</div><div class="r">Sunset Ember → Clay Ember → Midnight Forest</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#B04720,#E1A443,#F7DFC0);"></div><div class="glbl"><div class="t">Clay Dawn</div><div class="d">Terracotta rising into light — morning, wellness</div><div class="r">Terracotta → Harvest Gold → Warm Sand</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#0D5E39,#F2B01E,#0A0A0A);"></div><div class="glbl"><div class="t">Jungle Gilt</div><div class="d">Living green to gold on dark — luxe eco hero</div><div class="r">Rich Forest → Luminous Gold → Night</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#47107D,#F2B01E,#E1A443);"></div><div class="glbl"><div class="t">Royal Harvest</div><div class="d">Amethyst into amber warmth — premium reveal</div><div class="r">Deep Amethyst → Gold → Harvest Gold</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#587156,#0D5E39,#47107D);"></div><div class="glbl"><div class="t">Sage Circuit</div><div class="d">Herbal green into tech — calm learning UI</div><div class="r">Sage → Rich Forest → Deep Amethyst</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#E28D1F,#0D5E39,#042F1E);"></div><div class="glbl"><div class="t">Marigold Forest</div><div class="d">Warm bloom into deep canopy — seasonal, botanical</div><div class="r">Marigold → Rich Forest → Midnight Forest</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#B04720,#47107D,#0A0A0A);"></div><div class="glbl"><div class="t">Terra Royal</div><div class="d">Clay into royal shadow — editorial, ancestral</div><div class="r">Terracotta → Deep Amethyst → Night</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#D9531A,#B04720,#F7DFC0);"></div><div class="glbl"><div class="t">Ember Sand</div><div class="d">Molten warmth cooling to sand — packaging, print</div><div class="r">Sunset Ember → Terracotta → Warm Sand</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#F2B01E,#587156,#042F1E);"></div><div class="glbl"><div class="t">Gold Loam</div><div class="d">Gold settling into soil — abundance, grounded</div><div class="r">Luminous Gold → Sage → Midnight Forest</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#042F1E,#587156,#E1A443);"></div><div class="glbl"><div class="t">Deep Sage</div><div class="d">Dark canopy lifting to amber — journaling, meditation</div><div class="r">Midnight Forest → Sage → Harvest Gold</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#47107D,#B04720,#E1A443);"></div><div class="glbl"><div class="t">Clay Amethyst</div><div class="d">Royal warmed by earth — hero, brand primary</div><div class="r">Deep Amethyst → Terracotta → Harvest Gold</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#E1A443,#B04720,#0A0A0A);"></div><div class="glbl"><div class="t">Harvest Night</div><div class="d">Amber into clay into dark — luxe, moody</div><div class="r">Harvest Gold → Terracotta → Night</div></div></div>
+    <div class="gcard"><div class="gband" style="background:linear-gradient(135deg,#47107D,#0D5E39,#F2B01E);"></div><div class="glbl"><div class="t">Warm Vibranium</div><div class="d">Tech royal through jungle to gold — signature blend</div><div class="r">Deep Amethyst → Rich Forest → Luminous Gold</div></div></div>
+  </div>
+
+  <h2>Tech + Earth Schemes</h2>
+  <div class="legend">Twenty 3-color trios that pair the core with the earth set. Golden Rule still holds — one scheme per element.</div>
+  <div class="trio">
+    <div class="tcard"><div class="tbars"><span style="background:#47107D; color:#fff;">47107D</span><span style="background:#E1A443; color:#0A0A0A;">E1A443</span><span style="background:#F7DFC0; color:#0A0A0A;">F7DFC0</span></div><div class="tlbl"><div class="t">Rooted Sovereign</div><div class="d">Amethyst + Harvest Gold + Warm Sand — premium organic</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#0D5E39; color:#fff;">0D5E39</span><span style="background:#587156; color:#fff;">587156</span><span style="background:#F2B01E; color:#0A0A0A;">F2B01E</span></div><div class="tlbl"><div class="t">Jungle Circuit</div><div class="d">Rich Forest + Sage + Gold — tech-nature wellness</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#0A0A0A; color:#fff;">0A0A0A</span><span style="background:#B04720; color:#fff;">B04720</span><span style="background:#F7DFC0; color:#0A0A0A;">F7DFC0</span></div><div class="tlbl"><div class="t">Clay Court</div><div class="d">Night + Terracotta + Warm Sand — grounded luxe</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#D9531A; color:#0A0A0A;">D9531A</span><span style="background:#042F1E; color:#fff;">042F1E</span><span style="background:#F7DFC0; color:#0A0A0A;">F7DFC0</span></div><div class="tlbl"><div class="t">Ember Grove</div><div class="d">Sunset Ember + Midnight Forest + Warm Sand — warm on deep green</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#47107D; color:#fff;">47107D</span><span style="background:#B04720; color:#fff;">B04720</span><span style="background:#587156; color:#fff;">587156</span></div><div class="tlbl"><div class="t">Amethyst Earth</div><div class="d">Amethyst + Terracotta + Sage — royal meets soil</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#F2B01E; color:#0A0A0A;">F2B01E</span><span style="background:#0D5E39; color:#fff;">0D5E39</span><span style="background:#C15C27; color:#0A0A0A;">C15C27</span></div><div class="tlbl"><div class="t">Harvest Tech</div><div class="d">Gold + Rich Forest + Clay Ember — abundance</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#042F1E; color:#fff;">042F1E</span><span style="background:#E28D1F; color:#0A0A0A;">E28D1F</span><span style="background:#F7DFC0; color:#0A0A0A;">F7DFC0</span></div><div class="tlbl"><div class="t">Sacred Sand</div><div class="d">Midnight Forest + Marigold + Warm Sand — ceremonial</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#0A0A0A; color:#fff;">0A0A0A</span><span style="background:#C15C27; color:#0A0A0A;">C15C27</span><span style="background:#A8A5A0; color:#0A0A0A;">A8A5A0</span></div><div class="tlbl"><div class="t">Panther Clay</div><div class="d">Night + Clay Ember + Muted Platinum — editorial earth</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#0A0A0A; color:#fff;">0A0A0A</span><span style="background:#587156; color:#fff;">587156</span><span style="background:#E1A443; color:#0A0A0A;">E1A443</span></div><div class="tlbl"><div class="t">Obsidian Sage</div><div class="d">Night + Sage + Harvest Gold — calm premium, wellness-tech</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#47107D; color:#fff;">47107D</span><span style="background:#C15C27; color:#0A0A0A;">C15C27</span><span style="background:#F7DFC0; color:#0A0A0A;">F7DFC0</span></div><div class="tlbl"><div class="t">Amethyst Clay</div><div class="d">Amethyst + Clay Ember + Warm Sand — royal warmth, packaging</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#F2B01E; color:#0A0A0A;">F2B01E</span><span style="background:#042F1E; color:#fff;">042F1E</span><span style="background:#F7DFC0; color:#0A0A0A;">F7DFC0</span></div><div class="tlbl"><div class="t">Gilded Forest</div><div class="d">Gold + Midnight Forest + Warm Sand — luxe eco, foil on deep green</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#D9531A; color:#0A0A0A;">D9531A</span><span style="background:#B04720; color:#fff;">B04720</span><span style="background:#0A0A0A; color:#fff;">0A0A0A</span></div><div class="tlbl"><div class="t">Ember Terra</div><div class="d">Sunset Ember + Terracotta + Night — molten earth, bold campaigns</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#47107D; color:#fff;">47107D</span><span style="background:#587156; color:#fff;">587156</span><span style="background:#F7DFC0; color:#0A0A0A;">F7DFC0</span></div><div class="tlbl"><div class="t">Circuit Sand</div><div class="d">Amethyst + Sage + Warm Sand — soft tech, learning, UI</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#0A0A0A; color:#fff;">0A0A0A</span><span style="background:#E28D1F; color:#0A0A0A;">E28D1F</span><span style="background:#E8E6E1; color:#0A0A0A;">E8E6E1</span></div><div class="tlbl"><div class="t">Marigold Night</div><div class="d">Night + Marigold + Platinum — festive pop on dark, social</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#0D5E39; color:#fff;">0D5E39</span><span style="background:#47107D; color:#fff;">47107D</span><span style="background:#E1A443; color:#0A0A0A;">E1A443</span></div><div class="tlbl"><div class="t">Rooted Amethyst</div><div class="d">Rich Forest + Amethyst + Harvest Gold — jungle-tech-gold hero</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#47107D; color:#fff;">47107D</span><span style="background:#E28D1F; color:#0A0A0A;">E28D1F</span><span style="background:#042F1E; color:#fff;">042F1E</span></div><div class="tlbl"><div class="t">Terra Circuit</div><div class="d">Amethyst + Marigold + Midnight Forest — royal warmth on deep green</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#F2B01E; color:#0A0A0A;">F2B01E</span><span style="background:#587156; color:#fff;">587156</span><span style="background:#042F1E; color:#fff;">042F1E</span></div><div class="tlbl"><div class="t">Golden Grove</div><div class="d">Gold + Sage + Midnight Forest — gilded botanical</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#D9531A; color:#0A0A0A;">D9531A</span><span style="background:#E28D1F; color:#0A0A0A;">E28D1F</span><span style="background:#C15C27; color:#0A0A0A;">C15C27</span></div><div class="tlbl"><div class="t">Sunfire Clay</div><div class="d">Ember + Marigold + Clay Ember — all-warm heat (ground on Night)</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#47107D; color:#fff;">47107D</span><span style="background:#E1A443; color:#0A0A0A;">E1A443</span><span style="background:#587156; color:#fff;">587156</span></div><div class="tlbl"><div class="t">Amethyst Sand</div><div class="d">Amethyst + Harvest Gold + Sage — royal, amber, herbal</div></div></div>
+    <div class="tcard"><div class="tbars"><span style="background:#0D5E39; color:#fff;">0D5E39</span><span style="background:#C15C27; color:#0A0A0A;">C15C27</span><span style="background:#F7DFC0; color:#0A0A0A;">F7DFC0</span></div><div class="tlbl"><div class="t">Forest Ember</div><div class="d">Rich Forest + Clay Ember + Warm Sand — jungle clay</div></div></div>
+  </div>
+
+  <h2>Themed Palettes (Tech + Earth)</h2>
+  <div class="legend">Twenty multi-color palettes tuned to your suites and registers. Each pulls from both the core and the earth set. Twenty options.</div>
+  <div class="season">
+    <div class="scard"><div class="sbars"><span style="background:#042F1E;"></span><span style="background:#0D5E39;"></span><span style="background:#587156;"></span><span style="background:#E1A443;"></span><span style="background:#B04720;"></span><span style="background:#F7DFC0;"></span></div><div class="slbl"><div class="t">Amazonia · Organic Register</div><div class="d">Midnight Forest · Rich Forest · Sage · Harvest Gold · Terracotta · Warm Sand — wellness, ancestral, Amazonia persona</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#0A0A0A;"></span><span style="background:#47107D;"></span><span style="background:#F2B01E;"></span><span style="background:#E8E6E1;"></span><span style="background:#A8A5A0;"></span></div><div class="slbl"><div class="t">Command Core · Tech Premium</div><div class="d">Night · Deep Amethyst · Luminous Gold · Platinum · Muted Platinum — proposals, app, Omegea</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#D9531A;"></span><span style="background:#C15C27;"></span><span style="background:#E28D1F;"></span><span style="background:#E1A443;"></span><span style="background:#F7DFC0;"></span><span style="background:#0A0A0A;"></span></div><div class="slbl"><div class="t">Sensory Studio · Warm Creative</div><div class="d">Sunset Ember · Clay Ember · Marigold · Harvest Gold · Warm Sand · Night — design and creative collateral</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#47107D;"></span><span style="background:#F2B01E;"></span><span style="background:#D9531A;"></span><span style="background:#0D5E39;"></span><span style="background:#587156;"></span></div><div class="slbl"><div class="t">Data Alchemy · Chart Set</div><div class="d">Amethyst · Gold · Ember · Rich Forest · Sage — 5 distinct categorical series on Night or Platinum</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#042F1E;"></span><span style="background:#47107D;"></span><span style="background:#587156;"></span><span style="background:#E1A443;"></span><span style="background:#F7DFC0;"></span></div><div class="slbl"><div class="t">Sacred Transmission · Metaphysical</div><div class="d">Midnight Forest · Deep Amethyst · Sage · Harvest Gold · Warm Sand — spiritual, ritual, journaling</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#B04720;"></span><span style="background:#E1A443;"></span><span style="background:#042F1E;"></span><span style="background:#F7DFC0;"></span><span style="background:#0A0A0A;"></span></div><div class="slbl"><div class="t">Ancestral Craft · Print &amp; Merch</div><div class="d">Terracotta · Harvest Gold · Midnight Forest · Warm Sand · Night — packaging, foil, embroidery</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#0A0A0A;"></span><span style="background:#D9531A;"></span><span style="background:#F2B01E;"></span><span style="background:#47107D;"></span><span style="background:#E8E6E1;"></span></div><div class="slbl"><div class="t">Shon · Rebel Register</div><div class="d">Night · Sunset Ember · Gold · Amethyst · Platinum — launches, provocation, manifesto</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#0A0A0A;"></span><span style="background:#47107D;"></span><span style="background:#0D5E39;"></span><span style="background:#F2B01E;"></span><span style="background:#E8E6E1;"></span></div><div class="slbl"><div class="t">Master Avatar · Full Brand</div><div class="d">Night · Amethyst · Rich Forest · Gold · Platinum — the complete UJG signature</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#0A0A0A;"></span><span style="background:#47107D;"></span><span style="background:#F2B01E;"></span><span style="background:#B04720;"></span></div><div class="slbl"><div class="t">Afro-Futurist Royal · Authority</div><div class="d">Night · Amethyst · Gold · Terracotta — main brand visuals, premium proposals</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#042F1E;"></span><span style="background:#0D5E39;"></span><span style="background:#587156;"></span><span style="background:#F7DFC0;"></span><span style="background:#E8E6E1;"></span></div><div class="slbl"><div class="t">Urban Jungle Grounded · Eco</div><div class="d">Midnight Forest · Rich Forest · Sage · Warm Sand · Platinum — wellness, sustainability</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#F7DFC0;"></span><span style="background:#E1A443;"></span><span style="background:#B04720;"></span><span style="background:#587156;"></span><span style="background:#0A0A0A;"></span></div><div class="slbl"><div class="t">Warm Neutral · Editorial</div><div class="d">Warm Sand · Harvest Gold · Terracotta · Sage · Night — long-form, blog, print editorial</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#0A0A0A;"></span><span style="background:#47107D;"></span><span style="background:#D9531A;"></span><span style="background:#F2B01E;"></span></div><div class="slbl"><div class="t">Launch Heat · Campaigns</div><div class="d">Night · Amethyst · Sunset Ember · Gold — product drops, promos, urgency</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#E8E6E1;"></span><span style="background:#A8A5A0;"></span><span style="background:#47107D;"></span><span style="background:#0A0A0A;"></span></div><div class="slbl"><div class="t">Platinum Tech · Light UI</div><div class="d">Platinum · Muted Platinum · Amethyst · Night — light-mode app, dashboards, docs</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#0A0A0A;"></span><span style="background:#F2B01E;"></span><span style="background:#E1A443;"></span><span style="background:#B04720;"></span><span style="background:#E8E6E1;"></span></div><div class="slbl"><div class="t">Gilded Legacy · Wealth</div><div class="d">Night · Gold · Harvest Gold · Terracotta · Platinum — legacy, investment, premium tiers</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#042F1E;"></span><span style="background:#47107D;"></span><span style="background:#F2B01E;"></span><span style="background:#587156;"></span><span style="background:#F7DFC0;"></span></div><div class="slbl"><div class="t">Ritual Grove · Ceremony</div><div class="d">Midnight Forest · Amethyst · Gold · Sage · Warm Sand — sacred events, retreats, invocations</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#D9531A;"></span><span style="background:#E28D1F;"></span><span style="background:#47107D;"></span><span style="background:#0A0A0A;"></span><span style="background:#E8E6E1;"></span></div><div class="slbl"><div class="t">Signal Fire · Social</div><div class="d">Sunset Ember · Marigold · Amethyst · Night · Platinum — IG, LinkedIn, high-scroll content</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#0A0A0A;"></span><span style="background:#0D5E39;"></span><span style="background:#47107D;"></span><span style="background:#A8A5A0;"></span></div><div class="slbl"><div class="t">Deep System · Dark UI</div><div class="d">Night · Rich Forest · Amethyst · Muted Platinum — dark-mode app, code, cyber</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#F7DFC0;"></span><span style="background:#587156;"></span><span style="background:#0D5E39;"></span><span style="background:#E1A443;"></span></div><div class="slbl"><div class="t">Soft Botanical · Onboarding</div><div class="d">Warm Sand · Sage · Rich Forest · Harvest Gold — welcome flows, gentle first-touch</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#47107D;"></span><span style="background:#B04720;"></span><span style="background:#E1A443;"></span><span style="background:#042F1E;"></span><span style="background:#F7DFC0;"></span></div><div class="slbl"><div class="t">Full Spectrum · Showcase</div><div class="d">Amethyst · Terracotta · Harvest Gold · Midnight Forest · Warm Sand — portfolio, brand showcase</div></div></div>
+    <div class="scard"><div class="sbars"><span style="background:#0A0A0A;"></span><span style="background:#587156;"></span><span style="background:#E1A443;"></span><span style="background:#F7DFC0;"></span><span style="background:#E8E6E1;"></span></div><div class="slbl"><div class="t">Quiet Ground · Reflective</div><div class="d">Night · Sage · Harvest Gold · Warm Sand · Platinum — meditation, quiet content, rest</div></div></div>
+  </div>
+
+  <div class="note"><strong style="color:#F2B01E; font-weight:600;">On the physical-match systems:</strong> HEX, RGB, CMYK, HSB, HUE, and LAB are computed exactly from each hex. RAL, Copic, HKS, and Prismacolor are ink / marker / pencil libraries with no exact digital formula — the values shown are the nearest visual match and should be confirmed against a physical fan deck before any print, signage, or illustration run. CMYK is an uncoated naive conversion; for production, soft-proof against your printer's ICC profile.</div>
+</body>
+</html>
