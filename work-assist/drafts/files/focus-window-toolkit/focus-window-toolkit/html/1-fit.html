@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pomodoro Fit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a1710;
+    --bg2:#0e1f16;
+    --panel:#12241a;
+    --panel2:#162c20;
+    --line:#254234;
+    --gold:#e8c86a;
+    --gold-deep:#d4af37;
+    --cream:#f3ead6;
+    --sage:#8fae97;
+    --sage-dim:#6a8873;
+    --work:#2f7d52;
+    --work-lo:#1f5c3b;
+    --break:#d4af37;
+    --spare:#3a4a40;
+    --clay:#c47a45;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:
+      radial-gradient(120% 80% at 50% -10%, #123322 0%, var(--bg) 55%) fixed;
+    color:var(--cream);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.45;
+    padding:22px 16px 60px;
+    max-width:640px;
+    margin:0 auto;
+  }
+  .eyebrow{
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold-deep);font-weight:700;margin:0 0 6px;
+  }
+  h1{
+    font-family:"Fraunces",Georgia,serif;
+    font-weight:600;font-size:2.15rem;line-height:1.02;
+    margin:0 0 8px;color:var(--cream);letter-spacing:-.01em;
+  }
+  h1 span{color:var(--gold)}
+  .sub{color:var(--sage);font-size:.92rem;margin:0 0 22px}
+
+  .card{
+    background:linear-gradient(180deg,var(--panel2),var(--panel));
+    border:1px solid var(--line);border-radius:16px;
+    padding:16px 15px;margin-bottom:14px;
+  }
+  .card > .lbl{
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--sage);font-weight:700;margin:0 0 12px;
+  }
+
+  /* time chips */
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    appearance:none;border:1px solid var(--line);background:var(--bg2);
+    color:var(--cream);font:inherit;font-size:.9rem;font-weight:600;
+    padding:9px 13px;border-radius:999px;cursor:pointer;
+    transition:transform .06s ease,border-color .15s,background .15s;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .chip:active{transform:scale(.96)}
+  .chip.on{background:var(--gold);color:#1c1405;border-color:var(--gold)}
+
+  .custom{display:flex;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .custom label{font-size:.82rem;color:var(--sage)}
+  .num{
+    width:70px;background:var(--bg2);border:1px solid var(--line);
+    color:var(--cream);font:inherit;font-size:1rem;font-weight:600;
+    padding:8px 10px;border-radius:10px;text-align:center;
+  }
+  .num:focus,.chip:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+  .toggle{
+    display:flex;align-items:center;gap:11px;margin-top:16px;
+    color:var(--sage);font-size:.86rem;cursor:pointer;user-select:none;
+  }
+  .switch{
+    position:relative;width:44px;height:25px;border-radius:999px;
+    background:var(--spare);border:1px solid var(--line);flex:none;transition:background .18s;
+  }
+  .switch::after{
+    content:"";position:absolute;top:2px;left:2px;width:19px;height:19px;
+    border-radius:50%;background:var(--cream);transition:left .18s;
+  }
+  .toggle.on .switch{background:var(--gold)}
+  .toggle.on .switch::after{left:21px}
+
+  .total-line{
+    font-size:.9rem;color:var(--sage);margin:2px 0 16px;
+  }
+  .total-line b{color:var(--gold);font-weight:700}
+
+  /* result rows */
+  .res{
+    background:linear-gradient(180deg,var(--panel2),var(--panel));
+    border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;margin-bottom:11px;
+    position:relative;overflow:hidden;
+  }
+  .res.best{border-color:var(--gold-deep);box-shadow:0 0 0 1px rgba(212,175,55,.25)}
+  .res-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  .cfg{font-family:"Fraunces",serif;font-weight:600;font-size:1.12rem;color:var(--cream)}
+  .cfg small{font-family:ui-sans-serif,system-ui;font-weight:600;font-size:.72rem;color:var(--sage-dim);letter-spacing:.04em}
+  .badge{
+    font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;
+    color:#1c1405;background:var(--gold);padding:3px 7px;border-radius:6px;white-space:nowrap;
+  }
+
+  .stats{display:flex;gap:18px;margin:11px 0 12px;flex-wrap:wrap}
+  .stat{display:flex;flex-direction:column;gap:1px}
+  .stat .v{font-size:1.55rem;font-weight:700;font-variant-numeric:tabular-nums;line-height:1;color:var(--cream)}
+  .stat .v.spare{color:var(--clay)}
+  .stat .v.zero{color:var(--sage-dim)}
+  .stat .k{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--sage-dim);font-weight:700}
+
+  /* timeline */
+  .tl{display:flex;height:14px;border-radius:6px;overflow:hidden;background:var(--bg);border:1px solid var(--line)}
+  .seg{height:100%}
+  .seg.w{background:linear-gradient(180deg,var(--work),var(--work-lo))}
+  .seg.b{background:var(--break)}
+  .seg.s{background:repeating-linear-gradient(45deg,var(--spare),var(--spare) 4px,#31413700 4px,#31413700 8px)}
+  .seg + .seg{border-left:1px solid rgba(10,23,16,.6)}
+
+  .none{color:var(--sage-dim);font-size:.9rem;font-style:italic;margin:9px 0 2px}
+
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:18px;color:var(--sage);font-size:.78rem}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .sw{width:13px;height:13px;border-radius:3px;flex:none}
+  .sw.w{background:var(--work)}.sw.b{background:var(--break)}.sw.s{background:var(--spare)}
+
+  .note{color:var(--sage-dim);font-size:.78rem;line-height:1.55;margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+  .note b{color:var(--sage)}
+</style>
+</head>
+<body>
+  <p class="eyebrow">Focus in the gaps</p>
+  <h1>Pomodoro <span>Fit</span></h1>
+  <p class="sub">Set the time you've got. See how many focus sessions and breaks fit — laid out block by block.</p>
+
+  <div class="card">
+    <p class="lbl">Time available</p>
+    <div class="chips" id="chips"></div>
+    <div class="custom">
+      <label>or set it —</label>
+      <input class="num" id="hh" type="number" min="0" max="24" inputmode="numeric" aria-label="hours"> <span style="color:var(--sage-dim)">h</span>
+      <input class="num" id="mm" type="number" min="0" max="59" inputmode="numeric" aria-label="minutes"> <span style="color:var(--sage-dim)">m</span>
+    </div>
+    <div class="toggle" id="restToggle" role="switch" aria-checked="false" tabindex="0">
+      <span class="switch"></span><span>Rest after the last session too</span>
+    </div>
+  </div>
+
+  <p class="total-line" id="totalLine"></p>
+  <div id="results"></div>
+
+  <div class="legend">
+    <span><i class="sw w"></i>Focus</span>
+    <span><i class="sw b"></i>Break</span>
+    <span><i class="sw s"></i>Left over</span>
+  </div>
+
+  <p class="note">
+    <b>The math:</b> sessions run back to back with a break between each one. By default the trailing break is dropped — no point resting when you're walking out the door — so a run of N sessions needs N−1 breaks. Flip the toggle if you'd rather bank the final break. "Left over" is time too short for one more full session; use it or bleed it into the next thing.
+  </p>
+
+<script>
+  const CONFIGS = [
+    {name:"Sprint",      work:15, brk:5},
+    {name:"Classic",     work:25, brk:5},
+    {name:"Half hour",   work:30, brk:5},
+    {name:"Deep 45",     work:45, brk:15},
+    {name:"Deep 50",     work:50, brk:10},
+    {name:"The 52/17",   work:52, brk:17},
+    {name:"Long haul",   work:90, brk:20},
+  ];
+  const PRESETS = [30, 45, 60, 90, 110, 120, 180];
+
+  const state = { total: 110, restLast: false, custom: null };
+
+  function fmt(m){
+    m = Math.round(m);
+    const h = Math.floor(m/60), r = m%60;
+    if(h && r) return `${h}h ${r}m`;
+    if(h) return `${h}h`;
+    return `${r}m`;
+  }
+
+  // max sessions that fit
+  function compute(work, brk, T, restLast){
+    if(work<=0 || T<=0) return {n:0,breaks:0,focus:0,used:0,spare:T>0?T:0};
+    let n;
+    if(restLast){ n = Math.floor(T/(work+brk)); }
+    else { n = Math.floor((T+brk)/(work+brk)); }
+    if(n<0) n=0;
+    const breaks = restLast ? n : Math.max(n-1,0);
+    const focus = n*work;
+    const used = focus + breaks*brk;
+    return {n, breaks, focus, used, spare: Math.max(T-used,0)};
+  }
+
+  function timeline(work, brk, r, T, restLast){
+    const segs=[];
+    for(let i=0;i<r.n;i++){
+      segs.push(`<div class="seg w" style="flex:${work}"></div>`);
+      const needBreak = restLast ? true : (i < r.n-1);
+      if(needBreak && r.breaks>0 && (restLast || i<r.n-1)) segs.push(`<div class="seg b" style="flex:${brk}"></div>`);
+    }
+    if(r.spare>0) segs.push(`<div class="seg s" style="flex:${r.spare}"></div>`);
+    return `<div class="tl" aria-hidden="true">${segs.join("")}</div>`;
+  }
+
+  function render(){
+    // total line
+    document.getElementById("totalLine").innerHTML =
+      `You've got <b>${fmt(state.total)}</b> — here's what fits.`;
+
+    const rows = CONFIGS.map(c=>({c, r:compute(c.work,c.brk,state.total,state.restLast)}));
+    const maxFocus = Math.max(...rows.map(x=>x.r.focus));
+
+    const html = rows.map(({c,r})=>{
+      const best = r.focus>0 && r.focus===maxFocus;
+      if(r.n===0){
+        return `<div class="res">
+          <div class="res-head"><div class="cfg">${c.name} <small>${c.work}/${c.brk}</small></div></div>
+          <p class="none">One ${c.work}-minute session won't fit in this window.</p>
+        </div>`;
+      }
+      return `<div class="res${best?' best':''}">
+        <div class="res-head">
+          <div class="cfg">${c.name} <small>${c.work}/${c.brk}</small></div>
+          ${best?'<span class="badge">Most focus</span>':''}
+        </div>
+        <div class="stats">
+          <div class="stat"><span class="v">${r.n}</span><span class="k">Sessions</span></div>
+          <div class="stat"><span class="v ${r.breaks?'':'zero'}">${r.breaks}</span><span class="k">Breaks</span></div>
+          <div class="stat"><span class="v">${fmt(r.focus)}</span><span class="k">Focus time</span></div>
+          <div class="stat"><span class="v spare ${r.spare?'':'zero'}">${r.spare?fmt(r.spare):'0m'}</span><span class="k">Left over</span></div>
+        </div>
+        ${timeline(c.work,c.brk,r,state.total,state.restLast)}
+      </div>`;
+    }).join("");
+
+    document.getElementById("results").innerHTML = html;
+    syncChips();
+    syncInputs();
+  }
+
+  // ---- inputs ----
+  const chipsEl = document.getElementById("chips");
+  chipsEl.innerHTML = PRESETS.map(m=>`<button class="chip" data-m="${m}">${fmt(m)}</button>`).join("");
+  chipsEl.addEventListener("click", e=>{
+    const b = e.target.closest(".chip"); if(!b) return;
+    state.total = +b.dataset.m; render();
+  });
+
+  const hh = document.getElementById("hh"), mm = document.getElementById("mm");
+  function fromInputs(){
+    const h = Math.max(0, Math.min(24, +hh.value||0));
+    const m = Math.max(0, Math.min(59, +mm.value||0));
+    state.total = h*60+m; render();
+  }
+  hh.addEventListener("input", fromInputs);
+  mm.addEventListener("input", fromInputs);
+
+  function syncChips(){
+    document.querySelectorAll(".chip").forEach(c=>{
+      c.classList.toggle("on", +c.dataset.m===state.total);
+    });
+  }
+  function syncInputs(){
+    if(document.activeElement===hh||document.activeElement===mm) return;
+    hh.value = Math.floor(state.total/60) || "";
+    mm.value = state.total%60 || (state.total%60===0 && state.total>0 ? "0":"");
+  }
+
+  const tg = document.getElementById("restToggle");
+  function toggleRest(){
+    state.restLast=!state.restLast;
+    tg.classList.toggle("on",state.restLast);
+    tg.setAttribute("aria-checked", state.restLast);
+    render();
+  }
+  tg.addEventListener("click", toggleRest);
+  tg.addEventListener("keydown", e=>{ if(e.key===" "||e.key==="Enter"){e.preventDefault();toggleRest();} });
+
+  render();
+</script>
+</body>
+</html>
