@@ -9,14 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0a1710;--bg2:#0e1f16;--panel:#12241a;--panel2:#162c20;--line:#254234;
-    --gold:#e8c86a;--gold-deep:#d4af37;--cream:#f3ead6;--sage:#8fae97;--sage-dim:#6a8873;
-    --work:#2f7d52;--work-lo:#1f5c3b;--break:#d4af37;--spare:#3a4a40;--clay:#c47a45;
+    --bg:#0A0A0A;--bg2:#071E15;--panel:#042F1E;--panel2:#073D26;--line:#0D5E39;
+    --gold:#F2B01E;--gold-deep:#E1A443;--cream:#F7DFC0;--sage:#A8A5A0;--sage-dim:#90958A;
+    --work:#2E6B4F;--work-lo:#0D5E39;--break:#E1A443;--spare:#587156;--clay:#E28D1F;
   }
   *{box-sizing:border-box}
   html,body{margin:0}
   body{
-    background:radial-gradient(120% 80% at 50% -10%, #123322 0%, var(--bg) 55%) fixed;
+    background:radial-gradient(120% 80% at 50% -10%, #074128 0%, var(--bg) 55%) fixed;
     color:var(--cream);
     font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
     -webkit-font-smoothing:antialiased;line-height:1.45;
@@ -33,7 +33,7 @@
   /* segmented mode toggle */
   .seg-tog{display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:11px;padding:3px;margin-bottom:14px}
   .seg-tog button{flex:1;appearance:none;border:0;background:transparent;color:var(--sage);font:inherit;font-weight:600;font-size:.86rem;padding:8px;border-radius:8px;cursor:pointer}
-  .seg-tog button.on{background:var(--gold);color:#1c1405}
+  .seg-tog button.on{background:var(--gold);color:#0A0A0A}
 
   .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
   input[type="time"],.num{
@@ -47,7 +47,7 @@
   .chips{display:flex;flex-wrap:wrap;gap:8px}
   .chip{appearance:none;border:1px solid var(--line);background:var(--bg2);color:var(--cream);font:inherit;font-size:.88rem;font-weight:600;padding:8px 12px;border-radius:999px;cursor:pointer;transition:transform .06s,background .15s,border-color .15s;-webkit-tap-highlight-color:transparent}
   .chip:active{transform:scale(.96)}
-  .chip.on{background:var(--gold);color:#1c1405;border-color:var(--gold)}
+  .chip.on{background:var(--gold);color:#0A0A0A;border-color:var(--gold)}
   .chip .s{font-weight:600;font-size:.72rem;opacity:.7;margin-left:4px}
   .chip.on .s{opacity:.85}
 
@@ -65,7 +65,7 @@
   .add-row{display:flex;gap:9px}
   .add-row input.text{flex:1;background:var(--bg2);border:1px solid var(--line);color:var(--cream);font:inherit;font-size:.98rem;padding:11px 13px;border-radius:11px}
   .add-row input.text::placeholder{color:var(--sage-dim)}
-  .add-btn{appearance:none;border:0;background:var(--gold);color:#1c1405;font:inherit;font-weight:800;font-size:.9rem;padding:0 16px;border-radius:11px;cursor:pointer}
+  .add-btn{appearance:none;border:0;background:var(--gold);color:#0A0A0A;font:inherit;font-weight:800;font-size:.9rem;padding:0 16px;border-radius:11px;cursor:pointer}
   .add-btn:active{transform:scale(.97)}
 
   ul.blocks{list-style:none;margin:13px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
