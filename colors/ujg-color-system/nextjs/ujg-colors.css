@@ -1,0 +1,551 @@
+/*
+ * UJG Color System — CSS custom properties
+ * Generated from ujg_color_system_v2_1.html. Values are verbatim; do not hand-edit.
+ *
+ * Golden Rule — Never use more than 3 colors in a single design element.
+ */
+
+:root {
+  /* --- Core palette ------------------------------------------------ */
+  --ujg-night: #0A0A0A; /* Primary Base */
+  --ujg-deep-amethyst: #47107D; /* Tech & Royal */
+  --ujg-sunset-ember: #D9531A; /* Energy & Action */
+  --ujg-luminous-gold: #F2B01E; /* Wealth & Legacy */
+  --ujg-rich-forest: #0D5E39; /* Nature Core */
+  --ujg-platinum: #E8E6E1; /* Neutral & Contrast */
+
+  /* --- Functional support ------------------------------------------ */
+  --ujg-muted-platinum: #A8A5A0; /* secondary text */
+  --ujg-rich-jungle-green: #2E6B4F; /* success */
+
+  /* --- Extended palette (earth tones, secondary) -------------------- */
+  --ujg-midnight-forest: #042F1E; /* Deepest Forest */
+  --ujg-clay-ember: #C15C27; /* Burnt Clay */
+  --ujg-harvest-gold: #E1A443; /* Soft Amber */
+  --ujg-sage: #587156; /* Herbal Neutral */
+  --ujg-marigold: #E28D1F; /* Warm Accent */
+  --ujg-warm-sand: #F7DFC0; /* Warm Light */
+  --ujg-terracotta: #B04720; /* Grounded Earth */
+
+  /* --- Functional mapping ------------------------------------------- */
+  --ujg-role-primary: var(--ujg-night); /* Night — logos, headers */
+  --ujg-role-secondary: var(--ujg-deep-amethyst); /* Deep Amethyst — key UI, accents */
+  --ujg-role-accent: var(--ujg-luminous-gold); /* Luminous Gold — highlights, links */
+  --ujg-role-cta-action: var(--ujg-sunset-ember); /* Sunset Ember */
+  --ujg-role-neutral-dark: var(--ujg-rich-forest); /* Rich Forest — text, borders */
+  --ujg-role-neutral-mid: var(--ujg-muted-platinum); /* Muted Platinum — secondary text */
+  --ujg-role-neutral-light: var(--ujg-platinum); /* Platinum — backgrounds */
+  --ujg-role-success: var(--ujg-rich-jungle-green); /* Rich Jungle Green */
+  --ujg-role-warning: var(--ujg-luminous-gold); /* Luminous Gold */
+  --ujg-role-error-urgent: var(--ujg-sunset-ember); /* Sunset Ember */
+  --ujg-role-info: var(--ujg-deep-amethyst); /* Deep Amethyst */
+
+  /* --- Gradients ----------------------------------------------------- */
+  --ujg-gradient-quantum-royalty: linear-gradient(135deg,#47107D,#F2B01E,#E8E6E1); /* Digital banners, hero UI, profile frames */
+  --ujg-gradient-jungle-pulse: linear-gradient(135deg,#0D5E39,#D9531A,#0A0A0A); /* Dashboards, presentations, reports */
+  --ujg-gradient-vibranium-heat: linear-gradient(135deg,#D9531A,#47107D,#0A0A0A); /* Motion graphics, glitch effects, banners */
+  --ujg-gradient-solar-echo: linear-gradient(135deg,#F2B01E,#E8E6E1,#0D5E39); /* Onboarding flows, learning content */
+  --ujg-gradient-ancestral-interface: linear-gradient(135deg,#0A0A0A,#E8E6E1,#47107D); /* Scroll transitions, footers */
+  --ujg-gradient-cyber-mirage: linear-gradient(135deg,#47107D,#E8E6E1,#D9531A); /* Hero UI, app transitions */
+  --ujg-gradient-obsidian-bloom: linear-gradient(135deg,#0A0A0A,#0D5E39,#F2B01E); /* Finance tools, storytelling sliders */
+  --ujg-gradient-panther-pulse: linear-gradient(135deg,#D9531A,#F2B01E,#47107D); /* Product reveals, CTA banners */
+  --ujg-gradient-electric-clay: linear-gradient(135deg,#F2B01E,#D9531A,#E8E6E1); /* Minimal UI, eBooks, merch packaging */
+  --ujg-gradient-sacred-transmission: linear-gradient(135deg,#0D5E39,#47107D,#0A0A0A); /* Spiritual tech interfaces, journaling */
+  --ujg-gradient-nightfall-gold: linear-gradient(135deg,#0A0A0A,#47107D,#F2B01E); /* Footers, hero */
+  --ujg-gradient-emerald-dawn: linear-gradient(135deg,#0D5E39,#F2B01E,#E8E6E1); /* Onboarding, light content */
+  --ujg-gradient-violet-sun: linear-gradient(135deg,#47107D,#D9531A,#F2B01E); /* Campaigns, motion */
+  --ujg-gradient-deep-current: linear-gradient(135deg,#0A0A0A,#0D5E39,#E8E6E1); /* Calm backgrounds */
+  --ujg-gradient-royal-ash: linear-gradient(135deg,#47107D,#A8A5A0,#0A0A0A); /* UI depth, panels */
+  --ujg-gradient-ember-veil: linear-gradient(135deg,#D9531A,#47107D,#E8E6E1); /* Banners */
+  --ujg-gradient-goldstream: linear-gradient(135deg,#F2B01E,#0D5E39,#0A0A0A); /* Reports, finance */
+  --ujg-gradient-platinum-rise: linear-gradient(135deg,#0A0A0A,#47107D,#E8E6E1); /* Scroll transitions */
+  --ujg-gradient-forest-flare: linear-gradient(135deg,#0D5E39,#D9531A,#F2B01E); /* Product reveals */
+  --ujg-gradient-molten-night: linear-gradient(135deg,#0A0A0A,#D9531A,#47107D); /* Motion graphics */
+
+  /* --- Tech + Earth gradients ---------------------------------------- */
+  --ujg-gradient-vibranium-clay: linear-gradient(135deg,#47107D,#B04720,#0A0A0A); /* Royal tech grounded in earth — hero, packaging */
+  --ujg-gradient-circuit-harvest: linear-gradient(135deg,#0D5E39,#E1A443,#F7DFC0); /* Tech-green into organic light — onboarding, wellness */
+  --ujg-gradient-amethyst-ember: linear-gradient(135deg,#47107D,#C15C27,#E28D1F); /* Purple to warm clay — campaigns, motion */
+  --ujg-gradient-solar-loam: linear-gradient(135deg,#F2B01E,#E28D1F,#B04720); /* Gold cascading into earth — product reveals */
+  --ujg-gradient-sacred-canopy: linear-gradient(135deg,#042F1E,#0D5E39,#587156); /* Deep to living to soft green — journaling, spiritual */
+  --ujg-gradient-obsidian-terracotta: linear-gradient(135deg,#0A0A0A,#B04720,#F7DFC0); /* Dark to clay to sand — editorial, print */
+  --ujg-gradient-neon-sage: linear-gradient(135deg,#47107D,#587156,#F7DFC0); /* Tech to herbal to light — calm UI, learning */
+  --ujg-gradient-ember-dusk: linear-gradient(135deg,#D9531A,#C15C27,#042F1E); /* Warm into deep green — banners, seasonal */
+  --ujg-gradient-clay-dawn: linear-gradient(135deg,#B04720,#E1A443,#F7DFC0); /* Terracotta rising into light — morning, wellness */
+  --ujg-gradient-jungle-gilt: linear-gradient(135deg,#0D5E39,#F2B01E,#0A0A0A); /* Living green to gold on dark — luxe eco hero */
+  --ujg-gradient-royal-harvest: linear-gradient(135deg,#47107D,#F2B01E,#E1A443); /* Amethyst into amber warmth — premium reveal */
+  --ujg-gradient-sage-circuit: linear-gradient(135deg,#587156,#0D5E39,#47107D); /* Herbal green into tech — calm learning UI */
+  --ujg-gradient-marigold-forest: linear-gradient(135deg,#E28D1F,#0D5E39,#042F1E); /* Warm bloom into deep canopy — seasonal, botanical */
+  --ujg-gradient-terra-royal: linear-gradient(135deg,#B04720,#47107D,#0A0A0A); /* Clay into royal shadow — editorial, ancestral */
+  --ujg-gradient-ember-sand: linear-gradient(135deg,#D9531A,#B04720,#F7DFC0); /* Molten warmth cooling to sand — packaging, print */
+  --ujg-gradient-gold-loam: linear-gradient(135deg,#F2B01E,#587156,#042F1E); /* Gold settling into soil — abundance, grounded */
+  --ujg-gradient-deep-sage: linear-gradient(135deg,#042F1E,#587156,#E1A443); /* Dark canopy lifting to amber — journaling, meditation */
+  --ujg-gradient-clay-amethyst: linear-gradient(135deg,#47107D,#B04720,#E1A443); /* Royal warmed by earth — hero, brand primary */
+  --ujg-gradient-harvest-night: linear-gradient(135deg,#E1A443,#B04720,#0A0A0A); /* Amber into clay into dark — luxe, moody */
+  --ujg-gradient-warm-vibranium: linear-gradient(135deg,#47107D,#0D5E39,#F2B01E); /* Tech royal through jungle to gold — signature blend */
+}
+
+/* Color schemes — 20 trios */
+.ujg-trio-afro-futurist-royal {
+  --ujg-scheme-1: #47107D;
+  --ujg-scheme-2: #F2B01E;
+  --ujg-scheme-3: #0A0A0A;
+} /* Amethyst + Gold + Night */
+.ujg-trio-urban-jungle-grounded {
+  --ujg-scheme-1: #0D5E39;
+  --ujg-scheme-2: #F2B01E;
+  --ujg-scheme-3: #E8E6E1;
+} /* Rich Forest + Gold + Platinum */
+.ujg-trio-sunset-rebellion {
+  --ujg-scheme-1: #D9531A;
+  --ujg-scheme-2: #47107D;
+  --ujg-scheme-3: #0A0A0A;
+} /* Ember + Amethyst + Night */
+.ujg-trio-vibranium-court {
+  --ujg-scheme-1: #47107D;
+  --ujg-scheme-2: #E8E6E1;
+  --ujg-scheme-3: #0A0A0A;
+} /* Amethyst + Platinum + Night */
+.ujg-trio-solar-harvest {
+  --ujg-scheme-1: #F2B01E;
+  --ujg-scheme-2: #D9531A;
+  --ujg-scheme-3: #0A0A0A;
+} /* Gold + Ember + Night */
+.ujg-trio-emerald-circuit {
+  --ujg-scheme-1: #0D5E39;
+  --ujg-scheme-2: #47107D;
+  --ujg-scheme-3: #0A0A0A;
+} /* Rich Forest + Amethyst + Night */
+.ujg-trio-obsidian-gold {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #F2B01E;
+  --ujg-scheme-3: #E8E6E1;
+} /* Night + Gold + Platinum */
+.ujg-trio-ember-ash {
+  --ujg-scheme-1: #D9531A;
+  --ujg-scheme-2: #E8E6E1;
+  --ujg-scheme-3: #0A0A0A;
+} /* Ember + Platinum + Night */
+.ujg-trio-sacred-grove {
+  --ujg-scheme-1: #0D5E39;
+  --ujg-scheme-2: #47107D;
+  --ujg-scheme-3: #E8E6E1;
+} /* Rich Forest + Amethyst + Platinum */
+.ujg-trio-molten-crown {
+  --ujg-scheme-1: #D9531A;
+  --ujg-scheme-2: #F2B01E;
+  --ujg-scheme-3: #47107D;
+} /* Ember + Gold + Amethyst */
+.ujg-trio-circuit-grove {
+  --ujg-scheme-1: #0D5E39;
+  --ujg-scheme-2: #D9531A;
+  --ujg-scheme-3: #0A0A0A;
+} /* Rich Forest + Ember + Night */
+.ujg-trio-forest-signal {
+  --ujg-scheme-1: #0D5E39;
+  --ujg-scheme-2: #F2B01E;
+  --ujg-scheme-3: #0A0A0A;
+} /* Rich Forest + Gold + Night */
+.ujg-trio-deep-canopy {
+  --ujg-scheme-1: #0D5E39;
+  --ujg-scheme-2: #E8E6E1;
+  --ujg-scheme-3: #0A0A0A;
+} /* Rich Forest + Platinum + Night */
+.ujg-trio-royal-grove {
+  --ujg-scheme-1: #47107D;
+  --ujg-scheme-2: #0D5E39;
+  --ujg-scheme-3: #F2B01E;
+} /* Amethyst + Rich Forest + Gold */
+.ujg-trio-amethyst-signal {
+  --ujg-scheme-1: #47107D;
+  --ujg-scheme-2: #F2B01E;
+  --ujg-scheme-3: #E8E6E1;
+} /* Amethyst + Gold + Platinum */
+.ujg-trio-vibrant-jungle {
+  --ujg-scheme-1: #47107D;
+  --ujg-scheme-2: #D9531A;
+  --ujg-scheme-3: #0D5E39;
+} /* Amethyst + Ember + Rich Forest */
+.ujg-trio-cosmic-ember {
+  --ujg-scheme-1: #47107D;
+  --ujg-scheme-2: #D9531A;
+  --ujg-scheme-3: #E8E6E1;
+} /* Amethyst + Ember + Platinum */
+.ujg-trio-harvest-fire {
+  --ujg-scheme-1: #D9531A;
+  --ujg-scheme-2: #F2B01E;
+  --ujg-scheme-3: #0D5E39;
+} /* Ember + Gold + Rich Forest */
+.ujg-trio-solar-flare {
+  --ujg-scheme-1: #D9531A;
+  --ujg-scheme-2: #F2B01E;
+  --ujg-scheme-3: #E8E6E1;
+} /* Ember + Gold + Platinum */
+.ujg-trio-ember-meadow {
+  --ujg-scheme-1: #D9531A;
+  --ujg-scheme-2: #0D5E39;
+  --ujg-scheme-3: #E8E6E1;
+} /* Ember + Rich Forest + Platinum */
+
+/* Mood palettes — 20 */
+.ujg-mood-spring {
+  --ujg-scheme-1: #E8E6E1;
+  --ujg-scheme-2: #F2B01E;
+  --ujg-scheme-3: #0D5E39;
+  --ujg-scheme-4: #47107D;
+} /* Platinum · Gold · Rich Forest · Amethyst */
+.ujg-mood-summer {
+  --ujg-scheme-1: #D9531A;
+  --ujg-scheme-2: #F2B01E;
+  --ujg-scheme-3: #47107D;
+  --ujg-scheme-4: #0A0A0A;
+} /* Ember · Gold · Amethyst · Night */
+.ujg-mood-fall {
+  --ujg-scheme-1: #D9531A;
+  --ujg-scheme-2: #0D5E39;
+  --ujg-scheme-3: #F2B01E;
+  --ujg-scheme-4: #47107D;
+} /* Ember · Rich Forest · Gold · Amethyst */
+.ujg-mood-winter {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #E8E6E1;
+  --ujg-scheme-3: #0D5E39;
+  --ujg-scheme-4: #47107D;
+} /* Night · Platinum · Rich Forest · Amethyst */
+.ujg-mood-sovereign {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #47107D;
+  --ujg-scheme-3: #F2B01E;
+  --ujg-scheme-4: #E8E6E1;
+} /* Night · Amethyst · Gold · Platinum */
+.ujg-mood-grounded {
+  --ujg-scheme-1: #042F1E;
+  --ujg-scheme-2: #587156;
+  --ujg-scheme-3: #F7DFC0;
+  --ujg-scheme-4: #0D5E39;
+} /* Midnight Forest · Sage · Warm Sand · Rich Forest */
+.ujg-mood-rebellious {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #D9531A;
+  --ujg-scheme-3: #47107D;
+  --ujg-scheme-4: #A8A5A0;
+} /* Night · Ember · Amethyst · Muted Platinum */
+.ujg-mood-sacred {
+  --ujg-scheme-1: #042F1E;
+  --ujg-scheme-2: #47107D;
+  --ujg-scheme-3: #E1A443;
+  --ujg-scheme-4: #F7DFC0;
+} /* Midnight Forest · Amethyst · Harvest Gold · Warm Sand */
+.ujg-mood-luxe {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #F2B01E;
+  --ujg-scheme-3: #B04720;
+  --ujg-scheme-4: #E8E6E1;
+} /* Night · Gold · Terracotta · Platinum */
+.ujg-mood-electric {
+  --ujg-scheme-1: #47107D;
+  --ujg-scheme-2: #D9531A;
+  --ujg-scheme-3: #F2B01E;
+  --ujg-scheme-4: #0A0A0A;
+} /* Amethyst · Ember · Gold · Night */
+.ujg-mood-tender {
+  --ujg-scheme-1: #F7DFC0;
+  --ujg-scheme-2: #E1A443;
+  --ujg-scheme-3: #587156;
+  --ujg-scheme-4: #E8E6E1;
+} /* Warm Sand · Harvest Gold · Sage · Platinum */
+.ujg-mood-mystic {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #47107D;
+  --ujg-scheme-3: #042F1E;
+  --ujg-scheme-4: #A8A5A0;
+} /* Night · Amethyst · Midnight Forest · Muted Platinum */
+.ujg-mood-warm {
+  --ujg-scheme-1: #E1A443;
+  --ujg-scheme-2: #C15C27;
+  --ujg-scheme-3: #F7DFC0;
+  --ujg-scheme-4: #0D5E39;
+} /* Harvest Gold · Clay Ember · Warm Sand · Rich Forest */
+.ujg-mood-focused {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #47107D;
+  --ujg-scheme-3: #E8E6E1;
+  --ujg-scheme-4: #A8A5A0;
+} /* Night · Amethyst · Platinum · Muted Platinum */
+.ujg-mood-celebratory {
+  --ujg-scheme-1: #D9531A;
+  --ujg-scheme-2: #E28D1F;
+  --ujg-scheme-3: #F2B01E;
+  --ujg-scheme-4: #47107D;
+} /* Ember · Marigold · Gold · Amethyst */
+.ujg-mood-healing {
+  --ujg-scheme-1: #587156;
+  --ujg-scheme-2: #0D5E39;
+  --ujg-scheme-3: #F7DFC0;
+  --ujg-scheme-4: #E1A443;
+} /* Sage · Rich Forest · Warm Sand · Harvest Gold */
+.ujg-mood-bold {
+  --ujg-scheme-1: #D9531A;
+  --ujg-scheme-2: #B04720;
+  --ujg-scheme-3: #0A0A0A;
+  --ujg-scheme-4: #F2B01E;
+} /* Ember · Terracotta · Night · Gold */
+.ujg-mood-serene {
+  --ujg-scheme-1: #042F1E;
+  --ujg-scheme-2: #587156;
+  --ujg-scheme-3: #E8E6E1;
+  --ujg-scheme-4: #A8A5A0;
+} /* Midnight Forest · Sage · Platinum · Muted Platinum */
+.ujg-mood-regal {
+  --ujg-scheme-1: #47107D;
+  --ujg-scheme-2: #F2B01E;
+  --ujg-scheme-3: #B04720;
+  --ujg-scheme-4: #0A0A0A;
+} /* Amethyst · Gold · Terracotta · Night */
+.ujg-mood-dawn {
+  --ujg-scheme-1: #F7DFC0;
+  --ujg-scheme-2: #E1A443;
+  --ujg-scheme-3: #0D5E39;
+  --ujg-scheme-4: #47107D;
+} /* Warm Sand · Harvest Gold · Rich Forest · Amethyst */
+
+/* Tech + Earth schemes — 20 trios */
+.ujg-trio-rooted-sovereign {
+  --ujg-scheme-1: #47107D;
+  --ujg-scheme-2: #E1A443;
+  --ujg-scheme-3: #F7DFC0;
+} /* Amethyst + Harvest Gold + Warm Sand */
+.ujg-trio-jungle-circuit {
+  --ujg-scheme-1: #0D5E39;
+  --ujg-scheme-2: #587156;
+  --ujg-scheme-3: #F2B01E;
+} /* Rich Forest + Sage + Gold */
+.ujg-trio-clay-court {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #B04720;
+  --ujg-scheme-3: #F7DFC0;
+} /* Night + Terracotta + Warm Sand */
+.ujg-trio-ember-grove {
+  --ujg-scheme-1: #D9531A;
+  --ujg-scheme-2: #042F1E;
+  --ujg-scheme-3: #F7DFC0;
+} /* Sunset Ember + Midnight Forest + Warm Sand */
+.ujg-trio-amethyst-earth {
+  --ujg-scheme-1: #47107D;
+  --ujg-scheme-2: #B04720;
+  --ujg-scheme-3: #587156;
+} /* Amethyst + Terracotta + Sage */
+.ujg-trio-harvest-tech {
+  --ujg-scheme-1: #F2B01E;
+  --ujg-scheme-2: #0D5E39;
+  --ujg-scheme-3: #C15C27;
+} /* Gold + Rich Forest + Clay Ember */
+.ujg-trio-sacred-sand {
+  --ujg-scheme-1: #042F1E;
+  --ujg-scheme-2: #E28D1F;
+  --ujg-scheme-3: #F7DFC0;
+} /* Midnight Forest + Marigold + Warm Sand */
+.ujg-trio-panther-clay {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #C15C27;
+  --ujg-scheme-3: #A8A5A0;
+} /* Night + Clay Ember + Muted Platinum */
+.ujg-trio-obsidian-sage {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #587156;
+  --ujg-scheme-3: #E1A443;
+} /* Night + Sage + Harvest Gold */
+.ujg-trio-amethyst-clay {
+  --ujg-scheme-1: #47107D;
+  --ujg-scheme-2: #C15C27;
+  --ujg-scheme-3: #F7DFC0;
+} /* Amethyst + Clay Ember + Warm Sand */
+.ujg-trio-gilded-forest {
+  --ujg-scheme-1: #F2B01E;
+  --ujg-scheme-2: #042F1E;
+  --ujg-scheme-3: #F7DFC0;
+} /* Gold + Midnight Forest + Warm Sand */
+.ujg-trio-ember-terra {
+  --ujg-scheme-1: #D9531A;
+  --ujg-scheme-2: #B04720;
+  --ujg-scheme-3: #0A0A0A;
+} /* Sunset Ember + Terracotta + Night */
+.ujg-trio-circuit-sand {
+  --ujg-scheme-1: #47107D;
+  --ujg-scheme-2: #587156;
+  --ujg-scheme-3: #F7DFC0;
+} /* Amethyst + Sage + Warm Sand */
+.ujg-trio-marigold-night {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #E28D1F;
+  --ujg-scheme-3: #E8E6E1;
+} /* Night + Marigold + Platinum */
+.ujg-trio-rooted-amethyst {
+  --ujg-scheme-1: #0D5E39;
+  --ujg-scheme-2: #47107D;
+  --ujg-scheme-3: #E1A443;
+} /* Rich Forest + Amethyst + Harvest Gold */
+.ujg-trio-terra-circuit {
+  --ujg-scheme-1: #47107D;
+  --ujg-scheme-2: #E28D1F;
+  --ujg-scheme-3: #042F1E;
+} /* Amethyst + Marigold + Midnight Forest */
+.ujg-trio-golden-grove {
+  --ujg-scheme-1: #F2B01E;
+  --ujg-scheme-2: #587156;
+  --ujg-scheme-3: #042F1E;
+} /* Gold + Sage + Midnight Forest */
+.ujg-trio-sunfire-clay {
+  --ujg-scheme-1: #D9531A;
+  --ujg-scheme-2: #E28D1F;
+  --ujg-scheme-3: #C15C27;
+} /* Ember + Marigold + Clay Ember */
+.ujg-trio-amethyst-sand {
+  --ujg-scheme-1: #47107D;
+  --ujg-scheme-2: #E1A443;
+  --ujg-scheme-3: #587156;
+} /* Amethyst + Harvest Gold + Sage */
+.ujg-trio-forest-ember {
+  --ujg-scheme-1: #0D5E39;
+  --ujg-scheme-2: #C15C27;
+  --ujg-scheme-3: #F7DFC0;
+} /* Rich Forest + Clay Ember + Warm Sand */
+
+/* Themed palettes (Tech + Earth) — 20 */
+.ujg-palette-amazonia {
+  --ujg-scheme-1: #042F1E;
+  --ujg-scheme-2: #0D5E39;
+  --ujg-scheme-3: #587156;
+  --ujg-scheme-4: #E1A443;
+  --ujg-scheme-5: #B04720;
+  --ujg-scheme-6: #F7DFC0;
+} /* Midnight Forest · Rich Forest · Sage · Harvest Gold · Terracotta · Warm Sand */
+.ujg-palette-command-core {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #47107D;
+  --ujg-scheme-3: #F2B01E;
+  --ujg-scheme-4: #E8E6E1;
+  --ujg-scheme-5: #A8A5A0;
+} /* Night · Deep Amethyst · Luminous Gold · Platinum · Muted Platinum */
+.ujg-palette-sensory-studio {
+  --ujg-scheme-1: #D9531A;
+  --ujg-scheme-2: #C15C27;
+  --ujg-scheme-3: #E28D1F;
+  --ujg-scheme-4: #E1A443;
+  --ujg-scheme-5: #F7DFC0;
+  --ujg-scheme-6: #0A0A0A;
+} /* Sunset Ember · Clay Ember · Marigold · Harvest Gold · Warm Sand · Night */
+.ujg-palette-data-alchemy {
+  --ujg-scheme-1: #47107D;
+  --ujg-scheme-2: #F2B01E;
+  --ujg-scheme-3: #D9531A;
+  --ujg-scheme-4: #0D5E39;
+  --ujg-scheme-5: #587156;
+} /* Amethyst · Gold · Ember · Rich Forest · Sage */
+.ujg-palette-sacred-transmission {
+  --ujg-scheme-1: #042F1E;
+  --ujg-scheme-2: #47107D;
+  --ujg-scheme-3: #587156;
+  --ujg-scheme-4: #E1A443;
+  --ujg-scheme-5: #F7DFC0;
+} /* Midnight Forest · Deep Amethyst · Sage · Harvest Gold · Warm Sand */
+.ujg-palette-ancestral-craft {
+  --ujg-scheme-1: #B04720;
+  --ujg-scheme-2: #E1A443;
+  --ujg-scheme-3: #042F1E;
+  --ujg-scheme-4: #F7DFC0;
+  --ujg-scheme-5: #0A0A0A;
+} /* Terracotta · Harvest Gold · Midnight Forest · Warm Sand · Night */
+.ujg-palette-shon {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #D9531A;
+  --ujg-scheme-3: #F2B01E;
+  --ujg-scheme-4: #47107D;
+  --ujg-scheme-5: #E8E6E1;
+} /* Night · Sunset Ember · Gold · Amethyst · Platinum */
+.ujg-palette-master-avatar {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #47107D;
+  --ujg-scheme-3: #0D5E39;
+  --ujg-scheme-4: #F2B01E;
+  --ujg-scheme-5: #E8E6E1;
+} /* Night · Amethyst · Rich Forest · Gold · Platinum */
+.ujg-palette-afro-futurist-royal {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #47107D;
+  --ujg-scheme-3: #F2B01E;
+  --ujg-scheme-4: #B04720;
+} /* Night · Amethyst · Gold · Terracotta */
+.ujg-palette-urban-jungle-grounded {
+  --ujg-scheme-1: #042F1E;
+  --ujg-scheme-2: #0D5E39;
+  --ujg-scheme-3: #587156;
+  --ujg-scheme-4: #F7DFC0;
+  --ujg-scheme-5: #E8E6E1;
+} /* Midnight Forest · Rich Forest · Sage · Warm Sand · Platinum */
+.ujg-palette-warm-neutral {
+  --ujg-scheme-1: #F7DFC0;
+  --ujg-scheme-2: #E1A443;
+  --ujg-scheme-3: #B04720;
+  --ujg-scheme-4: #587156;
+  --ujg-scheme-5: #0A0A0A;
+} /* Warm Sand · Harvest Gold · Terracotta · Sage · Night */
+.ujg-palette-launch-heat {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #47107D;
+  --ujg-scheme-3: #D9531A;
+  --ujg-scheme-4: #F2B01E;
+} /* Night · Amethyst · Sunset Ember · Gold */
+.ujg-palette-platinum-tech {
+  --ujg-scheme-1: #E8E6E1;
+  --ujg-scheme-2: #A8A5A0;
+  --ujg-scheme-3: #47107D;
+  --ujg-scheme-4: #0A0A0A;
+} /* Platinum · Muted Platinum · Amethyst · Night */
+.ujg-palette-gilded-legacy {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #F2B01E;
+  --ujg-scheme-3: #E1A443;
+  --ujg-scheme-4: #B04720;
+  --ujg-scheme-5: #E8E6E1;
+} /* Night · Gold · Harvest Gold · Terracotta · Platinum */
+.ujg-palette-ritual-grove {
+  --ujg-scheme-1: #042F1E;
+  --ujg-scheme-2: #47107D;
+  --ujg-scheme-3: #F2B01E;
+  --ujg-scheme-4: #587156;
+  --ujg-scheme-5: #F7DFC0;
+} /* Midnight Forest · Amethyst · Gold · Sage · Warm Sand */
+.ujg-palette-signal-fire {
+  --ujg-scheme-1: #D9531A;
+  --ujg-scheme-2: #E28D1F;
+  --ujg-scheme-3: #47107D;
+  --ujg-scheme-4: #0A0A0A;
+  --ujg-scheme-5: #E8E6E1;
+} /* Sunset Ember · Marigold · Amethyst · Night · Platinum */
+.ujg-palette-deep-system {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #0D5E39;
+  --ujg-scheme-3: #47107D;
+  --ujg-scheme-4: #A8A5A0;
+} /* Night · Rich Forest · Amethyst · Muted Platinum */
+.ujg-palette-soft-botanical {
+  --ujg-scheme-1: #F7DFC0;
+  --ujg-scheme-2: #587156;
+  --ujg-scheme-3: #0D5E39;
+  --ujg-scheme-4: #E1A443;
+} /* Warm Sand · Sage · Rich Forest · Harvest Gold */
+.ujg-palette-full-spectrum {
+  --ujg-scheme-1: #47107D;
+  --ujg-scheme-2: #B04720;
+  --ujg-scheme-3: #E1A443;
+  --ujg-scheme-4: #042F1E;
+  --ujg-scheme-5: #F7DFC0;
+} /* Amethyst · Terracotta · Harvest Gold · Midnight Forest · Warm Sand */
+.ujg-palette-quiet-ground {
+  --ujg-scheme-1: #0A0A0A;
+  --ujg-scheme-2: #587156;
+  --ujg-scheme-3: #E1A443;
+  --ujg-scheme-4: #F7DFC0;
+  --ujg-scheme-5: #E8E6E1;
+} /* Night · Sage · Harvest Gold · Warm Sand · Platinum */

@@ -1,0 +1,2505 @@
+{
+  "meta": {
+    "source": "ujg_color_system_v2_1.html",
+    "title": "UJG Color System v2.0",
+    "heading": "Urban Jungle Goddess — Color System v2.0",
+    "kicker": "Book 3 · The Canopy · 3B.1",
+    "lead": "Locked Jul 29, 2026. Six core colors, each specified across ten value systems. Math systems (HEX, RGB, CMYK, HSB, HUE, LAB) are exact. RAL, Copic, HKS, and Prismacolor are nearest physical matches — verify on a fan deck before production.",
+    "goldenRule": "Golden Rule — Never use more than 3 colors in a single design element.",
+    "note": "On the physical-match systems: HEX, RGB, CMYK, HSB, HUE, and LAB are computed exactly from each hex. RAL, Copic, HKS, and Prismacolor are ink / marker / pencil libraries with no exact digital formula — the values shown are the nearest visual match and should be confirmed against a physical fan deck before any print, signage, or illustration run. CMYK is an uncoated naive conversion; for production, soft-proof against your printer's ICC profile.",
+    "fidelity": "Extracted verbatim from the reference HTML. Values are reproduced exactly as written, including the RAL / Copic / HKS / Prismacolor approximations."
+  },
+  "core": [
+    {
+      "name": "Night",
+      "slug": "night",
+      "key": "night",
+      "role": "Primary Base",
+      "swatch": "#0A0A0A",
+      "values": {
+        "HEX": "#0A0A0A",
+        "HSB": "0°, 0%, 4%",
+        "RGB": "10, 10, 10",
+        "HUE": "0°",
+        "CMYK": "0, 0, 0, 96",
+        "LAB": "3, 0, 0",
+        "RAL": "9005 Jet Black",
+        "Copic": "100 Black",
+        "HKS": "Process Black",
+        "Prismacolor": "PC 935 Black"
+      },
+      "systems": [
+        "HEX",
+        "HSB",
+        "RGB",
+        "HUE",
+        "CMYK",
+        "LAB",
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ],
+      "approximate": [
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ]
+    },
+    {
+      "name": "Deep Amethyst",
+      "slug": "deep-amethyst",
+      "key": "deepAmethyst",
+      "role": "Tech & Royal",
+      "swatch": "#47107D",
+      "values": {
+        "HEX": "#47107D",
+        "HSB": "270°, 87%, 49%",
+        "RGB": "71, 16, 125",
+        "HUE": "270°",
+        "CMYK": "43, 87, 0, 51",
+        "LAB": "21, 46, -50",
+        "RAL": "4007 Purple Violet",
+        "Copic": "V09 Violet",
+        "HKS": "37 N",
+        "Prismacolor": "PC 931 Dark Purple"
+      },
+      "systems": [
+        "HEX",
+        "HSB",
+        "RGB",
+        "HUE",
+        "CMYK",
+        "LAB",
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ],
+      "approximate": [
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ]
+    },
+    {
+      "name": "Sunset Ember",
+      "slug": "sunset-ember",
+      "key": "sunsetEmber",
+      "role": "Energy & Action",
+      "swatch": "#D9531A",
+      "values": {
+        "HEX": "#D9531A",
+        "HSB": "18°, 88%, 85%",
+        "RGB": "217, 83, 26",
+        "HUE": "18°",
+        "CMYK": "0, 62, 88, 15",
+        "LAB": "53, 50, 56",
+        "RAL": "2001 Red Orange",
+        "Copic": "YR09 Chinese Orange",
+        "HKS": "7 N",
+        "Prismacolor": "PC 921 Pale Vermilion"
+      },
+      "systems": [
+        "HEX",
+        "HSB",
+        "RGB",
+        "HUE",
+        "CMYK",
+        "LAB",
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ],
+      "approximate": [
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ]
+    },
+    {
+      "name": "Luminous Gold",
+      "slug": "luminous-gold",
+      "key": "luminousGold",
+      "role": "Wealth & Legacy",
+      "swatch": "#F2B01E",
+      "values": {
+        "HEX": "#F2B01E",
+        "HSB": "41°, 88%, 95%",
+        "RGB": "242, 176, 30",
+        "HUE": "41°",
+        "CMYK": "0, 27, 88, 5",
+        "LAB": "76, 13, 75",
+        "RAL": "1028 Melon Yellow",
+        "Copic": "Y17 Golden Yellow",
+        "HKS": "5 N",
+        "Prismacolor": "PC 1003 Spanish Orange"
+      },
+      "systems": [
+        "HEX",
+        "HSB",
+        "RGB",
+        "HUE",
+        "CMYK",
+        "LAB",
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ],
+      "approximate": [
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ]
+    },
+    {
+      "name": "Rich Forest",
+      "slug": "rich-forest",
+      "key": "richForest",
+      "role": "Nature Core",
+      "swatch": "#0D5E39",
+      "values": {
+        "HEX": "#0D5E39",
+        "HSB": "153°, 86%, 37%",
+        "RGB": "13, 94, 57",
+        "HUE": "153°",
+        "CMYK": "86, 0, 39, 63",
+        "LAB": "35, -33, 15",
+        "RAL": "6016 Turquoise Green",
+        "Copic": "G28 Ocean Green",
+        "HKS": "58 N",
+        "Prismacolor": "PC 908 Dark Green"
+      },
+      "systems": [
+        "HEX",
+        "HSB",
+        "RGB",
+        "HUE",
+        "CMYK",
+        "LAB",
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ],
+      "approximate": [
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ]
+    },
+    {
+      "name": "Platinum",
+      "slug": "platinum",
+      "key": "platinum",
+      "role": "Neutral & Contrast",
+      "swatch": "#E8E6E1",
+      "values": {
+        "HEX": "#E8E6E1",
+        "HSB": "43°, 3%, 91%",
+        "RGB": "232, 230, 225",
+        "HUE": "43°",
+        "CMYK": "0, 1, 3, 9",
+        "LAB": "91, 0, 3",
+        "RAL": "9003 Signal White",
+        "Copic": "W-1 Warm Gray",
+        "HKS": "Paper White",
+        "Prismacolor": "PC 938 White"
+      },
+      "systems": [
+        "HEX",
+        "HSB",
+        "RGB",
+        "HUE",
+        "CMYK",
+        "LAB",
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ],
+      "approximate": [
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ]
+    }
+  ],
+  "functional": [
+    {
+      "name": "Muted Platinum",
+      "slug": "muted-platinum",
+      "key": "mutedPlatinum",
+      "role": "secondary text",
+      "label": "Muted Platinum · secondary text",
+      "swatch": "#A8A5A0",
+      "values": {
+        "HEX": "#A8A5A0",
+        "HSB": "38°, 5%, 66%",
+        "RGB": "168,165,160",
+        "CMYK": "0,2,5,34",
+        "LAB": "68, 0, 3",
+        "RAL": "7038 Agate Grey"
+      },
+      "systems": [
+        "HEX",
+        "HSB",
+        "RGB",
+        "CMYK",
+        "LAB",
+        "RAL"
+      ],
+      "approximate": [
+        "RAL"
+      ]
+    },
+    {
+      "name": "Rich Jungle Green",
+      "slug": "rich-jungle-green",
+      "key": "richJungleGreen",
+      "role": "success",
+      "label": "Rich Jungle Green · success",
+      "swatch": "#2E6B4F",
+      "values": {
+        "HEX": "#2E6B4F",
+        "HSB": "152°, 57%, 42%",
+        "RGB": "46,107,79",
+        "CMYK": "57,0,26,58",
+        "LAB": "41, -27, 10",
+        "RAL": "6000 Patina Green"
+      },
+      "systems": [
+        "HEX",
+        "HSB",
+        "RGB",
+        "CMYK",
+        "LAB",
+        "RAL"
+      ],
+      "approximate": [
+        "RAL"
+      ]
+    }
+  ],
+  "extended": [
+    {
+      "name": "Midnight Forest",
+      "slug": "midnight-forest",
+      "key": "midnightForest",
+      "role": "Deepest Forest",
+      "swatch": "#042F1E",
+      "values": {
+        "HEX": "#042F1E",
+        "HSB": "156, 91, 18",
+        "RGB": "4, 47, 30",
+        "HSL": "156, 84, 10",
+        "CMYK": "84, 51, 81, 68",
+        "LAB": "16, -18, 7",
+        "RAL": "6009 Fir Green",
+        "Copic": "G99 Olive",
+        "HKS": "63 N",
+        "Prismacolor": "PC908 Dark Green"
+      },
+      "systems": [
+        "HEX",
+        "HSB",
+        "RGB",
+        "HSL",
+        "CMYK",
+        "LAB",
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ],
+      "approximate": [
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ]
+    },
+    {
+      "name": "Clay Ember",
+      "slug": "clay-ember",
+      "key": "clayEmber",
+      "role": "Burnt Clay",
+      "swatch": "#C15C27",
+      "values": {
+        "HEX": "#C15C27",
+        "HSB": "21, 80, 76",
+        "RGB": "193, 92, 39",
+        "HSL": "21, 66, 54",
+        "CMYK": "18, 75, 100, 6",
+        "LAB": "51, 39, 49",
+        "RAL": "8023 Orange Brown",
+        "Copic": "YR07 Cadmium Orange",
+        "HKS": "8 N",
+        "Prismacolor": "PC943 Burnt Ochre"
+      },
+      "systems": [
+        "HEX",
+        "HSB",
+        "RGB",
+        "HSL",
+        "CMYK",
+        "LAB",
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ],
+      "approximate": [
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ]
+    },
+    {
+      "name": "Harvest Gold",
+      "slug": "harvest-gold",
+      "key": "harvestGold",
+      "role": "Soft Amber",
+      "swatch": "#E1A443",
+      "values": {
+        "HEX": "#E1A443",
+        "HSB": "37, 70, 88",
+        "RGB": "225, 164, 67",
+        "HSL": "37, 72, 57",
+        "CMYK": "11, 38, 87, 0",
+        "LAB": "72, 17, 58",
+        "RAL": "1024 Ochre Yellow",
+        "Copic": "Y17 Golden Yellow",
+        "HKS": "4 N",
+        "Prismacolor": "PC942 Yellow Ochre"
+      },
+      "systems": [
+        "HEX",
+        "HSB",
+        "RGB",
+        "HSL",
+        "CMYK",
+        "LAB",
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ],
+      "approximate": [
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ]
+    },
+    {
+      "name": "Sage",
+      "slug": "sage",
+      "key": "sage",
+      "role": "Herbal Neutral",
+      "swatch": "#587156",
+      "values": {
+        "HEX": "#587156",
+        "HSB": "116, 24, 44",
+        "RGB": "88, 113, 86",
+        "HSL": "116, 14, 39",
+        "CMYK": "65, 39, 71, 21",
+        "LAB": "45, -13, 12",
+        "RAL": "6013 Reed Green",
+        "Copic": "G85 Verdigris",
+        "HKS": "61 N",
+        "Prismacolor": "PC1090 Kelp Green"
+      },
+      "systems": [
+        "HEX",
+        "HSB",
+        "RGB",
+        "HSL",
+        "CMYK",
+        "LAB",
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ],
+      "approximate": [
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ]
+    },
+    {
+      "name": "Marigold",
+      "slug": "marigold",
+      "key": "marigold",
+      "role": "Warm Accent",
+      "swatch": "#E28D1F",
+      "values": {
+        "HEX": "#E28D1F",
+        "HSB": "34, 86, 89",
+        "RGB": "226, 141, 31",
+        "HSL": "34, 77, 50",
+        "CMYK": "9, 51, 100, 0",
+        "LAB": "67, 28, 66",
+        "RAL": "2000 Yellow Orange",
+        "Copic": "YR15 Pumpkin Yellow",
+        "HKS": "5 N",
+        "Prismacolor": "PC1003 Spanish Orange"
+      },
+      "systems": [
+        "HEX",
+        "HSB",
+        "RGB",
+        "HSL",
+        "CMYK",
+        "LAB",
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ],
+      "approximate": [
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ]
+    },
+    {
+      "name": "Warm Sand",
+      "slug": "warm-sand",
+      "key": "warmSand",
+      "role": "Warm Light",
+      "swatch": "#F7DFC0",
+      "values": {
+        "HEX": "#F7DFC0",
+        "HSB": "34, 22, 97",
+        "RGB": "247, 223, 192",
+        "HSL": "34, 77, 86",
+        "CMYK": "2, 13, 25, 0",
+        "LAB": "90, 6, 19",
+        "RAL": "1015 Light Ivory",
+        "Copic": "E51 Milky White",
+        "HKS": "84 N",
+        "Prismacolor": "PC1012 Jasmine"
+      },
+      "systems": [
+        "HEX",
+        "HSB",
+        "RGB",
+        "HSL",
+        "CMYK",
+        "LAB",
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ],
+      "approximate": [
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ]
+    },
+    {
+      "name": "Terracotta",
+      "slug": "terracotta",
+      "key": "terracotta",
+      "role": "Grounded Earth",
+      "swatch": "#B04720",
+      "values": {
+        "HEX": "#B04720",
+        "HSB": "16, 82, 69",
+        "RGB": "176, 71, 32",
+        "HSL": "16, 69, 41",
+        "CMYK": "22, 84, 100, 13",
+        "LAB": "45, 43, 45",
+        "RAL": "8004 Copper Brown",
+        "Copic": "E08 Brown",
+        "HKS": "9 N",
+        "Prismacolor": "PC945 Sienna Brown"
+      },
+      "systems": [
+        "HEX",
+        "HSB",
+        "RGB",
+        "HSL",
+        "CMYK",
+        "LAB",
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ],
+      "approximate": [
+        "RAL",
+        "Copic",
+        "HKS",
+        "Prismacolor"
+      ]
+    }
+  ],
+  "mapping": [
+    {
+      "role": "Primary",
+      "usage": "logos, headers",
+      "roleLabel": "Primary — logos, headers",
+      "roleSlug": "primary",
+      "roleKey": "primary",
+      "color": "Night",
+      "colorSlug": "night",
+      "colorKey": "night",
+      "hex": "#0A0A0A"
+    },
+    {
+      "role": "Secondary",
+      "usage": "key UI, accents",
+      "roleLabel": "Secondary — key UI, accents",
+      "roleSlug": "secondary",
+      "roleKey": "secondary",
+      "color": "Deep Amethyst",
+      "colorSlug": "deep-amethyst",
+      "colorKey": "deepAmethyst",
+      "hex": "#47107D"
+    },
+    {
+      "role": "Accent",
+      "usage": "highlights, links",
+      "roleLabel": "Accent — highlights, links",
+      "roleSlug": "accent",
+      "roleKey": "accent",
+      "color": "Luminous Gold",
+      "colorSlug": "luminous-gold",
+      "colorKey": "luminousGold",
+      "hex": "#F2B01E"
+    },
+    {
+      "role": "CTA / Action",
+      "usage": null,
+      "roleLabel": "CTA / Action",
+      "roleSlug": "cta-action",
+      "roleKey": "ctaAction",
+      "color": "Sunset Ember",
+      "colorSlug": "sunset-ember",
+      "colorKey": "sunsetEmber",
+      "hex": "#D9531A"
+    },
+    {
+      "role": "Neutral Dark",
+      "usage": "text, borders",
+      "roleLabel": "Neutral Dark — text, borders",
+      "roleSlug": "neutral-dark",
+      "roleKey": "neutralDark",
+      "color": "Rich Forest",
+      "colorSlug": "rich-forest",
+      "colorKey": "richForest",
+      "hex": "#0D5E39"
+    },
+    {
+      "role": "Neutral Mid",
+      "usage": "secondary text",
+      "roleLabel": "Neutral Mid — secondary text",
+      "roleSlug": "neutral-mid",
+      "roleKey": "neutralMid",
+      "color": "Muted Platinum",
+      "colorSlug": "muted-platinum",
+      "colorKey": "mutedPlatinum",
+      "hex": "#A8A5A0"
+    },
+    {
+      "role": "Neutral Light",
+      "usage": "backgrounds",
+      "roleLabel": "Neutral Light — backgrounds",
+      "roleSlug": "neutral-light",
+      "roleKey": "neutralLight",
+      "color": "Platinum",
+      "colorSlug": "platinum",
+      "colorKey": "platinum",
+      "hex": "#E8E6E1"
+    },
+    {
+      "role": "Success",
+      "usage": null,
+      "roleLabel": "Success",
+      "roleSlug": "success",
+      "roleKey": "success",
+      "color": "Rich Jungle Green",
+      "colorSlug": "rich-jungle-green",
+      "colorKey": "richJungleGreen",
+      "hex": "#2E6B4F"
+    },
+    {
+      "role": "Warning",
+      "usage": null,
+      "roleLabel": "Warning",
+      "roleSlug": "warning",
+      "roleKey": "warning",
+      "color": "Luminous Gold",
+      "colorSlug": "luminous-gold",
+      "colorKey": "luminousGold",
+      "hex": "#F2B01E"
+    },
+    {
+      "role": "Error / Urgent",
+      "usage": null,
+      "roleLabel": "Error / Urgent",
+      "roleSlug": "error-urgent",
+      "roleKey": "errorUrgent",
+      "color": "Sunset Ember",
+      "colorSlug": "sunset-ember",
+      "colorKey": "sunsetEmber",
+      "hex": "#D9531A"
+    },
+    {
+      "role": "Info",
+      "usage": null,
+      "roleLabel": "Info",
+      "roleSlug": "info",
+      "roleKey": "info",
+      "color": "Deep Amethyst",
+      "colorSlug": "deep-amethyst",
+      "colorKey": "deepAmethyst",
+      "hex": "#47107D"
+    }
+  ],
+  "trios": [
+    {
+      "id": "01",
+      "name": "Afro-Futurist Royal",
+      "slug": "afro-futurist-royal",
+      "key": "afroFuturistRoyal",
+      "label": "01 · Afro-Futurist Royal",
+      "colors": [
+        "#47107D",
+        "#F2B01E",
+        "#0A0A0A"
+      ],
+      "mix": "Amethyst + Gold + Night",
+      "usage": "flagship brand visuals, authority, decks",
+      "description": "Amethyst + Gold + Night — flagship brand visuals, authority, decks"
+    },
+    {
+      "id": "02",
+      "name": "Urban Jungle Grounded",
+      "slug": "urban-jungle-grounded",
+      "key": "urbanJungleGrounded",
+      "label": "02 · Urban Jungle Grounded",
+      "colors": [
+        "#0D5E39",
+        "#F2B01E",
+        "#E8E6E1"
+      ],
+      "mix": "Rich Forest + Gold + Platinum",
+      "usage": "wellness, ancestral, eco, light collateral",
+      "description": "Rich Forest + Gold + Platinum — wellness, ancestral, eco, light collateral"
+    },
+    {
+      "id": "03",
+      "name": "Sunset Rebellion",
+      "slug": "sunset-rebellion",
+      "key": "sunsetRebellion",
+      "label": "03 · Sunset Rebellion",
+      "colors": [
+        "#D9531A",
+        "#47107D",
+        "#0A0A0A"
+      ],
+      "mix": "Ember + Amethyst + Night",
+      "usage": "campaigns, launches, provocation",
+      "description": "Ember + Amethyst + Night — campaigns, launches, provocation"
+    },
+    {
+      "id": "04",
+      "name": "Vibranium Court",
+      "slug": "vibranium-court",
+      "key": "vibraniumCourt",
+      "label": "04 · Vibranium Court",
+      "colors": [
+        "#47107D",
+        "#E8E6E1",
+        "#0A0A0A"
+      ],
+      "mix": "Amethyst + Platinum + Night",
+      "usage": "premium dark UI, nav bars, elegant tech surfaces",
+      "description": "Amethyst + Platinum + Night — premium dark UI, nav bars, elegant tech surfaces"
+    },
+    {
+      "id": "05",
+      "name": "Solar Harvest",
+      "slug": "solar-harvest",
+      "key": "solarHarvest",
+      "label": "05 · Solar Harvest",
+      "colors": [
+        "#F2B01E",
+        "#D9531A",
+        "#0A0A0A"
+      ],
+      "mix": "Gold + Ember + Night",
+      "usage": "warm CTAs, sales pages, product warmth",
+      "description": "Gold + Ember + Night — warm CTAs, sales pages, product warmth"
+    },
+    {
+      "id": "06",
+      "name": "Emerald Circuit",
+      "slug": "emerald-circuit",
+      "key": "emeraldCircuit",
+      "label": "06 · Emerald Circuit",
+      "colors": [
+        "#0D5E39",
+        "#47107D",
+        "#0A0A0A"
+      ],
+      "mix": "Rich Forest + Amethyst + Night",
+      "usage": "spiritual tech, journaling, sacred interfaces",
+      "description": "Rich Forest + Amethyst + Night — spiritual tech, journaling, sacred interfaces"
+    },
+    {
+      "id": "07",
+      "name": "Obsidian Gold",
+      "slug": "obsidian-gold",
+      "key": "obsidianGold",
+      "label": "07 · Obsidian Gold",
+      "colors": [
+        "#0A0A0A",
+        "#F2B01E",
+        "#E8E6E1"
+      ],
+      "mix": "Night + Gold + Platinum",
+      "usage": "luxe minimal, packaging, stationery, monograms",
+      "description": "Night + Gold + Platinum — luxe minimal, packaging, stationery, monograms"
+    },
+    {
+      "id": "08",
+      "name": "Ember Ash",
+      "slug": "ember-ash",
+      "key": "emberAsh",
+      "label": "08 · Ember Ash",
+      "colors": [
+        "#D9531A",
+        "#E8E6E1",
+        "#0A0A0A"
+      ],
+      "mix": "Ember + Platinum + Night",
+      "usage": "bold editorial, posters, social headlines",
+      "description": "Ember + Platinum + Night — bold editorial, posters, social headlines"
+    },
+    {
+      "id": "09",
+      "name": "Sacred Grove",
+      "slug": "sacred-grove",
+      "key": "sacredGrove",
+      "label": "09 · Sacred Grove",
+      "colors": [
+        "#0D5E39",
+        "#47107D",
+        "#E8E6E1"
+      ],
+      "mix": "Rich Forest + Amethyst + Platinum",
+      "usage": "airy sacred, light wellness, ceremony collateral",
+      "description": "Rich Forest + Amethyst + Platinum — airy sacred, light wellness, ceremony collateral"
+    },
+    {
+      "id": "10",
+      "name": "Molten Crown",
+      "slug": "molten-crown",
+      "key": "moltenCrown",
+      "label": "10 · Molten Crown",
+      "colors": [
+        "#D9531A",
+        "#F2B01E",
+        "#47107D"
+      ],
+      "mix": "Ember + Gold + Amethyst",
+      "usage": "rich reveal, hero art (ground on Night or Platinum)",
+      "description": "Ember + Gold + Amethyst — rich reveal, hero art (ground on Night or Platinum)"
+    },
+    {
+      "id": "11",
+      "name": "Circuit Grove",
+      "slug": "circuit-grove",
+      "key": "circuitGrove",
+      "label": "11 · Circuit Grove",
+      "colors": [
+        "#0D5E39",
+        "#D9531A",
+        "#0A0A0A"
+      ],
+      "mix": "Rich Forest + Ember + Night",
+      "usage": "eco-action campaigns, product",
+      "description": "Rich Forest + Ember + Night — eco-action campaigns, product"
+    },
+    {
+      "id": "12",
+      "name": "Forest Signal",
+      "slug": "forest-signal",
+      "key": "forestSignal",
+      "label": "12 · Forest Signal",
+      "colors": [
+        "#0D5E39",
+        "#F2B01E",
+        "#0A0A0A"
+      ],
+      "mix": "Rich Forest + Gold + Night",
+      "usage": "wellness authority on dark",
+      "description": "Rich Forest + Gold + Night — wellness authority on dark"
+    },
+    {
+      "id": "13",
+      "name": "Deep Canopy",
+      "slug": "deep-canopy",
+      "key": "deepCanopy",
+      "label": "13 · Deep Canopy",
+      "colors": [
+        "#0D5E39",
+        "#E8E6E1",
+        "#0A0A0A"
+      ],
+      "mix": "Rich Forest + Platinum + Night",
+      "usage": "calm reports, docs",
+      "description": "Rich Forest + Platinum + Night — calm reports, docs"
+    },
+    {
+      "id": "14",
+      "name": "Royal Grove",
+      "slug": "royal-grove",
+      "key": "royalGrove",
+      "label": "14 · Royal Grove",
+      "colors": [
+        "#47107D",
+        "#0D5E39",
+        "#F2B01E"
+      ],
+      "mix": "Amethyst + Rich Forest + Gold",
+      "usage": "three-jewel hero (ground on Night or Platinum)",
+      "description": "Amethyst + Rich Forest + Gold — three-jewel hero (ground on Night or Platinum)"
+    },
+    {
+      "id": "15",
+      "name": "Amethyst Signal",
+      "slug": "amethyst-signal",
+      "key": "amethystSignal",
+      "label": "15 · Amethyst Signal",
+      "colors": [
+        "#47107D",
+        "#F2B01E",
+        "#E8E6E1"
+      ],
+      "mix": "Amethyst + Gold + Platinum",
+      "usage": "premium light decks, one-pagers",
+      "description": "Amethyst + Gold + Platinum — premium light decks, one-pagers"
+    },
+    {
+      "id": "16",
+      "name": "Vibrant Jungle",
+      "slug": "vibrant-jungle",
+      "key": "vibrantJungle",
+      "label": "16 · Vibrant Jungle",
+      "colors": [
+        "#47107D",
+        "#D9531A",
+        "#0D5E39"
+      ],
+      "mix": "Amethyst + Ember + Rich Forest",
+      "usage": "bold multi-jewel (ground on Night)",
+      "description": "Amethyst + Ember + Rich Forest — bold multi-jewel (ground on Night)"
+    },
+    {
+      "id": "17",
+      "name": "Cosmic Ember",
+      "slug": "cosmic-ember",
+      "key": "cosmicEmber",
+      "label": "17 · Cosmic Ember",
+      "colors": [
+        "#47107D",
+        "#D9531A",
+        "#E8E6E1"
+      ],
+      "mix": "Amethyst + Ember + Platinum",
+      "usage": "energetic premium light",
+      "description": "Amethyst + Ember + Platinum — energetic premium light"
+    },
+    {
+      "id": "18",
+      "name": "Harvest Fire",
+      "slug": "harvest-fire",
+      "key": "harvestFire",
+      "label": "18 · Harvest Fire",
+      "colors": [
+        "#D9531A",
+        "#F2B01E",
+        "#0D5E39"
+      ],
+      "mix": "Ember + Gold + Rich Forest",
+      "usage": "food, eco, abundance campaigns",
+      "description": "Ember + Gold + Rich Forest — food, eco, abundance campaigns"
+    },
+    {
+      "id": "19",
+      "name": "Solar Flare",
+      "slug": "solar-flare",
+      "key": "solarFlare",
+      "label": "19 · Solar Flare",
+      "colors": [
+        "#D9531A",
+        "#F2B01E",
+        "#E8E6E1"
+      ],
+      "mix": "Ember + Gold + Platinum",
+      "usage": "bright warm light, launches",
+      "description": "Ember + Gold + Platinum — bright warm light, launches"
+    },
+    {
+      "id": "20",
+      "name": "Ember Meadow",
+      "slug": "ember-meadow",
+      "key": "emberMeadow",
+      "label": "20 · Ember Meadow",
+      "colors": [
+        "#D9531A",
+        "#0D5E39",
+        "#E8E6E1"
+      ],
+      "mix": "Ember + Rich Forest + Platinum",
+      "usage": "warm on green, wellness",
+      "description": "Ember + Rich Forest + Platinum — warm on green, wellness"
+    }
+  ],
+  "gradients": [
+    {
+      "name": "Quantum Royalty",
+      "slug": "quantum-royalty",
+      "key": "quantumRoyalty",
+      "angle": "135deg",
+      "colors": [
+        "#47107D",
+        "#F2B01E",
+        "#E8E6E1"
+      ],
+      "recipe": "Amethyst → Gold → Platinum",
+      "usage": "Digital banners, hero UI, profile frames",
+      "css": "linear-gradient(135deg,#47107D,#F2B01E,#E8E6E1)"
+    },
+    {
+      "name": "Jungle Pulse",
+      "slug": "jungle-pulse",
+      "key": "junglePulse",
+      "angle": "135deg",
+      "colors": [
+        "#0D5E39",
+        "#D9531A",
+        "#0A0A0A"
+      ],
+      "recipe": "Rich Forest → Ember → Night",
+      "usage": "Dashboards, presentations, reports",
+      "css": "linear-gradient(135deg,#0D5E39,#D9531A,#0A0A0A)"
+    },
+    {
+      "name": "Vibranium Heat",
+      "slug": "vibranium-heat",
+      "key": "vibraniumHeat",
+      "angle": "135deg",
+      "colors": [
+        "#D9531A",
+        "#47107D",
+        "#0A0A0A"
+      ],
+      "recipe": "Ember → Amethyst → Night",
+      "usage": "Motion graphics, glitch effects, banners",
+      "css": "linear-gradient(135deg,#D9531A,#47107D,#0A0A0A)"
+    },
+    {
+      "name": "Solar Echo",
+      "slug": "solar-echo",
+      "key": "solarEcho",
+      "angle": "135deg",
+      "colors": [
+        "#F2B01E",
+        "#E8E6E1",
+        "#0D5E39"
+      ],
+      "recipe": "Gold → Platinum → Rich Forest",
+      "usage": "Onboarding flows, learning content",
+      "css": "linear-gradient(135deg,#F2B01E,#E8E6E1,#0D5E39)"
+    },
+    {
+      "name": "Ancestral Interface",
+      "slug": "ancestral-interface",
+      "key": "ancestralInterface",
+      "angle": "135deg",
+      "colors": [
+        "#0A0A0A",
+        "#E8E6E1",
+        "#47107D"
+      ],
+      "recipe": "Night → Platinum → Amethyst",
+      "usage": "Scroll transitions, footers",
+      "css": "linear-gradient(135deg,#0A0A0A,#E8E6E1,#47107D)"
+    },
+    {
+      "name": "Cyber Mirage",
+      "slug": "cyber-mirage",
+      "key": "cyberMirage",
+      "angle": "135deg",
+      "colors": [
+        "#47107D",
+        "#E8E6E1",
+        "#D9531A"
+      ],
+      "recipe": "Amethyst → Platinum → Ember",
+      "usage": "Hero UI, app transitions",
+      "css": "linear-gradient(135deg,#47107D,#E8E6E1,#D9531A)"
+    },
+    {
+      "name": "Obsidian Bloom",
+      "slug": "obsidian-bloom",
+      "key": "obsidianBloom",
+      "angle": "135deg",
+      "colors": [
+        "#0A0A0A",
+        "#0D5E39",
+        "#F2B01E"
+      ],
+      "recipe": "Night → Rich Forest → Gold",
+      "usage": "Finance tools, storytelling sliders",
+      "css": "linear-gradient(135deg,#0A0A0A,#0D5E39,#F2B01E)"
+    },
+    {
+      "name": "Panther Pulse",
+      "slug": "panther-pulse",
+      "key": "pantherPulse",
+      "angle": "135deg",
+      "colors": [
+        "#D9531A",
+        "#F2B01E",
+        "#47107D"
+      ],
+      "recipe": "Ember → Gold → Amethyst",
+      "usage": "Product reveals, CTA banners",
+      "css": "linear-gradient(135deg,#D9531A,#F2B01E,#47107D)"
+    },
+    {
+      "name": "Electric Clay",
+      "slug": "electric-clay",
+      "key": "electricClay",
+      "angle": "135deg",
+      "colors": [
+        "#F2B01E",
+        "#D9531A",
+        "#E8E6E1"
+      ],
+      "recipe": "Gold → Ember → Platinum",
+      "usage": "Minimal UI, eBooks, merch packaging",
+      "css": "linear-gradient(135deg,#F2B01E,#D9531A,#E8E6E1)"
+    },
+    {
+      "name": "Sacred Transmission",
+      "slug": "sacred-transmission",
+      "key": "sacredTransmission",
+      "angle": "135deg",
+      "colors": [
+        "#0D5E39",
+        "#47107D",
+        "#0A0A0A"
+      ],
+      "recipe": "Rich Forest → Amethyst → Night",
+      "usage": "Spiritual tech interfaces, journaling",
+      "css": "linear-gradient(135deg,#0D5E39,#47107D,#0A0A0A)"
+    },
+    {
+      "name": "Nightfall Gold",
+      "slug": "nightfall-gold",
+      "key": "nightfallGold",
+      "angle": "135deg",
+      "colors": [
+        "#0A0A0A",
+        "#47107D",
+        "#F2B01E"
+      ],
+      "recipe": "Night → Amethyst → Gold",
+      "usage": "Footers, hero",
+      "css": "linear-gradient(135deg,#0A0A0A,#47107D,#F2B01E)"
+    },
+    {
+      "name": "Emerald Dawn",
+      "slug": "emerald-dawn",
+      "key": "emeraldDawn",
+      "angle": "135deg",
+      "colors": [
+        "#0D5E39",
+        "#F2B01E",
+        "#E8E6E1"
+      ],
+      "recipe": "Rich Forest → Gold → Platinum",
+      "usage": "Onboarding, light content",
+      "css": "linear-gradient(135deg,#0D5E39,#F2B01E,#E8E6E1)"
+    },
+    {
+      "name": "Violet Sun",
+      "slug": "violet-sun",
+      "key": "violetSun",
+      "angle": "135deg",
+      "colors": [
+        "#47107D",
+        "#D9531A",
+        "#F2B01E"
+      ],
+      "recipe": "Amethyst → Ember → Gold",
+      "usage": "Campaigns, motion",
+      "css": "linear-gradient(135deg,#47107D,#D9531A,#F2B01E)"
+    },
+    {
+      "name": "Deep Current",
+      "slug": "deep-current",
+      "key": "deepCurrent",
+      "angle": "135deg",
+      "colors": [
+        "#0A0A0A",
+        "#0D5E39",
+        "#E8E6E1"
+      ],
+      "recipe": "Night → Rich Forest → Platinum",
+      "usage": "Calm backgrounds",
+      "css": "linear-gradient(135deg,#0A0A0A,#0D5E39,#E8E6E1)"
+    },
+    {
+      "name": "Royal Ash",
+      "slug": "royal-ash",
+      "key": "royalAsh",
+      "angle": "135deg",
+      "colors": [
+        "#47107D",
+        "#A8A5A0",
+        "#0A0A0A"
+      ],
+      "recipe": "Amethyst → Muted Platinum → Night",
+      "usage": "UI depth, panels",
+      "css": "linear-gradient(135deg,#47107D,#A8A5A0,#0A0A0A)"
+    },
+    {
+      "name": "Ember Veil",
+      "slug": "ember-veil",
+      "key": "emberVeil",
+      "angle": "135deg",
+      "colors": [
+        "#D9531A",
+        "#47107D",
+        "#E8E6E1"
+      ],
+      "recipe": "Ember → Amethyst → Platinum",
+      "usage": "Banners",
+      "css": "linear-gradient(135deg,#D9531A,#47107D,#E8E6E1)"
+    },
+    {
+      "name": "Goldstream",
+      "slug": "goldstream",
+      "key": "goldstream",
+      "angle": "135deg",
+      "colors": [
+        "#F2B01E",
+        "#0D5E39",
+        "#0A0A0A"
+      ],
+      "recipe": "Gold → Rich Forest → Night",
+      "usage": "Reports, finance",
+      "css": "linear-gradient(135deg,#F2B01E,#0D5E39,#0A0A0A)"
+    },
+    {
+      "name": "Platinum Rise",
+      "slug": "platinum-rise",
+      "key": "platinumRise",
+      "angle": "135deg",
+      "colors": [
+        "#0A0A0A",
+        "#47107D",
+        "#E8E6E1"
+      ],
+      "recipe": "Night → Amethyst → Platinum",
+      "usage": "Scroll transitions",
+      "css": "linear-gradient(135deg,#0A0A0A,#47107D,#E8E6E1)"
+    },
+    {
+      "name": "Forest Flare",
+      "slug": "forest-flare",
+      "key": "forestFlare",
+      "angle": "135deg",
+      "colors": [
+        "#0D5E39",
+        "#D9531A",
+        "#F2B01E"
+      ],
+      "recipe": "Rich Forest → Ember → Gold",
+      "usage": "Product reveals",
+      "css": "linear-gradient(135deg,#0D5E39,#D9531A,#F2B01E)"
+    },
+    {
+      "name": "Molten Night",
+      "slug": "molten-night",
+      "key": "moltenNight",
+      "angle": "135deg",
+      "colors": [
+        "#0A0A0A",
+        "#D9531A",
+        "#47107D"
+      ],
+      "recipe": "Night → Ember → Amethyst",
+      "usage": "Motion graphics",
+      "css": "linear-gradient(135deg,#0A0A0A,#D9531A,#47107D)"
+    }
+  ],
+  "moods": [
+    {
+      "name": "Spring",
+      "register": "Awakening",
+      "label": "Spring · Awakening",
+      "slug": "spring",
+      "key": "spring",
+      "colors": [
+        "#E8E6E1",
+        "#F2B01E",
+        "#0D5E39",
+        "#47107D"
+      ],
+      "mix": "Platinum · Gold · Rich Forest · Amethyst",
+      "usage": "clean, fertile, new systems waking",
+      "description": "Platinum · Gold · Rich Forest · Amethyst — clean, fertile, new systems waking"
+    },
+    {
+      "name": "Summer",
+      "register": "Activation",
+      "label": "Summer · Activation",
+      "slug": "summer",
+      "key": "summer",
+      "colors": [
+        "#D9531A",
+        "#F2B01E",
+        "#47107D",
+        "#0A0A0A"
+      ],
+      "mix": "Ember · Gold · Amethyst · Night",
+      "usage": "magnetic, celebratory, high energy",
+      "description": "Ember · Gold · Amethyst · Night — magnetic, celebratory, high energy"
+    },
+    {
+      "name": "Fall",
+      "register": "Strategy",
+      "label": "Fall · Strategy",
+      "slug": "fall",
+      "key": "fall",
+      "colors": [
+        "#D9531A",
+        "#0D5E39",
+        "#F2B01E",
+        "#47107D"
+      ],
+      "mix": "Ember · Rich Forest · Gold · Amethyst",
+      "usage": "legacy building, deep strategy",
+      "description": "Ember · Rich Forest · Gold · Amethyst — legacy building, deep strategy"
+    },
+    {
+      "name": "Winter",
+      "register": "Reflection",
+      "label": "Winter · Reflection",
+      "slug": "winter",
+      "key": "winter",
+      "colors": [
+        "#0A0A0A",
+        "#E8E6E1",
+        "#0D5E39",
+        "#47107D"
+      ],
+      "mix": "Night · Platinum · Rich Forest · Amethyst",
+      "usage": "sacred silence, encrypted memory",
+      "description": "Night · Platinum · Rich Forest · Amethyst — sacred silence, encrypted memory"
+    },
+    {
+      "name": "Sovereign",
+      "register": "commanding",
+      "label": "Sovereign · commanding",
+      "slug": "sovereign",
+      "key": "sovereign",
+      "colors": [
+        "#0A0A0A",
+        "#47107D",
+        "#F2B01E",
+        "#E8E6E1"
+      ],
+      "mix": "Night · Amethyst · Gold · Platinum",
+      "usage": null,
+      "description": "Night · Amethyst · Gold · Platinum"
+    },
+    {
+      "name": "Grounded",
+      "register": "calm",
+      "label": "Grounded · calm",
+      "slug": "grounded",
+      "key": "grounded",
+      "colors": [
+        "#042F1E",
+        "#587156",
+        "#F7DFC0",
+        "#0D5E39"
+      ],
+      "mix": "Midnight Forest · Sage · Warm Sand · Rich Forest",
+      "usage": null,
+      "description": "Midnight Forest · Sage · Warm Sand · Rich Forest"
+    },
+    {
+      "name": "Rebellious",
+      "register": "edgy",
+      "label": "Rebellious · edgy",
+      "slug": "rebellious",
+      "key": "rebellious",
+      "colors": [
+        "#0A0A0A",
+        "#D9531A",
+        "#47107D",
+        "#A8A5A0"
+      ],
+      "mix": "Night · Ember · Amethyst · Muted Platinum",
+      "usage": null,
+      "description": "Night · Ember · Amethyst · Muted Platinum"
+    },
+    {
+      "name": "Sacred",
+      "register": "reverent",
+      "label": "Sacred · reverent",
+      "slug": "sacred",
+      "key": "sacred",
+      "colors": [
+        "#042F1E",
+        "#47107D",
+        "#E1A443",
+        "#F7DFC0"
+      ],
+      "mix": "Midnight Forest · Amethyst · Harvest Gold · Warm Sand",
+      "usage": null,
+      "description": "Midnight Forest · Amethyst · Harvest Gold · Warm Sand"
+    },
+    {
+      "name": "Luxe",
+      "register": "abundant",
+      "label": "Luxe · abundant",
+      "slug": "luxe",
+      "key": "luxe",
+      "colors": [
+        "#0A0A0A",
+        "#F2B01E",
+        "#B04720",
+        "#E8E6E1"
+      ],
+      "mix": "Night · Gold · Terracotta · Platinum",
+      "usage": null,
+      "description": "Night · Gold · Terracotta · Platinum"
+    },
+    {
+      "name": "Electric",
+      "register": "high-energy",
+      "label": "Electric · high-energy",
+      "slug": "electric",
+      "key": "electric",
+      "colors": [
+        "#47107D",
+        "#D9531A",
+        "#F2B01E",
+        "#0A0A0A"
+      ],
+      "mix": "Amethyst · Ember · Gold · Night",
+      "usage": null,
+      "description": "Amethyst · Ember · Gold · Night"
+    },
+    {
+      "name": "Tender",
+      "register": "soft",
+      "label": "Tender · soft",
+      "slug": "tender",
+      "key": "tender",
+      "colors": [
+        "#F7DFC0",
+        "#E1A443",
+        "#587156",
+        "#E8E6E1"
+      ],
+      "mix": "Warm Sand · Harvest Gold · Sage · Platinum",
+      "usage": null,
+      "description": "Warm Sand · Harvest Gold · Sage · Platinum"
+    },
+    {
+      "name": "Mystic",
+      "register": "unseen",
+      "label": "Mystic · unseen",
+      "slug": "mystic",
+      "key": "mystic",
+      "colors": [
+        "#0A0A0A",
+        "#47107D",
+        "#042F1E",
+        "#A8A5A0"
+      ],
+      "mix": "Night · Amethyst · Midnight Forest · Muted Platinum",
+      "usage": null,
+      "description": "Night · Amethyst · Midnight Forest · Muted Platinum"
+    },
+    {
+      "name": "Warm",
+      "register": "welcoming",
+      "label": "Warm · welcoming",
+      "slug": "warm",
+      "key": "warm",
+      "colors": [
+        "#E1A443",
+        "#C15C27",
+        "#F7DFC0",
+        "#0D5E39"
+      ],
+      "mix": "Harvest Gold · Clay Ember · Warm Sand · Rich Forest",
+      "usage": null,
+      "description": "Harvest Gold · Clay Ember · Warm Sand · Rich Forest"
+    },
+    {
+      "name": "Focused",
+      "register": "precise",
+      "label": "Focused · precise",
+      "slug": "focused",
+      "key": "focused",
+      "colors": [
+        "#0A0A0A",
+        "#47107D",
+        "#E8E6E1",
+        "#A8A5A0"
+      ],
+      "mix": "Night · Amethyst · Platinum · Muted Platinum",
+      "usage": null,
+      "description": "Night · Amethyst · Platinum · Muted Platinum"
+    },
+    {
+      "name": "Celebratory",
+      "register": "magnetic",
+      "label": "Celebratory · magnetic",
+      "slug": "celebratory",
+      "key": "celebratory",
+      "colors": [
+        "#D9531A",
+        "#E28D1F",
+        "#F2B01E",
+        "#47107D"
+      ],
+      "mix": "Ember · Marigold · Gold · Amethyst",
+      "usage": null,
+      "description": "Ember · Marigold · Gold · Amethyst"
+    },
+    {
+      "name": "Healing",
+      "register": "restorative",
+      "label": "Healing · restorative",
+      "slug": "healing",
+      "key": "healing",
+      "colors": [
+        "#587156",
+        "#0D5E39",
+        "#F7DFC0",
+        "#E1A443"
+      ],
+      "mix": "Sage · Rich Forest · Warm Sand · Harvest Gold",
+      "usage": null,
+      "description": "Sage · Rich Forest · Warm Sand · Harvest Gold"
+    },
+    {
+      "name": "Bold",
+      "register": "provocative",
+      "label": "Bold · provocative",
+      "slug": "bold",
+      "key": "bold",
+      "colors": [
+        "#D9531A",
+        "#B04720",
+        "#0A0A0A",
+        "#F2B01E"
+      ],
+      "mix": "Ember · Terracotta · Night · Gold",
+      "usage": null,
+      "description": "Ember · Terracotta · Night · Gold"
+    },
+    {
+      "name": "Serene",
+      "register": "still",
+      "label": "Serene · still",
+      "slug": "serene",
+      "key": "serene",
+      "colors": [
+        "#042F1E",
+        "#587156",
+        "#E8E6E1",
+        "#A8A5A0"
+      ],
+      "mix": "Midnight Forest · Sage · Platinum · Muted Platinum",
+      "usage": null,
+      "description": "Midnight Forest · Sage · Platinum · Muted Platinum"
+    },
+    {
+      "name": "Regal",
+      "register": "ancestral",
+      "label": "Regal · ancestral",
+      "slug": "regal",
+      "key": "regal",
+      "colors": [
+        "#47107D",
+        "#F2B01E",
+        "#B04720",
+        "#0A0A0A"
+      ],
+      "mix": "Amethyst · Gold · Terracotta · Night",
+      "usage": null,
+      "description": "Amethyst · Gold · Terracotta · Night"
+    },
+    {
+      "name": "Dawn",
+      "register": "emerging",
+      "label": "Dawn · emerging",
+      "slug": "dawn",
+      "key": "dawn",
+      "colors": [
+        "#F7DFC0",
+        "#E1A443",
+        "#0D5E39",
+        "#47107D"
+      ],
+      "mix": "Warm Sand · Harvest Gold · Rich Forest · Amethyst",
+      "usage": null,
+      "description": "Warm Sand · Harvest Gold · Rich Forest · Amethyst"
+    }
+  ],
+  "techEarthGradients": [
+    {
+      "name": "Vibranium Clay",
+      "slug": "vibranium-clay",
+      "key": "vibraniumClay",
+      "angle": "135deg",
+      "colors": [
+        "#47107D",
+        "#B04720",
+        "#0A0A0A"
+      ],
+      "recipe": "Deep Amethyst → Terracotta → Night",
+      "usage": "Royal tech grounded in earth — hero, packaging",
+      "css": "linear-gradient(135deg,#47107D,#B04720,#0A0A0A)"
+    },
+    {
+      "name": "Circuit Harvest",
+      "slug": "circuit-harvest",
+      "key": "circuitHarvest",
+      "angle": "135deg",
+      "colors": [
+        "#0D5E39",
+        "#E1A443",
+        "#F7DFC0"
+      ],
+      "recipe": "Rich Forest → Harvest Gold → Warm Sand",
+      "usage": "Tech-green into organic light — onboarding, wellness",
+      "css": "linear-gradient(135deg,#0D5E39,#E1A443,#F7DFC0)"
+    },
+    {
+      "name": "Amethyst Ember",
+      "slug": "amethyst-ember",
+      "key": "amethystEmber",
+      "angle": "135deg",
+      "colors": [
+        "#47107D",
+        "#C15C27",
+        "#E28D1F"
+      ],
+      "recipe": "Deep Amethyst → Clay Ember → Marigold",
+      "usage": "Purple to warm clay — campaigns, motion",
+      "css": "linear-gradient(135deg,#47107D,#C15C27,#E28D1F)"
+    },
+    {
+      "name": "Solar Loam",
+      "slug": "solar-loam",
+      "key": "solarLoam",
+      "angle": "135deg",
+      "colors": [
+        "#F2B01E",
+        "#E28D1F",
+        "#B04720"
+      ],
+      "recipe": "Luminous Gold → Marigold → Terracotta",
+      "usage": "Gold cascading into earth — product reveals",
+      "css": "linear-gradient(135deg,#F2B01E,#E28D1F,#B04720)"
+    },
+    {
+      "name": "Sacred Canopy",
+      "slug": "sacred-canopy",
+      "key": "sacredCanopy",
+      "angle": "135deg",
+      "colors": [
+        "#042F1E",
+        "#0D5E39",
+        "#587156"
+      ],
+      "recipe": "Midnight Forest → Rich Forest → Sage",
+      "usage": "Deep to living to soft green — journaling, spiritual",
+      "css": "linear-gradient(135deg,#042F1E,#0D5E39,#587156)"
+    },
+    {
+      "name": "Obsidian Terracotta",
+      "slug": "obsidian-terracotta",
+      "key": "obsidianTerracotta",
+      "angle": "135deg",
+      "colors": [
+        "#0A0A0A",
+        "#B04720",
+        "#F7DFC0"
+      ],
+      "recipe": "Night → Terracotta → Warm Sand",
+      "usage": "Dark to clay to sand — editorial, print",
+      "css": "linear-gradient(135deg,#0A0A0A,#B04720,#F7DFC0)"
+    },
+    {
+      "name": "Neon Sage",
+      "slug": "neon-sage",
+      "key": "neonSage",
+      "angle": "135deg",
+      "colors": [
+        "#47107D",
+        "#587156",
+        "#F7DFC0"
+      ],
+      "recipe": "Deep Amethyst → Sage → Warm Sand",
+      "usage": "Tech to herbal to light — calm UI, learning",
+      "css": "linear-gradient(135deg,#47107D,#587156,#F7DFC0)"
+    },
+    {
+      "name": "Ember Dusk",
+      "slug": "ember-dusk",
+      "key": "emberDusk",
+      "angle": "135deg",
+      "colors": [
+        "#D9531A",
+        "#C15C27",
+        "#042F1E"
+      ],
+      "recipe": "Sunset Ember → Clay Ember → Midnight Forest",
+      "usage": "Warm into deep green — banners, seasonal",
+      "css": "linear-gradient(135deg,#D9531A,#C15C27,#042F1E)"
+    },
+    {
+      "name": "Clay Dawn",
+      "slug": "clay-dawn",
+      "key": "clayDawn",
+      "angle": "135deg",
+      "colors": [
+        "#B04720",
+        "#E1A443",
+        "#F7DFC0"
+      ],
+      "recipe": "Terracotta → Harvest Gold → Warm Sand",
+      "usage": "Terracotta rising into light — morning, wellness",
+      "css": "linear-gradient(135deg,#B04720,#E1A443,#F7DFC0)"
+    },
+    {
+      "name": "Jungle Gilt",
+      "slug": "jungle-gilt",
+      "key": "jungleGilt",
+      "angle": "135deg",
+      "colors": [
+        "#0D5E39",
+        "#F2B01E",
+        "#0A0A0A"
+      ],
+      "recipe": "Rich Forest → Luminous Gold → Night",
+      "usage": "Living green to gold on dark — luxe eco hero",
+      "css": "linear-gradient(135deg,#0D5E39,#F2B01E,#0A0A0A)"
+    },
+    {
+      "name": "Royal Harvest",
+      "slug": "royal-harvest",
+      "key": "royalHarvest",
+      "angle": "135deg",
+      "colors": [
+        "#47107D",
+        "#F2B01E",
+        "#E1A443"
+      ],
+      "recipe": "Deep Amethyst → Gold → Harvest Gold",
+      "usage": "Amethyst into amber warmth — premium reveal",
+      "css": "linear-gradient(135deg,#47107D,#F2B01E,#E1A443)"
+    },
+    {
+      "name": "Sage Circuit",
+      "slug": "sage-circuit",
+      "key": "sageCircuit",
+      "angle": "135deg",
+      "colors": [
+        "#587156",
+        "#0D5E39",
+        "#47107D"
+      ],
+      "recipe": "Sage → Rich Forest → Deep Amethyst",
+      "usage": "Herbal green into tech — calm learning UI",
+      "css": "linear-gradient(135deg,#587156,#0D5E39,#47107D)"
+    },
+    {
+      "name": "Marigold Forest",
+      "slug": "marigold-forest",
+      "key": "marigoldForest",
+      "angle": "135deg",
+      "colors": [
+        "#E28D1F",
+        "#0D5E39",
+        "#042F1E"
+      ],
+      "recipe": "Marigold → Rich Forest → Midnight Forest",
+      "usage": "Warm bloom into deep canopy — seasonal, botanical",
+      "css": "linear-gradient(135deg,#E28D1F,#0D5E39,#042F1E)"
+    },
+    {
+      "name": "Terra Royal",
+      "slug": "terra-royal",
+      "key": "terraRoyal",
+      "angle": "135deg",
+      "colors": [
+        "#B04720",
+        "#47107D",
+        "#0A0A0A"
+      ],
+      "recipe": "Terracotta → Deep Amethyst → Night",
+      "usage": "Clay into royal shadow — editorial, ancestral",
+      "css": "linear-gradient(135deg,#B04720,#47107D,#0A0A0A)"
+    },
+    {
+      "name": "Ember Sand",
+      "slug": "ember-sand",
+      "key": "emberSand",
+      "angle": "135deg",
+      "colors": [
+        "#D9531A",
+        "#B04720",
+        "#F7DFC0"
+      ],
+      "recipe": "Sunset Ember → Terracotta → Warm Sand",
+      "usage": "Molten warmth cooling to sand — packaging, print",
+      "css": "linear-gradient(135deg,#D9531A,#B04720,#F7DFC0)"
+    },
+    {
+      "name": "Gold Loam",
+      "slug": "gold-loam",
+      "key": "goldLoam",
+      "angle": "135deg",
+      "colors": [
+        "#F2B01E",
+        "#587156",
+        "#042F1E"
+      ],
+      "recipe": "Luminous Gold → Sage → Midnight Forest",
+      "usage": "Gold settling into soil — abundance, grounded",
+      "css": "linear-gradient(135deg,#F2B01E,#587156,#042F1E)"
+    },
+    {
+      "name": "Deep Sage",
+      "slug": "deep-sage",
+      "key": "deepSage",
+      "angle": "135deg",
+      "colors": [
+        "#042F1E",
+        "#587156",
+        "#E1A443"
+      ],
+      "recipe": "Midnight Forest → Sage → Harvest Gold",
+      "usage": "Dark canopy lifting to amber — journaling, meditation",
+      "css": "linear-gradient(135deg,#042F1E,#587156,#E1A443)"
+    },
+    {
+      "name": "Clay Amethyst",
+      "slug": "clay-amethyst",
+      "key": "clayAmethyst",
+      "angle": "135deg",
+      "colors": [
+        "#47107D",
+        "#B04720",
+        "#E1A443"
+      ],
+      "recipe": "Deep Amethyst → Terracotta → Harvest Gold",
+      "usage": "Royal warmed by earth — hero, brand primary",
+      "css": "linear-gradient(135deg,#47107D,#B04720,#E1A443)"
+    },
+    {
+      "name": "Harvest Night",
+      "slug": "harvest-night",
+      "key": "harvestNight",
+      "angle": "135deg",
+      "colors": [
+        "#E1A443",
+        "#B04720",
+        "#0A0A0A"
+      ],
+      "recipe": "Harvest Gold → Terracotta → Night",
+      "usage": "Amber into clay into dark — luxe, moody",
+      "css": "linear-gradient(135deg,#E1A443,#B04720,#0A0A0A)"
+    },
+    {
+      "name": "Warm Vibranium",
+      "slug": "warm-vibranium",
+      "key": "warmVibranium",
+      "angle": "135deg",
+      "colors": [
+        "#47107D",
+        "#0D5E39",
+        "#F2B01E"
+      ],
+      "recipe": "Deep Amethyst → Rich Forest → Luminous Gold",
+      "usage": "Tech royal through jungle to gold — signature blend",
+      "css": "linear-gradient(135deg,#47107D,#0D5E39,#F2B01E)"
+    }
+  ],
+  "techEarthTrios": [
+    {
+      "id": null,
+      "name": "Rooted Sovereign",
+      "slug": "rooted-sovereign",
+      "key": "rootedSovereign",
+      "label": "Rooted Sovereign",
+      "colors": [
+        "#47107D",
+        "#E1A443",
+        "#F7DFC0"
+      ],
+      "mix": "Amethyst + Harvest Gold + Warm Sand",
+      "usage": "premium organic",
+      "description": "Amethyst + Harvest Gold + Warm Sand — premium organic"
+    },
+    {
+      "id": null,
+      "name": "Jungle Circuit",
+      "slug": "jungle-circuit",
+      "key": "jungleCircuit",
+      "label": "Jungle Circuit",
+      "colors": [
+        "#0D5E39",
+        "#587156",
+        "#F2B01E"
+      ],
+      "mix": "Rich Forest + Sage + Gold",
+      "usage": "tech-nature wellness",
+      "description": "Rich Forest + Sage + Gold — tech-nature wellness"
+    },
+    {
+      "id": null,
+      "name": "Clay Court",
+      "slug": "clay-court",
+      "key": "clayCourt",
+      "label": "Clay Court",
+      "colors": [
+        "#0A0A0A",
+        "#B04720",
+        "#F7DFC0"
+      ],
+      "mix": "Night + Terracotta + Warm Sand",
+      "usage": "grounded luxe",
+      "description": "Night + Terracotta + Warm Sand — grounded luxe"
+    },
+    {
+      "id": null,
+      "name": "Ember Grove",
+      "slug": "ember-grove",
+      "key": "emberGrove",
+      "label": "Ember Grove",
+      "colors": [
+        "#D9531A",
+        "#042F1E",
+        "#F7DFC0"
+      ],
+      "mix": "Sunset Ember + Midnight Forest + Warm Sand",
+      "usage": "warm on deep green",
+      "description": "Sunset Ember + Midnight Forest + Warm Sand — warm on deep green"
+    },
+    {
+      "id": null,
+      "name": "Amethyst Earth",
+      "slug": "amethyst-earth",
+      "key": "amethystEarth",
+      "label": "Amethyst Earth",
+      "colors": [
+        "#47107D",
+        "#B04720",
+        "#587156"
+      ],
+      "mix": "Amethyst + Terracotta + Sage",
+      "usage": "royal meets soil",
+      "description": "Amethyst + Terracotta + Sage — royal meets soil"
+    },
+    {
+      "id": null,
+      "name": "Harvest Tech",
+      "slug": "harvest-tech",
+      "key": "harvestTech",
+      "label": "Harvest Tech",
+      "colors": [
+        "#F2B01E",
+        "#0D5E39",
+        "#C15C27"
+      ],
+      "mix": "Gold + Rich Forest + Clay Ember",
+      "usage": "abundance",
+      "description": "Gold + Rich Forest + Clay Ember — abundance"
+    },
+    {
+      "id": null,
+      "name": "Sacred Sand",
+      "slug": "sacred-sand",
+      "key": "sacredSand",
+      "label": "Sacred Sand",
+      "colors": [
+        "#042F1E",
+        "#E28D1F",
+        "#F7DFC0"
+      ],
+      "mix": "Midnight Forest + Marigold + Warm Sand",
+      "usage": "ceremonial",
+      "description": "Midnight Forest + Marigold + Warm Sand — ceremonial"
+    },
+    {
+      "id": null,
+      "name": "Panther Clay",
+      "slug": "panther-clay",
+      "key": "pantherClay",
+      "label": "Panther Clay",
+      "colors": [
+        "#0A0A0A",
+        "#C15C27",
+        "#A8A5A0"
+      ],
+      "mix": "Night + Clay Ember + Muted Platinum",
+      "usage": "editorial earth",
+      "description": "Night + Clay Ember + Muted Platinum — editorial earth"
+    },
+    {
+      "id": null,
+      "name": "Obsidian Sage",
+      "slug": "obsidian-sage",
+      "key": "obsidianSage",
+      "label": "Obsidian Sage",
+      "colors": [
+        "#0A0A0A",
+        "#587156",
+        "#E1A443"
+      ],
+      "mix": "Night + Sage + Harvest Gold",
+      "usage": "calm premium, wellness-tech",
+      "description": "Night + Sage + Harvest Gold — calm premium, wellness-tech"
+    },
+    {
+      "id": null,
+      "name": "Amethyst Clay",
+      "slug": "amethyst-clay",
+      "key": "amethystClay",
+      "label": "Amethyst Clay",
+      "colors": [
+        "#47107D",
+        "#C15C27",
+        "#F7DFC0"
+      ],
+      "mix": "Amethyst + Clay Ember + Warm Sand",
+      "usage": "royal warmth, packaging",
+      "description": "Amethyst + Clay Ember + Warm Sand — royal warmth, packaging"
+    },
+    {
+      "id": null,
+      "name": "Gilded Forest",
+      "slug": "gilded-forest",
+      "key": "gildedForest",
+      "label": "Gilded Forest",
+      "colors": [
+        "#F2B01E",
+        "#042F1E",
+        "#F7DFC0"
+      ],
+      "mix": "Gold + Midnight Forest + Warm Sand",
+      "usage": "luxe eco, foil on deep green",
+      "description": "Gold + Midnight Forest + Warm Sand — luxe eco, foil on deep green"
+    },
+    {
+      "id": null,
+      "name": "Ember Terra",
+      "slug": "ember-terra",
+      "key": "emberTerra",
+      "label": "Ember Terra",
+      "colors": [
+        "#D9531A",
+        "#B04720",
+        "#0A0A0A"
+      ],
+      "mix": "Sunset Ember + Terracotta + Night",
+      "usage": "molten earth, bold campaigns",
+      "description": "Sunset Ember + Terracotta + Night — molten earth, bold campaigns"
+    },
+    {
+      "id": null,
+      "name": "Circuit Sand",
+      "slug": "circuit-sand",
+      "key": "circuitSand",
+      "label": "Circuit Sand",
+      "colors": [
+        "#47107D",
+        "#587156",
+        "#F7DFC0"
+      ],
+      "mix": "Amethyst + Sage + Warm Sand",
+      "usage": "soft tech, learning, UI",
+      "description": "Amethyst + Sage + Warm Sand — soft tech, learning, UI"
+    },
+    {
+      "id": null,
+      "name": "Marigold Night",
+      "slug": "marigold-night",
+      "key": "marigoldNight",
+      "label": "Marigold Night",
+      "colors": [
+        "#0A0A0A",
+        "#E28D1F",
+        "#E8E6E1"
+      ],
+      "mix": "Night + Marigold + Platinum",
+      "usage": "festive pop on dark, social",
+      "description": "Night + Marigold + Platinum — festive pop on dark, social"
+    },
+    {
+      "id": null,
+      "name": "Rooted Amethyst",
+      "slug": "rooted-amethyst",
+      "key": "rootedAmethyst",
+      "label": "Rooted Amethyst",
+      "colors": [
+        "#0D5E39",
+        "#47107D",
+        "#E1A443"
+      ],
+      "mix": "Rich Forest + Amethyst + Harvest Gold",
+      "usage": "jungle-tech-gold hero",
+      "description": "Rich Forest + Amethyst + Harvest Gold — jungle-tech-gold hero"
+    },
+    {
+      "id": null,
+      "name": "Terra Circuit",
+      "slug": "terra-circuit",
+      "key": "terraCircuit",
+      "label": "Terra Circuit",
+      "colors": [
+        "#47107D",
+        "#E28D1F",
+        "#042F1E"
+      ],
+      "mix": "Amethyst + Marigold + Midnight Forest",
+      "usage": "royal warmth on deep green",
+      "description": "Amethyst + Marigold + Midnight Forest — royal warmth on deep green"
+    },
+    {
+      "id": null,
+      "name": "Golden Grove",
+      "slug": "golden-grove",
+      "key": "goldenGrove",
+      "label": "Golden Grove",
+      "colors": [
+        "#F2B01E",
+        "#587156",
+        "#042F1E"
+      ],
+      "mix": "Gold + Sage + Midnight Forest",
+      "usage": "gilded botanical",
+      "description": "Gold + Sage + Midnight Forest — gilded botanical"
+    },
+    {
+      "id": null,
+      "name": "Sunfire Clay",
+      "slug": "sunfire-clay",
+      "key": "sunfireClay",
+      "label": "Sunfire Clay",
+      "colors": [
+        "#D9531A",
+        "#E28D1F",
+        "#C15C27"
+      ],
+      "mix": "Ember + Marigold + Clay Ember",
+      "usage": "all-warm heat (ground on Night)",
+      "description": "Ember + Marigold + Clay Ember — all-warm heat (ground on Night)"
+    },
+    {
+      "id": null,
+      "name": "Amethyst Sand",
+      "slug": "amethyst-sand",
+      "key": "amethystSand",
+      "label": "Amethyst Sand",
+      "colors": [
+        "#47107D",
+        "#E1A443",
+        "#587156"
+      ],
+      "mix": "Amethyst + Harvest Gold + Sage",
+      "usage": "royal, amber, herbal",
+      "description": "Amethyst + Harvest Gold + Sage — royal, amber, herbal"
+    },
+    {
+      "id": null,
+      "name": "Forest Ember",
+      "slug": "forest-ember",
+      "key": "forestEmber",
+      "label": "Forest Ember",
+      "colors": [
+        "#0D5E39",
+        "#C15C27",
+        "#F7DFC0"
+      ],
+      "mix": "Rich Forest + Clay Ember + Warm Sand",
+      "usage": "jungle clay",
+      "description": "Rich Forest + Clay Ember + Warm Sand — jungle clay"
+    }
+  ],
+  "themed": [
+    {
+      "name": "Amazonia",
+      "register": "Organic Register",
+      "label": "Amazonia · Organic Register",
+      "slug": "amazonia",
+      "key": "amazonia",
+      "colors": [
+        "#042F1E",
+        "#0D5E39",
+        "#587156",
+        "#E1A443",
+        "#B04720",
+        "#F7DFC0"
+      ],
+      "mix": "Midnight Forest · Rich Forest · Sage · Harvest Gold · Terracotta · Warm Sand",
+      "usage": "wellness, ancestral, Amazonia persona",
+      "description": "Midnight Forest · Rich Forest · Sage · Harvest Gold · Terracotta · Warm Sand — wellness, ancestral, Amazonia persona"
+    },
+    {
+      "name": "Command Core",
+      "register": "Tech Premium",
+      "label": "Command Core · Tech Premium",
+      "slug": "command-core",
+      "key": "commandCore",
+      "colors": [
+        "#0A0A0A",
+        "#47107D",
+        "#F2B01E",
+        "#E8E6E1",
+        "#A8A5A0"
+      ],
+      "mix": "Night · Deep Amethyst · Luminous Gold · Platinum · Muted Platinum",
+      "usage": "proposals, app, Omegea",
+      "description": "Night · Deep Amethyst · Luminous Gold · Platinum · Muted Platinum — proposals, app, Omegea"
+    },
+    {
+      "name": "Sensory Studio",
+      "register": "Warm Creative",
+      "label": "Sensory Studio · Warm Creative",
+      "slug": "sensory-studio",
+      "key": "sensoryStudio",
+      "colors": [
+        "#D9531A",
+        "#C15C27",
+        "#E28D1F",
+        "#E1A443",
+        "#F7DFC0",
+        "#0A0A0A"
+      ],
+      "mix": "Sunset Ember · Clay Ember · Marigold · Harvest Gold · Warm Sand · Night",
+      "usage": "design and creative collateral",
+      "description": "Sunset Ember · Clay Ember · Marigold · Harvest Gold · Warm Sand · Night — design and creative collateral"
+    },
+    {
+      "name": "Data Alchemy",
+      "register": "Chart Set",
+      "label": "Data Alchemy · Chart Set",
+      "slug": "data-alchemy",
+      "key": "dataAlchemy",
+      "colors": [
+        "#47107D",
+        "#F2B01E",
+        "#D9531A",
+        "#0D5E39",
+        "#587156"
+      ],
+      "mix": "Amethyst · Gold · Ember · Rich Forest · Sage",
+      "usage": "5 distinct categorical series on Night or Platinum",
+      "description": "Amethyst · Gold · Ember · Rich Forest · Sage — 5 distinct categorical series on Night or Platinum"
+    },
+    {
+      "name": "Sacred Transmission",
+      "register": "Metaphysical",
+      "label": "Sacred Transmission · Metaphysical",
+      "slug": "sacred-transmission",
+      "key": "sacredTransmission",
+      "colors": [
+        "#042F1E",
+        "#47107D",
+        "#587156",
+        "#E1A443",
+        "#F7DFC0"
+      ],
+      "mix": "Midnight Forest · Deep Amethyst · Sage · Harvest Gold · Warm Sand",
+      "usage": "spiritual, ritual, journaling",
+      "description": "Midnight Forest · Deep Amethyst · Sage · Harvest Gold · Warm Sand — spiritual, ritual, journaling"
+    },
+    {
+      "name": "Ancestral Craft",
+      "register": "Print & Merch",
+      "label": "Ancestral Craft · Print & Merch",
+      "slug": "ancestral-craft",
+      "key": "ancestralCraft",
+      "colors": [
+        "#B04720",
+        "#E1A443",
+        "#042F1E",
+        "#F7DFC0",
+        "#0A0A0A"
+      ],
+      "mix": "Terracotta · Harvest Gold · Midnight Forest · Warm Sand · Night",
+      "usage": "packaging, foil, embroidery",
+      "description": "Terracotta · Harvest Gold · Midnight Forest · Warm Sand · Night — packaging, foil, embroidery"
+    },
+    {
+      "name": "Shon",
+      "register": "Rebel Register",
+      "label": "Shon · Rebel Register",
+      "slug": "shon",
+      "key": "shon",
+      "colors": [
+        "#0A0A0A",
+        "#D9531A",
+        "#F2B01E",
+        "#47107D",
+        "#E8E6E1"
+      ],
+      "mix": "Night · Sunset Ember · Gold · Amethyst · Platinum",
+      "usage": "launches, provocation, manifesto",
+      "description": "Night · Sunset Ember · Gold · Amethyst · Platinum — launches, provocation, manifesto"
+    },
+    {
+      "name": "Master Avatar",
+      "register": "Full Brand",
+      "label": "Master Avatar · Full Brand",
+      "slug": "master-avatar",
+      "key": "masterAvatar",
+      "colors": [
+        "#0A0A0A",
+        "#47107D",
+        "#0D5E39",
+        "#F2B01E",
+        "#E8E6E1"
+      ],
+      "mix": "Night · Amethyst · Rich Forest · Gold · Platinum",
+      "usage": "the complete UJG signature",
+      "description": "Night · Amethyst · Rich Forest · Gold · Platinum — the complete UJG signature"
+    },
+    {
+      "name": "Afro-Futurist Royal",
+      "register": "Authority",
+      "label": "Afro-Futurist Royal · Authority",
+      "slug": "afro-futurist-royal",
+      "key": "afroFuturistRoyal",
+      "colors": [
+        "#0A0A0A",
+        "#47107D",
+        "#F2B01E",
+        "#B04720"
+      ],
+      "mix": "Night · Amethyst · Gold · Terracotta",
+      "usage": "main brand visuals, premium proposals",
+      "description": "Night · Amethyst · Gold · Terracotta — main brand visuals, premium proposals"
+    },
+    {
+      "name": "Urban Jungle Grounded",
+      "register": "Eco",
+      "label": "Urban Jungle Grounded · Eco",
+      "slug": "urban-jungle-grounded",
+      "key": "urbanJungleGrounded",
+      "colors": [
+        "#042F1E",
+        "#0D5E39",
+        "#587156",
+        "#F7DFC0",
+        "#E8E6E1"
+      ],
+      "mix": "Midnight Forest · Rich Forest · Sage · Warm Sand · Platinum",
+      "usage": "wellness, sustainability",
+      "description": "Midnight Forest · Rich Forest · Sage · Warm Sand · Platinum — wellness, sustainability"
+    },
+    {
+      "name": "Warm Neutral",
+      "register": "Editorial",
+      "label": "Warm Neutral · Editorial",
+      "slug": "warm-neutral",
+      "key": "warmNeutral",
+      "colors": [
+        "#F7DFC0",
+        "#E1A443",
+        "#B04720",
+        "#587156",
+        "#0A0A0A"
+      ],
+      "mix": "Warm Sand · Harvest Gold · Terracotta · Sage · Night",
+      "usage": "long-form, blog, print editorial",
+      "description": "Warm Sand · Harvest Gold · Terracotta · Sage · Night — long-form, blog, print editorial"
+    },
+    {
+      "name": "Launch Heat",
+      "register": "Campaigns",
+      "label": "Launch Heat · Campaigns",
+      "slug": "launch-heat",
+      "key": "launchHeat",
+      "colors": [
+        "#0A0A0A",
+        "#47107D",
+        "#D9531A",
+        "#F2B01E"
+      ],
+      "mix": "Night · Amethyst · Sunset Ember · Gold",
+      "usage": "product drops, promos, urgency",
+      "description": "Night · Amethyst · Sunset Ember · Gold — product drops, promos, urgency"
+    },
+    {
+      "name": "Platinum Tech",
+      "register": "Light UI",
+      "label": "Platinum Tech · Light UI",
+      "slug": "platinum-tech",
+      "key": "platinumTech",
+      "colors": [
+        "#E8E6E1",
+        "#A8A5A0",
+        "#47107D",
+        "#0A0A0A"
+      ],
+      "mix": "Platinum · Muted Platinum · Amethyst · Night",
+      "usage": "light-mode app, dashboards, docs",
+      "description": "Platinum · Muted Platinum · Amethyst · Night — light-mode app, dashboards, docs"
+    },
+    {
+      "name": "Gilded Legacy",
+      "register": "Wealth",
+      "label": "Gilded Legacy · Wealth",
+      "slug": "gilded-legacy",
+      "key": "gildedLegacy",
+      "colors": [
+        "#0A0A0A",
+        "#F2B01E",
+        "#E1A443",
+        "#B04720",
+        "#E8E6E1"
+      ],
+      "mix": "Night · Gold · Harvest Gold · Terracotta · Platinum",
+      "usage": "legacy, investment, premium tiers",
+      "description": "Night · Gold · Harvest Gold · Terracotta · Platinum — legacy, investment, premium tiers"
+    },
+    {
+      "name": "Ritual Grove",
+      "register": "Ceremony",
+      "label": "Ritual Grove · Ceremony",
+      "slug": "ritual-grove",
+      "key": "ritualGrove",
+      "colors": [
+        "#042F1E",
+        "#47107D",
+        "#F2B01E",
+        "#587156",
+        "#F7DFC0"
+      ],
+      "mix": "Midnight Forest · Amethyst · Gold · Sage · Warm Sand",
+      "usage": "sacred events, retreats, invocations",
+      "description": "Midnight Forest · Amethyst · Gold · Sage · Warm Sand — sacred events, retreats, invocations"
+    },
+    {
+      "name": "Signal Fire",
+      "register": "Social",
+      "label": "Signal Fire · Social",
+      "slug": "signal-fire",
+      "key": "signalFire",
+      "colors": [
+        "#D9531A",
+        "#E28D1F",
+        "#47107D",
+        "#0A0A0A",
+        "#E8E6E1"
+      ],
+      "mix": "Sunset Ember · Marigold · Amethyst · Night · Platinum",
+      "usage": "IG, LinkedIn, high-scroll content",
+      "description": "Sunset Ember · Marigold · Amethyst · Night · Platinum — IG, LinkedIn, high-scroll content"
+    },
+    {
+      "name": "Deep System",
+      "register": "Dark UI",
+      "label": "Deep System · Dark UI",
+      "slug": "deep-system",
+      "key": "deepSystem",
+      "colors": [
+        "#0A0A0A",
+        "#0D5E39",
+        "#47107D",
+        "#A8A5A0"
+      ],
+      "mix": "Night · Rich Forest · Amethyst · Muted Platinum",
+      "usage": "dark-mode app, code, cyber",
+      "description": "Night · Rich Forest · Amethyst · Muted Platinum — dark-mode app, code, cyber"
+    },
+    {
+      "name": "Soft Botanical",
+      "register": "Onboarding",
+      "label": "Soft Botanical · Onboarding",
+      "slug": "soft-botanical",
+      "key": "softBotanical",
+      "colors": [
+        "#F7DFC0",
+        "#587156",
+        "#0D5E39",
+        "#E1A443"
+      ],
+      "mix": "Warm Sand · Sage · Rich Forest · Harvest Gold",
+      "usage": "welcome flows, gentle first-touch",
+      "description": "Warm Sand · Sage · Rich Forest · Harvest Gold — welcome flows, gentle first-touch"
+    },
+    {
+      "name": "Full Spectrum",
+      "register": "Showcase",
+      "label": "Full Spectrum · Showcase",
+      "slug": "full-spectrum",
+      "key": "fullSpectrum",
+      "colors": [
+        "#47107D",
+        "#B04720",
+        "#E1A443",
+        "#042F1E",
+        "#F7DFC0"
+      ],
+      "mix": "Amethyst · Terracotta · Harvest Gold · Midnight Forest · Warm Sand",
+      "usage": "portfolio, brand showcase",
+      "description": "Amethyst · Terracotta · Harvest Gold · Midnight Forest · Warm Sand — portfolio, brand showcase"
+    },
+    {
+      "name": "Quiet Ground",
+      "register": "Reflective",
+      "label": "Quiet Ground · Reflective",
+      "slug": "quiet-ground",
+      "key": "quietGround",
+      "colors": [
+        "#0A0A0A",
+        "#587156",
+        "#E1A443",
+        "#F7DFC0",
+        "#E8E6E1"
+      ],
+      "mix": "Night · Sage · Harvest Gold · Warm Sand · Platinum",
+      "usage": "meditation, quiet content, rest",
+      "description": "Night · Sage · Harvest Gold · Warm Sand · Platinum — meditation, quiet content, rest"
+    }
+  ]
+}
