@@ -1,0 +1,12 @@
+{
+  "name": "@ujg/work-assist",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Focus Window — four focus tools, one shared core, four stacks.",
+  "scripts": {
+    "test": "node real/scripts/verify-palette.mjs real"
+  },
+  "devDependencies": {
+    "@ujg/colors": "workspace:*"
+  }
+}

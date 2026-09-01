@@ -1,0 +1,27 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "stream",
+  "tasks": {
+    "build": {
+      "inputs": [
+        "ujg_color_system_v2_1.html",
+        "**/scripts/**"
+      ],
+      "outputs": [
+        "ujg-color-system/ujg-colors.json",
+        "ujg-color-system/web/**",
+        "ujg-color-system/react/**",
+        "ujg-color-system/nextjs/**",
+        "ujg-color-system/expo/**"
+      ]
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "typecheck": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    }
+  }
+}

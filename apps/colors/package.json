@@ -1,0 +1,14 @@
+{
+  "name": "@ujg/colors",
+  "version": "0.0.0",
+  "private": true,
+  "description": "UJG Color System — the reference sheet plus drop-in token files for web, react, next.js and expo.",
+  "scripts": {
+    "build": "node ujg-color-system/scripts/extract.mjs ujg_color_system_v2_1.html ujg-color-system/ujg-colors.json && node ujg-color-system/scripts/generate.mjs ujg-color-system/ujg-colors.json ujg-color-system",
+    "test": "node ujg-color-system/scripts/verify-fidelity.mjs ujg_color_system_v2_1.html ujg-color-system && node ujg-color-system/scripts/check-collisions.mjs ujg-color-system",
+    "typecheck": "tsc --noEmit --strict --target ES2020 --module esnext --moduleResolution bundler ujg-color-system/react/ujgColors.ts ujg-color-system/nextjs/ujgColors.ts ujg-color-system/expo/ujgColors.ts ujg-color-system/expo/theme.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5"
+  }
+}
