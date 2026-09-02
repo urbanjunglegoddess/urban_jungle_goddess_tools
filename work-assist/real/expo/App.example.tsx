@@ -5,7 +5,7 @@ import LiveFocusWindow from "./components/LiveFocusWindow";
 
 export default function App() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#0a1710" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#0A0A0A" }}>
       <StatusBar barStyle="light-content" />
       <LiveFocusWindow />
     </SafeAreaView>

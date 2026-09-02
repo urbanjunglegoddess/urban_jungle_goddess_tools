@@ -1,9 +1,5 @@
 # Website Platform Field Guide — reference record
 
-Live artifact: https://claude.ai/code/artifact/fb058df7-a541-4450-a4f9-234910c6145e
-Source file in project: `claude/website-platform-field-guide.html`
-Built 2026-08-26 · Status verified Aug 2026 · Pricing verified Aug 2026
-
 Internal scoping tool. Not client-facing as-is — it carries stack flags and the blueprint note.
 
 ## What each of the 228 records carries
