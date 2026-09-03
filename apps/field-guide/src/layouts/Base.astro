@@ -1,0 +1,35 @@
+---
+import "../styles/site.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <meta name="robots" content="noindex" />
+    <!--
+      Applied before first paint so an explicit theme choice never flashes the
+      other palette. Kept inline and tiny for the same reason.
+    -->
+    <script is:inline>
+      try {
+        var t = localStorage.getItem("ujg-theme");
+        if (t === "dark" || t === "light")
+          document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div class="wrap">
+      <slot />
+    </div>
+  </body>
+</html>

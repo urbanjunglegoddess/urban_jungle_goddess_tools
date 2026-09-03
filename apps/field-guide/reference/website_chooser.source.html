@@ -1,0 +1,5193 @@
+<title>Website Platform Field Guide</title>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Urbanist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+/>
+
+<style>
+  :root {
+    --ground: #0a0a0a;
+    --surface: #101512;
+    --surface-2: #161d19;
+    --line: #243029;
+    --line-soft: #1a231e;
+    --ink: #efede8;
+    --ink-2: #a8b2ab;
+    --ink-3: #6e7a73;
+    --accent: #e86100;
+    --accent-2: #dca424;
+    --mark: #9c6bc4;
+    --mark-soft: #2a1b3a;
+    --ok: #3fa37a;
+    --warn: #dca424;
+    --absorb: #9c6bc4;
+    --off: #c0703c;
+    --ceil: #c0703c;
+    --focus: #dca424;
+    --shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --ground: #e8e6e1;
+      --surface: #f5f4f1;
+      --surface-2: #efede8;
+      --line: #cfccc3;
+      --line-soft: #dedbd3;
+      --ink: #0a0a0a;
+      --ink-2: #4a544d;
+      --ink-3: #7c857e;
+      --accent: #c24f00;
+      --accent-2: #8a6206;
+      --mark: #5f2c82;
+      --mark-soft: #ede4f4;
+      --ok: #1f6b4a;
+      --warn: #8a6206;
+      --absorb: #5f2c82;
+      --off: #7e3209;
+      --ceil: #7e3209;
+      --focus: #5f2c82;
+      --shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #e8e6e1;
+    --surface: #f5f4f1;
+    --surface-2: #efede8;
+    --line: #cfccc3;
+    --line-soft: #dedbd3;
+    --ink: #0a0a0a;
+    --ink-2: #4a544d;
+    --ink-3: #7c857e;
+    --accent: #c24f00;
+    --accent-2: #8a6206;
+    --mark: #5f2c82;
+    --mark-soft: #ede4f4;
+    --ok: #1f6b4a;
+    --warn: #8a6206;
+    --absorb: #5f2c82;
+    --off: #7e3209;
+    --ceil: #7e3209;
+    --focus: #5f2c82;
+    --shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family:
+      "Urbanist",
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      "Segoe UI",
+      sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 20px 96px;
+  }
+  .mono {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  /* ---------- masthead ---------- */
+  .mast {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 44px 0 26px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    font-family: "Chakra Petch", "Urbanist", sans-serif;
+    font-weight: 700;
+    font-size: clamp(34px, 5.2vw, 58px);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h1 .rule {
+    color: var(--accent);
+  }
+  .standfirst {
+    max-width: 63ch;
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 17px;
+  }
+  .mastfoot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 26px;
+    align-items: baseline;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .mastfoot b {
+    color: var(--ink-2);
+    font-weight: 500;
+  }
+
+  /* ---------- section furniture ---------- */
+  .sect {
+    margin-top: 46px;
+  }
+  .sect-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    align-items: baseline;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 9px;
+    margin-bottom: 18px;
+  }
+  .sect-head h2 {
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 0.01em;
+    margin: 0;
+  }
+  .sect-head p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-3);
+    max-width: 60ch;
+  }
+
+  /* ---------- start here ---------- */
+  .starthere {
+    margin: 30px 0 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 1px solid var(--line);
+    background: var(--surface);
+  }
+  @media (min-width: 900px) {
+    .starthere {
+      grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    }
+  }
+  .sh-a {
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sh-b {
+    padding: 22px 24px;
+  }
+  @media (min-width: 900px) {
+    .sh-a {
+      border-bottom: 0;
+      border-right: 1px solid var(--line);
+    }
+  }
+  .sh-title {
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 4px;
+  }
+  .sh-note {
+    margin: 0 0 14px;
+    font-size: 13.5px;
+    color: var(--ink-3);
+    line-height: 1.45;
+  }
+  .shortlist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .shortlist button {
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    background: var(--surface-2);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 4px 9px;
+  }
+  .shortlist button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .routes {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 9px;
+  }
+  .routes li {
+    display: grid;
+    gap: 2px;
+    padding-bottom: 9px;
+    border-bottom: 1px dashed var(--line-soft);
+    font-size: 14px;
+  }
+  .routes li:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+  @media (min-width: 620px) {
+    .routes li {
+      grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+      gap: 16px;
+      align-items: baseline;
+    }
+  }
+  .routes .said {
+    color: var(--ink-2);
+    font-style: italic;
+  }
+  .routes .go em {
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ---------- intake ---------- */
+  .intake {
+    display: grid;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  @media (min-width: 700px) {
+    .intake {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1050px) {
+    .intake {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .ask {
+    background: var(--surface);
+    padding: 16px 17px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ask .qn {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+  }
+  .ask .q {
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 600;
+    font-size: 15.5px;
+    line-height: 1.25;
+    margin: 0;
+  }
+  .ask .why {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--ink-3);
+  }
+
+  /* ---------- table ---------- */
+  .tablewrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    background: var(--surface);
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 900px;
+    font-size: 13.5px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 11px 13px;
+    border-bottom: 1px solid var(--line-soft);
+    vertical-align: top;
+  }
+  thead th {
+    position: sticky;
+    top: 0;
+    background: var(--surface-2);
+    z-index: 1;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 400;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  td.pf {
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 600;
+    font-size: 14.5px;
+    white-space: nowrap;
+  }
+  td.num {
+    font-family: "JetBrains Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    color: var(--ink-2);
+  }
+  td.dim {
+    color: var(--ink-3);
+  }
+  .yes {
+    color: var(--ok);
+    font-weight: 600;
+  }
+  .no {
+    color: var(--ink-3);
+  }
+  .part {
+    color: var(--warn);
+  }
+
+  /* ---------- tco ---------- */
+  .tco {
+    display: grid;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  @media (min-width: 760px) {
+    .tco {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1080px) {
+    .tco {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .shape {
+    background: var(--surface);
+    padding: 17px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .shape h3 {
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0;
+  }
+  .shape .band {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 19px;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+  .shape .band small {
+    display: block;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-top: 3px;
+  }
+  .shape ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 5px;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .shape ul li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px dashed var(--line-soft);
+    padding-bottom: 4px;
+  }
+  .shape ul li:last-child {
+    border-bottom: 0;
+  }
+  .shape ul span {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .tco-note {
+    margin: 12px 0 0;
+    font-size: 13px;
+    color: var(--ink-3);
+    max-width: 78ch;
+  }
+
+  /* ---------- controls ---------- */
+  .controls {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--ground);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 0 12px;
+    margin-top: 36px;
+  }
+  .search {
+    flex: 1 1 260px;
+    min-width: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .search input {
+    width: 100%;
+    font: inherit;
+    font-size: 15px;
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 9px 12px 9px 34px;
+  }
+  .search input::placeholder {
+    color: var(--ink-3);
+  }
+  .search svg {
+    position: absolute;
+    left: 11px;
+    width: 14px;
+    height: 14px;
+    stroke: var(--ink-3);
+    fill: none;
+    stroke-width: 2;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .chip {
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--ink-2);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 5px 10px;
+    display: inline-flex;
+    gap: 7px;
+    align-items: center;
+    transition:
+      border-color 0.12s,
+      color 0.12s,
+      background 0.12s;
+  }
+  .chip .ct {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .chip:hover {
+    color: var(--ink);
+    border-color: var(--ink-3);
+  }
+  .chip[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0a0a0a;
+  }
+  .chip[aria-pressed="true"] .ct {
+    color: rgba(10, 10, 10, 0.6);
+  }
+  .chip.mk[aria-pressed="true"] {
+    background: var(--mark);
+    border-color: var(--mark);
+    color: #fff;
+  }
+  .chip.mk[aria-pressed="true"] .ct {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .resultline {
+    margin-top: 11px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .clear {
+    font: inherit;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ---------- cards ---------- */
+  .grid {
+    display: grid;
+    gap: 12px;
+    margin-top: 22px;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--ok);
+    padding: 15px 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+  .card.s-legacy {
+    border-left-color: var(--warn);
+  }
+  .card.s-absorbed {
+    border-left-color: var(--absorb);
+  }
+  .card.s-retired {
+    border-left-color: var(--off);
+    opacity: 0.8;
+  }
+  .card-top {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .name {
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 1.2;
+    margin: 0;
+  }
+  .card.s-retired .name {
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+    color: var(--ink-2);
+  }
+  .flag {
+    flex: 0 0 auto;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 6px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .flag.stack {
+    background: var(--mark-soft);
+    color: var(--mark);
+    border: 1px solid var(--mark);
+  }
+  .flag.first {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+  .desc {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .bestfor {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--ink);
+    padding-left: 11px;
+    border-left: 2px solid var(--accent-2);
+  }
+  .bestfor span,
+  .ceiling span {
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 2px;
+  }
+  .ceiling {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--ink-2);
+    padding-left: 11px;
+    border-left: 2px solid var(--ceil);
+  }
+  .spec {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--line-soft);
+    border: 1px solid var(--line-soft);
+  }
+  .spec div {
+    background: var(--surface-2);
+    padding: 7px 9px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .spec dt {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .spec dd {
+    margin: 0;
+    font-size: 12.5px;
+    line-height: 1.3;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+  .spec dd.v {
+    color: var(--accent-2);
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: auto;
+    padding-top: 9px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .tag {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--ink-3);
+    border: 1px solid var(--line);
+    padding: 2px 6px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .tag.k {
+    color: var(--ink-2);
+  }
+  .tag.st {
+    border-color: currentColor;
+  }
+  .tag.st.active {
+    color: var(--ok);
+  }
+  .tag.st.legacy {
+    color: var(--warn);
+  }
+  .tag.st.absorbed {
+    color: var(--absorb);
+  }
+  .tag.st.retired {
+    color: var(--off);
+  }
+  .empty {
+    grid-column: 1/-1;
+    padding: 56px 20px;
+    text-align: center;
+    border: 1px dashed var(--line);
+    color: var(--ink-3);
+  }
+  .empty strong {
+    display: block;
+    font-family: "Chakra Petch", sans-serif;
+    color: var(--ink);
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  /* ---------- flags / method ---------- */
+  .flags {
+    display: grid;
+    gap: 10px;
+  }
+  @media (min-width: 760px) {
+    .flags {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .rf {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--ceil);
+    background: var(--surface);
+    padding: 13px 15px;
+  }
+  .rf h4 {
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 600;
+    font-size: 14.5px;
+    margin: 0 0 4px;
+  }
+  .rf p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--ink-3);
+  }
+  .method {
+    margin-top: 52px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: grid;
+    gap: 22px;
+  }
+  @media (min-width: 820px) {
+    .method {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 34px;
+    }
+  }
+  .method h3 {
+    font-family: "Chakra Petch", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 8px;
+  }
+  .method p {
+    margin: 0 0 9px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink-3);
+  }
+  .method p:last-child {
+    margin-bottom: 0;
+  }
+  .method strong {
+    color: var(--ink-2);
+    font-weight: 600;
+  }
+  .key {
+    display: grid;
+    gap: 6px;
+  }
+  .key div {
+    display: flex;
+    gap: 9px;
+    align-items: baseline;
+    font-size: 13.5px;
+    color: var(--ink-3);
+  }
+  .key i {
+    flex: 0 0 auto;
+    width: 3px;
+    height: 13px;
+    border-radius: 1px;
+    display: inline-block;
+    transform: translateY(1px);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="eyebrow">Urban Jungle Goddess · Technical Product Works</div>
+    <h1>Website Platform<br /><span class="rule">Field Guide</span></h1>
+    <p class="standfirst">
+      228 builders, CMSs, frameworks, and hosted platforms — deduplicated,
+      status-checked, and carrying the four things that actually decide a
+      project: what it costs, who can run it after launch, whether the client
+      can leave, and where it stops working.
+    </p>
+    <div class="mastfoot">
+      <span><b id="total">0</b> platforms</span>
+      <span>Status &amp; pricing verified <b>Aug 2026</b></span>
+      <span>Internal scoping tool — press <b>/</b> to search</span>
+    </div>
+  </header>
+
+  <section class="starthere">
+    <div class="sh-a">
+      <h2 class="sh-title">Start here</h2>
+      <p class="sh-note">
+        For a typical freelance, portfolio, or small-business project these ten
+        cover almost every real answer. Tap one to jump to it.
+      </p>
+      <ul class="shortlist" id="shortlist"></ul>
+    </div>
+    <div class="sh-b">
+      <h2 class="sh-title">What the client says → where to look</h2>
+      <ul class="routes">
+        <li>
+          <span class="said">"I need to edit it myself."</span
+          ><span class="go"
+            ><em>Wix Studio</em>, <em>Squarespace</em>, or WordPress with
+            Gutenberg</span
+          >
+        </li>
+        <li>
+          <span class="said">"I sell physical products."</span
+          ><span class="go"
+            ><em>Shopify</em> — stop evaluating unless the catalog is
+            enterprise-sized</span
+          >
+        </li>
+        <li>
+          <span class="said">"I sell files or courses."</span
+          ><span class="go"
+            ><em>Lemon Squeezy</em>, <em>Podia</em>, or Gumroad before you build
+            anything</span
+          >
+        </li>
+        <li>
+          <span class="said">"I need logins and a members area."</span
+          ><span class="go"
+            ><em>Softr</em>, <em>Circle</em>, or Memberstack on a Webflow front
+            end</span
+          >
+        </li>
+        <li>
+          <span class="said"
+            >"Make it do something, not just say something."</span
+          ><span class="go"
+            ><em>Bubble</em>, <em>WeWeb</em>, or a real
+            <em>Next.js</em> build</span
+          >
+        </li>
+        <li>
+          <span class="said">"I have almost no budget."</span
+          ><span class="go"
+            ><em>Carrd</em> for one page, <em>Hostinger</em> or
+            <em>Dorik</em> for several</span
+          >
+        </li>
+        <li>
+          <span class="said">"It has to rank and load fast."</span
+          ><span class="go"
+            ><em>Astro</em> or Next.js on <em>Vercel</em>; Bricks if it must be
+            WordPress</span
+          >
+        </li>
+        <li>
+          <span class="said">"We already run HubSpot / Square / Notion."</span
+          ><span class="go"
+            >Use their native site product before adding a platform</span
+          >
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sect">
+    <div class="sect-head">
+      <h2>Eight questions that pick the platform</h2>
+      <p>
+        Ask these before you name a single tool. The answers narrow 228 options
+        to two or three, and they are also the scope you will quote against.
+      </p>
+    </div>
+    <div class="intake">
+      <div class="ask">
+        <div class="qn">01</div>
+        <p class="q">Who updates this after launch, and how often?</p>
+        <p class="why">
+          Weekly updates by a non-technical owner rules out every framework on
+          this list. Quarterly updates by you rules almost nothing out.
+        </p>
+      </div>
+      <div class="ask">
+        <div class="qn">02</div>
+        <p class="q">Are you selling — and is it physical, digital, or time?</p>
+        <p class="why">
+          Physical means Shopify. Digital means a merchant of record. Time means
+          booking software, and the site is secondary.
+        </p>
+      </div>
+      <div class="ask">
+        <div class="qn">03</div>
+        <p class="q">Does anyone need to log in?</p>
+        <p class="why">
+          Logins are the line between a website and an application. Crossing it
+          multiplies the build, the cost, and the liability.
+        </p>
+      </div>
+      <div class="ask">
+        <div class="qn">04</div>
+        <p class="q">How many pages today, and how many in two years?</p>
+        <p class="why">
+          Under ten pages, almost anything works. Over a hundred, you need a
+          real CMS and the answer set collapses fast.
+        </p>
+      </div>
+      <div class="ask">
+        <div class="qn">05</div>
+        <p class="q">What has to connect to it?</p>
+        <p class="why">
+          CRM, POS, inventory, booking, accounting. One required integration can
+          decide the platform on its own.
+        </p>
+      </div>
+      <div class="ask">
+        <div class="qn">06</div>
+        <p class="q">What happens if the site is down for a day?</p>
+        <p class="why">
+          If the honest answer is "nothing," stop over-engineering. If it is "we
+          lose the day's revenue," managed hosting is not optional.
+        </p>
+      </div>
+      <div class="ask">
+        <div class="qn">07</div>
+        <p class="q">What is the budget after launch, not just to build it?</p>
+        <p class="why">
+          Platform fees, domain, email, plugins, and maintenance are annual and
+          forever. A client who only budgeted the build will resent year two.
+        </p>
+      </div>
+      <div class="ask">
+        <div class="qn">08</div>
+        <p class="q">Who owns the domain and the existing accounts?</p>
+        <p class="why">
+          If they cannot answer, that is the first deliverable. Chasing a former
+          developer for DNS access has killed more timelines than any design
+          round.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect">
+    <div class="sect-head">
+      <h2>The finalists, head to head</h2>
+      <p>
+        The realistic end of most evaluations. Platform cost only — your build
+        and care are separate, below. Prices are US list, verified August 2026.
+      </p>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Platform</th>
+            <th>Platform cost</th>
+            <th>Who edits after launch</th>
+            <th>Exit path</th>
+            <th>Commerce</th>
+            <th>Your build effort</th>
+            <th>They outgrow it when…</th>
+          </tr>
+        </thead>
+        <tbody id="cmp"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sect">
+    <div class="sect-head">
+      <h2>What it actually costs</h2>
+      <p>
+        The platform fee is the smallest number in the project. These are
+        planning bands at the Technical Product Works rate of $85/hr — adjust
+        them from your own logged time as you build history.
+      </p>
+    </div>
+    <div class="tco">
+      <div class="shape">
+        <h3>One-page presence</h3>
+        <div class="band">$850 – $1,700<small>Build, year one</small></div>
+        <ul>
+          <li>Build <span>10 – 20 hrs</span></li>
+          <li>Content &amp; copy <span>Client-supplied</span></li>
+          <li>Platform <span>$0 – 240/yr</span></li>
+          <li>Care after launch <span>Optional</span></li>
+        </ul>
+      </div>
+      <div class="shape">
+        <h3>Brochure site, 5–8 pages</h3>
+        <div class="band">$2,550 – $5,100<small>Build, year one</small></div>
+        <ul>
+          <li>Build <span>30 – 60 hrs</span></li>
+          <li>Content migration <span>+5 – 15 hrs</span></li>
+          <li>Platform <span>$200 – 700/yr</span></li>
+          <li>Care after launch <span>$150 – 400/mo</span></li>
+        </ul>
+      </div>
+      <div class="shape">
+        <h3>Store, launch catalog</h3>
+        <div class="band">$5,100 – $10,200<small>Build, year one</small></div>
+        <ul>
+          <li>Build <span>60 – 120 hrs</span></li>
+          <li>Product data <span>Bill separately</span></li>
+          <li>Platform <span>$350 – 3,600/yr</span></li>
+          <li>Processing <span>2.5 – 2.9% + 30¢</span></li>
+        </ul>
+      </div>
+      <div class="shape">
+        <h3>Custom app or portal</h3>
+        <div class="band">$10,200+<small>Build, year one</small></div>
+        <ul>
+          <li>Build <span>120+ hrs</span></li>
+          <li>Infrastructure <span>$240 – 1,200/yr</span></li>
+          <li>Care after launch <span>Retainer required</span></li>
+          <li>Rate <span>Command Core $110</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="tco-note">
+      Three costs clients never budget and you should name in the first call:
+      <strong style="color: var(--ink-2)">content</strong> — writing and
+      gathering it is usually the longest task in the project and is not design
+      work; <strong style="color: var(--ink-2)">maintenance</strong> — every
+      self-hosted platform on this list needs someone to own updates and
+      backups, and if it is not paid for it becomes yours for free; and
+      <strong style="color: var(--ink-2)">switching later</strong> — leaving
+      Wix, Framer, Bubble, or a Divi site means rebuilding, not exporting. Price
+      the exit before they buy the entrance.
+    </p>
+  </section>
+
+  <div class="controls">
+    <label class="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="M16.5 16.5 21 21"></path>
+      </svg>
+      <input
+        id="q"
+        type="search"
+        placeholder="Search platforms, or what the site needs to do…"
+        autocomplete="off"
+        aria-label="Search platforms"
+      />
+    </label>
+    <div class="chips" id="cats"></div>
+    <div class="chips" id="filters"></div>
+    <div class="resultline">
+      <span id="count">—</span>
+      <button class="clear" id="clear" hidden>Reset filters</button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <section class="sect">
+    <div class="sect-head">
+      <h2>Red flags in the scoping call</h2>
+      <p>
+        Each of these has cost a project more than any platform choice ever
+        will.
+      </p>
+    </div>
+    <div class="flags">
+      <div class="rf">
+        <h4>They cannot say who owns the domain</h4>
+        <p>
+          Recovering DNS from a former developer or a lapsed registrar account
+          is unbounded work. Make access the first milestone and do not start
+          design until it clears.
+        </p>
+      </div>
+      <div class="rf">
+        <h4>"We just need something simple" plus a feature list</h4>
+        <p>
+          Simple means one page and no logins. Anything with accounts, bookings,
+          inventory, or a portal is not simple, and agreeing that it is prices
+          the whole project wrong.
+        </p>
+      </div>
+      <div class="rf">
+        <h4>The platform was picked before the scope</h4>
+        <p>
+          A client who arrives having already bought a plan has made your
+          decision for you and will resent paying to undo it. Re-run the eight
+          questions before you accept their choice.
+        </p>
+      </div>
+      <div class="rf">
+        <h4>They are on a dead platform and do not know it</h4>
+        <p>
+          Weebly, Typedream, Bookmark, a Google Business Profile site. Lead with
+          the migration, not the redesign — the redesign is the easy half.
+        </p>
+      </div>
+      <div class="rf">
+        <h4>No content exists yet</h4>
+        <p>
+          Content is the schedule risk on nearly every project. Either they
+          deliver it before build starts, or you bill for producing it. There is
+          no third option that ends on time.
+        </p>
+      </div>
+      <div class="rf">
+        <h4>The headline hosting price is a four-year prepay</h4>
+        <p>
+          Hostinger's advertised rate requires a 48-month commitment and renews
+          at roughly triple. Quote renewal pricing or the client will feel
+          misled in year two — by you, not by them.
+        </p>
+      </div>
+      <div class="rf">
+        <h4>They insist on their own payment gateway</h4>
+        <p>
+          Shopify surcharges 0.6–2% on outside gateways and BigCommerce does the
+          same. On real volume that fee dwarfs the plan price. Run the math in
+          front of them.
+        </p>
+      </div>
+      <div class="rf">
+        <h4>"Can you just make it like this one?"</h4>
+        <p>
+          The reference site usually represents a budget an order of magnitude
+          above theirs. Name the gap early and offer the version their budget
+          actually buys.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="method">
+    <div>
+      <h3>Status key</h3>
+      <div class="key">
+        <div>
+          <i style="background: var(--ok)"></i
+          ><span
+            ><strong>Active</strong> — shipping releases, safe to specify.</span
+          >
+        </div>
+        <div>
+          <i style="background: var(--warn)"></i
+          ><span
+            ><strong>Legacy</strong> — still runs, no real investment. Migrate
+            off, don't build on.</span
+          >
+        </div>
+        <div>
+          <i style="background: var(--absorb)"></i
+          ><span
+            ><strong>Absorbed</strong> — folded into another product; the card
+            names it.</span
+          >
+        </div>
+        <div>
+          <i style="background: var(--off)"></i
+          ><span
+            ><strong>Retired</strong> — gone. Kept so you recognize a dead
+            reference when a client cites one.</span
+          >
+        </div>
+      </div>
+      <p style="margin-top: 12px">
+        Cost bands: <strong>Free</strong> · <strong>Under $20/mo</strong> ·
+        <strong>$20–60/mo</strong> · <strong>$60–200/mo</strong> ·
+        <strong>$200+/mo</strong> · <strong>Self-host</strong> (software free,
+        you pay hosting and maintenance). Where a card shows a real figure, it
+        was checked against the vendor's own pricing page in August 2026.
+      </p>
+    </div>
+    <div>
+      <h3>How this was built</h3>
+      <p>
+        Repeats in the source list were collapsed into one record each — Carrd,
+        Ghost, Bubble, Softr, and Leadpages appeared in several categories, so
+        they now carry several tags instead of several entries.
+      </p>
+      <p>
+        Vendor sub-products were folded into their parent: Wix AI, Squarespace
+        Blueprint, Divi AI, Jimdo Dolphin, GoDaddy Airo, and the Wix,
+        Squarespace, and Weebly commerce and member modules are features of a
+        platform, not platforms.
+      </p>
+      <p>
+        One source entry, SellNow, resolved to a parked domain with no
+        identifiable product and was dropped.
+      </p>
+      <p>
+        Two figures need re-checking before you quote them: Squarespace
+        publishes no server-side prices at all, and Wix Studio's pricing page
+        was erroring — those numbers came from a Wix-authored post, not the
+        pricing page.
+      </p>
+    </div>
+    <div>
+      <h3>Using it in a proposal</h3>
+      <p>
+        Client-facing writing gets the <strong>Best for</strong> line, the cost,
+        and the ceiling. Naming what a platform cannot do is what separates a
+        consultant from a salesperson, and it protects you at month nine.
+      </p>
+      <p>
+        The comparison reasoning — why you ruled out the other four, and how you
+        would build it — is the blueprint. Hold it until after the contract.
+      </p>
+      <p>
+        Purple flags mark what is already in your stack. Reaching for a new
+        platform per project is how margin disappears.
+      </p>
+    </div>
+  </section>
+</div>
+
+<script>
+  const CAT = {
+    gen: "General builders",
+    ecom: "Ecommerce",
+    cms: "CMS",
+    edit: "Editors & app builders",
+    land: "Landing & funnel",
+    ai: "AI builders",
+    comm: "Community & membership",
+    dev: "Dev, static & hosting",
+    niche: "Niche & specialized",
+  };
+  const BAND = {
+    free: "Free",
+    low: "Under $20/mo",
+    mid: "$20–60/mo",
+    high: "$60–200/mo",
+    ent: "$200+/mo",
+    host: "Self-host cost",
+  };
+
+  /* n, cats, type, skill, status, desc, bestFor, flag, band, whoEdits, exit, ceiling, verifiedPrice */
+  const D = [
+    [
+      "Wix",
+      ["gen", "ecom", "ai", "comm"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Mass-market builder with an app market, AI site generation, and stores and member areas built in.",
+      "Small business sites the client will edit alone",
+      "stack",
+      "low",
+      "Client alone",
+      "Content exports only",
+      "You cannot move a Wix design anywhere. The template cannot be swapped after publishing without a rebuild.",
+      "$17.77–159.77/mo annual",
+    ],
+    [
+      "Wix Studio",
+      ["gen", "ecom", "ai"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "The agency tier: real CSS grid control, breakpoints, Velo dev mode, and structured client handoff.",
+      "Client sites you build and keep maintaining",
+      "stack",
+      "low",
+      "Client, once trained",
+      "Content exports only",
+      "Same lock-in as Wix. Velo code does not port out, so heavy custom logic belongs in a real framework.",
+      "$19–159/mo annual — re-verify",
+    ],
+    [
+      "Squarespace",
+      ["gen", "ecom", "comm", "niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Design-led templates, Blueprint AI onboarding, commerce and member areas native. Owns Acuity and Bio Sites.",
+      "Brand-forward clients who value polish over control",
+      "first",
+      "mid",
+      "Client alone",
+      "Content exports only",
+      "Layout freedom stops where the template stops. Conditional content and real integrations are out of reach.",
+      "2% store fee on entry plan, 0% above",
+    ],
+    [
+      "Webflow",
+      ["gen", "comm"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "Visual CSS with a real box model, CMS collections, and memberships. Steep curve, professional ceiling.",
+      "Custom marketing sites without hand-writing front end",
+      "first",
+      "low",
+      "Client, once trained",
+      "Exports to code",
+      "CMS collection and reference limits bite on large content sites, and the Editor is unfriendly to casual clients.",
+      "$15–25/mo site plans; ecom $29–212/mo",
+    ],
+    [
+      "Framer",
+      ["gen", "land", "ai"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "A design-tool interface that publishes production sites. Strongest motion work of any hosted builder.",
+      "Fast, animated launch and marketing sites",
+      "first",
+      "low",
+      "Client, once trained",
+      "Locked in",
+      "No code export and a thin CMS. Right for a beautiful ten-page site, wrong for a 200-page content library.",
+      "$10–30/mo; extra editors $20/mo each",
+    ],
+    [
+      "GoDaddy Website Builder",
+      ["gen", "ai"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Bundled with domains and hosting; the Airo AI writes the first draft.",
+      "Clients already locked into GoDaddy",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Low design ceiling and limited SEO control. Fine for presence, not for competing.",
+      "",
+    ],
+    [
+      "Hostinger Website Builder",
+      ["gen", "ai"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Cheap AI-first builder that absorbed Zyro and its user base.",
+      "Budget sites where hosting cost decides it",
+      "first",
+      "low",
+      "Client alone",
+      "Content exports only",
+      "The advertised price is a four-year prepay. Quote the renewal rate or the client feels misled in year two.",
+      "$2.99–7.99/mo on 48-mo prepay; renews $10.99–25.99",
+    ],
+    [
+      "Weebly",
+      ["gen", "ecom"],
+      "Hosted",
+      "No-code",
+      "legacy",
+      "Square routes new users to Square Online. Editor frozen, mobile app pulled Dec 2025.",
+      "Migrating clients off, not starting new builds",
+      null,
+      "low",
+      "Client alone",
+      "Content exports only",
+      "Frozen product. Anything built here will be rebuilt.",
+      "",
+    ],
+    [
+      "Webnode",
+      ["gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Multilingual sites out of the box; light on everything else.",
+      "Simple sites needing several language versions",
+      null,
+      "low",
+      "Client alone",
+      "Content exports only",
+      "Thin past multilingual basics.",
+      "",
+    ],
+    [
+      "Jimdo",
+      ["gen", "ai"],
+      "Hosted",
+      "No-code",
+      "active",
+      "German builder for solo traders. Dolphin AI builds from a short questionnaire.",
+      "One-page trade and service businesses in the EU",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Very limited past a handful of pages.",
+      "",
+    ],
+    [
+      "SITE123",
+      ["gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "A structured wizard rather than a canvas — you fill sections, it handles layout.",
+      "Clients who freeze in front of a blank canvas",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "The wizard that makes it easy also caps what can be changed.",
+      "",
+    ],
+    [
+      "Strikingly",
+      ["gen", "land"],
+      "Hosted",
+      "No-code",
+      "active",
+      "One-page sites with a simple store and blog attached.",
+      "Single-scroll launch pages",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "One page is the product. Multi-page needs are a mismatch.",
+      "",
+    ],
+    [
+      "Ucraft",
+      ["gen", "ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Builder packaged with a free logo maker and a lean commerce tier.",
+      "Startups needing a mark and a site at once",
+      null,
+      "low",
+      "Client alone",
+      "Content exports only",
+      "Small ecosystem and basic commerce.",
+      "",
+    ],
+    [
+      "Duda",
+      ["gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Built for agencies: white-label, client roles, bulk site management, multi-language.",
+      "Running many client sites under your own brand",
+      "first",
+      "low",
+      "Client alone",
+      "Content exports only",
+      "Design ceiling sits below Webflow. You are paying for the operations layer, not creative range.",
+      "$19–149/mo annual; extra sites $17–19/mo",
+    ],
+    [
+      "IONOS MyWebsite",
+      ["gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Hosting-company builder bundled with domains and email.",
+      "Clients buying hosting and site together",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Tied to IONOS hosting with a limited design range.",
+      "",
+    ],
+    [
+      "Network Solutions Website Builder",
+      ["gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Registrar-bundled builder, often sold with done-for-you setup.",
+      "Inherited accounts, rarely a new choice",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Registrar-tier tooling. Usually inherited, rarely chosen.",
+      "",
+    ],
+    [
+      "Web.com",
+      ["gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Registrar builder sold alongside done-for-you site services.",
+      "Clients who want someone else to press the buttons",
+      null,
+      "low",
+      "You maintain",
+      "Locked in",
+      "Done-for-you means every change request queues behind their backlog.",
+      "",
+    ],
+    [
+      "Bluehost Website Builder",
+      ["gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "WordPress-adjacent builder from a WordPress host; funnels you into WP.",
+      "Clients who will graduate to WordPress",
+      null,
+      "low",
+      "Client, once trained",
+      "Content exports only",
+      "A stepping stone to WordPress, not a destination.",
+      "",
+    ],
+    [
+      "Namecheap Website Builder",
+      ["gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Free-tier builder bundled with Namecheap domains.",
+      "Placeholder sites on a domain you already bought",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Placeholder-grade output.",
+      "",
+    ],
+    [
+      "One.com Website Builder",
+      ["gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "EU hosting bundle with a straightforward builder.",
+      "European clients wanting local hosting",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Basic feature set.",
+      "",
+    ],
+    [
+      "Webador",
+      ["gen", "ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Simple builder with a small store; strong in the Netherlands.",
+      "Very small European retail",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "The store is minimal and outgrown quickly.",
+      "",
+    ],
+    [
+      "Yola",
+      ["gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Long-running lightweight builder; the free tier is still open.",
+      "Tiny informational sites",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Dated toolset.",
+      "",
+    ],
+    [
+      "Mozello",
+      ["gen", "ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Multilingual small-store builder out of Latvia.",
+      "Multi-language micro-shops",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Small catalogs only.",
+      "",
+    ],
+    [
+      "Webstarts",
+      ["gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Veteran drag-and-drop builder running since 2004.",
+      "Legacy accounts",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Dated toolset and thin support.",
+      "",
+    ],
+    [
+      "Simvoly",
+      ["gen", "land"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Builder plus sales funnels, with a white-label reseller tier.",
+      "Reselling sites under your own brand",
+      null,
+      "mid",
+      "Client, once trained",
+      "Locked in",
+      "Funnel features are shallower than ClickFunnels and the design ceiling is modest.",
+      "",
+    ],
+    [
+      "Tilda",
+      ["gen", "land"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Block-based editor with unusually good typography and long-form storytelling blocks.",
+      "Editorial landing pages and case studies",
+      null,
+      "low",
+      "Client, once trained",
+      "Content exports only",
+      "The block library is the design. Off-grid layouts fight it.",
+      "",
+    ],
+    [
+      "Bookmark",
+      ["gen", "ai"],
+      "Hosted",
+      "No-code",
+      "retired",
+      "Shut down around 2024 — bookmark.com now sells the domain. AIDA is gone.",
+      "Nothing. Migrate any client still on it",
+      null,
+      "free",
+      "You maintain",
+      "Locked in",
+      "The product is gone.",
+      "",
+    ],
+    [
+      "Dorik",
+      ["gen", "land", "ai"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Clean block builder with a generous free tier and AI generation.",
+      "Cheap client sites you do not want to babysit",
+      null,
+      "mid",
+      "Client alone",
+      "Content exports only",
+      "Small ecosystem and no real commerce. Comfortable to about thirty pages.",
+      "$20.75–79/mo annual; lifetime $249–599",
+    ],
+    [
+      "Carrd",
+      ["gen", "land", "niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "One-page sites for a few dollars a year. Nothing else touches the price.",
+      "Link pages, personal sites, quick validation",
+      "first",
+      "free",
+      "Client alone",
+      "Locked in",
+      "One page, hard stop. No CMS, no store, no logins.",
+      "Free tier; Pro from about $19/yr",
+    ],
+    [
+      "Typedream",
+      ["gen", "land"],
+      "Hosted",
+      "No-code",
+      "legacy",
+      "Notion-flavored builder. Changelog stopped in April 2024.",
+      "Avoid for new client work",
+      null,
+      "mid",
+      "Client alone",
+      "Locked in",
+      "Abandoned. Do not start a client here.",
+      "",
+    ],
+    [
+      "Google Sites",
+      ["gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Free internal sites tied to Google Workspace. No meaningful design control.",
+      "Internal wikis and team hubs, never a brand site",
+      null,
+      "free",
+      "Client alone",
+      "Content exports only",
+      "No design control and no commerce. Public brand work is off the table.",
+      "",
+    ],
+    [
+      "Canva Websites",
+      ["gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Publishes a Canva design as a site. Design tool first, website second.",
+      "One-page collateral already designed in Canva",
+      "stack",
+      "free",
+      "Client alone",
+      "Locked in",
+      "No CMS, weak SEO, no real navigation. It is a design file with a URL.",
+      "Included with Canva Pro",
+    ],
+    [
+      "Notion Sites",
+      ["gen", "cms"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Publishes Notion pages to a custom domain with no export step.",
+      "Docs and resource hubs you already maintain in Notion",
+      "stack",
+      "low",
+      "Client alone",
+      "Content exports only",
+      "Notion's layout is the layout. SEO and performance are mediocre.",
+      "",
+    ],
+    [
+      "Super",
+      ["gen", "cms"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Turns a Notion workspace into a fast, styled site with custom CSS.",
+      "Notion-backed sites that need to look designed",
+      null,
+      "low",
+      "Client alone",
+      "Content exports only",
+      "Still bound to Notion's structure; dynamic behavior is limited.",
+      "",
+    ],
+    [
+      "Potion",
+      ["gen", "cms"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Notion-to-site with heavier customization; currently mid-rebuild.",
+      "Notion sites needing more control than Super",
+      null,
+      "low",
+      "Client alone",
+      "Content exports only",
+      "Same Notion constraints, and the product is mid-rebuild.",
+      "",
+    ],
+    [
+      "Softr",
+      ["gen", "comm", "edit"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Portals and internal tools built on Airtable, Sheets, or a database — auth, roles, and gated content included.",
+      "Client portals and member apps: your no-code lane",
+      "stack",
+      "mid",
+      "Client, once trained",
+      "Locked in",
+      "The data lives in Airtable or a database the client also pays for, and cost scales with users and records.",
+      "$19–329/mo annual",
+    ],
+    [
+      "Appy Pie Website Builder",
+      ["gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Part of a broad no-code suite with app-first heritage.",
+      "Clients wanting an app and site from one vendor",
+      null,
+      "mid",
+      "Client alone",
+      "Locked in",
+      "Broad but shallow across every product in the suite.",
+      "",
+    ],
+    [
+      "Mobirise",
+      ["gen"],
+      "Desktop",
+      "No-code",
+      "active",
+      "Offline block builder that exports static files you host anywhere.",
+      "Sites you must hand over as plain files",
+      null,
+      "free",
+      "You maintain",
+      "You own the code",
+      "No CMS. Every content change is a file edit and a re-upload.",
+      "",
+    ],
+    [
+      "Nicepage",
+      ["gen", "edit"],
+      "Desktop",
+      "No-code",
+      "active",
+      "Desktop designer that exports to HTML, WordPress, or Joomla.",
+      "Designing offline, deploying to WordPress",
+      null,
+      "low",
+      "You maintain",
+      "Exports to code",
+      "Exported markup is bulky and not a maintainable long-term codebase.",
+      "",
+    ],
+    [
+      "Silex",
+      ["gen", "cms"],
+      "Self-hosted",
+      "Low-code",
+      "active",
+      "Open-source visual builder producing static sites; v3.9 shipped July 2026.",
+      "Clients who require open-source-only tooling",
+      null,
+      "free",
+      "Developer required",
+      "You own the code",
+      "Small community. You are the support desk.",
+      "",
+    ],
+    [
+      "AllYou",
+      ["gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "European builder with curated template packs.",
+      "EU small business",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Small template range.",
+      "",
+    ],
+    [
+      "Pagely",
+      ["dev"],
+      "Managed hosting",
+      "Code",
+      "active",
+      "Not a builder — managed WordPress hosting, GoDaddy-owned. Listed because roundups keep misfiling it.",
+      "High-traffic WordPress that cannot go down",
+      null,
+      "ent",
+      "Developer required",
+      "You own the code",
+      "Hosting only, priced for traffic most clients do not have yet.",
+      "",
+    ],
+    [
+      "B12",
+      ["gen", "ai"],
+      "Hosted",
+      "No-code",
+      "active",
+      "AI draft plus a human design team. Sold as done-for-you, priced accordingly.",
+      "Clients who want it built for them, not with them",
+      null,
+      "mid",
+      "You maintain",
+      "Locked in",
+      "You are buying their team's time, and change requests queue.",
+      "",
+    ],
+    [
+      "Design.com",
+      ["gen", "ai"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Logo maker with an AI site builder attached.",
+      "Brand-and-site starter bundles",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Logo-first product; the site side is thin.",
+      "",
+    ],
+    [
+      "Olitt",
+      ["gen", "ai"],
+      "Hosted",
+      "No-code",
+      "active",
+      "AI builder aimed at African and emerging markets.",
+      "Regional small business",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Limited ecosystem.",
+      "",
+    ],
+    [
+      "Neo Sites",
+      ["gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "One-page site bundled with Neo business email and a domain.",
+      "Solo professionals needing email more than a site",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "One page bundled with email. Not a growth path.",
+      "",
+    ],
+    [
+      "Tithely Sites",
+      ["gen", "niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Church sites bundled with giving, events, and church management.",
+      "Congregations",
+      null,
+      "mid",
+      "Client alone",
+      "Content exports only",
+      "Only makes sense if they also use Tithely giving.",
+      "",
+    ],
+
+    [
+      "Shopify",
+      ["ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "The default serious storefront: checkout, payments, an app for everything, POS.",
+      "Any client whose main business is selling products",
+      "first",
+      "mid",
+      "Client alone",
+      "Content exports only",
+      "Checkout is not customizable below Plus, and content tooling is weak next to WordPress.",
+      "$29–299/mo annual; Plus from $2,300/mo; 0.6–2% on outside gateways",
+    ],
+    [
+      "Shopify Starter",
+      ["ecom", "niche"],
+      "Hosted",
+      "No-code",
+      "retired",
+      "Closed to new stores — Shopify's help center lists it as no longer available.",
+      "Nothing. Route new clients to Square Online or Big Cartel",
+      null,
+      "low",
+      "Client alone",
+      "Content exports only",
+      "No longer sold. Existing stores only.",
+      "",
+    ],
+    [
+      "BigCommerce",
+      ["ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Shopify's enterprise-leaning rival — more built in, fewer app subscriptions.",
+      "Large catalogs and B2B pricing rules",
+      null,
+      "mid",
+      "Client alone",
+      "Content exports only",
+      "Plans force-upgrade as sales grow. Budget for the jump at $30K and $100K GMV, not for today's tier.",
+      "$29–299/mo annual; Enterprise from ~$1,499/mo",
+    ],
+    [
+      "WooCommerce",
+      ["ecom", "cms"],
+      "WordPress plugin",
+      "Low-code",
+      "active",
+      "Turns WordPress into a store. You own the stack and its maintenance bill.",
+      "Clients who need to own everything",
+      null,
+      "host",
+      "Client, once trained",
+      "You own the code",
+      "Free until it is not. Hosting, extensions, and security are yours forever.",
+      "",
+    ],
+    [
+      "Square Online",
+      ["ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Free storefront wired straight into Square POS and inventory.",
+      "Brick-and-mortar sellers already on Square",
+      null,
+      "free",
+      "Client alone",
+      "Content exports only",
+      "Narrow design range, and it only makes sense inside Square's ecosystem.",
+      "Free (3.3%+30¢); $29–99/mo paid (2.9%+30¢)",
+    ],
+    [
+      "Ecwid",
+      ["ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "A store widget you drop into a site you cannot rebuild.",
+      "Adding commerce to an existing site",
+      null,
+      "low",
+      "Client alone",
+      "Content exports only",
+      "It is a widget. It will never feel native to the host site.",
+      "",
+    ],
+    [
+      "Big Cartel",
+      ["ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Small-catalog store built for artists; free up to five products.",
+      "Makers and short runs",
+      null,
+      "low",
+      "Client alone",
+      "Content exports only",
+      "Small catalogs and simple shipping. Not built to scale.",
+      "Free Gold plan; $15–30/mo; no platform transaction fee",
+    ],
+    [
+      "Sellfy",
+      ["ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Digital products, subscriptions, and print-on-demand in one place.",
+      "Selling files without running a store",
+      null,
+      "mid",
+      "Client alone",
+      "Content exports only",
+      "Storefront design is limited. Treat it as a checkout, not a site.",
+      "",
+    ],
+    [
+      "Shift4Shop",
+      ["ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Full-featured store tied to Shift4 payment processing.",
+      "Merchants already on Shift4",
+      null,
+      "mid",
+      "Client, once trained",
+      "Content exports only",
+      "Tied to Shift4 processing with a smaller app ecosystem.",
+      "",
+    ],
+    [
+      "Volusion",
+      ["ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Long-running hosted cart with a smaller ecosystem than its rivals.",
+      "Existing accounts; rarely a new pick",
+      null,
+      "mid",
+      "Client, once trained",
+      "Content exports only",
+      "Aging platform and a shrinking ecosystem.",
+      "",
+    ],
+    [
+      "PrestaShop",
+      ["ecom"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Open-source PHP store, strong across Europe.",
+      "European stores wanting no platform fee",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Module quality varies wildly and upgrades break things.",
+      "",
+    ],
+    [
+      "OpenCart",
+      ["ecom"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Lightweight open-source cart with a big extension market.",
+      "Budget self-hosted commerce",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Thin core. You will buy or build most features.",
+      "",
+    ],
+    [
+      "Adobe Commerce",
+      ["ecom"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Enterprise Magento with Adobe's licensing and price tag.",
+      "Enterprise catalogs with real dev budget",
+      null,
+      "ent",
+      "Developer required",
+      "You own the code",
+      "Needs a team and a six-figure budget. The wrong answer for almost every client you will meet.",
+      "",
+    ],
+    [
+      "Magento Open Source",
+      ["ecom"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "The free Magento core. Powerful, heavy, needs a developer permanently.",
+      "Complex catalogs where licensing is the blocker",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Free license, expensive everything else.",
+      "",
+    ],
+    [
+      "Shopware",
+      ["ecom"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "German enterprise commerce, API-first architecture.",
+      "EU mid-market and enterprise",
+      null,
+      "ent",
+      "Developer required",
+      "You own the code",
+      "EU-centric with a sparse US support network.",
+      "",
+    ],
+    [
+      "nopCommerce",
+      ["ecom"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Open-source store on .NET.",
+      "Microsoft-stack organizations",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Requires .NET hosting and .NET people.",
+      "",
+    ],
+    [
+      "CS-Cart",
+      ["ecom"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Store software with a strong multi-vendor marketplace edition.",
+      "Marketplaces you host yourself",
+      null,
+      "high",
+      "Developer required",
+      "You own the code",
+      "Marketplace features are strong; the admin experience is dated.",
+      "",
+    ],
+    [
+      "Lightspeed eCom",
+      ["ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Commerce tied to Lightspeed retail and restaurant POS.",
+      "Retailers running Lightspeed in-store",
+      null,
+      "high",
+      "Client alone",
+      "Locked in",
+      "Only rational if they run Lightspeed in store.",
+      "",
+    ],
+    [
+      "Lemon Squeezy",
+      ["ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Merchant of record for digital goods — it handles global sales tax for you.",
+      "Selling software or files internationally",
+      null,
+      "free",
+      "Client alone",
+      "Content exports only",
+      "The 5% is the cost. At real volume a Shopify plan plus a tax service gets cheaper.",
+      "No monthly fee; 5% + 50¢ per transaction",
+    ],
+    [
+      "Gumroad",
+      ["ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Sell a file with a link. Minimal storefront, minimal setup, visible fees.",
+      "A first digital product with zero infrastructure",
+      null,
+      "free",
+      "Client alone",
+      "Locked in",
+      "Fees are high and the storefront barely exists. Cheap to start, expensive to stay.",
+      "No monthly fee; 10% + 50¢ direct, 30% via Discover",
+    ],
+    [
+      "Podia",
+      ["ecom", "comm"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Courses, downloads, memberships, and email under one login.",
+      "Creators bundling a course with a community",
+      null,
+      "high",
+      "Client alone",
+      "Content exports only",
+      "Jack of all trades. Serious course businesses outgrow the LMS depth.",
+      "$42–150/mo; 5% fee on entry plan, 0% above",
+    ],
+    [
+      "Fourthwall",
+      ["ecom", "comm"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Creator merch storefronts with print-on-demand and memberships.",
+      "Audience-first merch drops",
+      null,
+      "free",
+      "Client alone",
+      "Locked in",
+      "Margins are set by their fulfillment, not by the client.",
+      "",
+    ],
+    [
+      "Payhip",
+      ["ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Digital products and courses with EU VAT handled.",
+      "Small digital catalogs sold into Europe",
+      null,
+      "low",
+      "Client alone",
+      "Content exports only",
+      "Minimal storefront design.",
+      "",
+    ],
+
+    [
+      "WordPress.org",
+      ["cms"],
+      "Self-hosted",
+      "Low-code",
+      "active",
+      "Still runs a large share of the web. Infinite plugins, infinite maintenance.",
+      "Content-heavy sites and anything needing custom functionality",
+      "first",
+      "host",
+      "Client, once trained",
+      "You own the code",
+      "The maintenance never ends. Someone owns updates, backups, and security — price it in or it becomes your unpaid job.",
+      "",
+    ],
+    [
+      "WordPress.com",
+      ["cms"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "Automattic-hosted WordPress; plugins and custom code only on higher plans.",
+      "WordPress without a server to babysit",
+      null,
+      "low",
+      "Client, once trained",
+      "You own the code",
+      "Plugins and custom code only on Business and up. Below that it is a walled garden.",
+      "$4–45/mo annual; payment fees 10%→2% by plan",
+    ],
+    [
+      "Drupal",
+      ["cms"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Structured content and granular permissions. Government and university default.",
+      "Complex content models with strict access rules",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Overkill unless the content model is genuinely complex, and editors need training.",
+      "",
+    ],
+    [
+      "Joomla",
+      ["cms"],
+      "Self-hosted",
+      "Low-code",
+      "active",
+      "Middle ground between WordPress and Drupal; community has thinned.",
+      "Existing Joomla estates",
+      null,
+      "host",
+      "Client, once trained",
+      "You own the code",
+      "A shrinking community means fewer extensions and fewer people to hire.",
+      "",
+    ],
+    [
+      "TYPO3",
+      ["cms"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Enterprise CMS, dominant in German-speaking Europe.",
+      "Large multi-site European organizations",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Steep learning curve and a talent pool concentrated in Europe.",
+      "",
+    ],
+    [
+      "Ghost",
+      ["cms", "comm"],
+      "Self-hosted",
+      "Low-code",
+      "active",
+      "Publishing platform with native memberships and paid newsletters.",
+      "Writers monetizing an audience without Substack's cut",
+      null,
+      "low",
+      "Client alone",
+      "You own the code",
+      "Built for publishing. Anything that is not posts and memberships fights the platform.",
+      "Ghost(Pro) $18–199/mo by member count; zero revenue share",
+    ],
+    [
+      "Craft CMS",
+      ["cms"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Developer-favorite CMS with a genuinely good author experience.",
+      "Bespoke sites where editors matter as much as devs",
+      null,
+      "host",
+      "Client alone",
+      "You own the code",
+      "License plus a developer. There is no cheap path.",
+      "",
+    ],
+    [
+      "ExpressionEngine",
+      ["cms"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Veteran PHP CMS, still shipping releases in 2026.",
+      "Long-lived custom PHP sites",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Small talent pool in 2026.",
+      "",
+    ],
+    [
+      "Concrete CMS",
+      ["cms"],
+      "Self-hosted",
+      "Low-code",
+      "active",
+      "In-context editing — clients edit directly on the rendered page.",
+      "Non-technical owners who hate admin panels",
+      null,
+      "host",
+      "Client alone",
+      "You own the code",
+      "Smaller ecosystem and fewer ready-made add-ons.",
+      "",
+    ],
+    [
+      "MODX",
+      ["cms"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Template-agnostic CMS. You write the markup; it manages the content.",
+      "Hand-built markup with client editing on top",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Nothing is built for you. Every feature is yours to make.",
+      "",
+    ],
+    [
+      "Grav",
+      ["cms"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Flat-file CMS with no database to maintain.",
+      "Small sites where a database is overhead",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Flat files get slow at large content volumes.",
+      "",
+    ],
+    [
+      "Kirby",
+      ["cms"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "File-based CMS with a clean panel and a one-off license per site.",
+      "Boutique client sites with no subscription",
+      null,
+      "host",
+      "Client alone",
+      "You own the code",
+      "Developer-built by definition. There is no template marketplace to lean on.",
+      "About €99 one-time per site",
+    ],
+    [
+      "Statamic",
+      ["cms"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Laravel-based flat-file CMS with a polished control panel.",
+      "Laravel shops building content sites",
+      null,
+      "host",
+      "Client alone",
+      "You own the code",
+      "Needs Laravel knowledge to extend.",
+      "",
+    ],
+    [
+      "ProcessWire",
+      ["cms"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Behaves like a content API with a jQuery-flavored PHP interface.",
+      "Developers who want a CMS that stays out of the way",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Minimal admin polish and a small community.",
+      "",
+    ],
+    [
+      "Umbraco",
+      ["cms"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "The .NET CMS standard.",
+      "Microsoft-stack enterprises",
+      null,
+      "host",
+      "Client, once trained",
+      "You own the code",
+      "Windows and .NET hosting costs more.",
+      "",
+    ],
+    [
+      "October CMS",
+      ["cms"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Laravel CMS, actively released through 2026.",
+      "Laravel projects needing an admin",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Small plugin market.",
+      "",
+    ],
+    [
+      "Silverstripe",
+      ["cms"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "PHP CMS and framework, strong in New Zealand and the public sector.",
+      "Public sector and education",
+      null,
+      "host",
+      "Client, once trained",
+      "You own the code",
+      "Regional community with limited US support.",
+      "",
+    ],
+    [
+      "Plone",
+      ["cms"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Python CMS with serious permissions and a long institutional life.",
+      "Organizations with real workflow and approval needs",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Heavy. Python hosting and Python people required.",
+      "",
+    ],
+    [
+      "Webstudio",
+      ["cms", "edit"],
+      "Self-hosted",
+      "Low-code",
+      "active",
+      "Open-source visual builder positioned directly against Webflow; self-hostable.",
+      "Webflow-grade output without the lock-in",
+      null,
+      "low",
+      "Client, once trained",
+      "You own the code",
+      "Young product with fewer integrations than Webflow and a smaller safety net.",
+      "",
+    ],
+    [
+      "Microweber",
+      ["cms"],
+      "Self-hosted",
+      "No-code",
+      "active",
+      "Open-source drag-and-drop CMS with a built-in shop.",
+      "Open-source requirement plus non-technical editors",
+      null,
+      "host",
+      "Client alone",
+      "You own the code",
+      "Rough edges compared with commercial builders.",
+      "",
+    ],
+    [
+      "CMS Made Simple",
+      ["cms"],
+      "Self-hosted",
+      "Low-code",
+      "legacy",
+      "Newest release is still 2.2.21 from June 2024.",
+      "Maintenance only",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Stalled since 2024, which becomes a security risk over time.",
+      "",
+    ],
+    [
+      "XOOPS",
+      ["cms"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Old-guard PHP portal CMS, still shipping releases.",
+      "Legacy community portals",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Dated architecture and interface.",
+      "",
+    ],
+    [
+      "WonderCMS",
+      ["cms"],
+      "Self-hosted",
+      "Low-code",
+      "active",
+      "A handful of files, no database. Among the smallest real CMSes.",
+      "Tiny sites on cheap shared hosting",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Deliberately tiny. No real content modeling.",
+      "",
+    ],
+    [
+      "Bolt CMS",
+      ["cms"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Symfony-based CMS with a clean content model.",
+      "Symfony teams",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Small community and Symfony knowledge required.",
+      "",
+    ],
+    [
+      "WebsiteBaker",
+      ["cms"],
+      "Self-hosted",
+      "Low-code",
+      "legacy",
+      "Latest download is 2.13.5 from December 2023.",
+      "Maintenance only",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "No release since 2023.",
+      "",
+    ],
+    [
+      "Textpattern",
+      ["cms"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Minimal, fast, markup-focused publishing.",
+      "Writers who want speed and no bloat",
+      null,
+      "host",
+      "Client, once trained",
+      "You own the code",
+      "Niche template syntax and a small talent pool.",
+      "",
+    ],
+    [
+      "TinaCMS",
+      ["cms", "dev"],
+      "Dev tool",
+      "Code",
+      "active",
+      "Git-backed visual editing layered onto Next.js and other frameworks.",
+      "Giving clients editing on a developer-built site",
+      null,
+      "low",
+      "Client alone",
+      "You own the code",
+      "A developer sets it up, and a developer changes the content model.",
+      "",
+    ],
+    [
+      "Publii",
+      ["cms"],
+      "Desktop",
+      "No-code",
+      "active",
+      "Desktop app that builds a static site and pushes it to your host.",
+      "Static-site speed for a non-technical owner",
+      null,
+      "free",
+      "Client, once trained",
+      "You own the code",
+      "Single-machine app. Two people cannot edit the same site.",
+      "",
+    ],
+
+    [
+      "Adobe Dreamweaver",
+      ["edit"],
+      "Desktop",
+      "Code",
+      "legacy",
+      "Security and library patches only since 2021. Historical, not a recommendation.",
+      "Nothing current",
+      null,
+      "mid",
+      "Developer required",
+      "You own the code",
+      "Abandoned in all but name.",
+      "",
+    ],
+    [
+      "Adobe Portfolio",
+      ["edit", "niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Free portfolio site included with a Creative Cloud subscription.",
+      "Designers already paying Adobe",
+      null,
+      "free",
+      "Client alone",
+      "Locked in",
+      "Portfolio only. No commerce, no CMS.",
+      "Included with Creative Cloud",
+    ],
+    [
+      "Bootstrap Studio",
+      ["edit"],
+      "Desktop",
+      "Low-code",
+      "active",
+      "Desktop builder that outputs clean, readable Bootstrap markup.",
+      "Handing off editable static code",
+      null,
+      "free",
+      "Developer required",
+      "You own the code",
+      "You still need hosting and a way for the client to update content.",
+      "$29 one-time",
+    ],
+    [
+      "Pinegrow",
+      ["edit"],
+      "Desktop",
+      "Code",
+      "active",
+      "Visual editor that works directly on your real HTML, CSS, and WordPress themes.",
+      "Hand-coders who want a visual layer",
+      null,
+      "low",
+      "Developer required",
+      "You own the code",
+      "Assumes you can already read the code it edits.",
+      "",
+    ],
+    [
+      "RapidWeaver",
+      ["edit"],
+      "Desktop",
+      "No-code",
+      "active",
+      "Mac site builder with a long-running plugin ecosystem.",
+      "Mac-native workflows",
+      null,
+      "free",
+      "You maintain",
+      "You own the code",
+      "Mac only, and the plugin ecosystem is aging.",
+      "One-time license",
+    ],
+    [
+      "Blocs",
+      ["edit"],
+      "Desktop",
+      "No-code",
+      "active",
+      "Mac visual builder producing clean static sites.",
+      "Designers avoiding a subscription",
+      null,
+      "free",
+      "You maintain",
+      "You own the code",
+      "Mac only, and no CMS without add-ons.",
+      "One-time license",
+    ],
+    [
+      "Sparkle",
+      ["edit"],
+      "Desktop",
+      "No-code",
+      "active",
+      "Mac builder for designers who refuse to touch code.",
+      "Small, art-directed sites offline",
+      null,
+      "low",
+      "You maintain",
+      "You own the code",
+      "Mac only, and every content update routes through you.",
+      "",
+    ],
+    [
+      "Readymag",
+      ["edit", "niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Editorial design tool with free-form layout and strong typographic control.",
+      "Art-directed digital stories and lookbooks",
+      null,
+      "mid",
+      "Client, once trained",
+      "Locked in",
+      "Layout freedom, weak structure. Not for content-heavy sites.",
+      "",
+    ],
+    [
+      "Siter.io",
+      ["edit"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Figma-to-site design tool.",
+      "Publishing straight from a Figma file",
+      null,
+      "low",
+      "Client, once trained",
+      "Locked in",
+      "Design-tool output with limited dynamic behavior.",
+      "",
+    ],
+    [
+      "Cargo",
+      ["edit", "niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Art-school portfolio platform with unusually good typographic defaults.",
+      "Artists and studios with a point of view",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Opinionated to the point of constraint, and no commerce depth.",
+      "",
+    ],
+    [
+      "Format",
+      ["edit", "niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Portfolio platform for photographers with proofing and client galleries.",
+      "Working photographers",
+      null,
+      "mid",
+      "Client alone",
+      "Content exports only",
+      "Photography-shaped. Anything else fights the templates.",
+      "",
+    ],
+    [
+      "Dunked",
+      ["edit", "niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Simple creative portfolio host.",
+      "Fast portfolio with no setup",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Small feature set.",
+      "",
+    ],
+    [
+      "PortfolioBox",
+      ["edit", "niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Portfolio builder aimed broadly at creatives.",
+      "Multi-discipline portfolios",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Generic output and limited SEO control.",
+      "",
+    ],
+    [
+      "Pixpa",
+      ["edit", "niche", "ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Portfolio, store, and client galleries bundled together.",
+      "Creatives who also sell prints",
+      null,
+      "low",
+      "Client alone",
+      "Content exports only",
+      "Does several things adequately, none exceptionally.",
+      "",
+    ],
+    [
+      "Krop",
+      ["edit", "niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Creative portfolios. The old creative job board now redirects away.",
+      "Creative portfolios only",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Portfolio only, and the job board that drew people there is gone.",
+      "",
+    ],
+    [
+      "FolioHD",
+      ["edit", "niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Long-running portfolio host.",
+      "Model and photography portfolios",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Dated product.",
+      "",
+    ],
+    [
+      "Bubble",
+      ["edit", "dev"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "Full visual app development — database, logic, workflows, auth, plugins.",
+      "Web apps, not websites",
+      null,
+      "mid",
+      "You maintain",
+      "Locked in",
+      "Workload pricing surprises people at scale and nothing exports. Rewriting later means starting over.",
+      "$29–349/mo web (annual) plus workload overages",
+    ],
+    [
+      "FlutterFlow",
+      ["edit", "dev"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "Visual Flutter builder producing mobile and web from one codebase.",
+      "Mobile-first client products",
+      null,
+      "mid",
+      "Developer required",
+      "Exports to code",
+      "Mobile-shaped. Web output is secondary.",
+      "",
+    ],
+    [
+      "WeWeb",
+      ["edit", "dev"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "Front end that sits on your own backend — Supabase, Xano, or any REST API.",
+      "Client tools with a real database behind them",
+      null,
+      "high",
+      "Developer required",
+      "Exports to code",
+      "You still need and pay for the backend separately.",
+      "",
+    ],
+    [
+      "Plasmic",
+      ["edit", "dev"],
+      "Dev tool",
+      "Low-code",
+      "active",
+      "Visual builder that drops into an existing React codebase.",
+      "Letting marketing edit pages in a React app",
+      null,
+      "mid",
+      "Client, once trained",
+      "You own the code",
+      "Only makes sense if a React codebase already exists.",
+      "",
+    ],
+    [
+      "Builder.io",
+      ["edit", "dev", "cms"],
+      "Dev tool",
+      "Low-code",
+      "active",
+      "Visual CMS and page building inside your production framework.",
+      "Enterprise teams shipping pages without deploys",
+      null,
+      "ent",
+      "Client alone",
+      "You own the code",
+      "Enterprise pricing. Overbuilt for a small client.",
+      "",
+    ],
+    [
+      "GrapesJS",
+      ["edit", "dev"],
+      "Self-hosted",
+      "Code",
+      "active",
+      "Open-source builder framework you embed inside your own product.",
+      "Building a builder into a client platform",
+      null,
+      "free",
+      "Developer required",
+      "You own the code",
+      "A toolkit, not a product. You build the editor around it.",
+      "",
+    ],
+    [
+      "Elementor",
+      ["edit"],
+      "WordPress plugin",
+      "No-code",
+      "active",
+      "The dominant WordPress page builder. Huge widget library, real performance cost.",
+      "Fast WordPress builds for clients who will edit later",
+      null,
+      "low",
+      "Client alone",
+      "You own the code",
+      "Page weight and bloat, and removing Elementor later means rebuilding every page.",
+      "Free core; Pro $49–399/yr; Elementor One $199–499/yr",
+    ],
+    [
+      "Beaver Builder",
+      ["edit"],
+      "WordPress plugin",
+      "No-code",
+      "active",
+      "Stable, developer-respected WordPress builder with clean output.",
+      "Agency WordPress work that must not break",
+      null,
+      "low",
+      "Client alone",
+      "You own the code",
+      "Smaller widget library than Elementor and fewer third-party add-ons.",
+      "",
+    ],
+    [
+      "Divi",
+      ["edit", "ai"],
+      "WordPress plugin",
+      "No-code",
+      "active",
+      "Elegant Themes' builder and theme with a lifetime license and AI features.",
+      "Volume WordPress work on one license",
+      null,
+      "low",
+      "Client alone",
+      "You own the code",
+      "Divi shortcodes end up everywhere in the content. Leaving Divi means a rebuild.",
+      "$89/yr unlimited sites, or $249 one-time lifetime",
+    ],
+    [
+      "Bricks Builder",
+      ["edit"],
+      "WordPress plugin",
+      "Low-code",
+      "active",
+      "Performance-focused WordPress builder favored by developers.",
+      "WordPress sites that must score well",
+      null,
+      "low",
+      "Client, once trained",
+      "You own the code",
+      "Smaller ecosystem and less forgiving for non-technical editors.",
+      "",
+    ],
+    [
+      "Brizy",
+      ["edit"],
+      "WordPress plugin",
+      "No-code",
+      "active",
+      "Builder with a white-label cloud version aimed at agencies.",
+      "White-labeled client editing",
+      null,
+      "low",
+      "Client alone",
+      "You own the code",
+      "Smaller community and fewer integrations.",
+      "",
+    ],
+    [
+      "WPBakery",
+      ["edit"],
+      "WordPress plugin",
+      "No-code",
+      "active",
+      "The old shortcode builder bundled into thousands of themes; v9 shipped.",
+      "Inherited theme sites",
+      null,
+      "low",
+      "Client alone",
+      "You own the code",
+      "The worst shortcode lock-in of any WordPress builder. Deactivating it destroys the content.",
+      "",
+    ],
+    [
+      "Oxygen Builder",
+      ["edit"],
+      "WordPress plugin",
+      "Low-code",
+      "active",
+      "Replaces the WordPress theme entirely. Rewritten from scratch for v6.",
+      "Developers who want WordPress without theme bloat",
+      null,
+      "low",
+      "Developer required",
+      "You own the code",
+      "No theme means no fallback. If it is removed, the client has nothing.",
+      "",
+    ],
+    [
+      "GeneratePress",
+      ["edit"],
+      "WordPress theme",
+      "Low-code",
+      "active",
+      "A lightweight theme, not a builder — the performance baseline others are measured against.",
+      "Pairing with a block or builder workflow",
+      null,
+      "low",
+      "Client, once trained",
+      "You own the code",
+      "It is a theme. You still need a building method on top of it.",
+      "",
+    ],
+    [
+      "Breakdance",
+      ["edit"],
+      "WordPress plugin",
+      "Low-code",
+      "active",
+      "Modern builder from the Oxygen team.",
+      "New WordPress builds wanting one tool",
+      null,
+      "low",
+      "Client alone",
+      "You own the code",
+      "Young, with a smaller add-on market.",
+      "",
+    ],
+    [
+      "Gutenberg",
+      ["edit", "cms"],
+      "WordPress core",
+      "No-code",
+      "active",
+      "WordPress's built-in block editor. Free, native, and increasingly capable.",
+      "Avoiding a page-builder dependency entirely",
+      null,
+      "free",
+      "Client, once trained",
+      "You own the code",
+      "Design control is improving but still behind the commercial builders.",
+      "",
+    ],
+
+    [
+      "Unbounce",
+      ["land", "ai"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Landing pages with A/B testing and conversion-focused AI.",
+      "Paid-ad campaigns where CRO pays for the tool",
+      null,
+      "high",
+      "Client, once trained",
+      "Content exports only",
+      "Priced for ad spend. Without a campaign behind it, it is dead weight.",
+      "",
+    ],
+    [
+      "Leadpages",
+      ["land"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Landing pages, pop-ups, and lead capture on a small-business budget.",
+      "Lead-gen for local and service businesses",
+      null,
+      "mid",
+      "Client alone",
+      "Content exports only",
+      "Template-bound, and not a full site.",
+      "",
+    ],
+    [
+      "Instapage",
+      ["land"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Enterprise landing pages with ad-to-page personalization.",
+      "Large paid media budgets",
+      null,
+      "ent",
+      "Client, once trained",
+      "Locked in",
+      "Enterprise pricing kills it for small clients.",
+      "",
+    ],
+    [
+      "Landingi",
+      ["land"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Landing pages at a lower price point with agency sub-accounts.",
+      "Running pages for several clients",
+      null,
+      "mid",
+      "Client alone",
+      "Content exports only",
+      "Fewer optimization features than Unbounce.",
+      "",
+    ],
+    [
+      "ClickFunnels",
+      ["land", "ecom", "comm"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Funnels, upsells, courses, and email in one opinionated system.",
+      "Info-product and coaching offers",
+      null,
+      "high",
+      "Client alone",
+      "Locked in",
+      "Opinionated aesthetics many brands cannot wear, and everything lives inside it.",
+      "",
+    ],
+    [
+      "GetResponse Website Builder",
+      ["land", "gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Site builder attached to an email marketing suite.",
+      "Clients already emailing through GetResponse",
+      null,
+      "mid",
+      "Client alone",
+      "Locked in",
+      "The site builder is a bonus feature, not the product.",
+      "",
+    ],
+    [
+      "HubSpot Content Hub",
+      ["land", "cms"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "CMS wired directly to the CRM, with personalization by contact record.",
+      "Clients already running HubSpot",
+      "first",
+      "high",
+      "Client alone",
+      "Content exports only",
+      "Only justified if they already pay for HubSpot. Standalone it is expensive for what it is.",
+      "$7/seat/mo Starter to $450/mo Pro; Enterprise $1,500/mo",
+    ],
+    [
+      "Mailchimp Websites",
+      ["land", "gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Basic sites and landing pages built inside Mailchimp.",
+      "Tiny sites for an existing Mailchimp list",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Very limited. A landing page, not a site.",
+      "",
+    ],
+    [
+      "Kit Landing Pages",
+      ["land", "comm"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Free landing pages tied to a creator email list. Formerly ConvertKit.",
+      "Newsletter signup pages",
+      null,
+      "free",
+      "Client alone",
+      "Locked in",
+      "Pages exist to feed the list. There is no real site structure.",
+      "Free to 1,000 subscribers; $33–66/mo above",
+    ],
+    [
+      "Systeme.io",
+      ["land", "ecom", "comm"],
+      "Hosted",
+      "No-code",
+      "active",
+      "All-in-one funnels, courses, and email with a real free tier.",
+      "Bootstrapped course launches",
+      null,
+      "free",
+      "Client alone",
+      "Locked in",
+      "Design quality is visibly low. Function over form.",
+      "",
+    ],
+    [
+      "Swipe Pages",
+      ["land"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Landing pages built around mobile load speed.",
+      "Mobile ad traffic",
+      null,
+      "mid",
+      "Client alone",
+      "Content exports only",
+      "Narrow use case.",
+      "",
+    ],
+    [
+      "Lander",
+      ["land"],
+      "Hosted",
+      "No-code",
+      "legacy",
+      "Still selling plans, but no visible development and a compromised blog subdomain.",
+      "Skip",
+      null,
+      "mid",
+      "Client alone",
+      "Locked in",
+      "Unmaintained. Skip.",
+      "",
+    ],
+    [
+      "Wishpond",
+      ["land"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Landing pages plus contests and marketing automation.",
+      "Promotion and giveaway campaigns",
+      null,
+      "high",
+      "You maintain",
+      "Locked in",
+      "Priced above what its design output justifies.",
+      "",
+    ],
+
+    [
+      "10Web",
+      ["ai", "cms"],
+      "Hosted",
+      "No-code",
+      "active",
+      "AI generates a WordPress site and hosts it on managed infrastructure.",
+      "WordPress speed without the setup work",
+      null,
+      "mid",
+      "Client, once trained",
+      "You own the code",
+      "It is WordPress underneath, so all of WordPress's maintenance comes with it.",
+      "",
+    ],
+    [
+      "Durable",
+      ["ai", "gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Generates a service-business site in under a minute, with invoicing and a light CRM bolted on.",
+      "Trades and local service businesses",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Generic output. Every Durable site looks like a Durable site.",
+      "",
+    ],
+    [
+      "Hocoos",
+      ["ai", "gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Answer eight questions, get a site.",
+      "Absolute-fastest first draft",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Speed is the only advantage; the design range is narrow.",
+      "",
+    ],
+    [
+      "TeleportHQ",
+      ["ai", "edit", "dev"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "AI and visual design that exports real front-end code.",
+      "Handing developers a starting codebase",
+      null,
+      "mid",
+      "Developer required",
+      "Exports to code",
+      "Exported code still needs a developer to finish and host.",
+      "",
+    ],
+    [
+      "Relume",
+      ["ai", "edit"],
+      "Design tool",
+      "Low-code",
+      "active",
+      "AI sitemap and wireframe generation with a large Webflow and Figma component library.",
+      "Speeding up structure before you design",
+      null,
+      "mid",
+      "Developer required",
+      "Exports to code",
+      "It produces structure, not a finished site. The build is still yours.",
+      "",
+    ],
+    [
+      "Gamma",
+      ["ai", "gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "AI decks that publish as sites. Presentation-shaped, not site-shaped.",
+      "Pitch pages and quick one-pagers",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Deck-shaped. No navigation model and no SEO story.",
+      "",
+    ],
+    [
+      "Lovable",
+      ["ai", "dev", "edit"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "Prompt to full-stack app with Supabase and GitHub sync.",
+      "Prototyping a client app in an afternoon",
+      null,
+      "mid",
+      "Developer required",
+      "You own the code",
+      "Generated code needs review before anyone depends on it.",
+      "",
+    ],
+    [
+      "Bolt.new",
+      ["ai", "dev"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "In-browser AI dev environment that builds and deploys real applications.",
+      "Throwaway prototypes you may keep",
+      null,
+      "mid",
+      "Developer required",
+      "You own the code",
+      "Prototype quality. Do not ship to a client without a rewrite pass.",
+      "",
+    ],
+    [
+      "v0",
+      ["ai", "dev"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "Vercel's AI UI generator; outputs React and shadcn components.",
+      "Scaffolding components for a Next.js build",
+      null,
+      "mid",
+      "Developer required",
+      "You own the code",
+      "Components, not a site. It presumes a Next.js project around it.",
+      "",
+    ],
+    [
+      "Replit",
+      ["ai", "dev"],
+      "Dev platform",
+      "Code",
+      "active",
+      "AI-assisted cloud IDE with hosting; the Agent builds whole apps.",
+      "Coding from a phone or a borrowed machine",
+      null,
+      "mid",
+      "Developer required",
+      "You own the code",
+      "Hosting and performance are fine for demos, thin for production.",
+      "",
+    ],
+    [
+      "Anything",
+      ["ai", "dev"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "Prompt-to-app builder. Rebranded from Create.xyz.",
+      "Non-developers shipping a working tool",
+      null,
+      "mid",
+      "Client, once trained",
+      "Locked in",
+      "Young product, and the rebrand from Create.xyz is recent.",
+      "",
+    ],
+    [
+      "Leap.new",
+      ["ai", "dev"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "AI that ships backends and infrastructure to AWS or GCP, not just pages.",
+      "Backend scaffolding, not marketing sites",
+      null,
+      "mid",
+      "Developer required",
+      "You own the code",
+      "Infrastructure output means cloud bills the client did not expect.",
+      "",
+    ],
+    [
+      "Manus",
+      ["ai"],
+      "Hosted",
+      "No-code",
+      "active",
+      "A general AI agent that can produce and deploy a site as one of many task types.",
+      "Errands where the site is a by-product",
+      null,
+      "mid",
+      "You maintain",
+      "Content exports only",
+      "Sites are a side effect, not the product focus.",
+      "",
+    ],
+    [
+      "CodeDesign.ai",
+      ["ai", "gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "AI builder that will export the code it generates.",
+      "Starting from AI, finishing by hand",
+      null,
+      "low",
+      "Client alone",
+      "Exports to code",
+      "Export quality varies. Treat it as a starting point.",
+      "",
+    ],
+    [
+      "Kleap",
+      ["ai", "gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Mobile-first AI builder.",
+      "Sites designed for phone traffic first",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Mobile-first also means desktop-thin.",
+      "",
+    ],
+    [
+      "Butternut AI",
+      ["ai", "gen", "niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "AI site and portfolio generation, now with agent features.",
+      "Fast personal and portfolio sites",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Template-flavored output.",
+      "",
+    ],
+    [
+      "Pineapple Builder",
+      ["ai", "gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "AI builder with SEO content generation attached.",
+      "Content-led small business sites",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "AI copy still needs an editor before it goes live.",
+      "",
+    ],
+    [
+      "Mixo",
+      ["ai", "land"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Generates a landing page and waitlist from a single sentence.",
+      "Validating an idea before building anything",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "A validation page. Nothing more, by design.",
+      "",
+    ],
+    [
+      "CodeWP",
+      ["ai", "dev", "cms"],
+      "Dev tool",
+      "Code",
+      "active",
+      "AI trained specifically on WordPress — generates PHP, JS, and plugin code.",
+      "Custom WordPress work, faster",
+      null,
+      "mid",
+      "Developer required",
+      "You own the code",
+      "Generated PHP still needs someone who can read PHP.",
+      "",
+    ],
+    [
+      "Zyro",
+      ["ai", "gen"],
+      "Hosted",
+      "No-code",
+      "absorbed",
+      "Folded into Hostinger Website Builder; all users migrated.",
+      "Use Hostinger instead",
+      null,
+      "low",
+      "Client alone",
+      "Content exports only",
+      "No longer sold.",
+      "",
+    ],
+
+    [
+      "Circle",
+      ["comm"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Modern community platform with courses, events, and paid spaces.",
+      "Paid communities that need to feel premium",
+      null,
+      "high",
+      "Client alone",
+      "Content exports only",
+      "Not a website. They still need a public site in front of it.",
+      "$89–199/mo; 0.5–2% of paid membership revenue",
+    ],
+    [
+      "Mighty Networks",
+      ["comm"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Community, courses, and events with a strong branded mobile app.",
+      "Communities that live on phones",
+      null,
+      "high",
+      "Client alone",
+      "Content exports only",
+      "Their branding stays visible unless you pay well up the plan ladder.",
+      "",
+    ],
+    [
+      "Kajabi",
+      ["comm", "ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Courses, funnels, email, and community in one expensive box.",
+      "Established course businesses consolidating tools",
+      null,
+      "ent",
+      "Client alone",
+      "Content exports only",
+      "Expensive, and the site builder inside it is the weakest part.",
+      "$143–399/mo annual; 0.5–2% on outside gateways",
+    ],
+    [
+      "Teachable",
+      ["comm", "ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Course hosting with payments and simple sales pages.",
+      "A first course with minimal setup",
+      null,
+      "mid",
+      "Client alone",
+      "Content exports only",
+      "Sales page design is limited, and lower plans carry fees.",
+      "",
+    ],
+    [
+      "Thinkific",
+      ["comm", "ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Course platform with more site control than Teachable.",
+      "Course businesses wanting design control",
+      null,
+      "mid",
+      "Client alone",
+      "Content exports only",
+      "The site side is basic. You will still build a front end.",
+      "",
+    ],
+    [
+      "Patreon",
+      ["comm"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Recurring member payments with hosted posts. Not really a website.",
+      "Ongoing creator support, not a site",
+      null,
+      "free",
+      "Client alone",
+      "Locked in",
+      "Patreon owns the member relationship, not your client.",
+      "",
+    ],
+    [
+      "Ko-fi",
+      ["comm", "ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Tips, memberships, and a small shop with unusually low fees.",
+      "Low-volume creator income",
+      null,
+      "free",
+      "Client alone",
+      "Content exports only",
+      "Small scale by design.",
+      "",
+    ],
+    [
+      "Substack",
+      ["comm", "cms"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Newsletter and paid subscriptions with a site attached. You rent the audience relationship.",
+      "Writers starting from zero",
+      null,
+      "free",
+      "Client alone",
+      "Content exports only",
+      "You rent the audience, and custom branding is minimal.",
+      "",
+    ],
+    [
+      "Beehiiv",
+      ["comm", "cms"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Newsletter platform with a real website builder and an ad network.",
+      "Newsletters treated as a business",
+      null,
+      "high",
+      "Client alone",
+      "Content exports only",
+      "Website features stay secondary to the newsletter, and price scales with list size.",
+      "Free to 2,500 subs; $43–96/mo scaling",
+    ],
+    [
+      "Memberstack",
+      ["comm", "dev"],
+      "Dev tool",
+      "Low-code",
+      "active",
+      "Adds auth, gating, and payments to Webflow or a custom front end.",
+      "Gating a Webflow site",
+      null,
+      "mid",
+      "Developer required",
+      "Content exports only",
+      "A second bill and a second failure point on top of the site.",
+      "",
+    ],
+    [
+      "Memberful",
+      ["comm", "dev"],
+      "Dev tool",
+      "Low-code",
+      "active",
+      "Memberships bolted onto WordPress or a custom site. Patreon you own.",
+      "Creators leaving Patreon",
+      null,
+      "mid",
+      "Developer required",
+      "Content exports only",
+      "Needs a site to attach to. Not standalone.",
+      "",
+    ],
+    [
+      "Bettermode",
+      ["comm"],
+      "Hosted",
+      "No-code",
+      "active",
+      "White-label community platform. Formerly Tribe, rebranded in 2022.",
+      "Communities inside a product",
+      null,
+      "high",
+      "Client alone",
+      "Content exports only",
+      "Enterprise-shaped pricing and setup.",
+      "",
+    ],
+    [
+      "Ning",
+      ["comm"],
+      "Hosted",
+      "No-code",
+      "active",
+      "The original hosted social network, still running and still selling plans.",
+      "Legacy networks",
+      null,
+      "mid",
+      "Client alone",
+      "Locked in",
+      "Dated. Only for networks that already live there.",
+      "",
+    ],
+    [
+      "BuddyBoss",
+      ["comm"],
+      "WordPress plugin",
+      "Low-code",
+      "active",
+      "Turns WordPress into a social network and LMS.",
+      "Owning your community stack on WordPress",
+      null,
+      "high",
+      "Developer required",
+      "You own the code",
+      "Heavy on WordPress. Performance and update management become real ongoing work.",
+      "",
+    ],
+    [
+      "WildApricot",
+      ["comm", "niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Membership association management — dues, events, directory, and a site.",
+      "Nonprofits and professional associations",
+      null,
+      "high",
+      "Client alone",
+      "Content exports only",
+      "The website module is the weakest part of the product.",
+      "",
+    ],
+    [
+      "Glide",
+      ["comm", "edit", "dev"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Turns spreadsheets and databases into working apps quickly.",
+      "Internal tools and simple client apps",
+      null,
+      "mid",
+      "Client, once trained",
+      "Locked in",
+      "Per-user pricing climbs fast, and it is not for public-facing sites.",
+      "",
+    ],
+
+    [
+      "GitHub Pages",
+      ["dev"],
+      "Dev platform",
+      "Code",
+      "active",
+      "Free static hosting straight from a repository.",
+      "Docs, demos, and portfolio sites at zero cost",
+      null,
+      "free",
+      "Developer required",
+      "You own the code",
+      "Static only. No forms, no server logic, no CMS.",
+      "",
+    ],
+    [
+      "GitLab Pages",
+      ["dev"],
+      "Dev platform",
+      "Code",
+      "active",
+      "Static hosting driven by GitLab CI.",
+      "Teams already on GitLab",
+      null,
+      "free",
+      "Developer required",
+      "You own the code",
+      "Same static limits, plus CI setup.",
+      "",
+    ],
+    [
+      "Netlify",
+      ["dev"],
+      "Dev platform",
+      "Code",
+      "active",
+      "Static and edge hosting with forms, functions, and deploy previews.",
+      "Static sites needing forms without a backend",
+      null,
+      "low",
+      "Developer required",
+      "You own the code",
+      "Credit metering can surprise you on a traffic spike.",
+      "Free tier hard-capped; $9/member/mo to $20/mo Pro",
+    ],
+    [
+      "Vercel",
+      ["dev"],
+      "Dev platform",
+      "Code",
+      "active",
+      "The Next.js host: preview deploys, edge functions, analytics.",
+      "Where a custom Next.js build should live",
+      "stack",
+      "mid",
+      "Developer required",
+      "You own the code",
+      "Hobby is non-commercial, so client work must sit on Pro, and usage overages are real.",
+      "Free Hobby (non-commercial); Pro $20/seat/mo + usage",
+    ],
+    [
+      "Cloudflare Pages",
+      ["dev"],
+      "Dev platform",
+      "Code",
+      "active",
+      "Static and Workers hosting on Cloudflare's edge with a generous free tier.",
+      "Global performance on a small budget",
+      null,
+      "free",
+      "Developer required",
+      "You own the code",
+      "Workers has its own learning curve for anything dynamic.",
+      "",
+    ],
+    [
+      "Render",
+      ["dev"],
+      "Dev platform",
+      "Code",
+      "active",
+      "Managed hosting for static sites, services, cron jobs, and databases.",
+      "Apps needing a server, not just a CDN",
+      null,
+      "low",
+      "Developer required",
+      "You own the code",
+      "The free tier sleeps, and paid tiers add up once databases are involved.",
+      "",
+    ],
+    [
+      "Firebase Hosting",
+      ["dev"],
+      "Dev platform",
+      "Code",
+      "active",
+      "Google's static hosting with auth and Firestore alongside it.",
+      "Prototypes needing auth and a database fast",
+      null,
+      "free",
+      "Developer required",
+      "You own the code",
+      "Costs scale with reads and writes, not page views. Easy to misprice.",
+      "",
+    ],
+    [
+      "AWS Amplify",
+      ["dev"],
+      "Dev platform",
+      "Code",
+      "active",
+      "AWS front-end hosting with backend scaffolding.",
+      "Clients already committed to AWS",
+      null,
+      "low",
+      "Developer required",
+      "You own the code",
+      "AWS billing complexity is the real cost.",
+      "",
+    ],
+    [
+      "Deno Deploy",
+      ["dev"],
+      "Dev platform",
+      "Code",
+      "active",
+      "Edge runtime for Deno and modern JavaScript.",
+      "Edge functions in TypeScript",
+      null,
+      "free",
+      "Developer required",
+      "You own the code",
+      "Smaller ecosystem than Node.",
+      "",
+    ],
+    [
+      "Surge",
+      ["dev"],
+      "Dev platform",
+      "Code",
+      "active",
+      "One command from the terminal and a static site is live.",
+      "Throwaway staging links",
+      null,
+      "free",
+      "Developer required",
+      "You own the code",
+      "Bare-bones. No build pipeline and no previews.",
+      "",
+    ],
+    [
+      "Neocities",
+      ["dev", "niche"],
+      "Hosted",
+      "Code",
+      "active",
+      "Hand-coded personal sites in the spirit of GeoCities.",
+      "Personal, weird, non-commercial web",
+      null,
+      "free",
+      "Developer required",
+      "You own the code",
+      "Not a commercial platform. Never for client work.",
+      "",
+    ],
+    [
+      "Jekyll",
+      ["dev"],
+      "Framework",
+      "Code",
+      "active",
+      "Ruby static generator; what GitHub Pages runs natively.",
+      "Simple blogs hosted free on GitHub",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Ruby toolchain and slow builds at scale.",
+      "",
+    ],
+    [
+      "Hugo",
+      ["dev"],
+      "Framework",
+      "Code",
+      "active",
+      "Extremely fast Go static generator.",
+      "Large content sites that must build in seconds",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Unfriendly templating, and client editing needs a CMS bolted on.",
+      "",
+    ],
+    [
+      "Eleventy",
+      ["dev"],
+      "Framework",
+      "Code",
+      "active",
+      "Flexible JS static generator with no framework opinions.",
+      "Static sites without a JS framework",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "No conventions means you make every decision yourself.",
+      "",
+    ],
+    [
+      "Astro",
+      ["dev"],
+      "Framework",
+      "Code",
+      "active",
+      "Content-first framework that ships almost no JavaScript by default.",
+      "Fast marketing and content sites in 2026",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Client editing requires a CMS choice on top. Not turnkey.",
+      "",
+    ],
+    [
+      "Gatsby",
+      ["dev"],
+      "Framework",
+      "Code",
+      "legacy",
+      "Last release February 2025; Gatsby Cloud shut down in 2023. Do not start here.",
+      "Maintaining existing sites only",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Effectively unmaintained. A migration target, not a build target.",
+      "",
+    ],
+    [
+      "Nuxt",
+      ["dev"],
+      "Framework",
+      "Code",
+      "active",
+      "The Vue meta-framework; Nuxt Content handles markdown-driven sites.",
+      "Vue teams building content sites",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Vue talent is thinner than React talent in the US market.",
+      "",
+    ],
+    [
+      "Next.js",
+      ["dev"],
+      "Framework",
+      "Code",
+      "active",
+      "The React standard: routing, server components, and the Vercel pipeline.",
+      "Custom apps and the Phase 2 site",
+      "stack",
+      "host",
+      "Developer required",
+      "You own the code",
+      "You become the maintainer permanently. Only price this when a retainer covers it.",
+      "",
+    ],
+    [
+      "SvelteKit",
+      ["dev"],
+      "Framework",
+      "Code",
+      "active",
+      "Svelte's full-stack framework. Small bundles, clean developer experience.",
+      "Performance-critical custom builds",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "The smallest talent pool of the three major frameworks.",
+      "",
+    ],
+    [
+      "React Router v7",
+      ["dev"],
+      "Framework",
+      "Code",
+      "active",
+      "Remix v2 merged into React Router v7. The Remix name now belongs to a separate non-React framework.",
+      "React apps needing real routing and data loading",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "The naming history confuses clients and contractors alike.",
+      "",
+    ],
+    [
+      "Docusaurus",
+      ["dev"],
+      "Framework",
+      "Code",
+      "active",
+      "Documentation sites with versioning and search out of the box.",
+      "Product and API documentation",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Docs-shaped. Marketing pages fight it.",
+      "",
+    ],
+    [
+      "MkDocs",
+      ["dev"],
+      "Framework",
+      "Code",
+      "active",
+      "Python documentation generator; the Material theme is the default choice.",
+      "Internal technical docs",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Markdown only. No visual editing for clients.",
+      "",
+    ],
+    [
+      "VitePress",
+      ["dev"],
+      "Framework",
+      "Code",
+      "active",
+      "Vite-powered documentation and content sites.",
+      "Fast, minimal docs",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Docs-shaped with a small theme ecosystem.",
+      "",
+    ],
+    [
+      "Hexo",
+      ["dev"],
+      "Framework",
+      "Code",
+      "active",
+      "Node blog generator, widely used across Asia.",
+      "Personal blogs",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "English documentation is patchy.",
+      "",
+    ],
+    [
+      "Pelican",
+      ["dev"],
+      "Framework",
+      "Code",
+      "active",
+      "Python static site generator.",
+      "Python teams publishing content",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Small community.",
+      "",
+    ],
+    [
+      "Middleman",
+      ["dev"],
+      "Framework",
+      "Code",
+      "active",
+      "Ruby static generator for hand-built sites.",
+      "Ruby shops with legacy static sites",
+      null,
+      "host",
+      "Developer required",
+      "You own the code",
+      "Declining usage and a Ruby dependency.",
+      "",
+    ],
+
+    [
+      "Linktree",
+      ["niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "The default link-in-bio page. Recognizable, limited, everywhere.",
+      "A link page nobody has to explain",
+      null,
+      "free",
+      "Client alone",
+      "Locked in",
+      "Everyone recognizes it, which is exactly the branding problem.",
+      "",
+    ],
+    [
+      "Beacons",
+      ["niche", "ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Link-in-bio with a store, media kit, and email list attached.",
+      "Creators pitching brands",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Creator-shaped. Not for a company.",
+      "",
+    ],
+    [
+      "Later Link in Bio",
+      ["niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Shoppable link page tied to Later's social scheduler.",
+      "Clients already scheduling in Later",
+      null,
+      "mid",
+      "Client alone",
+      "Locked in",
+      "Only worth it inside a Later subscription.",
+      "",
+    ],
+    [
+      "Campsite",
+      ["niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Link-in-bio with usable analytics.",
+      "Measuring what the bio link actually does",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Narrow feature set.",
+      "",
+    ],
+    [
+      "Taplink",
+      ["niche", "ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Link page with payments and forms built in.",
+      "Taking bookings from a bio link",
+      null,
+      "low",
+      "Client alone",
+      "Locked in",
+      "Cheap, and it shows.",
+      "",
+    ],
+    [
+      "Milkshake",
+      ["niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Build a small link site entirely from your phone.",
+      "Clients who only work from mobile",
+      null,
+      "free",
+      "Client alone",
+      "Locked in",
+      "Phone-only editing. No desktop control.",
+      "",
+    ],
+    [
+      "Linkpop",
+      ["niche"],
+      "Hosted",
+      "No-code",
+      "retired",
+      "Shopify shut it down on 7 July 2025.",
+      "Nothing — move to Beacons or Linktree",
+      null,
+      "free",
+      "Client alone",
+      "Locked in",
+      "Shut down July 2025.",
+      "",
+    ],
+    [
+      "Bio Sites",
+      ["niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Squarespace's link-in-bio product.",
+      "Squarespace clients adding a bio link",
+      null,
+      "free",
+      "Client alone",
+      "Locked in",
+      "A feeder product for Squarespace.",
+      "",
+    ],
+    [
+      "Google Business Profile websites",
+      ["niche"],
+      "Hosted",
+      "No-code",
+      "retired",
+      "Shut down March 2024; the pages now redirect to the listing. A dead URL if a client still cites one.",
+      "Nothing — the listing itself is what remains",
+      null,
+      "free",
+      "Client alone",
+      "Locked in",
+      "Dead since March 2024.",
+      "",
+    ],
+    [
+      "Zillow Websites",
+      ["niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Agent websites tied to Zillow's lead products.",
+      "Real estate agents buying Zillow leads",
+      null,
+      "high",
+      "Client alone",
+      "Locked in",
+      "Renting an agent site attached to a lead product they do not control.",
+      "",
+    ],
+    [
+      "Lodgify",
+      ["niche", "ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Vacation rental sites with direct booking and channel sync.",
+      "Owners escaping OTA commission",
+      null,
+      "high",
+      "Client alone",
+      "Content exports only",
+      "Only pays off if direct bookings actually replace OTA volume.",
+      "",
+    ],
+    [
+      "Guesty",
+      ["niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Short-term rental management with a booking site attached.",
+      "Multi-property rental operators",
+      null,
+      "ent",
+      "Client alone",
+      "Locked in",
+      "Priced for portfolios, not one property.",
+      "",
+    ],
+    [
+      "Showit",
+      ["niche", "gen"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Free-canvas design paired with a WordPress blog. Photographer favorite.",
+      "Photographers and wedding vendors",
+      null,
+      "mid",
+      "Client alone",
+      "Content exports only",
+      "Design freedom with weak structure and SEO, and blog pricing scales with traffic.",
+      "$27–149/mo; annual $326–1,430/yr",
+    ],
+    [
+      "PhotoShelter",
+      ["niche", "ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Photo archive, licensing, and sales for working photographers.",
+      "Photographers licensing their library",
+      null,
+      "high",
+      "Client alone",
+      "Content exports only",
+      "Archive-first. The public site is secondary.",
+      "",
+    ],
+    [
+      "Bandzoogle",
+      ["niche", "ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Musician sites with commission-free music and merch sales.",
+      "Artists selling directly to fans",
+      null,
+      "low",
+      "Client alone",
+      "Content exports only",
+      "Music-shaped templates with limited range outside that world.",
+      "",
+    ],
+    [
+      "MinistryPlatform",
+      ["niche"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "Church management database with connected web tools.",
+      "Large churches with real data needs",
+      null,
+      "ent",
+      "Developer required",
+      "Content exports only",
+      "Database first. The website is an add-on.",
+      "",
+    ],
+    [
+      "ChurchSpring",
+      ["niche"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Church website builder with ministry-specific templates.",
+      "Small congregations",
+      null,
+      "mid",
+      "Client alone",
+      "Locked in",
+      "Template-bound.",
+      "",
+    ],
+    [
+      "Brilliant Directories",
+      ["niche", "comm"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Directory and membership sites with paid listings.",
+      "Associations charging for placement",
+      null,
+      "high",
+      "Client, once trained",
+      "Content exports only",
+      "Directory logic is rigid and customization gets expensive.",
+      "",
+    ],
+    [
+      "Sharetribe",
+      ["niche", "ecom"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "Marketplace platform with a no-code tier and a developer edition.",
+      "Two-sided marketplaces without a dev team",
+      null,
+      "high",
+      "Client, once trained",
+      "You own the code",
+      "The no-code tier is genuinely limited. Real marketplaces need the developer edition and a developer.",
+      "$39/mo Build (dev only) to $299/mo Extend; ~$0.19/transaction over allowance",
+    ],
+    [
+      "Arcadier",
+      ["niche", "ecom"],
+      "Hosted",
+      "Low-code",
+      "active",
+      "Marketplace builder with its own extension marketplace.",
+      "Niche B2B marketplaces",
+      null,
+      "high",
+      "Developer required",
+      "Content exports only",
+      "Extension quality is uneven.",
+      "",
+    ],
+    [
+      "Yclas",
+      ["niche", "ecom"],
+      "Hosted",
+      "No-code",
+      "active",
+      "Classifieds site builder.",
+      "Local listings and classifieds",
+      null,
+      "low",
+      "Client alone",
+      "Content exports only",
+      "A dated classifieds model.",
+      "",
+    ],
+    [
+      "Dokan",
+      ["niche", "ecom"],
+      "WordPress plugin",
+      "Low-code",
+      "active",
+      "Turns WooCommerce into a multi-vendor marketplace.",
+      "Marketplaces on WordPress",
+      null,
+      "mid",
+      "Developer required",
+      "You own the code",
+      "Multi-vendor on WooCommerce compounds every WooCommerce maintenance problem.",
+      "",
+    ],
+    [
+      "Mirakl",
+      ["niche", "ecom"],
+      "Enterprise",
+      "Code",
+      "active",
+      "Enterprise marketplace platform for large retailers.",
+      "Retailers adding third-party sellers",
+      null,
+      "ent",
+      "Developer required",
+      "Content exports only",
+      "Enterprise contracts only. Not a freelance-scale platform.",
+      "",
+    ],
+  ];
+
+  const items = D.map(function (r) {
+    return {
+      n: r[0],
+      c: r[1],
+      t: r[2],
+      k: r[3],
+      s: r[4],
+      d: r[5],
+      b: r[6],
+      f: r[7],
+      p: r[8],
+      e: r[9],
+      o: r[10],
+      x: r[11],
+      pd: r[12],
+      hay: (
+        r[0] +
+        " " +
+        r[5] +
+        " " +
+        r[6] +
+        " " +
+        r[11] +
+        " " +
+        r[2] +
+        " " +
+        r[3] +
+        " " +
+        r[9] +
+        " " +
+        r[10] +
+        " " +
+        r[1]
+          .map(function (y) {
+            return CAT[y];
+          })
+          .join(" ")
+      ).toLowerCase(),
+    };
+  });
+
+  /* ---------- finalist comparison ---------- */
+  const CMP = [
+    [
+      "Wix Studio",
+      "$19–159/mo",
+      "Client, once trained",
+      "Locked in — no export",
+      "Built in",
+      "Low",
+      "They need real custom logic or a second developer",
+    ],
+    [
+      "Squarespace",
+      "Mid tier + 0–2% store fee",
+      "Client alone",
+      "Content only",
+      "Built in",
+      "Low",
+      "The template stops matching what they need to say",
+    ],
+    [
+      "Webflow",
+      "$15–25/mo site plans",
+      "Client, once trained",
+      "Exports to code",
+      "$29–212/mo",
+      "Medium",
+      "Content passes a few hundred items",
+    ],
+    [
+      "Framer",
+      "$10–30/mo",
+      "Client, once trained",
+      "Locked in — no export",
+      "Light",
+      "Low",
+      "They need a real content library or a store",
+    ],
+    [
+      "WordPress + Bricks",
+      "Hosting + license",
+      "Client, once trained",
+      "You own the code",
+      "WooCommerce",
+      "Medium",
+      "Never — but someone must own maintenance forever",
+    ],
+    [
+      "Shopify",
+      "$29–299/mo",
+      "Client alone",
+      "Content only",
+      "The point",
+      "Medium",
+      "They need checkout control, which means Plus",
+    ],
+    [
+      "Duda",
+      "$19–149/mo",
+      "Client alone",
+      "Content only",
+      "Add-on",
+      "Low",
+      "They want a design that does not look like a template",
+    ],
+    [
+      "Carrd",
+      "About $19/yr",
+      "Client alone",
+      "Locked in",
+      "No",
+      "Very low",
+      "They need a second page",
+    ],
+    [
+      "Softr",
+      "$19–329/mo",
+      "Client, once trained",
+      "Locked in",
+      "Via Stripe",
+      "Medium",
+      "User counts or records make the bill hurt",
+    ],
+    [
+      "Next.js on Vercel",
+      "$20/seat/mo + usage",
+      "Developer required",
+      "You own the code",
+      "Build it",
+      "High",
+      "Never — it is the ceiling, and the floor is your retainer",
+    ],
+  ];
+
+  const CMPMARK = {
+    "Built in": "yes",
+    "The point": "yes",
+    WooCommerce: "yes",
+    "$29–212/mo": "part",
+    "Add-on": "part",
+    Light: "part",
+    "Via Stripe": "part",
+    "Build it": "part",
+    No: "no",
+  };
+
+  const tb = document.getElementById("cmp");
+  CMP.forEach(function (r) {
+    const tr = document.createElement("tr");
+    const mark = CMPMARK[r[4]] || "";
+    tr.innerHTML =
+      '<td class="pf">' +
+      r[0] +
+      "</td>" +
+      '<td class="num">' +
+      r[1] +
+      "</td>" +
+      "<td>" +
+      r[2] +
+      "</td>" +
+      "<td>" +
+      r[3] +
+      "</td>" +
+      '<td class="' +
+      mark +
+      '">' +
+      r[4] +
+      "</td>" +
+      '<td class="num">' +
+      r[5] +
+      "</td>" +
+      '<td class="dim">' +
+      r[6] +
+      "</td>";
+    tb.appendChild(tr);
+  });
+
+  /* ---------- index ---------- */
+  const SHORT = [
+    "Wix Studio",
+    "Webflow",
+    "Framer",
+    "Squarespace",
+    "WordPress.org",
+    "Shopify",
+    "Duda",
+    "Carrd",
+    "HubSpot Content Hub",
+    "Hostinger Website Builder",
+  ];
+  const state = {
+    q: "",
+    cats: new Set(),
+    stack: false,
+    nocode: false,
+    selfrun: false,
+    owns: false,
+    hideDead: false,
+  };
+
+  const grid = document.getElementById("grid");
+  const countEl = document.getElementById("count");
+  const clearBtn = document.getElementById("clear");
+  document.getElementById("total").textContent = items.length;
+
+  const catBar = document.getElementById("cats");
+  Object.keys(CAT).forEach(function (key) {
+    const b = document.createElement("button");
+    b.className = "chip";
+    b.type = "button";
+    b.setAttribute("aria-pressed", "false");
+    const num = items.filter(function (i) {
+      return i.c.indexOf(key) > -1;
+    }).length;
+    b.innerHTML = CAT[key] + ' <span class="ct">' + num + "</span>";
+    b.addEventListener("click", function () {
+      if (state.cats.has(key)) {
+        state.cats.delete(key);
+      } else {
+        state.cats.add(key);
+      }
+      b.setAttribute("aria-pressed", state.cats.has(key) ? "true" : "false");
+      render();
+    });
+    catBar.appendChild(b);
+  });
+
+  const TOGGLES = [
+    {
+      id: "stack",
+      label: "In your stack",
+      cls: "mk",
+      test: function (i) {
+        return i.f === "stack";
+      },
+    },
+    {
+      id: "nocode",
+      label: "No-code only",
+      cls: "",
+      test: function (i) {
+        return i.k === "No-code";
+      },
+    },
+    {
+      id: "selfrun",
+      label: "Client can run it alone",
+      cls: "",
+      test: function (i) {
+        return i.e === "Client alone";
+      },
+    },
+    {
+      id: "owns",
+      label: "Client keeps the code",
+      cls: "",
+      test: function (i) {
+        return i.o === "You own the code" || i.o === "Exports to code";
+      },
+    },
+    {
+      id: "hideDead",
+      label: "Hide legacy & retired",
+      cls: "",
+      test: function (i) {
+        return i.s !== "active";
+      },
+    },
+  ];
+  const filterBar = document.getElementById("filters");
+  TOGGLES.forEach(function (t) {
+    const b = document.createElement("button");
+    b.className = "chip " + t.cls;
+    b.type = "button";
+    b.setAttribute("aria-pressed", "false");
+    b.innerHTML =
+      t.label + ' <span class="ct">' + items.filter(t.test).length + "</span>";
+    b.addEventListener("click", function () {
+      state[t.id] = !state[t.id];
+      b.setAttribute("aria-pressed", state[t.id] ? "true" : "false");
+      render();
+    });
+    filterBar.appendChild(b);
+  });
+
+  const slEl = document.getElementById("shortlist");
+  SHORT.forEach(function (name) {
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = name;
+    b.addEventListener("click", function () {
+      document.getElementById("q").value = name;
+      state.q = name.toLowerCase();
+      resetChips();
+      render();
+      document
+        .querySelector(".controls")
+        .scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    li.appendChild(b);
+    slEl.appendChild(li);
+  });
+
+  function resetChips() {
+    state.cats.clear();
+    state.stack = false;
+    state.nocode = false;
+    state.selfrun = false;
+    state.owns = false;
+    state.hideDead = false;
+    document.querySelectorAll(".chip").forEach(function (c) {
+      c.setAttribute("aria-pressed", "false");
+    });
+  }
+
+  document.getElementById("q").addEventListener("input", function (e) {
+    state.q = e.target.value.trim().toLowerCase();
+    render();
+  });
+  clearBtn.addEventListener("click", function () {
+    document.getElementById("q").value = "";
+    state.q = "";
+    resetChips();
+    render();
+    document.getElementById("q").focus();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "/" && document.activeElement.tagName !== "INPUT") {
+      e.preventDefault();
+      document.getElementById("q").focus();
+    }
+  });
+
+  const STATUS_LABEL = {
+    active: "Active",
+    legacy: "Legacy",
+    absorbed: "Absorbed",
+    retired: "Retired",
+  };
+
+  function card(i) {
+    const el = document.createElement("article");
+    el.className = "card s-" + i.s;
+    const flag =
+      i.f === "stack"
+        ? '<span class="flag stack">Your stack</span>'
+        : i.f === "first"
+          ? '<span class="flag first">Shortlist</span>'
+          : "";
+    const cost = i.pd ? i.pd : BAND[i.p];
+    el.innerHTML =
+      '<div class="card-top"><h3 class="name">' +
+      i.n +
+      "</h3>" +
+      flag +
+      "</div>" +
+      '<p class="desc">' +
+      i.d +
+      "</p>" +
+      '<dl class="spec">' +
+      "<div><dt>Cost</dt><dd" +
+      (i.pd ? ' class="v"' : "") +
+      ">" +
+      cost +
+      "</dd></div>" +
+      "<div><dt>Who edits it</dt><dd>" +
+      i.e +
+      "</dd></div>" +
+      "<div><dt>Exit path</dt><dd>" +
+      i.o +
+      "</dd></div>" +
+      "</dl>" +
+      '<p class="bestfor"><span>Best for</span>' +
+      i.b +
+      "</p>" +
+      '<p class="ceiling"><span>Ceiling</span>' +
+      i.x +
+      "</p>" +
+      '<div class="meta">' +
+      '<span class="tag st ' +
+      i.s +
+      '">' +
+      STATUS_LABEL[i.s] +
+      "</span>" +
+      '<span class="tag">' +
+      i.t +
+      "</span>" +
+      '<span class="tag k">' +
+      i.k +
+      "</span>" +
+      '<span class="tag">' +
+      BAND[i.p] +
+      "</span>" +
+      i.c
+        .map(function (c) {
+          return '<span class="tag">' + CAT[c] + "</span>";
+        })
+        .join("") +
+      "</div>";
+    return el;
+  }
+
+  function render() {
+    const out = items.filter(function (i) {
+      if (state.q && i.hay.indexOf(state.q) === -1) return false;
+      if (state.cats.size) {
+        let hit = false;
+        state.cats.forEach(function (c) {
+          if (i.c.indexOf(c) > -1) hit = true;
+        });
+        if (!hit) return false;
+      }
+      if (state.stack && i.f !== "stack") return false;
+      if (state.nocode && i.k !== "No-code") return false;
+      if (state.selfrun && i.e !== "Client alone") return false;
+      if (
+        state.owns &&
+        !(i.o === "You own the code" || i.o === "Exports to code")
+      )
+        return false;
+      if (state.hideDead && i.s !== "active") return false;
+      return true;
+    });
+
+    grid.innerHTML = "";
+    if (!out.length) {
+      const e = document.createElement("div");
+      e.className = "empty";
+      e.innerHTML =
+        "<strong>Nothing matches that</strong>Try a broader term, or reset the filters and search by what the site needs to do.";
+      grid.appendChild(e);
+    } else {
+      const frag = document.createDocumentFragment();
+      out.forEach(function (i) {
+        frag.appendChild(card(i));
+      });
+      grid.appendChild(frag);
+    }
+    countEl.textContent = out.length + " of " + items.length + " shown";
+    clearBtn.hidden = !(
+      state.q ||
+      state.cats.size ||
+      state.stack ||
+      state.nocode ||
+      state.selfrun ||
+      state.owns ||
+      state.hideDead
+    );
+  }
+
+  render();
+</script>
