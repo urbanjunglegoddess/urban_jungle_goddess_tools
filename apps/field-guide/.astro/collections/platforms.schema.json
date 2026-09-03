@@ -1,0 +1,504 @@
+{
+  "$ref": "#/definitions/platforms",
+  "definitions": {
+    "platforms": {
+      "type": "object",
+      "properties": {
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "errorMessage": {
+            "pattern": "slug is lowercase, digits and hyphens"
+          }
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "officialUrl": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uri"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "owner": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "gen",
+              "ecom",
+              "cms",
+              "edit",
+              "land",
+              "ai",
+              "comm",
+              "dev",
+              "niche"
+            ]
+          },
+          "minItems": 1
+        },
+        "hostingType": {
+          "type": "string",
+          "enum": [
+            "Hosted",
+            "Self-hosted",
+            "Managed hosting",
+            "WordPress core",
+            "WordPress plugin",
+            "WordPress theme",
+            "Framework",
+            "Dev platform",
+            "Dev tool",
+            "Design tool",
+            "Desktop",
+            "Enterprise"
+          ]
+        },
+        "skillLevel": {
+          "type": "string",
+          "enum": [
+            "No-code",
+            "Low-code",
+            "Code"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "legacy",
+            "absorbed",
+            "retired"
+          ]
+        },
+        "statusEvidence": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "statusSourceUrl": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/platforms/properties/officialUrl/anyOf/0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "statusCheckedOn": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "errorMessage": {
+                "pattern": "dates are YYYY-MM-DD"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "costBand": {
+          "type": "string",
+          "enum": [
+            "free",
+            "low",
+            "mid",
+            "high",
+            "ent",
+            "host"
+          ]
+        },
+        "plans": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "monthlyUsd": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null
+              },
+              "annualUsd": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null
+              },
+              "notes": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "default": null
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "fees": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "transaction",
+                  "processing",
+                  "gateway surcharge",
+                  "revenue share",
+                  "listing",
+                  "other"
+                ]
+              },
+              "rate": {
+                "type": "string",
+                "minLength": 1
+              },
+              "appliesTo": {
+                "type": "string",
+                "minLength": 1
+              },
+              "notes": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "default": null
+              }
+            },
+            "required": [
+              "kind",
+              "rate",
+              "appliesTo"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "pricingSourceUrl": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/platforms/properties/officialUrl/anyOf/0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "pricingCheckedOn": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/platforms/properties/statusCheckedOn/anyOf/0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "pricingConfidence": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "high",
+                "medium",
+                "low"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "verifiedPriceNote": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "bestFor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notFor": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "whoEditsIt": {
+          "type": "string",
+          "enum": [
+            "Client alone",
+            "Client, once trained",
+            "You maintain",
+            "Developer required"
+          ]
+        },
+        "exitPath": {
+          "type": "string",
+          "enum": [
+            "Locked in",
+            "Content exports only",
+            "Exports to code",
+            "You own the code"
+          ]
+        },
+        "exportDetail": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "ceiling": {
+          "type": "string",
+          "minLength": 1
+        },
+        "outgrowSignals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "strengths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "limits": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "keyIntegrations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "seoNotes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "performanceNotes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "accessibilityNotes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "migrationIn": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "difficulty": {
+                  "type": "string",
+                  "enum": [
+                    "trivial",
+                    "easy",
+                    "moderate",
+                    "hard",
+                    "rebuild"
+                  ]
+                },
+                "steps": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "default": []
+                },
+                "notes": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "default": null
+                }
+              },
+              "required": [
+                "difficulty"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "migrationOut": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/platforms/properties/migrationIn/anyOf/0"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "slug": {
+                "type": "string",
+                "minLength": 1
+              },
+              "insteadWhen": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "slug",
+              "insteadWhen"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "buildNotes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "inUjgStack": {
+          "type": "boolean",
+          "default": false
+        },
+        "shortlist": {
+          "type": "boolean",
+          "default": false
+        },
+        "redFlags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "proposalLine": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "depth": {
+          "type": "string",
+          "enum": [
+            "full",
+            "standard",
+            "stub"
+          ]
+        },
+        "lastReviewed": {
+          "$ref": "#/definitions/platforms/properties/statusCheckedOn/anyOf/0"
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "slug",
+        "name",
+        "categories",
+        "hostingType",
+        "skillLevel",
+        "status",
+        "costBand",
+        "bestFor",
+        "whoEditsIt",
+        "exitPath",
+        "ceiling",
+        "depth",
+        "lastReviewed",
+        "confidence",
+        "description"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

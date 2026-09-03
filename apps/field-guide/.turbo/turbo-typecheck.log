@@ -1,0 +1,18 @@
+
+> @ujg/field-guide@0.1.0 typecheck C:\Users\Omegea Hunter\OneDrive\Documents\GitHub\urban_jungle_goddess_tools\apps\field-guide
+> astro check
+
+[34m▶ Astro collects anonymous usage data.[39m
+  This information helps us improve Astro.
+  Run "astro telemetry disable" to opt-out.
+  [36m[4mhttps://astro.build/telemetry[24m[39m
+
+[2m06:06:30[22m [34m[content][39m Syncing content
+[2m06:06:31[22m [34m[content][39m Synced content
+[2m06:06:31[22m [34m[types][39m Generated [2m1.85s[22m
+[2m06:06:31[22m [34m[check][39m Getting diagnostics for Astro files in C:\Users\Omegea Hunter\OneDrive\Documents\GitHub\urban_jungle_goddess_tools\apps\field-guide...
+Result (9 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+
