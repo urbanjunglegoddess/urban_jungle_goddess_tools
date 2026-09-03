@@ -90,7 +90,12 @@ a:hover { color: var(--accent-2); }
 @media (min-width: 820px) { .psect.two { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 .fields { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 0; }
-@media (min-width: 720px) { .fields { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 720px) {
+  .fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* An odd number of fields would otherwise leave a dangling half-row of bare
+     grid background. Let the last one run the full width instead. */
+  .fields > .field:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
 
 /* A gap nobody has filled reads as a gap, never as a fact. */
 .undoc { color: var(--ink-3); font-style: italic; }
