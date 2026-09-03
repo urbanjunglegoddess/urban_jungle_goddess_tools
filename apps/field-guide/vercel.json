@@ -5,5 +5,9 @@
   "outputDirectory": "dist",
   "installCommand": "pnpm install --frozen-lockfile",
   "ignoreCommand": "npx turbo-ignore @ujg/field-guide",
-  "github": { "silent": true }
+  "github": { "silent": true },
+
+  "//": "Astro is configured with build.format 'file', so pages are emitted flat as <slug>.html while every internal link is extensionless (/wix-studio). These two make that mapping explicit rather than leaning on a platform default — get it wrong and all 228 platform links 404.",
+  "cleanUrls": true,
+  "trailingSlash": false
 }
