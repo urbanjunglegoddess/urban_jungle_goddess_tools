@@ -106,3 +106,14 @@ Its own Vercel project, Root Directory `apps/field-guide`, with
 "Include files outside the Root Directory" enabled so the pnpm workspace
 resolves. `vercel.json` sets the `turbo-ignore` step, so a commit touching only
 another app does not rebuild this one.
+
+Two settings there are load-bearing. Astro is configured with
+`build.format: "file"`, so pages are emitted flat as `<slug>.html` while every
+internal link is extensionless (`/wix-studio`). `cleanUrls: true` and
+`trailingSlash: false` make that mapping explicit instead of leaning on a
+platform default — get it wrong and all 228 platform links 404 while the index
+still looks perfect.
+
+Note that Vercel validates `vercel.json` against a strict schema and rejects
+any key it does not recognise, including a `//` comment key. Keep notes here,
+not in the file.
