@@ -1,0 +1,55 @@
+---
+import type { Platform } from "../lib/labels";
+import {
+  BAND_LABEL,
+  CATEGORY_LABEL,
+  STATUS_LABEL,
+  costLine,
+  haystack,
+} from "../lib/labels";
+
+interface Props {
+  entry: Platform;
+}
+const { entry } = Astro.props;
+const d = entry.data;
+---
+
+<article
+  class:list={["card", `s-${d.status}`]}
+  data-hay={haystack(d)}
+  data-cats={d.categories.join(" ")}
+  data-skill={d.skillLevel}
+  data-edits={d.whoEditsIt}
+  data-exit={d.exitPath}
+  data-status={d.status}
+  data-stack={d.inUjgStack ? "1" : "0"}
+>
+  <div class="card-top">
+    <h3 class="name"><a href={`/${d.slug}`}>{d.name}</a></h3>
+    {d.inUjgStack && <span class="flag stack">Your stack</span>}
+    {!d.inUjgStack && d.shortlist && <span class="flag first">Shortlist</span>}
+  </div>
+
+  <p class="desc">{d.description}</p>
+
+  <dl class="spec">
+    <div>
+      <dt>Cost</dt>
+      <dd class={d.verifiedPriceNote ? "v" : undefined}>{costLine(d)}</dd>
+    </div>
+    <div><dt>Who edits it</dt><dd>{d.whoEditsIt}</dd></div>
+    <div><dt>Exit path</dt><dd>{d.exitPath}</dd></div>
+  </dl>
+
+  <p class="bestfor"><span>Best for</span>{d.bestFor}</p>
+  <p class="ceiling"><span>Ceiling</span>{d.ceiling}</p>
+
+  <div class="meta">
+    <span class:list={["tag", "st", d.status]}>{STATUS_LABEL[d.status]}</span>
+    <span class="tag">{d.hostingType}</span>
+    <span class="tag k">{d.skillLevel}</span>
+    <span class="tag">{BAND_LABEL[d.costBand]}</span>
+    {d.categories.map((c) => <span class="tag">{CATEGORY_LABEL[c]}</span>)}
+  </div>
+</article>

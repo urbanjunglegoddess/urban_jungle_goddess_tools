@@ -1,0 +1,346 @@
+---
+/**
+ * A page per platform.
+ *
+ * The blueprint rule is enforced here, in the template, not in a comment: the
+ * internal block and the comparison reasoning are wrapped in one element that
+ * the handout view removes. Client-safe content — the proposal line, best for,
+ * cost, and the ceiling — sits outside it.
+ */
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import Field from "../components/Field.astro";
+import {
+  BAND_LABEL,
+  CATEGORY_LABEL,
+  DEPTH_LABEL,
+  STATUS_LABEL,
+  costLine,
+} from "../lib/labels";
+
+export const getStaticPaths = (async () => {
+  const platforms = await getCollection("platforms");
+  const bySlug = new Map(platforms.map((p) => [p.data.slug, p]));
+  return platforms.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: {
+      entry,
+      // Resolved here so the template never has to guess at a broken reference.
+      alternatives: entry.data.alternatives.map((a) => ({
+        ...a,
+        name: bySlug.get(a.slug)?.data.name ?? a.slug,
+        known: bySlug.has(a.slug),
+      })),
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry, alternatives } = Astro.props;
+const d = entry.data;
+
+const stale = (iso: string | null) => {
+  if (!iso) return null;
+  const days = Math.floor((Date.now() - new Date(iso).getTime()) / 86_400_000);
+  return days;
+};
+const pricingAge = stale(d.pricingCheckedOn);
+const statusAge = stale(d.statusCheckedOn);
+const SIX_MONTHS = 183;
+---
+
+<Base title={`${d.name} — Website Platform Field Guide`} description={d.description}>
+  <nav class="crumb"><a href="/">← All platforms</a></nav>
+
+  <article data-pagefind-body>
+    <header class="phead">
+      <div class="phead-top">
+        <h1 data-pagefind-meta="title">{d.name}</h1>
+        <span class:list={["tag", "st", d.status]}>{STATUS_LABEL[d.status]}</span>
+        {/* Her curation, not the client's business — detached by the handout view. */}
+        {d.inUjgStack && <span class="flag stack" data-internal>Your stack</span>}
+        {!d.inUjgStack && d.shortlist && <span class="flag first" data-internal>Shortlist</span>}
+      </div>
+      <p class="standfirst">{d.description}</p>
+
+      <!-- Above the fold: answer a client's question without scrolling. -->
+      <dl class="atop">
+        <div class="field">
+          <dt>Cost</dt>
+          <dd class={d.verifiedPriceNote ? "v" : undefined}>{costLine(d)}</dd>
+        </div>
+        <div class="field"><dt>Who edits it</dt><dd>{d.whoEditsIt}</dd></div>
+        <div class="field"><dt>Exit path</dt><dd>{d.exitPath}</dd></div>
+        <div class="field"><dt>Ceiling</dt><dd>{d.ceiling}</dd></div>
+      </dl>
+    </header>
+
+    <section class="psect">
+      <h2>What it is</h2>
+      <dl class="fields">
+        <Field label="Best for" value={d.bestFor} />
+        <Field label="Not for" value={d.notFor} />
+        <Field label="Hosting" value={d.hostingType} />
+        <Field label="Skill level" value={d.skillLevel} />
+        <Field label="Owner" value={d.owner} />
+        <Field label="Categories" value={d.categories.map((c) => CATEGORY_LABEL[c]).join(" · ")} />
+        <Field label="Cost band" value={BAND_LABEL[d.costBand]} />
+      </dl>
+      {
+        d.officialUrl && (
+          <p>
+            <a href={d.officialUrl} rel="noreferrer noopener">
+              {d.officialUrl}
+            </a>
+          </p>
+        )
+      }
+    </section>
+
+    {
+      (d.strengths.length > 0 || d.limits.length > 0) && (
+        <section class="psect two">
+          <div>
+            <h2>Strengths</h2>
+            {d.strengths.length ? (
+              <ul>{d.strengths.map((s) => <li>{s}</li>)}</ul>
+            ) : (
+              <p class="undoc">Not documented</p>
+            )}
+          </div>
+          <div>
+            <h2>Limits</h2>
+            {d.limits.length ? (
+              <ul>{d.limits.map((s) => <li>{s}</li>)}</ul>
+            ) : (
+              <p class="undoc">Not documented</p>
+            )}
+          </div>
+        </section>
+      )
+    }
+
+    <section class="psect">
+      <h2>Pricing</h2>
+      {
+        d.plans.length > 0 ? (
+          <div class="tablewrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Plan</th>
+                  <th>Monthly</th>
+                  <th>Annual</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {d.plans.map((p) => (
+                  <tr>
+                    <td class="pf">{p.name}</td>
+                    <td class="num">{p.monthlyUsd === null ? "—" : `$${p.monthlyUsd}`}</td>
+                    <td class="num">{p.annualUsd === null ? "—" : `$${p.annualUsd}`}</td>
+                    <td class="dim">{p.notes ?? "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <dl class="fields">
+            <Field label="Figure carried from the original guide" value={d.verifiedPriceNote} />
+          </dl>
+        )
+      }
+
+      {
+        d.fees.length > 0 && (
+          <>
+            <h3>Fees on top of the plan</h3>
+            <ul>
+              {d.fees.map((f) => (
+                <li>
+                  <strong>{f.rate}</strong> {f.kind} on {f.appliesTo}
+                  {f.notes && ` — ${f.notes}`}
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+
+      <p class="prov">
+        {
+          d.pricingSourceUrl ? (
+            <>
+              Source: <a href={d.pricingSourceUrl} rel="noreferrer noopener">vendor pricing page</a>
+              {d.pricingCheckedOn && <> · checked {d.pricingCheckedOn}</>}
+              {d.pricingConfidence && <> · confidence {d.pricingConfidence}</>}
+            </>
+          ) : (
+            <span class="undoc">
+              No pricing source URL recorded. Re-verify against the vendor's own pricing page
+              before quoting this.
+            </span>
+          )
+        }
+        {
+          pricingAge !== null && pricingAge > SIX_MONTHS && (
+            <span class="staleflag">Stale — checked {pricingAge} days ago</span>
+          )
+        }
+      </p>
+    </section>
+
+    <section class="psect">
+      <h2>Status</h2>
+      <dl class="fields">
+        <Field label="Status" value={STATUS_LABEL[d.status]} />
+        <Field label="Evidence" value={d.statusEvidence} />
+      </dl>
+      <p class="prov">
+        {
+          d.statusSourceUrl ? (
+            <>
+              Source: <a href={d.statusSourceUrl} rel="noreferrer noopener">link</a>
+              {d.statusCheckedOn && <> · checked {d.statusCheckedOn}</>}
+            </>
+          ) : (
+            <span class="undoc">No status source URL recorded.</span>
+          )
+        }
+        {
+          statusAge !== null && statusAge > SIX_MONTHS && (
+            <span class="staleflag">Stale — checked {statusAge} days ago</span>
+          )
+        }
+      </p>
+    </section>
+
+    <section class="psect">
+      <h2>Running it</h2>
+      <dl class="fields">
+        <Field label="What comes out if they leave" value={d.exportDetail} />
+        <Field label="SEO" value={d.seoNotes} />
+        <Field label="Performance" value={d.performanceNotes} />
+        <Field label="Accessibility" value={d.accessibilityNotes} />
+        <Field
+          label="Key integrations"
+          value={d.keyIntegrations.length ? d.keyIntegrations.join(" · ") : null}
+        />
+      </dl>
+    </section>
+
+    <section class="psect two">
+      <div>
+        <h2>Migration in</h2>
+        {
+          d.migrationIn ? (
+            <>
+              <p class="diff">Difficulty: {d.migrationIn.difficulty}</p>
+              <ol>{d.migrationIn.steps.map((s) => <li>{s}</li>)}</ol>
+              {d.migrationIn.notes && <p>{d.migrationIn.notes}</p>}
+            </>
+          ) : (
+            <p class="undoc">Not documented</p>
+          )
+        }
+      </div>
+      <div>
+        <h2>Migration out</h2>
+        {
+          d.migrationOut ? (
+            <>
+              <p class="diff">Difficulty: {d.migrationOut.difficulty}</p>
+              <ol>{d.migrationOut.steps.map((s) => <li>{s}</li>)}</ol>
+              {d.migrationOut.notes && <p>{d.migrationOut.notes}</p>}
+            </>
+          ) : (
+            <p class="undoc">Not documented</p>
+          )
+        }
+      </div>
+    </section>
+
+    <section class="psect">
+      <h2>When they outgrow it</h2>
+      {
+        d.outgrowSignals.length ? (
+          <ul>{d.outgrowSignals.map((s) => <li>{s}</li>)}</ul>
+        ) : (
+          <p class="undoc">Not documented</p>
+        )
+      }
+    </section>
+
+    {
+      d.proposalLine && (
+        <section class="psect proposal">
+          <h2>Proposal line</h2>
+          <p class="sh-note">
+            Client-safe. Lift it straight in — it carries no methodology and no comparison
+            reasoning.
+          </p>
+          <blockquote id="proposal-text">{d.proposalLine}</blockquote>
+          <button class="chip" type="button" id="copy-proposal">Copy</button>
+        </section>
+      )
+    }
+
+    <!--
+      Everything below is internal. The handout view removes this whole element,
+      so nothing inside it can reach a client by accident.
+    -->
+    <div data-internal>
+      <section class="psect internal">
+        <h2>Internal — not for the client</h2>
+
+        <dl class="fields">
+          <Field label="Build notes" value={d.buildNotes} />
+          <Field label="In your stack" value={d.inUjgStack ? "Yes" : "No"} />
+          <Field label="On the shortlist" value={d.shortlist ? "Yes" : "No"} />
+        </dl>
+
+        {
+          d.redFlags.length > 0 && (
+            <>
+              <h3>Red flags</h3>
+              <ul>{d.redFlags.map((f) => <li>{f}</li>)}</ul>
+            </>
+          )
+        }
+
+        <h3>Instead of this, when…</h3>
+        {
+          alternatives.length ? (
+            <ul>
+              {alternatives.map((a) => (
+                <li>
+                  {a.known ? <a href={`/${a.slug}`}>{a.name}</a> : <strong>{a.name}</strong>} —{" "}
+                  {a.insteadWhen}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="undoc">Not documented</p>
+          )
+        }
+      </section>
+    </div>
+
+    <footer class="pfoot">
+      <span class:list={["tag", "depth", d.depth]}>{DEPTH_LABEL[d.depth]}</span>
+      <span>Last reviewed <b>{d.lastReviewed}</b></span>
+      <span>Confidence <b>{d.confidence}</b></span>
+    </footer>
+  </article>
+
+  <div class="handout-bar">
+    <button class="chip" type="button" id="handout">Client handout view</button>
+    <span class="sh-note" id="handout-note">Strips every internal field, then prints.</span>
+  </div>
+
+  <script>
+    import "../scripts/platform-page.ts";
+  </script>
+</Base>

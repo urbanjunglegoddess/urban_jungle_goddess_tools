@@ -10,8 +10,10 @@
     "./tokens.js": "./src/tokens.js",
     "./theme-toggle.js": "./src/theme-toggle.js"
   },
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "scripts": {
-    "test": "node scripts/verify-tokens.mjs"
+    "test": "node scripts/verify-tokens.mjs && node scripts/verify-contrast.mjs"
   }
 }

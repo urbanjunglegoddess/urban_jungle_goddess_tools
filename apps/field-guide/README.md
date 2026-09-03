@@ -21,7 +21,14 @@ pnpm --filter @ujg/field-guide dev
 | `pnpm build` | Static build to `dist/` |
 | `pnpm typecheck` | `astro check` — types and Astro diagnostics |
 | `pnpm test` | Migration parity check against the original HTML |
+| `pnpm blueprint` | Proves no internal field survives the handout view (needs `dist/`) |
 | `pnpm migrate` | Re-derive content files from the frozen original |
+| `pnpm styles` | Re-extract the carried stylesheet from the frozen original |
+| `pnpm smoke` | Browser test of the filters, handout, and theme (needs Chromium) |
+| `pnpm a11y` | WCAG 2.1 AA audit in both themes (needs Chromium) |
+
+`smoke` and `a11y` are out of `pnpm check` because they need a Chromium
+binary. Set `CHROMIUM_PATH` if Playwright's own download is not present.
 
 ## The data
 
@@ -61,9 +68,27 @@ The tier is shown on the page, so it is always clear what is being looked at.
 Client-safe: `proposalLine`, `bestFor`, cost, and `ceiling`. Naming what a
 platform cannot do is what separates a consultant from a salesperson.
 
-Not client-safe: `buildNotes`, `inUjgStack`, and comparison reasoning. These
-stay behind internal styling and out of the client handout view — enforced in
-the template, not in a comment.
+Not client-safe: `buildNotes`, `redFlags`, `inUjgStack`, the shortlist flag,
+and the comparison reasoning in `alternatives`.
+
+This is enforced, not documented. Everything internal sits inside a
+`[data-internal]` element, and the handout view **detaches** those nodes rather
+than hiding them — while it is on, they are absent from the DOM, so nothing
+internal can be read from a screenshot, a print, or the inspector.
+`pnpm blueprint` checks the built HTML for all 228 pages, in both directions:
+nothing internal survives the handout, and every client-safe field does.
+
+## The visual system
+
+`src/styles/carried.css` is **generated** — extracted from the frozen original
+by `pnpm styles`, with the palette and type stacks swapped for `@ujg/brand`
+tokens on the way through. Do not hand-edit it. Site-specific styling goes in
+`site.css` after the import.
+
+Carrying the palette across surfaced a real problem that was in the original:
+the muted text tokens failed WCAG AA in both themes, on every card. The tokens
+were nudged in `@ujg/brand` (hue preserved, none of the seven brand anchors
+touched) and `@ujg/brand`'s contrast test now holds the line.
 
 ## Migration provenance
 
