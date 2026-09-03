@@ -37,9 +37,14 @@ pnpm check           # typecheck, test, and build every app
 switching. Every tool imports it. That is how the palette stops drifting from
 tool to tool as new ones get built.
 
-It is dark-first with a working light theme, and it enforces one rule in
-`pnpm --filter @ujg/brand test`: no colour may have its only definition inside a
-media query. Break that and the toggle and the OS setting disagree.
+It is dark-first with a working light theme, and `pnpm --filter @ujg/brand test`
+enforces two rules:
+
+- **No colour may have its only definition inside a media query.** Break that
+  and the toggle and the OS setting disagree.
+- **Every text token clears WCAG AA on every surface it is painted on**, in
+  both themes. The seven brand anchors are exempt — they are the identity. The
+  derived greys and accents are not.
 
 There is deliberately **no** `packages/ui`. One app does not need a shared
 component library, and an empty abstraction is worse than a duplicated
@@ -58,7 +63,7 @@ Nothing in any other app should need to change.
 
 | Directory | State |
 |---|---|
-| `apps/field-guide` | Phase 0 — data migrated behind a schema, index is a placeholder |
+| `apps/field-guide` | Phase 1 — searchable index and a page per platform, all 228 at `standard` depth |
 | `packages/brand` | In use by `apps/field-guide` |
 | `colors/` | The original UJG colour system. Superseded by `packages/brand` for new work; not yet folded in. |
 | `work-assist/` | Focus Window toolkit. Not yet an app in the workspace. |

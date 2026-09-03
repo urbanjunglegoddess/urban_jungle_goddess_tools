@@ -1,0 +1,200 @@
+---
+/**
+ * The static decision layer, carried from the original guide.
+ *
+ * This is the part that makes the page a scoping instrument rather than a
+ * list: the router, the intake script, the finalist table, the cost bands, and
+ * the red flags. Interactive versions of Decide, Compare and Cost land in
+ * Phase 3 — this is the existing content, moved without rewriting.
+ */
+import decisionLayer from "../data/source-decision-layer.json";
+
+const { finalistComparison } = decisionLayer;
+
+/** The commerce column carries a verdict colour in the original. */
+const COMMERCE_MARK: Record<string, string> = {
+  "Built in": "yes",
+  "The point": "yes",
+  WooCommerce: "yes",
+  "$29–212/mo": "part",
+  "Add-on": "part",
+  Light: "part",
+  "Via Stripe": "part",
+  "Build it": "part",
+  No: "no",
+};
+
+const ROUTES = [
+  ["I need to edit it myself.", 'Wix Studio|, |Squarespace|, or WordPress with Gutenberg'],
+  ["I sell physical products.", "Shopify| — stop evaluating unless the catalog is enterprise-sized"],
+  ["I sell files or courses.", "Lemon Squeezy|, |Podia|, or Gumroad before you build anything"],
+  ["I need logins and a members area.", "Softr|, |Circle|, or Memberstack on a Webflow front end"],
+  ["Make it do something, not just say something.", "Bubble|, |WeWeb|, or a real |Next.js| build"],
+  ["I have almost no budget.", "Carrd| for one page, |Hostinger| or |Dorik| for several"],
+  ["It has to rank and load fast.", "Astro| or Next.js on |Vercel|; Bricks if it must be WordPress"],
+  ["We already run HubSpot / Square / Notion.", "Use their native site product before adding a platform"],
+] as const;
+
+const QUESTIONS = [
+  ["Who updates this after launch, and how often?", "Weekly updates by a non-technical owner rules out every framework on this list. Quarterly updates by you rules almost nothing out."],
+  ["Are you selling — and is it physical, digital, or time?", "Physical means Shopify. Digital means a merchant of record. Time means booking software, and the site is secondary."],
+  ["Does anyone need to log in?", "Logins are the line between a website and an application. Crossing it multiplies the build, the cost, and the liability."],
+  ["How many pages today, and how many in two years?", "Under ten pages, almost anything works. Over a hundred, you need a real CMS and the answer set collapses fast."],
+  ["What has to connect to it?", "CRM, POS, inventory, booking, accounting. One required integration can decide the platform on its own."],
+  ["What happens if the site is down for a day?", 'If the honest answer is "nothing," stop over-engineering. If it is "we lose the day’s revenue," managed hosting is not optional.'],
+  ["What is the budget after launch, not just to build it?", "Platform fees, domain, email, plugins, and maintenance are annual and forever. A client who only budgeted the build will resent year two."],
+  ["Who owns the domain and the existing accounts?", "If they cannot answer, that is the first deliverable. Chasing a former developer for DNS access has killed more timelines than any design round."],
+] as const;
+
+const SHAPES = [
+  ["One-page presence", "$850 – $1,700", [["Build", "10 – 20 hrs"], ["Content & copy", "Client-supplied"], ["Platform", "$0 – 240/yr"], ["Care after launch", "Optional"]]],
+  ["Brochure site, 5–8 pages", "$2,550 – $5,100", [["Build", "30 – 60 hrs"], ["Content migration", "+5 – 15 hrs"], ["Platform", "$200 – 700/yr"], ["Care after launch", "$150 – 400/mo"]]],
+  ["Store, launch catalog", "$5,100 – $10,200", [["Build", "60 – 120 hrs"], ["Product data", "Bill separately"], ["Platform", "$350 – 3,600/yr"], ["Processing", "2.5 – 2.9% + 30¢"]]],
+  ["Custom app or portal", "$10,200+", [["Build", "120+ hrs"], ["Infrastructure", "$240 – 1,200/yr"], ["Care after launch", "Retainer required"], ["Rate", "Command Core $110"]]],
+] as const;
+
+const RED_FLAGS = [
+  ["They cannot say who owns the domain", "Recovering DNS from a former developer or a lapsed registrar account is unbounded work. Make access the first milestone and do not start design until it clears."],
+  ['"We just need something simple" plus a feature list', "Simple means one page and no logins. Anything with accounts, bookings, inventory, or a portal is not simple, and agreeing that it is prices the whole project wrong."],
+  ["The platform was picked before the scope", "A client who arrives having already bought a plan has made your decision for you and will resent paying to undo it. Re-run the eight questions before you accept their choice."],
+  ["They are on a dead platform and do not know it", "Weebly, Typedream, Bookmark, a Google Business Profile site. Lead with the migration, not the redesign — the redesign is the easy half."],
+  ["No content exists yet", "Content is the schedule risk on nearly every project. Either they deliver it before build starts, or you bill for producing it. There is no third option that ends on time."],
+  ["The headline hosting price is a four-year prepay", "Hostinger's advertised rate requires a 48-month commitment and renews at roughly triple. Quote renewal pricing or the client will feel misled in year two — by you, not by them."],
+  ["They insist on their own payment gateway", "Shopify surcharges 0.6–2% on outside gateways and BigCommerce does the same. On real volume that fee dwarfs the plan price. Run the math in front of them."],
+  ['"Can you just make it like this one?"', "The reference site usually represents a budget an order of magnitude above theirs. Name the gap early and offer the version their budget actually buys."],
+] as const;
+
+/** Split "A|, |B" into alternating plain / emphasised runs. */
+function runs(s: string) {
+  return s.split("|").map((text, i) => ({ text, em: i % 2 === 0 }));
+}
+---
+
+<section class="sect">
+  <div class="sect-head">
+    <h2>What the client says → where to look</h2>
+    <p>The router. Their words on the left, the shortlist to open on the right.</p>
+  </div>
+  <ul class="routes">
+    {
+      ROUTES.map(([said, go]) => (
+        <li>
+          <span class="said">"{said}"</span>
+          <span class="go">{runs(go).map((r) => (r.em ? <em>{r.text}</em> : <Fragment>{r.text}</Fragment>))}</span>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<section class="sect">
+  <div class="sect-head">
+    <h2>Eight questions that pick the platform</h2>
+    <p>
+      Ask these before you name a single tool. The answers narrow 228 options to two
+      or three, and they are also the scope you will quote against.
+    </p>
+  </div>
+  <div class="intake">
+    {
+      QUESTIONS.map(([q, why], i) => (
+        <div class="ask">
+          <div class="qn">{String(i + 1).padStart(2, "0")}</div>
+          <p class="q">{q}</p>
+          <p class="why">{why}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<section class="sect">
+  <div class="sect-head">
+    <h2>The finalists, head to head</h2>
+    <p>
+      The realistic end of most evaluations. Platform cost only — your build and care
+      are separate, below. Prices are US list, verified August 2026.
+    </p>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr>{finalistComparison.columns.map((c) => <th>{c}</th>)}</tr>
+      </thead>
+      <tbody>
+        {
+          finalistComparison.rows.map((r) => (
+            <tr>
+              <td class="pf">{r[0]}</td>
+              <td class="num">{r[1]}</td>
+              <td>{r[2]}</td>
+              <td>{r[3]}</td>
+              <td class={COMMERCE_MARK[r[4]]}>{r[4]}</td>
+              <td class="num">{r[5]}</td>
+              <td class="dim">{r[6]}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="sect">
+  <div class="sect-head">
+    <h2>What it actually costs</h2>
+    <p>
+      The platform fee is the smallest number in the project. These are planning bands
+      at the Technical Product Works rate of $85/hr — adjust them from your own logged
+      time as you build history.
+    </p>
+  </div>
+  <div class="tco">
+    {
+      SHAPES.map(([title, band, lines]) => (
+        <div class="shape">
+          <h3>{title}</h3>
+          <div class="band">
+            {band}
+            <small>Build, year one</small>
+          </div>
+          <ul>
+            {lines.map(([k, v]) => (
+              <li>
+                {k} <span>{v}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+  <p class="tco-note">
+    Three costs clients never budget and you should name in the first call:
+    <strong style="color: var(--ink-2)">content</strong> — writing and gathering it is
+    usually the longest task in the project and is not design work;
+    <strong style="color: var(--ink-2)">maintenance</strong> — every self-hosted
+    platform on this list needs someone to own updates and backups, and if it is not
+    paid for it becomes yours for free; and
+    <strong style="color: var(--ink-2)">switching later</strong> — leaving Wix, Framer,
+    Bubble, or a Divi site means rebuilding, not exporting. Price the exit before they
+    buy the entrance.
+  </p>
+</section>
+
+<section class="sect" id="red-flags">
+  <div class="sect-head">
+    <h2>Red flags in the scoping call</h2>
+    <p>Each of these has cost a project more than any platform choice ever will.</p>
+  </div>
+  <div class="flags">
+    {
+      RED_FLAGS.map(([h, p]) => (
+        <div class="rf">
+          <h4>{h}</h4>
+          <p>{p}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

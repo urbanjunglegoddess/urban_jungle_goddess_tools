@@ -3,15 +3,24 @@
   "ui": "stream",
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".astro/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".astro/**"
+      ]
     },
     "typecheck": {
-      "dependsOn": ["^build"],
+      "dependsOn": [
+        "^build"
+      ],
       "outputs": []
     },
     "test": {
-      "dependsOn": ["^build"],
+      "dependsOn": [
+        "^build"
+      ],
       "outputs": []
     },
     "migrate": {
@@ -21,6 +30,12 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "blueprint": {
+      "dependsOn": [
+        "build"
+      ],
+      "outputs": []
     }
   }
 }

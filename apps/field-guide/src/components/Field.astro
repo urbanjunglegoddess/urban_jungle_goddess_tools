@@ -1,0 +1,26 @@
+---
+/**
+ * One labelled field. A null value renders as "Not documented" — the honest
+ * state, and the reason this component exists rather than inlining `??`
+ * everywhere: the fallback is decided in one place and cannot drift.
+ */
+import { NOT_DOCUMENTED } from "../lib/labels";
+
+interface Props {
+  label: string;
+  value?: string | null;
+  /** Render nothing at all rather than "Not documented". */
+  hideIfEmpty?: boolean;
+}
+const { label, value, hideIfEmpty = false } = Astro.props;
+const empty = value === null || value === undefined || value === "";
+---
+
+{
+  !(empty && hideIfEmpty) && (
+    <div class="field">
+      <dt>{label}</dt>
+      <dd class={empty ? "undoc" : undefined}>{empty ? NOT_DOCUMENTED : value}</dd>
+    </div>
+  )
+}

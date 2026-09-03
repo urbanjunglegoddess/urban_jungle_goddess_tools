@@ -5,5 +5,7 @@
   "outputDirectory": "dist",
   "installCommand": "pnpm install --frozen-lockfile",
   "ignoreCommand": "npx turbo-ignore @ujg/field-guide",
-  "github": { "silent": true }
+  "github": { "silent": true },
+  "cleanUrls": true,
+  "trailingSlash": false
 }
