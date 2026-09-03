@@ -1,0 +1,137 @@
+{
+  "note": "Verbatim from the original website_chooser.html. Do not edit by hand; re-run migrate.",
+  "categories": {
+    "gen": "General builders",
+    "ecom": "Ecommerce",
+    "cms": "CMS",
+    "edit": "Editors & app builders",
+    "land": "Landing & funnel",
+    "ai": "AI builders",
+    "comm": "Community & membership",
+    "dev": "Dev, static & hosting",
+    "niche": "Niche & specialized"
+  },
+  "costBands": {
+    "free": "Free",
+    "low": "Under $20/mo",
+    "mid": "$20–60/mo",
+    "high": "$60–200/mo",
+    "ent": "$200+/mo",
+    "host": "Self-host cost"
+  },
+  "shortlist": [
+    "Wix Studio",
+    "Webflow",
+    "Framer",
+    "Squarespace",
+    "WordPress.org",
+    "Shopify",
+    "Duda",
+    "Carrd",
+    "HubSpot Content Hub",
+    "Hostinger Website Builder"
+  ],
+  "finalistComparison": {
+    "columns": [
+      "Platform",
+      "Platform cost",
+      "Who edits after launch",
+      "Exit path",
+      "Commerce",
+      "Your build effort",
+      "They outgrow it when…"
+    ],
+    "rows": [
+      [
+        "Wix Studio",
+        "$19–159/mo",
+        "Client, once trained",
+        "Locked in — no export",
+        "Built in",
+        "Low",
+        "They need real custom logic or a second developer"
+      ],
+      [
+        "Squarespace",
+        "Mid tier + 0–2% store fee",
+        "Client alone",
+        "Content only",
+        "Built in",
+        "Low",
+        "The template stops matching what they need to say"
+      ],
+      [
+        "Webflow",
+        "$15–25/mo site plans",
+        "Client, once trained",
+        "Exports to code",
+        "$29–212/mo",
+        "Medium",
+        "Content passes a few hundred items"
+      ],
+      [
+        "Framer",
+        "$10–30/mo",
+        "Client, once trained",
+        "Locked in — no export",
+        "Light",
+        "Low",
+        "They need a real content library or a store"
+      ],
+      [
+        "WordPress + Bricks",
+        "Hosting + license",
+        "Client, once trained",
+        "You own the code",
+        "WooCommerce",
+        "Medium",
+        "Never — but someone must own maintenance forever"
+      ],
+      [
+        "Shopify",
+        "$29–299/mo",
+        "Client alone",
+        "Content only",
+        "The point",
+        "Medium",
+        "They need checkout control, which means Plus"
+      ],
+      [
+        "Duda",
+        "$19–149/mo",
+        "Client alone",
+        "Content only",
+        "Add-on",
+        "Low",
+        "They want a design that does not look like a template"
+      ],
+      [
+        "Carrd",
+        "About $19/yr",
+        "Client alone",
+        "Locked in",
+        "No",
+        "Very low",
+        "They need a second page"
+      ],
+      [
+        "Softr",
+        "$19–329/mo",
+        "Client, once trained",
+        "Locked in",
+        "Via Stripe",
+        "Medium",
+        "User counts or records make the bill hurt"
+      ],
+      [
+        "Next.js on Vercel",
+        "$20/seat/mo + usage",
+        "Developer required",
+        "You own the code",
+        "Build it",
+        "High",
+        "Never — it is the ceiling, and the floor is your retainer"
+      ]
+    ]
+  }
+}

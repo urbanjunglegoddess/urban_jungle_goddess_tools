@@ -1,0 +1,17 @@
+{
+  "name": "@ujg/brand",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Urban Jungle Goddess brand tokens: colour, type, theme switching. The single source every UJG tool imports.",
+  "type": "module",
+  "exports": {
+    "./tokens.css": "./src/tokens.css",
+    "./fonts.css": "./src/fonts.css",
+    "./tokens.js": "./src/tokens.js",
+    "./theme-toggle.js": "./src/theme-toggle.js"
+  },
+  "files": ["src"],
+  "scripts": {
+    "test": "node scripts/verify-tokens.mjs"
+  }
+}

@@ -1,0 +1,100 @@
+/*
+ * @ujg/brand — Urban Jungle Goddess colour tokens.
+ *
+ * Dark-first. The full palette is defined on bare :root so every token has a
+ * definition outside any media query. The light palette is then redefined
+ * twice — once under prefers-color-scheme guarded against an explicit dark
+ * choice, once under an explicit light choice — so a toggle wins in both
+ * directions.
+ *
+ * Brand anchors: Night #0A0A0A · Dark Green #042D1D · Eminence #5F2C82
+ * Spanish Orange #E86100 · Goldenrod #DCA424 · Platinum #E8E6E1 · Sienna #7E3209
+ */
+
+:root {
+  /* --- brand anchors, theme-independent --- */
+  --ujg-night: #0a0a0a;
+  --ujg-dark-green: #042d1d;
+  --ujg-eminence: #5f2c82;
+  --ujg-spanish-orange: #e86100;
+  --ujg-goldenrod: #dca424;
+  --ujg-platinum: #e8e6e1;
+  --ujg-sienna: #7e3209;
+
+  /* --- semantic surface & ink (dark) --- */
+  --ground: #0a0a0a;
+  --surface: #101512;
+  --surface-2: #161d19;
+  --line: #243029;
+  --line-soft: #1a231e;
+  --ink: #efede8;
+  --ink-2: #a8b2ab;
+  --ink-3: #6e7a73;
+
+  /* --- semantic accent --- */
+  --accent: #e86100;
+  --accent-2: #dca424;
+  --mark: #9c6bc4;
+  --mark-soft: #2a1b3a;
+
+  /* --- status --- */
+  --ok: #3fa37a;
+  --warn: #dca424;
+  --absorb: #9c6bc4;
+  --off: #c0703c;
+  --ceil: #c0703c;
+
+  --focus: #dca424;
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset;
+
+  /* --- type --- */
+  --font-display: "Chakra Petch", "Urbanist", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Urbanist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --ground: #e8e6e1;
+    --surface: #f5f4f1;
+    --surface-2: #efede8;
+    --line: #cfccc3;
+    --line-soft: #dedbd3;
+    --ink: #0a0a0a;
+    --ink-2: #4a544d;
+    --ink-3: #7c857e;
+    --accent: #c24f00;
+    --accent-2: #8a6206;
+    --mark: #5f2c82;
+    --mark-soft: #ede4f4;
+    --ok: #1f6b4a;
+    --warn: #8a6206;
+    --absorb: #5f2c82;
+    --off: #7e3209;
+    --ceil: #7e3209;
+    --focus: #5f2c82;
+    --shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  }
+}
+
+:root[data-theme="light"] {
+  --ground: #e8e6e1;
+  --surface: #f5f4f1;
+  --surface-2: #efede8;
+  --line: #cfccc3;
+  --line-soft: #dedbd3;
+  --ink: #0a0a0a;
+  --ink-2: #4a544d;
+  --ink-3: #7c857e;
+  --accent: #c24f00;
+  --accent-2: #8a6206;
+  --mark: #5f2c82;
+  --mark-soft: #ede4f4;
+  --ok: #1f6b4a;
+  --warn: #8a6206;
+  --absorb: #5f2c82;
+  --off: #7e3209;
+  --ceil: #7e3209;
+  --focus: #5f2c82;
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+}

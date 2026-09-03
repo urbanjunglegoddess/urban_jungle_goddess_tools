@@ -1,0 +1,87 @@
+---
+/**
+ * Phase 0 index.
+ *
+ * Deliberately plain: its job right now is to load the collection so the Zod
+ * schema runs on every build, and to show that all 228 records survived the
+ * migration. Phase 1 replaces it with the searchable, filterable index.
+ */
+import Base from "../layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+const platforms = (await getCollection("platforms")).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name)
+);
+
+const depth = platforms.reduce<Record<string, number>>((acc, p) => {
+  acc[p.data.depth] = (acc[p.data.depth] || 0) + 1;
+  return acc;
+}, {});
+const shortlist = platforms.filter((p) => p.data.shortlist);
+---
+
+<Base
+  title="Website Platform Field Guide"
+  description="Internal scoping tool — 228 website platforms with cost, who runs it, exit path, and ceiling."
+>
+  <header class="mast">
+    <div class="eyebrow">Urban Jungle Goddess · Technical Product Works</div>
+    <h1>Website Platform<br />Field Guide</h1>
+    <p class="standfirst">
+      {platforms.length} builders, CMSs, frameworks, and hosted platforms — deduplicated,
+      status-checked, and carrying the four things that actually decide a project:
+      what it costs, who can run it after launch, whether the client can leave,
+      and where it stops working.
+    </p>
+    <div class="mastfoot">
+      <span><b>{platforms.length}</b> platforms</span>
+      <span>Status &amp; pricing verified <b>Aug 2026</b></span>
+      <span>
+        Depth: <b>{depth.full ?? 0}</b> full · <b>{depth.standard ?? 0}</b> standard ·
+        <b>{depth.stub ?? 0}</b> stub
+      </span>
+      <span>Internal scoping tool</span>
+    </div>
+  </header>
+
+  <p class="standfirst" style="margin-top: 28px">
+    <strong>Phase 0 — migration complete.</strong> Every record is now its own content
+    file behind a schema that fails the build on malformed data. Search, filters, and a
+    page per platform land in Phase 1.
+  </p>
+
+  <h2 style="margin-top: 40px">Start here</h2>
+  <ul>
+    {shortlist.map((p) => <li>{p.data.name} — {p.data.bestFor}</li>)}
+  </ul>
+
+  <h2 style="margin-top: 40px">All {platforms.length} platforms</h2>
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Status</th>
+          <th>Cost</th>
+          <th>Who edits it</th>
+          <th>Exit path</th>
+          <th>Depth</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          platforms.map((p) => (
+            <tr>
+              <td>{p.data.name}</td>
+              <td>{p.data.status}</td>
+              <td>{p.data.verifiedPriceNote ?? p.data.costBand}</td>
+              <td>{p.data.whoEditsIt}</td>
+              <td>{p.data.exitPath}</td>
+              <td>{p.data.depth}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</Base>
