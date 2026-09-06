@@ -1,0 +1,199 @@
+/*
+ * The front door.
+ *
+ * Deliberately its own small stylesheet rather than a shared component
+ * package: two apps sharing tokens is the design, two apps sharing components
+ * is a decision that needs a third case first. Everything visual below comes
+ * from @ujg/brand — no colour is defined here.
+ */
+@import "@ujg/brand/fonts.css";
+@import "@ujg/brand/tokens.css";
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px 96px; }
+
+a { color: var(--accent); }
+a:hover { color: var(--accent-2); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 3px; }
+
+/* --- masthead --- */
+.mast {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 56px 0 28px;
+  border-bottom: 1px solid var(--line);
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.mast h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(34px, 5.2vw, 56px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: balance;
+}
+.mast h1 .rule { color: var(--accent); }
+.standfirst { max-width: 64ch; margin: 0; color: var(--ink-2); font-size: 17px; }
+
+.mastfoot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+.mastfoot b { color: var(--ink-2); font-weight: 500; }
+
+/* --- tool cards --- */
+.tools { display: grid; gap: 18px; margin: 34px 0 0; }
+@media (min-width: 900px) { .tools { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.tool {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line);
+  padding: 22px 24px;
+  box-shadow: var(--shadow);
+}
+.tool.live { border-left-color: var(--ok); }
+.tool.in-repo { border-left-color: var(--warn); }
+.tool.superseded { border-left-color: var(--ink-3); }
+
+/* The live tool is the reason the page exists — give it the full width. */
+@media (min-width: 900px) { .tool.live { grid-column: 1 / -1; } }
+
+.tool-top { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; }
+.tool h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 21px;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+.tool h2 a { text-decoration: none; color: inherit; }
+.tool h2 a:hover { color: var(--accent); }
+
+.state {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border: 1px solid;
+  border-radius: 2px;
+}
+.state.live { color: var(--ok); border-color: var(--ok); }
+.state.in-repo { color: var(--warn); border-color: var(--warn); }
+.state.superseded { color: var(--ink-3); border-color: var(--ink-3); }
+
+.blurb { margin: 0; color: var(--ink); font-size: 15px; }
+.used { margin: 0; color: var(--ink-2); font-size: 14px; }
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 26px;
+  margin: 2px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.facts li { display: flex; flex-direction: column; gap: 1px; }
+.facts dt, .facts .k {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.facts .v { font-family: var(--font-mono); font-size: 14px; color: var(--ink); }
+
+.notyet {
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  font-size: 13.5px;
+  color: var(--ink-3);
+}
+.notyet b {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  display: block;
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+
+.where {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-3);
+  margin: 0;
+}
+
+.open {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 7px 14px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 2px;
+}
+.open:hover { background: var(--accent); color: var(--ground); }
+
+/* --- key --- */
+.key {
+  margin-top: 42px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+@media (min-width: 760px) { .key { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; } }
+.key strong { color: var(--ink); }
+
+.foot {
+  margin-top: 34px;
+  font-size: 13.5px;
+  color: var(--ink-3);
+  max-width: 70ch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

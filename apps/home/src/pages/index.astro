@@ -1,0 +1,91 @@
+---
+import Base from "../layouts/Base.astro";
+import { TOOLS, STATE_LABEL, STATE_NOTE } from "../data/tools";
+
+const live = TOOLS.filter((t) => t.state === "live").length;
+const total = TOOLS.length;
+---
+
+<Base
+  title="Urban Jungle Goddess — Tools"
+  description="Internal tooling for Urban Jungle Goddess LLC. What exists, what state each tool is in, and where to open it."
+>
+  <header class="mast">
+    <div class="eyebrow">Urban Jungle Goddess · Technical Product Works</div>
+    <h1>Tools</h1>
+    <p class="standfirst">
+      Internal tooling for Urban Jungle Goddess LLC. Each one is a separate site with
+      its own build and its own deploy — they share the brand and nothing else.
+    </p>
+    <div class="mastfoot">
+      <span><b>{total}</b> tools</span>
+      <span><b>{live}</b> deployed</span>
+      <span>Not client-facing</span>
+    </div>
+  </header>
+
+  <div class="tools">
+    {
+      TOOLS.map((t) => (
+        <article class:list={["tool", t.state]}>
+          <div class="tool-top">
+            <h2>{t.href ? <a href={t.href}>{t.name}</a> : t.name}</h2>
+            <span class:list={["state", t.state]}>{STATE_LABEL[t.state]}</span>
+          </div>
+
+          <p class="blurb">{t.blurb}</p>
+          <p class="used">{t.usedWhen}</p>
+
+          {t.facts && (
+            <ul class="facts">
+              {t.facts.map((f) => (
+                <li>
+                  <span class="k">{f.label}</span>
+                  <span class="v">{f.value}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {t.href ? (
+            <a class="open" href={t.href}>
+              Open
+            </a>
+          ) : (
+            t.state === "live" && (
+              <p class="where">
+                Deployed, but no URL is configured here — set
+                <code> PUBLIC_FIELD_GUIDE_URL</code> to link it.
+              </p>
+            )
+          )}
+
+          <p class="where">{t.path}</p>
+
+          {t.notYet && (
+            <p class="notyet">
+              <b>Not yet</b>
+              {t.notYet}
+            </p>
+          )}
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="key">
+    {
+      (Object.keys(STATE_LABEL) as (keyof typeof STATE_LABEL)[]).map((s) => (
+        <div>
+          <strong>{STATE_LABEL[s]}</strong> — {STATE_NOTE[s]}
+        </div>
+      ))
+    }
+  </div>
+
+  <p class="foot">
+    Every card says what the tool does <em>not</em> do yet. That is deliberate, and it
+    is the same rule the Field Guide runs on: a gap nobody has filled reads as a gap,
+    never as a fact.
+  </p>
+</Base>
