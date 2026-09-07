@@ -1,0 +1,76 @@
+/*
+ * Field Guide — site styles.
+ * Imports the brand; adds only what is specific to this site.
+ */
+@import "@ujg/brand/fonts.css";
+@import "@ujg/brand/tokens.css";
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 20px 96px; }
+.mono { font-family: var(--font-mono); }
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.05; }
+
+a { color: var(--accent); }
+a:hover { color: var(--accent-2); }
+
+/* Every interactive control is keyboard reachable with a visible ring. */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.mast {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 44px 0 26px;
+  border-bottom: 1px solid var(--line);
+}
+.mast h1 { font-size: clamp(34px, 5.2vw, 58px); margin: 0; }
+.standfirst { color: var(--ink-2); max-width: 68ch; margin: 0; }
+
+.mastfoot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.mastfoot b { color: var(--ink-2); font-weight: 500; }
+
+/* Wide content scrolls inside its own container; the body never scrolls sideways. */
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; }
+.tablewrap table { border-collapse: collapse; width: 100%; min-width: 720px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

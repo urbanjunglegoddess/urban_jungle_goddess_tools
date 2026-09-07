@@ -1,0 +1,6 @@
+/*
+ * @ujg/brand — type.
+ * Chakra Petch stands in for Methanerse, which is not available as a web font.
+ * Loaded from Google Fonts; every face has a real fallback stack in tokens.css.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Urbanist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
