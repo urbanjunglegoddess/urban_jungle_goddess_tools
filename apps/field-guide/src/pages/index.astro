@@ -1,23 +1,42 @@
 ---
-/**
- * Phase 0 index.
- *
- * Deliberately plain: its job right now is to load the collection so the Zod
- * schema runs on every build, and to show that all 228 records survived the
- * migration. Phase 1 replaces it with the searchable, filterable index.
- */
 import Base from "../layouts/Base.astro";
+import PlatformCard from "../components/PlatformCard.astro";
+import DecisionLayer from "../components/DecisionLayer.astro";
 import { getCollection } from "astro:content";
+import { CATEGORY_LABEL } from "../lib/labels";
 
 const platforms = (await getCollection("platforms")).sort((a, b) =>
   a.data.name.localeCompare(b.data.name)
 );
-
-const depth = platforms.reduce<Record<string, number>>((acc, p) => {
-  acc[p.data.depth] = (acc[p.data.depth] || 0) + 1;
-  return acc;
-}, {});
 const shortlist = platforms.filter((p) => p.data.shortlist);
+
+const count = (fn: (d: (typeof platforms)[number]["data"]) => boolean) =>
+  platforms.filter((p) => fn(p.data)).length;
+
+const cats = Object.entries(CATEGORY_LABEL).map(([key, label]) => ({
+  key,
+  label,
+  n: count((d) => d.categories.includes(key as never)),
+}));
+
+/** The five toggles the original carried, with their live counts. */
+const toggles = [
+  { id: "stack", label: "In your stack", cls: "mk", n: count((d) => d.inUjgStack) },
+  { id: "nocode", label: "No-code only", cls: "", n: count((d) => d.skillLevel === "No-code") },
+  { id: "selfrun", label: "Client can run it alone", cls: "", n: count((d) => d.whoEditsIt === "Client alone") },
+  {
+    id: "owns",
+    label: "Client keeps the code",
+    cls: "",
+    n: count((d) => d.exitPath === "You own the code" || d.exitPath === "Exports to code"),
+  },
+  { id: "hideDead", label: "Hide legacy & retired", cls: "", n: count((d) => d.status !== "active") },
+];
+
+const depth = platforms.reduce<Record<string, number>>((a, p) => {
+  a[p.data.depth] = (a[p.data.depth] || 0) + 1;
+  return a;
+}, {});
 ---
 
 <Base
@@ -26,62 +45,195 @@ const shortlist = platforms.filter((p) => p.data.shortlist);
 >
   <header class="mast">
     <div class="eyebrow">Urban Jungle Goddess · Technical Product Works</div>
-    <h1>Website Platform<br />Field Guide</h1>
+    <h1>Website Platform<br /><span class="rule">Field Guide</span></h1>
     <p class="standfirst">
       {platforms.length} builders, CMSs, frameworks, and hosted platforms — deduplicated,
-      status-checked, and carrying the four things that actually decide a project:
-      what it costs, who can run it after launch, whether the client can leave,
-      and where it stops working.
+      status-checked, and carrying the four things that actually decide a project: what it
+      costs, who can run it after launch, whether the client can leave, and where it stops
+      working.
     </p>
     <div class="mastfoot">
       <span><b>{platforms.length}</b> platforms</span>
       <span>Status &amp; pricing verified <b>Aug 2026</b></span>
       <span>
-        Depth: <b>{depth.full ?? 0}</b> full · <b>{depth.standard ?? 0}</b> standard ·
+        Depth <b>{depth.full ?? 0}</b> full · <b>{depth.standard ?? 0}</b> standard ·
         <b>{depth.stub ?? 0}</b> stub
       </span>
-      <span>Internal scoping tool</span>
+      <span>Internal scoping tool — press <b>/</b> to search</span>
     </div>
   </header>
 
-  <p class="standfirst" style="margin-top: 28px">
-    <strong>Phase 0 — migration complete.</strong> Every record is now its own content
-    file behind a schema that fails the build on malformed data. Search, filters, and a
-    page per platform land in Phase 1.
-  </p>
-
-  <h2 style="margin-top: 40px">Start here</h2>
-  <ul>
-    {shortlist.map((p) => <li>{p.data.name} — {p.data.bestFor}</li>)}
-  </ul>
-
-  <h2 style="margin-top: 40px">All {platforms.length} platforms</h2>
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Platform</th>
-          <th>Status</th>
-          <th>Cost</th>
-          <th>Who edits it</th>
-          <th>Exit path</th>
-          <th>Depth</th>
-        </tr>
-      </thead>
-      <tbody>
+  <section class="starthere">
+    <div class="sh-a">
+      <h2 class="sh-title">Start here</h2>
+      <p class="sh-note">
+        For a typical freelance, portfolio, or small-business project these ten cover
+        almost every real answer. Open one, or tap to filter the list.
+      </p>
+      <ul class="shortlist">
         {
-          platforms.map((p) => (
-            <tr>
-              <td>{p.data.name}</td>
-              <td>{p.data.status}</td>
-              <td>{p.data.verifiedPriceNote ?? p.data.costBand}</td>
-              <td>{p.data.whoEditsIt}</td>
-              <td>{p.data.exitPath}</td>
-              <td>{p.data.depth}</td>
-            </tr>
+          shortlist.map((p) => (
+            <li>
+              <a href={`/${p.data.slug}`}>{p.data.name}</a>
+            </li>
           ))
         }
-      </tbody>
-    </table>
+      </ul>
+    </div>
+    <div class="sh-b">
+      <h2 class="sh-title">How to read a card</h2>
+      <p class="sh-note">
+        Every platform has its own page — the card is the summary. Cost, who edits it, and
+        the exit path are the three that end most conversations; the ceiling is the one
+        that protects you at month nine.
+      </p>
+      <p class="sh-note">
+        A page marked <strong>standard</strong> carries what the original guide carried,
+        and no more. Nothing on this site is filled in with a guess: a fact nobody has
+        verified reads <strong>Not documented</strong>.
+      </p>
+    </div>
+  </section>
+
+  <DecisionLayer />
+
+  <div class="controls" id="controls">
+    <label class="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="M16.5 16.5 21 21"></path>
+      </svg>
+      <input
+        id="q"
+        type="search"
+        placeholder="Search platforms, or what the site needs to do…"
+        autocomplete="off"
+        aria-label="Search platforms"
+      />
+    </label>
+    <div class="chips" id="cats">
+      {
+        cats.map((c) => (
+          <button class="chip" type="button" aria-pressed="false" data-cat={c.key}>
+            {c.label} <span class="ct">{c.n}</span>
+          </button>
+        ))
+      }
+    </div>
+    <div class="chips" id="filters">
+      {
+        toggles.map((t) => (
+          <button
+            class:list={["chip", t.cls]}
+            type="button"
+            aria-pressed="false"
+            data-toggle={t.id}
+          >
+            {t.label} <span class="ct">{t.n}</span>
+          </button>
+        ))
+      }
+    </div>
+    <div class="resultline">
+      <span id="count" aria-live="polite">{platforms.length} of {platforms.length} shown</span>
+      <button class="clear" id="clear" hidden>Reset filters</button>
+    </div>
   </div>
+
+  <div class="grid" id="grid">
+    {platforms.map((entry) => <PlatformCard entry={entry} />)}
+  </div>
+
+  <div class="empty" id="empty" hidden>
+    <strong>Nothing matches that</strong>Try a broader term, or reset the filters and
+    search by what the site needs to do.
+  </div>
+
+  <section class="sect" id="deep" hidden>
+    <div class="sect-head">
+      <h2>Also found inside platform pages</h2>
+      <p>Full-text matches from the detail pages — build notes, migration steps, limits.</p>
+    </div>
+    <ul class="deephits" id="deephits"></ul>
+  </section>
+
+  <section class="method">
+    <div>
+      <h3>Status key</h3>
+      <div class="key">
+        <div>
+          <i style="background: var(--ok)"></i><span
+            ><strong>Active</strong> — shipping releases, safe to specify.</span
+          >
+        </div>
+        <div>
+          <i style="background: var(--warn)"></i><span
+            ><strong>Legacy</strong> — still runs, no real investment. Migrate off, don't
+            build on.</span
+          >
+        </div>
+        <div>
+          <i style="background: var(--absorb)"></i><span
+            ><strong>Absorbed</strong> — folded into another product; the page names it.</span
+          >
+        </div>
+        <div>
+          <i style="background: var(--off)"></i><span
+            ><strong>Retired</strong> — gone. Kept so you recognize a dead reference when a
+            client cites one.</span
+          >
+        </div>
+      </div>
+      <p style="margin-top: 12px">
+        Cost bands: <strong>Free</strong> · <strong>Under $20/mo</strong> ·
+        <strong>$20–60/mo</strong> · <strong>$60–200/mo</strong> · <strong>$200+/mo</strong> ·
+        <strong>Self-host</strong> (software free, you pay hosting and maintenance). Where a
+        page shows a real figure, it was checked against the vendor's own pricing page in
+        August 2026.
+      </p>
+    </div>
+    <div>
+      <h3>How this was built</h3>
+      <p>
+        Repeats in the source list were collapsed into one record each — Carrd, Ghost,
+        Bubble, Softr, and Leadpages appeared in several categories, so they now carry
+        several tags instead of several entries.
+      </p>
+      <p>
+        Vendor sub-products were folded into their parent: Wix AI, Squarespace Blueprint,
+        Divi AI, Jimdo Dolphin, GoDaddy Airo, and the Wix, Squarespace, and Weebly commerce
+        and member modules are features of a platform, not platforms.
+      </p>
+      <p>
+        One source entry, SellNow, resolved to a parked domain with no identifiable product
+        and was dropped.
+      </p>
+      <p>
+        Two figures need re-checking before you quote them: Squarespace publishes no
+        server-side prices at all, and Wix Studio's pricing page was erroring — those
+        numbers came from a Wix-authored post, not the pricing page.
+      </p>
+    </div>
+    <div>
+      <h3>Using it in a proposal</h3>
+      <p>
+        Client-facing writing gets the <strong>Best for</strong> line, the cost, and the
+        ceiling. Naming what a platform cannot do is what separates a consultant from a
+        salesperson, and it protects you at month nine.
+      </p>
+      <p>
+        The comparison reasoning — why you ruled out the other four, and how you would build
+        it — is the blueprint. Hold it until after the contract. Every page has a
+        <strong>client handout</strong> view that strips it.
+      </p>
+      <p>
+        Purple flags mark what is already in your stack. Reaching for a new platform per
+        project is how margin disappears.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    import "../scripts/index-filter.ts";
+  </script>
 </Base>

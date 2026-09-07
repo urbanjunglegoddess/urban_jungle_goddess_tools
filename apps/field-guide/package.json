@@ -6,11 +6,15 @@
   "description": "Website Platform Field Guide \u2014 the scoping instrument. 228 platforms, one page each.",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
     "typecheck": "astro check",
     "test": "node scripts/parity-check.mjs",
-    "migrate": "node scripts/migrate.mjs"
+    "migrate": "node scripts/migrate.mjs",
+    "styles": "node scripts/extract-styles.mjs",
+    "blueprint": "node scripts/blueprint-check.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "a11y": "node scripts/a11y.mjs"
   },
   "dependencies": {
     "@ujg/brand": "workspace:*",

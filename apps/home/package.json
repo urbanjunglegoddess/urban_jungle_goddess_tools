@@ -1,0 +1,22 @@
+{
+  "name": "@ujg/home",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The front door \u2014 what tools exist, what state each is in, and where to open them.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check",
+    "a11y": "node scripts/a11y.mjs"
+  },
+  "dependencies": {
+    "@ujg/brand": "workspace:*",
+    "astro": "^5.16.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.5",
+    "typescript": "^5.9.3"
+  }
+}
