@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Focus Window</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="focus-window.css">
+</head>
+<body>
+  <p class="eyebrow">Plan the window</p>
+  <h1>Focus <span>Window</span></h1>
+  <p class="sub">Set when you have to stop. See which style fits, tap it, load your tasks — then start the run and let it keep time.</p>
+
+  <div id="setup">
+    <!-- WINDOW -->
+    <div class="card">
+      <p class="lbl">The window</p>
+      <div class="seg-tog" id="modeTog">
+        <button data-mode="until" class="on">Until a time</button>
+        <button data-mode="length">For a length</button>
+      </div>
+      <div id="untilPane" class="row"><span class="hint">Free until</span><input type="time" id="untilInput"></div>
+      <div id="lengthPane" class="row" style="display:none">
+        <span class="hint">I have</span>
+        <input class="num" id="hh" type="number" min="0" max="24" inputmode="numeric" aria-label="hours"><span class="hint">h</span>
+        <input class="num" id="mm" type="number" min="0" max="59" inputmode="numeric" aria-label="minutes"><span class="hint">m</span>
+      </div>
+      <div style="margin-top:14px"><p class="lbl" style="margin-bottom:9px">Buffer at the end</p><div class="chips" id="bufChips"></div></div>
+      <div class="toggle" id="restToggle" role="switch" aria-checked="false" tabindex="0" style="margin-top:16px"><span class="switch"></span><span>Rest after the last session too</span></div>
+      <p class="window-line" id="windowLine"></p>
+    </div>
+
+    <!-- COMPARE -->
+    <p class="sec-h">Which style fits</p>
+    <p class="sec-sub">Every style — and one of your own — measured against your window. Tap one to build the run with it.</p>
+    <div class="card custom-card">
+      <div class="custom-row">
+        <span class="lbl" style="margin:0">Custom</span>
+        <span class="custom-io"><input class="num" id="cwInput" type="number" min="1" max="240" inputmode="numeric" aria-label="custom work minutes"><span class="hint">m work</span></span>
+        <span class="custom-io"><input class="num" id="cbInput" type="number" min="0" max="120" inputmode="numeric" aria-label="custom break minutes"><span class="hint">m break</span></span>
+      </div>
+    </div>
+    <p class="compare-lock" id="compareLock" style="display:none">Running — stop the run to change style.</p>
+    <div id="compare"></div>
+    <div class="legend"><span><i class="sw w"></i>Focus</span><span><i class="sw b"></i>Break</span><span><i class="sw s"></i>Left over</span></div>
+
+    <!-- BLOCKS -->
+    <p class="sec-h">Your blocks</p>
+    <p class="sec-sub">What you want to get through. Top of the list runs first.</p>
+    <div class="card">
+      <div class="add-row"><input class="text" id="blockInput" placeholder="What's a session for?" enterkeyhint="done" maxlength="80"><button class="add-btn" id="addBtn">Add</button></div>
+      <ul class="blocks" id="blockList"></ul>
+      <p class="empty-blocks" id="emptyBlocks">No blocks yet. Add tasks and they'll drop onto the sessions below.</p>
+      <div class="blocks-foot"><span class="held" id="heldNote"></span><button class="clearall" id="clearAll" style="display:none">Clear all</button></div>
+    </div>
+  </div>
+
+  <!-- RUN -->
+  <p class="sec-h">The run</p>
+  <p class="sec-sub" id="runSub">Timed, using the style you tapped above.</p>
+  <div class="card" id="runCard"></div>
+
+  <p class="note">
+    <b>How it runs:</b> hit Start and the plan locks to the clock — it stops sliding, a live counter shows the block you're in and the time left, and a chime marks every hand-off so you never have to watch the screen. Stop returns you to planning.
+    <br><br><b>Holding your list:</b> blocks and settings save in this browser when storage is available; the badge under your list tells you the truth for wherever you're running it right now.
+  </p>
+
+<script src="focus-window.js"></script>
+</body>
+</html>
