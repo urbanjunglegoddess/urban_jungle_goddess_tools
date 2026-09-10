@@ -1,0 +1,312 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UJG Contrast Matrix</title>
+<style>
+  :root{color-scheme:dark}
+  *{box-sizing:border-box}
+  body{margin:0;background:#0A0A0A;color:#E8E6E1;font:14px/1.5 'Segoe UI',system-ui,sans-serif;padding:40px 32px 64px}
+  h1{font-size:24px;letter-spacing:1px;margin:0 0 4px}
+  h1 span{color:#F2B01E}
+  .sub{color:#9a9791;font-size:13px;margin-bottom:8px}
+  h2{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#F2B01E;margin:38px 0 12px;border-bottom:1px solid #2a2a2a;padding-bottom:8px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;color:#8a877f;font-weight:600;font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:8px 10px;border-bottom:1px solid #2a2a2a}
+  td{padding:9px 10px;border-bottom:1px solid #1c1c1c;vertical-align:middle}
+  code{font-family:ui-monospace,monospace;font-size:11px;color:#b9b6b0}
+  .sw{display:inline-block;width:13px;height:13px;border-radius:3px;vertical-align:-2px;margin-right:6px;border:1px solid #333}
+  .chip{font-weight:700;text-align:center;border-radius:6px;width:44px}
+  .num{font-family:ui-monospace,monospace;font-weight:600}
+  .b{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px}
+  .pass{background:rgba(46,107,79,.35);color:#5fce9b}
+  .fail{background:rgba(217,83,26,.28);color:#f0895a}
+  .warn{background:rgba(242,176,30,.22);color:#f2b01e}
+  .legend{color:#78756f;font-size:12px;margin-top:10px}
+</style></head><body>
+  <h1>UJG <span>Contrast Matrix</span></h1>
+  <div class="sub">WCAG 2.1 relative-luminance ratios for every semantic pairing. Computed from ujg_color_system_v2_1.html. AA needs 4.5:1 (normal) / 3:1 (large); AAA needs 7:1 / 4.5:1.</div>
+  
+    <h2>Dark mode (default)</h2>
+    <table>
+      <thead><tr><th>Pairing</th><th>Foreground</th><th>Background</th><th>Preview</th><th>Ratio</th><th>Size</th><th>AA</th><th>AAA</th></tr></thead>
+      <tbody><tr>
+      <td>Body text on base surface</td>
+      <td><span class="sw" style="background:#E8E6E1"></span><code>#E8E6E1</code></td>
+      <td><span class="sw" style="background:#0A0A0A"></span><code>#0A0A0A</code></td>
+      <td class="chip" style="background:#0A0A0A;color:#E8E6E1">Aa</td>
+      <td class="num">15.87:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Body text on raised surface</td>
+      <td><span class="sw" style="background:#E8E6E1"></span><code>#E8E6E1</code></td>
+      <td><span class="sw" style="background:#2A2A2A"></span><code>#2A2A2A</code></td>
+      <td class="chip" style="background:#2A2A2A;color:#E8E6E1">Aa</td>
+      <td class="num">11.51:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Muted text on base surface</td>
+      <td><span class="sw" style="background:#A8A5A0"></span><code>#A8A5A0</code></td>
+      <td><span class="sw" style="background:#0A0A0A"></span><code>#0A0A0A</code></td>
+      <td class="chip" style="background:#0A0A0A;color:#A8A5A0">Aa</td>
+      <td class="num">8.07:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Subtle text on base surface</td>
+      <td><span class="sw" style="background:#A3A3A3"></span><code>#A3A3A3</code></td>
+      <td><span class="sw" style="background:#0A0A0A"></span><code>#0A0A0A</code></td>
+      <td class="chip" style="background:#0A0A0A;color:#A3A3A3">Aa</td>
+      <td class="num">7.85:1</td>
+      <td>large</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Link on base surface</td>
+      <td><span class="sw" style="background:#D29709"></span><code>#D29709</code></td>
+      <td><span class="sw" style="background:#0A0A0A"></span><code>#0A0A0A</code></td>
+      <td class="chip" style="background:#0A0A0A;color:#D29709">Aa</td>
+      <td class="num">7.70:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Primary button label</td>
+      <td><span class="sw" style="background:#E8E6E1"></span><code>#E8E6E1</code></td>
+      <td><span class="sw" style="background:#47107D"></span><code>#47107D</code></td>
+      <td class="chip" style="background:#47107D;color:#E8E6E1">Aa</td>
+      <td class="num">10.28:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Secondary button label</td>
+      <td><span class="sw" style="background:#E8E6E1"></span><code>#E8E6E1</code></td>
+      <td><span class="sw" style="background:#2A2A2A"></span><code>#2A2A2A</code></td>
+      <td class="chip" style="background:#2A2A2A;color:#E8E6E1">Aa</td>
+      <td class="num">11.51:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>CTA label</td>
+      <td><span class="sw" style="background:#0A0A0A"></span><code>#0A0A0A</code></td>
+      <td><span class="sw" style="background:#D9531A"></span><code>#D9531A</code></td>
+      <td class="chip" style="background:#D9531A;color:#0A0A0A">Aa</td>
+      <td class="num">4.90:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b fail">AAA ✗</span></td>
+    </tr><tr>
+      <td>Accent label</td>
+      <td><span class="sw" style="background:#0A0A0A"></span><code>#0A0A0A</code></td>
+      <td><span class="sw" style="background:#F2B01E"></span><code>#F2B01E</code></td>
+      <td class="chip" style="background:#F2B01E;color:#0A0A0A">Aa</td>
+      <td class="num">10.37:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Success text on success surface</td>
+      <td><span class="sw" style="background:#9BCCB2"></span><code>#9BCCB2</code></td>
+      <td><span class="sw" style="background:#073221"></span><code>#073221</code></td>
+      <td class="chip" style="background:#073221;color:#9BCCB2">Aa</td>
+      <td class="num">7.85:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Warning text on warning surface</td>
+      <td><span class="sw" style="background:#E9B555"></span><code>#E9B555</code></td>
+      <td><span class="sw" style="background:#392601"></span><code>#392601</code></td>
+      <td class="chip" style="background:#392601;color:#E9B555">Aa</td>
+      <td class="num">7.72:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Error text on error surface</td>
+      <td><span class="sw" style="background:#FDA587"></span><code>#FDA587</code></td>
+      <td><span class="sw" style="background:#4A1703"></span><code>#4A1703</code></td>
+      <td class="chip" style="background:#4A1703;color:#FDA587">Aa</td>
+      <td class="num">7.71:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Info text on info surface</td>
+      <td><span class="sw" style="background:#CAADFE"></span><code>#CAADFE</code></td>
+      <td><span class="sw" style="background:#34145A"></span><code>#34145A</code></td>
+      <td class="chip" style="background:#34145A;color:#CAADFE">Aa</td>
+      <td class="num">7.84:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Focus ring on base surface</td>
+      <td><span class="sw" style="background:#B28BF3"></span><code>#B28BF3</code></td>
+      <td><span class="sw" style="background:#0A0A0A"></span><code>#0A0A0A</code></td>
+      <td class="chip" style="background:#0A0A0A;color:#B28BF3">Aa</td>
+      <td class="num">7.43:1</td>
+      <td>large</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Strong border on base surface</td>
+      <td><span class="sw" style="background:#888888"></span><code>#888888</code></td>
+      <td><span class="sw" style="background:#0A0A0A"></span><code>#0A0A0A</code></td>
+      <td class="chip" style="background:#0A0A0A;color:#888888">Aa</td>
+      <td class="num">5.58:1</td>
+      <td>large</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr></tbody>
+    </table>
+  
+    <h2>Light mode</h2>
+    <table>
+      <thead><tr><th>Pairing</th><th>Foreground</th><th>Background</th><th>Preview</th><th>Ratio</th><th>Size</th><th>AA</th><th>AAA</th></tr></thead>
+      <tbody><tr>
+      <td>Body text on base surface</td>
+      <td><span class="sw" style="background:#0A0A0A"></span><code>#0A0A0A</code></td>
+      <td><span class="sw" style="background:#F6F6F4"></span><code>#F6F6F4</code></td>
+      <td class="chip" style="background:#F6F6F4;color:#0A0A0A">Aa</td>
+      <td class="num">18.30:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Body text on raised surface</td>
+      <td><span class="sw" style="background:#0A0A0A"></span><code>#0A0A0A</code></td>
+      <td><span class="sw" style="background:#FFFFFF"></span><code>#FFFFFF</code></td>
+      <td class="chip" style="background:#FFFFFF;color:#0A0A0A">Aa</td>
+      <td class="num">19.80:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Muted text on base surface</td>
+      <td><span class="sw" style="background:#6F6F6F"></span><code>#6F6F6F</code></td>
+      <td><span class="sw" style="background:#F6F6F4"></span><code>#F6F6F4</code></td>
+      <td class="chip" style="background:#F6F6F4;color:#6F6F6F">Aa</td>
+      <td class="num">4.64:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b fail">AAA ✗</span></td>
+    </tr><tr>
+      <td>Subtle text on base surface</td>
+      <td><span class="sw" style="background:#888888"></span><code>#888888</code></td>
+      <td><span class="sw" style="background:#F6F6F4"></span><code>#F6F6F4</code></td>
+      <td class="chip" style="background:#F6F6F4;color:#888888">Aa</td>
+      <td class="num">3.28:1</td>
+      <td>large</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b fail">AAA ✗</span></td>
+    </tr><tr>
+      <td>Link on base surface</td>
+      <td><span class="sw" style="background:#7F53BF"></span><code>#7F53BF</code></td>
+      <td><span class="sw" style="background:#F6F6F4"></span><code>#F6F6F4</code></td>
+      <td class="chip" style="background:#F6F6F4;color:#7F53BF">Aa</td>
+      <td class="num">4.99:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b fail">AAA ✗</span></td>
+    </tr><tr>
+      <td>Primary button label</td>
+      <td><span class="sw" style="background:#E8E6E1"></span><code>#E8E6E1</code></td>
+      <td><span class="sw" style="background:#47107D"></span><code>#47107D</code></td>
+      <td class="chip" style="background:#47107D;color:#E8E6E1">Aa</td>
+      <td class="num">10.28:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Secondary button label</td>
+      <td><span class="sw" style="background:#0A0A0A"></span><code>#0A0A0A</code></td>
+      <td><span class="sw" style="background:#FFFFFF"></span><code>#FFFFFF</code></td>
+      <td class="chip" style="background:#FFFFFF;color:#0A0A0A">Aa</td>
+      <td class="num">19.80:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>CTA label</td>
+      <td><span class="sw" style="background:#0A0A0A"></span><code>#0A0A0A</code></td>
+      <td><span class="sw" style="background:#D9531A"></span><code>#D9531A</code></td>
+      <td class="chip" style="background:#D9531A;color:#0A0A0A">Aa</td>
+      <td class="num">4.90:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b fail">AAA ✗</span></td>
+    </tr><tr>
+      <td>Accent label</td>
+      <td><span class="sw" style="background:#0A0A0A"></span><code>#0A0A0A</code></td>
+      <td><span class="sw" style="background:#F2B01E"></span><code>#F2B01E</code></td>
+      <td class="chip" style="background:#F2B01E;color:#0A0A0A">Aa</td>
+      <td class="num">10.37:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Success text on success surface</td>
+      <td><span class="sw" style="background:#2A644A"></span><code>#2A644A</code></td>
+      <td><span class="sw" style="background:#E9FBF1"></span><code>#E9FBF1</code></td>
+      <td class="chip" style="background:#E9FBF1;color:#2A644A">Aa</td>
+      <td class="num">6.47:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b fail">AAA ✗</span></td>
+    </tr><tr>
+      <td>Warning text on warning surface</td>
+      <td><span class="sw" style="background:#543B05"></span><code>#543B05</code></td>
+      <td><span class="sw" style="background:#FFF4E4"></span><code>#FFF4E4</code></td>
+      <td class="chip" style="background:#FFF4E4;color:#543B05">Aa</td>
+      <td class="num">9.63:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Error text on error surface</td>
+      <td><span class="sw" style="background:#963100"></span><code>#963100</code></td>
+      <td><span class="sw" style="background:#FFF3EF"></span><code>#FFF3EF</code></td>
+      <td class="chip" style="background:#FFF3EF;color:#963100">Aa</td>
+      <td class="num">7.06:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Info text on info surface</td>
+      <td><span class="sw" style="background:#663BA0"></span><code>#663BA0</code></td>
+      <td><span class="sw" style="background:#F7F4FF"></span><code>#F7F4FF</code></td>
+      <td class="chip" style="background:#F7F4FF;color:#663BA0">Aa</td>
+      <td class="num">7.17:1</td>
+      <td>normal</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr><tr>
+      <td>Focus ring on base surface</td>
+      <td><span class="sw" style="background:#996DDC"></span><code>#996DDC</code></td>
+      <td><span class="sw" style="background:#F6F6F4"></span><code>#F6F6F4</code></td>
+      <td class="chip" style="background:#F6F6F4;color:#996DDC">Aa</td>
+      <td class="num">3.48:1</td>
+      <td>large</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b fail">AAA ✗</span></td>
+    </tr><tr>
+      <td>Strong border on base surface</td>
+      <td><span class="sw" style="background:#726F6A"></span><code>#726F6A</code></td>
+      <td><span class="sw" style="background:#F6F6F4"></span><code>#F6F6F4</code></td>
+      <td class="chip" style="background:#F6F6F4;color:#726F6A">Aa</td>
+      <td class="num">4.62:1</td>
+      <td>large</td>
+      <td><span class="b pass">AA ✓</span></td>
+      <td><span class="b pass">AAA ✓</span></td>
+    </tr></tbody>
+    </table>
+  <h2>Brand pairs — identity hexes on Night &amp; Platinum</h2>
+  <table><thead><tr><th>Pairing</th><th>Preview</th><th>Ratio</th><th>Verdict</th></tr></thead>
+  <tbody><tr><td>Deep Amethyst on Night</td><td class="chip" style="background:#0A0A0A;color:#47107D">Aa</td><td class="num">1.54:1</td><td><span class="b fail">decorative</span></td></tr><tr><td>Deep Amethyst on Platinum</td><td class="chip" style="background:#E8E6E1;color:#47107D">Aa</td><td class="num">10.28:1</td><td><span class="b pass">text ✓</span></td></tr><tr><td>Sunset Ember on Night</td><td class="chip" style="background:#0A0A0A;color:#D9531A">Aa</td><td class="num">4.90:1</td><td><span class="b pass">text ✓</span></td></tr><tr><td>Sunset Ember on Platinum</td><td class="chip" style="background:#E8E6E1;color:#D9531A">Aa</td><td class="num">3.24:1</td><td><span class="b warn">large only</span></td></tr><tr><td>Luminous Gold on Night</td><td class="chip" style="background:#0A0A0A;color:#F2B01E">Aa</td><td class="num">10.37:1</td><td><span class="b pass">text ✓</span></td></tr><tr><td>Luminous Gold on Platinum</td><td class="chip" style="background:#E8E6E1;color:#F2B01E">Aa</td><td class="num">1.53:1</td><td><span class="b fail">decorative</span></td></tr><tr><td>Rich Forest on Night</td><td class="chip" style="background:#0A0A0A;color:#0D5E39">Aa</td><td class="num">2.52:1</td><td><span class="b fail">decorative</span></td></tr><tr><td>Rich Forest on Platinum</td><td class="chip" style="background:#E8E6E1;color:#0D5E39">Aa</td><td class="num">6.29:1</td><td><span class="b pass">text ✓</span></td></tr><tr><td>Platinum on Night</td><td class="chip" style="background:#0A0A0A;color:#E8E6E1">Aa</td><td class="num">15.87:1</td><td><span class="b pass">text ✓</span></td></tr><tr><td>Platinum on Platinum</td><td class="chip" style="background:#E8E6E1;color:#E8E6E1">Aa</td><td class="num">1.00:1</td><td><span class="b fail">decorative</span></td></tr><tr><td>Muted Platinum on Night</td><td class="chip" style="background:#0A0A0A;color:#A8A5A0">Aa</td><td class="num">8.07:1</td><td><span class="b pass">text ✓</span></td></tr><tr><td>Muted Platinum on Platinum</td><td class="chip" style="background:#E8E6E1;color:#A8A5A0">Aa</td><td class="num">1.97:1</td><td><span class="b fail">decorative</span></td></tr><tr><td>Rich Jungle Green on Night</td><td class="chip" style="background:#0A0A0A;color:#2E6B4F">Aa</td><td class="num">3.14:1</td><td><span class="b warn">large only</span></td></tr><tr><td>Rich Jungle Green on Platinum</td><td class="chip" style="background:#E8E6E1;color:#2E6B4F">Aa</td><td class="num">5.05:1</td><td><span class="b pass">text ✓</span></td></tr></tbody></table>
+  <div class="legend">Verdict on brand pairs: "text" = safe for body copy, "large only" = headings/large text ≥3:1, "decorative" = shape/icon fills only, never text.</div>
+</body></html>
