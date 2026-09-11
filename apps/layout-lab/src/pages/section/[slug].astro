@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import { SECTIONS } from "../../lib/catalog";
 import type { GetStaticPaths } from "astro";
+import { path } from "../../lib/path";
 
 export const getStaticPaths = (() =>
   SECTIONS.map((section) => ({ params: { slug: section.slug }, props: { section } }))) satisfies GetStaticPaths;
@@ -10,7 +11,7 @@ const { section } = Astro.props;
 ---
 
 <Base title={`${section.name} — Section playbook`} description={section.blurb}>
-  <p class="crumb"><a href="/sections">← Section playbook</a></p>
+  <p class="crumb"><a href={path("/sections")}>← Section playbook</a></p>
 
   <header class="lhead">
     <p class="lpath">{section.group}</p>

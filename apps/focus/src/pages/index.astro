@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import { path } from "../lib/path";
 
 const LADDER = [
   { n: "01", href: "/fit", name: "Fit", blurb: "Window in → a breakdown of every session style at once. A calculator." },
@@ -27,7 +28,7 @@ const LADDER = [
     {
       LADDER.map((t) => (
         <li>
-          <a href={t.href}>
+          <a href={path(t.href)}>
             <span class="n">{t.n}</span>
             <h2>{t.name}</h2>
             <p>{t.blurb}</p>

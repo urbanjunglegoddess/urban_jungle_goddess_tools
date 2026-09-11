@@ -27,6 +27,11 @@ if (!existsSync(dist)) {
   process.exit(1);
 }
 
+/* The prefix this app is served under, read out of its own Astro config so the
+   two can never disagree. Every link the build emits carries it. */
+const BASE = (/base:\s*"([^"]+)"/.exec(readFileSync(join(app, "astro.config.mjs"), "utf8"))?.[1] ?? "").replace(/\/$/, "");
+const at = (p) => BASE + p;
+
 const catalog = JSON.parse(readFileSync(join(app, "src", "data", "catalog.json"), "utf8"));
 const problems = [];
 let checks = 0;
@@ -58,21 +63,21 @@ for (const slug of demoSlugs) ok(`demo page /demo/${slug} built`, page("demo", `
    marked "Demo" with no page behind it is the one lie this tool must not tell. */
 const index = page("index.html") ?? "";
 for (const l of catalog.layouts) {
-  const linked = index.includes(`href="/layout/${l.slug}"`);
-  ok(`index links to /layout/${l.slug}`, linked);
+  const linked = index.includes(`href="${at(`/layout/${l.slug}`)}"`);
+  ok(`index links to ${at(`/layout/${l.slug}`)}`, linked);
 }
 
 for (const slug of demoSlugs) {
   const detail = page("layout", `${slug}.html`) ?? "";
-  ok(`layout page ${slug} embeds its demo`, detail.includes(`src="/demo/${slug}"`));
-  ok(`layout page ${slug} offers the demo full screen`, detail.includes(`href="/demo/${slug}"`));
+  ok(`layout page ${slug} embeds its demo`, detail.includes(`src="${at(`/demo/${slug}`)}"`));
+  ok(`layout page ${slug} offers the demo full screen`, detail.includes(`href="${at(`/demo/${slug}`)}"`));
 }
 
 for (const l of catalog.layouts) {
   if (demoSlugs.includes(l.slug)) continue;
   const detail = page("layout", `${l.slug}.html`) ?? "";
   ok(`layout page ${l.slug} says plainly that it is not built`, detail.includes("Not built yet"));
-  ok(`layout page ${l.slug} does not embed a demo it does not have`, !detail.includes(`src="/demo/${l.slug}"`));
+  ok(`layout page ${l.slug} does not embed a demo it does not have`, !detail.includes(`src="${at(`/demo/${l.slug}`)}"`));
 }
 
 /* ---------------- 2. isolation ---------------- */

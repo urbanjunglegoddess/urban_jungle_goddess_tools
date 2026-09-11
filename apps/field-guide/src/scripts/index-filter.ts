@@ -17,7 +17,7 @@
  * that does not exist yet, so the URL is held in a variable and the shape is
  * declared here — narrow, and only what this page calls.
  */
-const PAGEFIND_URL = "/pagefind/pagefind.js";
+const PAGEFIND_URL = "/field-guide/pagefind/pagefind.js";
 
 interface PagefindHit {
   url: string;

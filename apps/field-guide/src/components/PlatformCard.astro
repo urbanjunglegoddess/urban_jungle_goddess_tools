@@ -1,5 +1,6 @@
 ---
 import type { Platform } from "../lib/labels";
+import { path } from "../lib/path";
 import {
   BAND_LABEL,
   CATEGORY_LABEL,
@@ -26,7 +27,7 @@ const d = entry.data;
   data-stack={d.inUjgStack ? "1" : "0"}
 >
   <div class="card-top">
-    <h3 class="name"><a href={`/${d.slug}`}>{d.name}</a></h3>
+    <h3 class="name"><a href={path(`/${d.slug}`)}>{d.name}</a></h3>
     {d.inUjgStack && <span class="flag stack">Your stack</span>}
     {!d.inUjgStack && d.shortlist && <span class="flag first">Shortlist</span>}
   </div>

@@ -26,6 +26,9 @@ const TYPES = { ".html": "text/html", ".js": "text/javascript", ".css": "text/cs
 
 const server = createServer((req, res) => {
   let p = decodeURIComponent(req.url.split("?")[0]);
+  // In production this app is served under /focus/, so its built asset
+  // URLs carry that prefix. dist/ here is the app on its own, so strip it.
+  if (p === "/focus" || p.startsWith("/focus/")) p = p.slice(6) || "/";
   if (p === "/") p = "/index.html";
   let f = join(DIST, p);
   if (!existsSync(f) && existsSync(f + ".html")) f = f + ".html";

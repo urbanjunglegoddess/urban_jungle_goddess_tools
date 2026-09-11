@@ -2,17 +2,19 @@
   "name": "urban-jungle-goddess-tools",
   "private": true,
   "version": "0.0.0",
-  "description": "Internal tooling for Urban Jungle Goddess LLC. A container of independent sites, each deployed on its own.",
+  "description": "Internal tooling for Urban Jungle Goddess LLC. Four sites, built separately, served together from one deploy.",
   "packageManager": "pnpm@10.33.0",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build",
+    "build": "turbo run build && node scripts/assemble.mjs",
     "test": "turbo run test",
-    "check": "turbo run typecheck test build blueprint isolation",
-    "migrate": "turbo run migrate"
+    "links": "node scripts/links-check.mjs",
+    "check": "turbo run typecheck test build blueprint isolation && node scripts/assemble.mjs && node scripts/links-check.mjs",
+    "migrate": "turbo run migrate",
+    "site-smoke": "node scripts/site-smoke.mjs"
   },
   "devDependencies": {
     "axe-core": "^4.13.0",

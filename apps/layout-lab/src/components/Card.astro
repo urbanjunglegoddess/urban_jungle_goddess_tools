@@ -1,6 +1,7 @@
 ---
 import type { Layout } from "../lib/catalog";
 import { hasDemo } from "../lib/catalog";
+import { path } from "../lib/path";
 
 interface Props {
   layout: Layout;
@@ -9,7 +10,7 @@ const { layout } = Astro.props;
 const live = hasDemo(layout.slug);
 ---
 
-<a class="card" href={`/layout/${layout.slug}`}>
+<a class="card" href={path(`/layout/${layout.slug}`)}>
   {
     layout.wireframe ? (
       <Fragment set:html={layout.wireframe} />

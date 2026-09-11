@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import { SECTIONS, GROUPS } from "../lib/catalog";
+import { path } from "../lib/path";
 
 const variantCount = SECTIONS.reduce((n, s) => n + s.variants.length, 0);
 ---
@@ -9,7 +10,7 @@ const variantCount = SECTIONS.reduce((n, s) => n + s.variants.length, 0);
   title="Section playbook — Layout Lab"
   description="29 page sections in 142 variants: the parts a page is assembled from, and the shapes each one can take."
 >
-  <p class="crumb"><a href="/">← Layout Lab</a></p>
+  <p class="crumb"><a href={path("/")}>← Layout Lab</a></p>
 
   <header class="mast">
     <p class="eyebrow">Layout Lab</p>
@@ -38,7 +39,7 @@ const variantCount = SECTIONS.reduce((n, s) => n + s.variants.length, 0);
           <ul class="seclist">
             {inGroup.map((s) => (
               <li>
-                <a href={`/section/${s.slug}`}>
+                <a href={path(`/section/${s.slug}`)}>
                   <h3>{s.name}</h3>
                   <p>{s.blurb}</p>
                   <span class="n">{s.variants.length} variants</span>

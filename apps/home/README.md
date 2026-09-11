@@ -22,25 +22,31 @@ The `state` field is the point of the page:
 
 | State | Means |
 |---|---|
-| `live` | Deployed and in use. Gets the full-width card. |
-| `in-repo` | Real and working, but not its own app or deploy yet. |
+| `live` | Served, and in use. Gets the full-width card. |
+| `in-repo` | Real and working, but not served yet. |
 | `superseded` | Kept for reference; new work uses something else. |
 
 `notYet` is not optional in spirit. Every card says what the tool does *not* do
 yet — the same rule the Field Guide runs on, applied to the tools themselves. A
 half-finished tool that looks finished is worse than one that says so.
 
-## Linking a deployment
+## Linking a tool
 
-Deployed URLs come from the environment, never from a literal in the data.
+All four apps ship from one deploy — this page at the root, each tool under its
+own prefix — so a link is a path, not a URL:
 
+```ts
+href: path("/layout-lab"),
 ```
-PUBLIC_FIELD_GUIDE_URL=https://…
-```
 
-Set it in the Vercel project or a local `.env` (see `.env.example`). Unset is a
-valid state — the card renders without an Open button rather than with a
-guessed link, and the card says so.
+`path()` is `src/lib/path.ts`. The prefix has to match the `base` in that app's
+`astro.config.mjs`, and `scripts/links-check.mjs` at the repo root walks the
+assembled site and fails the build if a link here does not resolve to a file
+that exists.
+
+This replaced three `PUBLIC_*_URL` environment variables. Any one of them left
+unset meant a card with no way in, and nothing in the repo could tell you that
+had happened. A path cannot point at the wrong deployment and cannot go stale.
 
 ## Styling
 

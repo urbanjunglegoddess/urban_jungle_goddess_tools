@@ -15,11 +15,12 @@ const total = TOOLS.length;
     <h1>Tools</h1>
     <p class="standfirst">
       Internal tooling for Urban Jungle Goddess LLC. Each one is a separate site with
-      its own build and its own deploy — they share the brand and nothing else.
+      its own build, its own tests and its own reason to exist. They ship together, from
+      here, and share the brand and nothing else.
     </p>
     <div class="mastfoot">
       <span><b>{total}</b> tools</span>
-      <span><b>{live}</b> deployed</span>
+      <span><b>{live}</b> you can open right now</span>
       <span>Not client-facing</span>
     </div>
   </header>
@@ -47,17 +48,10 @@ const total = TOOLS.length;
             </ul>
           )}
 
-          {t.href ? (
+          {t.href && (
             <a class="open" href={t.href}>
-              Open
+              Open {t.name}
             </a>
-          ) : (
-            t.state === "live" && (
-              <p class="where">
-                Deployed, but no URL is configured here — set
-                <code> PUBLIC_FIELD_GUIDE_URL</code> to link it.
-              </p>
-            )
           )}
 
           <p class="where">{t.path}</p>

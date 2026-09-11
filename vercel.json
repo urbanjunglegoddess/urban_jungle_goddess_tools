@@ -1,10 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "astro",
+  "framework": null,
   "buildCommand": "pnpm run build",
   "outputDirectory": "dist",
   "installCommand": "pnpm install --frozen-lockfile",
-  "ignoreCommand": "npx turbo-ignore @ujg/layout-lab",
   "github": { "silent": true },
   "cleanUrls": true,
   "trailingSlash": false
