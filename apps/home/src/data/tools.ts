@@ -7,6 +7,8 @@
  * list — nothing claims more than it is.
  */
 
+import { path } from "../lib/path";
+
 export type ToolState = "live" | "in-repo" | "superseded";
 
 export interface Tool {
@@ -18,7 +20,7 @@ export interface Tool {
   state: ToolState;
   /** Where it lives in the repo. */
   path: string;
-  /** Deployed URL, when there is one. */
+  /** Where it is served, when it is served. A path, not a URL. */
   href?: string;
   /** Live figures worth showing on the card. */
   facts?: { label: string; value: string }[];
@@ -34,22 +36,23 @@ export const STATE_LABEL: Record<ToolState, string> = {
 
 export const STATE_NOTE: Record<ToolState, string> = {
   live: "Deployed and in use.",
-  "in-repo": "Builds and passes its own checks in the repo, but has no deploy yet.",
+  "in-repo": "Builds and passes its own checks in the repo, but is not served yet.",
   superseded: "Kept for reference; new work uses something else.",
 };
 
 /**
- * Deployed URLs come from the environment, never from a literal here.
+ * Where each tool is served.
  *
- * A front door with a wrong link is worse than one with no link, and this repo
- * has no way to know what domain a Vercel project ended up on. Set the tool's
- * PUBLIC_*_URL in that tool's own Vercel project (or a local .env) and the Open
- * button appears; leave it unset and the card says so. Each app deploys as its
- * own project, so the variable has to be set on THIS project — apps/home — not
- * on the one it points at.
+ * All four apps ship from one Vercel project — this page at the root, and each
+ * tool under its own prefix. So a link is just a path: it cannot point at the
+ * wrong deployment, cannot go stale, and needs no environment variable to work.
+ * That replaced three PUBLIC_*_URL variables, any one of which being unset left
+ * a card with no way in.
+ *
+ * The prefix here has to match the `base` in that app's astro.config.mjs.
+ * scripts/links-check.mjs walks the assembled site and fails if a link on this
+ * page does not resolve to a file that exists.
  */
-const url = (v: string | undefined): string | undefined =>
-  v && /^https?:\/\//.test(v) ? v : undefined;
 
 export const TOOLS: Tool[] = [
   {
@@ -60,7 +63,7 @@ export const TOOLS: Tool[] = [
       "Open during a client scoping call to decide what a website project should be built on.",
     state: "live",
     path: "apps/field-guide",
-    href: url(import.meta.env.PUBLIC_FIELD_GUIDE_URL),
+    href: path("/field-guide"),
     facts: [
       { label: "Platforms", value: "228" },
       { label: "Shortlist", value: "10" },
@@ -75,16 +78,16 @@ export const TOOLS: Tool[] = [
     blurb:
       "Four focus tools over one shared core — a fit calculator, a planner, a combined dial, and a live session that locks to the clock.",
     usedWhen: "Personal work sessions. Also drops into a client site as an embed.",
-    state: "in-repo",
+    state: "live",
     path: "apps/focus",
-    href: url(import.meta.env.PUBLIC_FOCUS_URL),
+    href: path("/focus"),
     facts: [
       { label: "Tools", value: "4" },
       { label: "Shared core", value: "1 file, 113 assertions" },
       { label: "Smoke tests", value: "20" },
     ],
     notYet:
-      "No deploy. The four HTML prototypes in work-assist/real are still there and are now the superseded copy — they have not been deleted.",
+      "The four HTML prototypes in work-assist/real are still there and are now the superseded copy — they have not been deleted.",
   },
   {
     name: "Layout Lab",
@@ -92,9 +95,9 @@ export const TOOLS: Tool[] = [
       "74 avant-garde page layouts and 29 sections in 142 variants, catalogued from the reference sheets — with the Rule-Breakers built as real, openable pages rather than sketches.",
     usedWhen:
       "Open when a project needs a shape before it needs a page. Shows a client what a layout actually feels like instead of describing it.",
-    state: "in-repo",
+    state: "live",
     path: "apps/layout-lab",
-    href: url(import.meta.env.PUBLIC_LAYOUT_LAB_URL),
+    href: path("/layout-lab"),
     facts: [
       { label: "Layouts", value: "74" },
       { label: "Built as pages", value: "24" },

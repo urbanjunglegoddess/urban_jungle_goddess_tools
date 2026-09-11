@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import { LAYOUTS, RISK_NOTE, hasDemo } from "../../lib/catalog";
 import type { GetStaticPaths } from "astro";
+import { path } from "../../lib/path";
 
 export const getStaticPaths = (() =>
   LAYOUTS.map((layout) => ({ params: { slug: layout.slug }, props: { layout } }))) satisfies GetStaticPaths;
@@ -12,7 +13,7 @@ const note = RISK_NOTE[layout.riskName];
 ---
 
 <Base title={`${layout.name} — Layout Lab`} description={layout.blurb}>
-  <p class="crumb"><a href="/">← All layouts</a></p>
+  <p class="crumb"><a href={path("/")}>← All layouts</a></p>
 
   <header class="lhead">
     <p class="lpath">{layout.round} · {layout.category}</p>
@@ -38,13 +39,13 @@ const note = RISK_NOTE[layout.riskName];
       live ? (
         <>
           <p class="demo-bar">
-            <a href={`/demo/${layout.slug}`} target="_blank" rel="noopener">
+            <a href={path(`/demo/${layout.slug}`)} target="_blank" rel="noopener">
               Open full screen ↗
             </a>
             <span>Drag the frame's bottom-right corner to test narrower widths.</span>
           </p>
           <div class="demo-frame">
-            <iframe src={`/demo/${layout.slug}`} title={`${layout.name} demo`} loading="lazy" />
+            <iframe src={path(`/demo/${layout.slug}`)} title={`${layout.name} demo`} loading="lazy" />
           </div>
         </>
       ) : (

@@ -4,9 +4,20 @@ Internal tooling for Urban Jungle Goddess LLC, the Afro-Futurist digital
 consultancy run by Omegea Hunter.
 
 This repo is a **container of separate sites**, not one application. Each tool
-in `apps/` has its own build, its own Vercel project, and can take its own
-domain. They share the brand and nothing else. `apps/home` is the front door
-that lists them.
+in `apps/` has its own build, its own tests and its own README. They share the
+brand and nothing else.
+
+They **ship together**, from one Vercel project: `apps/home` is the front door
+at the root, and each tool is served under its own prefix. One deploy, one URL,
+and links between the apps that are ordinary paths — nothing to configure and
+nothing to keep in sync.
+
+```
+/                    apps/home        the front door
+/field-guide         apps/field-guide
+/focus               apps/focus
+/layout-lab          apps/layout-lab
+```
 
 None of it is client-facing. These are the instruments used to run the
 business — opened during a scoping call, not published as marketing.
@@ -15,16 +26,16 @@ business — opened during a scoping call, not published as marketing.
 
 ## What's here
 
-| Tool | State | What it's for |
+| Tool | Served at | What it's for |
 |---|---|---|
-| [`apps/field-guide`](apps/field-guide) | **Live** | 228 website platforms with cost, who runs it after launch, exit path and ceiling. Opened during a client scoping call. |
-| [`apps/home`](apps/home) | **Live** | This list, as a page. Says what each tool does *and* what it doesn't do yet. |
-| [`apps/focus`](apps/focus) | In the repo | Focus Window: four focus tools over one shared core — fit, planner, combined dial, live session. Builds and tests; no deploy yet. |
-| [`apps/layout-lab`](apps/layout-lab) | In the repo | 74 avant-garde layouts and 29 sections in 142 variants, catalogued — with the 24 Rule-Breakers built as real pages. No deploy yet. |
-| [`packages/brand`](packages/brand) | In use | `@ujg/brand` — the UJG palette, type stack and theme switching. Every tool imports it. |
-| [`work-assist/`](work-assist) | Superseded | The Focus Window prototypes in five stacks. `apps/focus` is the one that gets maintained now. |
-| [`colors/`](colors) | Superseded | The original colour-system export. `packages/brand` replaced it for new work; not yet folded in or retired. |
-| [`operations/`](operations) | Superseded | The original single-file Field Guide. Still the only place Compare, Decide and Cost work end to end; stays until the site carries them. |
+| [`apps/field-guide`](apps/field-guide) | `/field-guide` | 228 website platforms with cost, who runs it after launch, exit path and ceiling. Opened during a client scoping call. |
+| [`apps/home`](apps/home) | `/` | This list, as a page. Says what each tool does *and* what it doesn't do yet. |
+| [`apps/focus`](apps/focus) | `/focus` | Focus Window: four focus tools over one shared core — fit, planner, combined dial, live session. |
+| [`apps/layout-lab`](apps/layout-lab) | `/layout-lab` | 74 avant-garde layouts and 29 sections in 142 variants, catalogued — with the 24 Rule-Breakers built as real pages. |
+| [`packages/brand`](packages/brand) | — | `@ujg/brand` — the UJG palette, type stack and theme switching. Every tool imports it. |
+| [`work-assist/`](work-assist) | — | The Focus Window prototypes in five stacks. `apps/focus` is the one that gets maintained now. |
+| [`colors/`](colors) | — | The original colour-system export. `packages/brand` replaced it for new work; not yet folded in or retired. |
+| [`operations/`](operations) | — | The original single-file Field Guide. Still the only place Compare, Decide and Cost work end to end; stays until the site carries them. |
 
 ---
 
@@ -40,14 +51,19 @@ pnpm check          # typecheck, test, build and verify every app
 | Command | What it does |
 |---|---|
 | `pnpm dev` | Dev servers for every app |
-| `pnpm build` | Build every app |
+| `pnpm build` | Build every app, then assemble them into one `dist/` |
 | `pnpm test` | Every package's tests |
-| `pnpm check` | typecheck + test + build + blueprint + isolation |
+| `pnpm links` | Resolve every internal link on the assembled site |
+| `pnpm check` | typecheck + test + build + blueprint + isolation + assemble + links |
 
-Two checks need a Chromium binary and so are deliberately outside `pnpm check`.
-Run them when a colour token, a text size or a demo changes:
-`pnpm --filter @ujg/layout-lab a11y` and `... smoke`, and the same `a11y` script
-in `apps/focus` and `apps/field-guide`.
+Anything needing a Chromium binary sits outside `pnpm check`. Run these when a
+colour token, a text size, a base path or a demo changes:
+
+| Command | What it proves |
+|---|---|
+| `pnpm site-smoke` | The front door opens all three tools, and each one works and is styled |
+| `pnpm --filter @ujg/<app> a11y` | Zero WCAG 2.1 AA violations (all four apps have one) |
+| `pnpm --filter @ujg/<app> smoke` | That app's own behaviour (field-guide, focus, layout-lab) |
 
 To work on one app: `pnpm --filter @ujg/field-guide dev`.
 
@@ -134,11 +150,13 @@ catalogue page got caught.
 
 1. `apps/<name>/` with its own `package.json`.
 2. Import `@ujg/brand` — never copy the palette.
-3. Add an entry to `apps/home/src/data/tools.ts`, with an honest `state`.
-4. Its own Vercel project, Root Directory `apps/<name>`, with a `turbo-ignore`
-   step so it only rebuilds when it actually changes.
+3. Set `base: "/<name>"` in its `astro.config.mjs`, and copy `src/lib/path.ts`
+   from any other app. Every internal link goes through `path()`.
+4. Add it to the `APPS` list in `scripts/assemble.mjs`.
+5. Add an entry to `apps/home/src/data/tools.ts` with an honest `state` and
+   `href: path("/<name>")`.
 
-Nothing in any other app should need to change.
+Then `pnpm check`. If a link is wrong, `links-check` says which one.
 
 ## Adding a platform to the Field Guide
 
@@ -149,24 +167,34 @@ The schema will tell you what's missing.
 
 ## Deploying
 
-Each app is its own Vercel project with Root Directory set to that app, and
-"Include files outside the Root Directory" enabled so the pnpm workspace
-resolves. `vercel.json` in each app sets the `turbo-ignore` step, so a commit
-touching one app doesn't rebuild the others.
+**One Vercel project**, Root Directory at the repo root, with the build command
+`pnpm run build` and output directory `dist`.
 
-Two settings in those files are load-bearing: `cleanUrls` and `trailingSlash`.
-Astro is configured with `build.format: "file"`, so pages are emitted flat as
-`<slug>.html` while internal links are extensionless. Get that mapping wrong and
-every link 404s while the index still looks perfect.
+`pnpm build` runs every app's build through Turborepo, then
+`scripts/assemble.mjs` copies the four outputs into a single `dist/` — home at
+the root, each tool under its prefix. Assemble refuses to let the home app
+overwrite a tool's directory, because a page called `field-guide.html` would
+silently shadow the entire Field Guide.
+
+Each app declares its prefix as `base` in its `astro.config.mjs`. Astro rewrites
+**asset** URLs from that, but an `href` you typed by hand is just a string and
+stays exactly as written — so every internal link goes through that app's
+`src/lib/path.ts`. A link that skips it builds fine, reviews fine, and 404s in
+production. `pnpm links` walks the built HTML and resolves all 1,125 internal
+links against the files that actually exist, which is the only way to catch the
+one you forgot.
+
+Two settings in the root `vercel.json` are load-bearing: `cleanUrls` and
+`trailingSlash`. Astro is configured with `build.format: "file"`, so pages are
+emitted flat as `<slug>.html` while internal links are extensionless. Get that
+mapping wrong and every link 404s while the index still looks perfect.
 
 Vercel validates `vercel.json` against a strict schema and rejects any key it
-doesn't recognise — including a `//` comment key. Keep notes in the app README.
+doesn't recognise — including a `//` comment key. Keep notes in the README.
 
-`apps/home` links to each deployed tool via a `PUBLIC_*_URL` variable —
-`PUBLIC_FIELD_GUIDE_URL`, `PUBLIC_FOCUS_URL`, `PUBLIC_LAYOUT_LAB_URL`. They are
-set on the **home** project, not on the project they point at. Unset is a valid
-state: the card renders without an Open button rather than with a guessed link.
-See `apps/home/.env.example`.
+There are no `PUBLIC_*_URL` environment variables any more. The home page links
+to each tool with a path, so there is nothing to set and nothing that can point
+at a stale deployment.
 
 **Before any of this takes a real domain**, look at Deployment Protection. These
 pages carry build notes, stack flags and comparison reasoning, and preview URLs

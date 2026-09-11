@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Card from "../components/Card.astro";
 import { LAYOUTS, SECTIONS, ROUNDS, DEMOS, layoutsByCategory } from "../lib/catalog";
+import { path } from "../lib/path";
 
 const variantCount = SECTIONS.reduce((n, s) => n + s.variants.length, 0);
 const demoCount = LAYOUTS.filter((l) => DEMOS.has(l.slug)).length;
@@ -26,7 +27,7 @@ const demoCount = LAYOUTS.filter((l) => DEMOS.has(l.slug)).length;
       <span><b>{SECTIONS.length}</b> sections · <b>{variantCount}</b> variants</span>
     </p>
     <p class="mastfoot">
-      <a href="/sections">Section playbook →</a>
+      <a href={path("/sections")}>Section playbook →</a>
     </p>
   </header>
 

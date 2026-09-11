@@ -4,6 +4,7 @@ import PlatformCard from "../components/PlatformCard.astro";
 import DecisionLayer from "../components/DecisionLayer.astro";
 import { getCollection } from "astro:content";
 import { CATEGORY_LABEL } from "../lib/labels";
+import { path } from "../lib/path";
 
 const platforms = (await getCollection("platforms")).sort((a, b) =>
   a.data.name.localeCompare(b.data.name)
@@ -74,7 +75,7 @@ const depth = platforms.reduce<Record<string, number>>((a, p) => {
         {
           shortlist.map((p) => (
             <li>
-              <a href={`/${p.data.slug}`}>{p.data.name}</a>
+              <a href={path(`/${p.data.slug}`)}>{p.data.name}</a>
             </li>
           ))
         }

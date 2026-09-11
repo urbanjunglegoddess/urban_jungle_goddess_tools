@@ -130,7 +130,20 @@ canvas becomes a list. `smoke` checks all twenty-four for horizontal overflow at
 
 ## Deploying
 
-Its own Vercel project. Root Directory `apps/layout-lab`, and nothing else to
-configure — `vercel.json` carries the build, the clean URLs and the
-`turbo-ignore` command. Do not add comment keys to `vercel.json`; Vercel
-validates it strictly and rejects unknown properties, including `//`.
+Not deployed on its own. All four apps ship from a single Vercel project at the
+repo root: `pnpm build` builds each one, then `scripts/assemble.mjs` copies the
+outputs into one `dist/` and this app lands under `/layout-lab/`.
+
+That prefix is `base` in `astro.config.mjs`. Astro rewrites asset URLs from it,
+but **not** hrefs written by hand — those go through `src/lib/path.ts`. A link
+that skips it still builds and still looks right in review, then 404s in
+production, so `scripts/links-check.mjs` walks the assembled site and resolves
+every internal link against the files that actually exist.
+
+The root `vercel.json` sets `cleanUrls: true` and `trailingSlash: false`. Both
+are load-bearing: `build.format: "file"` emits pages flat as `<slug>.html` while
+every internal link is extensionless. Get that mapping wrong and the links 404
+while the index still looks perfect.
+
+Vercel validates `vercel.json` against a strict schema and rejects any key it
+does not recognise, including a `//` comment key. Keep notes here, not in it.

@@ -9,6 +9,7 @@
  * things are shared — the brand webfonts and a minimal reset.
  */
 import "@ujg/brand/fonts.css";
+import { path } from "../lib/path";
 
 interface Props {
   /** Layout slug, so the chip can point back at the catalog entry. */
@@ -88,6 +89,6 @@ const { slug, name, premise } = Astro.props;
   </head>
   <body>
     <slot />
-    <a class="lab-chip" href={`/layout/${slug}`} target="_top">← Layout Lab</a>
+    <a class="lab-chip" href={path(`/layout/${slug}`)} target="_top">← Layout Lab</a>
   </body>
 </html>

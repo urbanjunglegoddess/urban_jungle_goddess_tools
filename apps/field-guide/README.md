@@ -102,18 +102,20 @@ carried, field for field, in both directions.
 
 ## Deploying
 
-Its own Vercel project, Root Directory `apps/field-guide`, with
-"Include files outside the Root Directory" enabled so the pnpm workspace
-resolves. `vercel.json` sets the `turbo-ignore` step, so a commit touching only
-another app does not rebuild this one.
+Not deployed on its own. All four apps ship from a single Vercel project at the
+repo root: `pnpm build` builds each one, then `scripts/assemble.mjs` copies the
+outputs into one `dist/` and this app lands under `/field-guide/`.
 
-Two settings there are load-bearing. Astro is configured with
-`build.format: "file"`, so pages are emitted flat as `<slug>.html` while every
-internal link is extensionless (`/wix-studio`). `cleanUrls: true` and
-`trailingSlash: false` make that mapping explicit instead of leaning on a
-platform default — get it wrong and all 228 platform links 404 while the index
-still looks perfect.
+That prefix is `base` in `astro.config.mjs`. Astro rewrites asset URLs from it,
+but **not** hrefs written by hand — those go through `src/lib/path.ts`. A link
+that skips it still builds and still looks right in review, then 404s in
+production, so `scripts/links-check.mjs` walks the assembled site and resolves
+every internal link against the files that actually exist.
 
-Note that Vercel validates `vercel.json` against a strict schema and rejects
-any key it does not recognise, including a `//` comment key. Keep notes here,
-not in the file.
+The root `vercel.json` sets `cleanUrls: true` and `trailingSlash: false`. Both
+are load-bearing: `build.format: "file"` emits pages flat as `<slug>.html` while
+every internal link is extensionless. Get that mapping wrong and the links 404
+while the index still looks perfect.
+
+Vercel validates `vercel.json` against a strict schema and rejects any key it
+does not recognise, including a `//` comment key. Keep notes here, not in it.

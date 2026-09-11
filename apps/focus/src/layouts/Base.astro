@@ -1,5 +1,6 @@
 ---
 import "../styles/site.css";
+import { path } from "../lib/path";
 
 interface Props {
   title: string;
@@ -30,11 +31,11 @@ const TOOLS = [
     <div class="wrap">
       <nav aria-label="Focus tools">
         <ul class="toolnav">
-          <li><a href="/" aria-current={tool === null ? "page" : undefined}>All four</a></li>
+          <li><a href={path("/")} aria-current={tool === null ? "page" : undefined}>All four</a></li>
           {
             TOOLS.map((t) => (
               <li>
-                <a href={t.href} aria-current={tool === t.id ? "page" : undefined}>
+                <a href={path(t.href)} aria-current={tool === t.id ? "page" : undefined}>
                   {t.label}
                 </a>
               </li>
