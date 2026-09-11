@@ -1,0 +1,37 @@
+---
+import type { Layout } from "../lib/catalog";
+import { hasDemo } from "../lib/catalog";
+
+interface Props {
+  layout: Layout;
+}
+const { layout } = Astro.props;
+const live = hasDemo(layout.slug);
+---
+
+<a class="card" href={`/layout/${layout.slug}`}>
+  {
+    layout.wireframe ? (
+      <Fragment set:html={layout.wireframe} />
+    ) : (
+      <div class="wfwrap">
+        <div class="wf" />
+      </div>
+    )
+  }
+  <div class="card-meta">
+    <h4>{layout.name}</h4>
+    <p>{layout.blurb}</p>
+    <div class="rowtags">
+      <span class="risk">
+        <span class="rdots" aria-hidden="true">
+          {[1, 2, 3, 4, 5].map((i) => <span class={i <= layout.risk ? "rd on" : "rd"} />)}
+        </span>
+        <span class="rname">
+          <span class="sr">Risk {layout.risk} of 5: </span>{layout.riskName}
+        </span>
+      </span>
+      <span class={live ? "pill live" : "pill wire"}>{live ? "Demo" : "Wireframe"}</span>
+    </div>
+  </div>
+</a>

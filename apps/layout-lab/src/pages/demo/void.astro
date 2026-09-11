@@ -1,0 +1,102 @@
+---
+import DemoBase from "../../layouts/DemoBase.astro";
+import { BRAND, NAV, SERVICES, WORKS, CTA, TAGLINE } from "../../lib/demoContent";
+---
+
+<DemoBase
+  slug="void"
+  name="Negative-Space Dominant"
+  premise="One small thing in a very large empty field, repeated down the page. Restraint as the whole design."
+>
+  <style is:global>
+    /* Nowhere for weak craft to hide, says the sheet — so there are exactly
+       three type sizes, one weight per size, one accent, and a single measure.
+       Every screen holds one idea and then stops. */
+    body { background: #E8E6E1; color: #0A0A0A; }
+
+    .screen {
+      min-height: 92vh; display: grid; place-items: center;
+      padding: 40px 24px; text-align: center;
+    }
+    .screen > * { max-width: 34ch; }
+
+    .mark { font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.42em; text-transform: uppercase; }
+
+    h1 { font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 600; font-size: clamp(28px, 4.2vw, 46px); line-height: 1.22; margin: 0; letter-spacing: -0.01em; }
+    p { font-size: 16px; line-height: 1.75; color: #5f5a52; margin: 0; }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #7E3209; margin: 0 auto; }
+
+    .k { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.34em; text-transform: uppercase; color: #5f5a52; }
+
+    .stack { display: grid; gap: 26px; justify-items: center; }
+
+    a.quiet { color: #7E3209; text-decoration: none; border-bottom: 1px solid rgba(126,50,9,0.35); padding-bottom: 2px; }
+    a.quiet:hover { border-bottom-color: #7E3209; }
+
+    nav.top {
+      position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: center;
+      gap: 26px; padding: 22px; font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 10.5px; letter-spacing: 0.26em; text-transform: uppercase;
+      background: linear-gradient(#E8E6E1 60%, rgba(232,230,225,0));
+    }
+    nav.top a { color: #5f5a52; text-decoration: none; }
+    nav.top a:hover { color: #7E3209; }
+
+    /* The work list is the one place the page allows more than one thing at a
+       time, and even then it is a single column with a lot of air. */
+    .list { display: grid; gap: 46px; width: 100%; max-width: 34ch; }
+    .item h2 { font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 600; font-size: 20px; margin: 0 0 5px; }
+    .item p { font-size: 14px; }
+  </style>
+
+  <nav class="top" aria-label="Primary">
+    {NAV.map((n) => <a href="#work">{n}</a>)}
+  </nav>
+
+  <section class="screen">
+    <div class="stack">
+      <span class="mark">{BRAND}</span>
+      <div class="dot" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="screen">
+    <h1>{TAGLINE}</h1>
+  </section>
+
+  <section class="screen" id="work">
+    <div class="stack">
+      <span class="k">Selected work</span>
+      <div class="list">
+        {
+          WORKS.slice(0, 4).map((w) => (
+            <article class="item">
+              <h2>{w.client}</h2>
+              <p>{w.kind} — {w.year}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    SERVICES.map((s) => (
+      <section class="screen">
+        <div class="stack">
+          <span class="k">{s.n} — {s.title}</span>
+          <p>{s.body}</p>
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="screen">
+    <div class="stack">
+      <p>{CTA.line}</p>
+      <a class="quiet" href="#work">{CTA.email}</a>
+      <span class="k">{CTA.address}</span>
+    </div>
+  </section>
+</DemoBase>

@@ -36,6 +36,12 @@
         "build"
       ],
       "outputs": []
+    },
+    "isolation": {
+      "dependsOn": [
+        "build"
+      ],
+      "outputs": []
     }
   }
 }

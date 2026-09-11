@@ -1,0 +1,62 @@
+---
+import Base from "../layouts/Base.astro";
+import Card from "../components/Card.astro";
+import { LAYOUTS, SECTIONS, ROUNDS, DEMOS, layoutsByCategory } from "../lib/catalog";
+
+const variantCount = SECTIONS.reduce((n, s) => n + s.variants.length, 0);
+const demoCount = LAYOUTS.filter((l) => DEMOS.has(l.slug)).length;
+---
+
+<Base
+  title="Layout Lab — Urban Jungle Goddess"
+  description="74 avant-garde page layouts and 29 sections in 142 variants, with working demos for the layouts that have been built."
+>
+  <header class="mast">
+    <p class="eyebrow">Urban Jungle Goddess</p>
+    <h1>Layout Lab</h1>
+    <p class="standfirst">
+      Two reference sheets, opened up. The catalog below is the layout vocabulary — what a
+      page can be before it settles into a header, a hero and three cards. Where a layout has
+      been built, the card says <b>Demo</b> and you can open the real thing.
+    </p>
+    <p class="mastfoot">
+      <span><b>{LAYOUTS.length}</b> layouts</span>
+      <span><b>{ROUNDS.length}</b> rounds</span>
+      <span><b>{demoCount}</b> built as pages</span>
+      <span><b>{SECTIONS.length}</b> sections · <b>{variantCount}</b> variants</span>
+    </p>
+    <p class="mastfoot">
+      <a href="/sections">Section playbook →</a>
+    </p>
+  </header>
+
+  <div class="warnbar">
+    <b>Read the risk dots.</b> They are the reference sheet's own rating, carried across
+    unchanged. Four and five dots are not a dare — they mark layouts that cost real money to
+    build well and break badly when they are rushed. Every layout page says what to watch for.
+  </div>
+
+  {
+    ROUNDS.map((round) => (
+      <section>
+        <div class="round-head">
+          <h2>{round}</h2>
+          <span class="n">{LAYOUTS.filter((l) => l.round === round).length} layouts</span>
+        </div>
+        {layoutsByCategory(round).map(({ category, layouts }) => (
+          <>
+            <div class="cat-head">
+              <h3>{category}</h3>
+              <span class="n">{layouts.length}</span>
+            </div>
+            <div class="grid">
+              {layouts.map((layout) => (
+                <Card layout={layout} />
+              ))}
+            </div>
+          </>
+        ))}
+      </section>
+    ))
+  }
+</Base>

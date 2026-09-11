@@ -1,0 +1,95 @@
+---
+import DemoBase from "../../layouts/DemoBase.astro";
+import { BRAND, WORKS, SERVICES, CTA } from "../../lib/demoContent";
+
+const LEFT = [
+  { k: "For clients", h: "You have a deadline", p: "A launch date that already moved once, and a brand that will not survive being stretched over it. Start here." },
+  ...SERVICES.map((s) => ({ k: s.n, h: s.title, p: s.body })),
+  { k: "Next", h: CTA.label, p: CTA.line },
+];
+const RIGHT = [
+  { k: "For collaborators", h: "You want to work with us", p: "We take on two freelance leads a quarter — writers, motion, front-end. The bar is that you can defend your decisions." },
+  ...WORKS.slice(0, 3).map((w) => ({ k: w.year, h: w.client, p: w.line })),
+  { k: "Next", h: "Send three things", p: "One project you are proud of, one you are not, and the reason for the difference." },
+];
+---
+
+<DemoBase
+  slug="dualscroll"
+  name="Split-Screen Dual Scroll"
+  premise="Two halves that scroll independently in opposite directions — and one ordinary page under 860px, because two columns will not fit."
+>
+  <style is:global>
+    /* The sheet's note is the design constraint: mobile has no room for two
+       columns, so it does not get two columns. Below the breakpoint this is a
+       single stacked page with both audiences in sequence, and the split
+       behaviour is not degraded — it is absent. */
+    body { background: #0A0A0A; color: #E8E6E1; }
+
+    .mark {
+      position: fixed; left: 50%; top: 18px; transform: translateX(-50%); z-index: 70;
+      font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700; font-size: 16px;
+      background: #0A0A0A; border: 1px solid #2a2a2a; border-radius: 999px; padding: 7px 18px;
+    }
+
+    .split { display: grid; }
+    .side { padding: 96px clamp(22px, 4vw, 56px) 80px; }
+    .side.a { background: #042D1D; }
+    .side.b { background: #2a1339; }
+
+    .cell { padding: 30px 0; border-bottom: 1px solid rgba(232,230,225,0.14); }
+    .cell .k { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #DCA424; }
+    .cell h2 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(24px, 3.4vw, 38px); margin: 9px 0 10px; line-height: 1.05; }
+    .cell p { margin: 0; font-size: 16px; line-height: 1.65; color: #cfcbc2; max-width: 42ch; }
+
+    .go { display: inline-block; margin-top: 26px; background: #DCA424; color: #0A0A0A; padding: 12px 24px; text-decoration: none; font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 600; }
+    .go:hover { background: #E8E6E1; }
+
+    /* Each half is its own scroll container above the breakpoint, so each one
+       carries tabindex="0" — a region you can only reach with a pointer is not
+       reachable at all for a keyboard user. */
+    @media (min-width: 860px) {
+      /* Each half becomes its own scroll container. Opposite directions come
+         from column-reverse on the right, so it fills from the bottom up. */
+      html, body { height: 100%; overflow: hidden; }
+      .split { grid-template-columns: 1fr 1fr; height: 100vh; }
+      .side { overflow-y: auto; height: 100vh; scrollbar-width: thin; }
+      .side.b { display: flex; flex-direction: column-reverse; }
+      .side.b .inner { display: flex; flex-direction: column-reverse; }
+      .side + .side { border-left: 1px solid rgba(232,230,225,0.14); }
+    }
+  </style>
+
+  <span class="mark">{BRAND}</span>
+
+  <div class="split">
+    <section class="side a" aria-label="For clients" tabindex="0">
+      <div class="inner">
+        {
+          LEFT.map((c) => (
+            <article class="cell">
+              <span class="k">{c.k}</span>
+              <h2>{c.h}</h2>
+              <p>{c.p}</p>
+            </article>
+          ))
+        }
+        <a class="go" href="#top">{CTA.email}</a>
+      </div>
+    </section>
+
+    <section class="side b" aria-label="For collaborators" tabindex="0">
+      <div class="inner">
+        {
+          RIGHT.map((c) => (
+            <article class="cell">
+              <span class="k">{c.k}</span>
+              <h2>{c.h}</h2>
+              <p>{c.p}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</DemoBase>

@@ -34,7 +34,7 @@ export const STATE_LABEL: Record<ToolState, string> = {
 
 export const STATE_NOTE: Record<ToolState, string> = {
   live: "Deployed and in use.",
-  "in-repo": "Real and working, but not yet its own app or deploy.",
+  "in-repo": "Builds and passes its own checks in the repo, but has no deploy yet.",
   superseded: "Kept for reference; new work uses something else.",
 };
 
@@ -42,9 +42,11 @@ export const STATE_NOTE: Record<ToolState, string> = {
  * Deployed URLs come from the environment, never from a literal here.
  *
  * A front door with a wrong link is worse than one with no link, and this repo
- * has no way to know what domain a Vercel project ended up on. Set
- * PUBLIC_FIELD_GUIDE_URL in the Vercel project (or a local .env) and the Open
- * button appears; leave it unset and the card says so.
+ * has no way to know what domain a Vercel project ended up on. Set the tool's
+ * PUBLIC_*_URL in that tool's own Vercel project (or a local .env) and the Open
+ * button appears; leave it unset and the card says so. Each app deploys as its
+ * own project, so the variable has to be set on THIS project — apps/home — not
+ * on the one it points at.
  */
 const url = (v: string | undefined): string | undefined =>
   v && /^https?:\/\//.test(v) ? v : undefined;
@@ -74,13 +76,33 @@ export const TOOLS: Tool[] = [
       "Four focus tools over one shared core — a fit calculator, a planner, a combined dial, and a live session that locks to the clock.",
     usedWhen: "Personal work sessions. Also drops into a client site as an embed.",
     state: "in-repo",
-    path: "work-assist/real",
+    path: "apps/focus",
+    href: url(import.meta.env.PUBLIC_FOCUS_URL),
     facts: [
       { label: "Tools", value: "4" },
-      { label: "Stacks", value: "HTML · web · React · Next.js · Expo" },
+      { label: "Shared core", value: "1 file, 113 assertions" },
+      { label: "Smoke tests", value: "20" },
     ],
     notYet:
-      "Not a workspace app, so it has no build, no tests and no deploy. Moving it to apps/ is a rename plus a package.json.",
+      "No deploy. The four HTML prototypes in work-assist/real are still there and are now the superseded copy — they have not been deleted.",
+  },
+  {
+    name: "Layout Lab",
+    blurb:
+      "74 avant-garde page layouts and 29 sections in 142 variants, catalogued from the reference sheets — with the Rule-Breakers built as real, openable pages rather than sketches.",
+    usedWhen:
+      "Open when a project needs a shape before it needs a page. Shows a client what a layout actually feels like instead of describing it.",
+    state: "in-repo",
+    path: "apps/layout-lab",
+    href: url(import.meta.env.PUBLIC_LAYOUT_LAB_URL),
+    facts: [
+      { label: "Layouts", value: "74" },
+      { label: "Built as pages", value: "24" },
+      { label: "Sections", value: "29 · 142 variants" },
+      { label: "A11y", value: "0 violations, 34 views" },
+    ],
+    notYet:
+      "Rounds 2 to 4 — 50 layouts — are catalogue and wireframe only. Several of them (WebGL scenes, fluid simulation, audio-reactive) are a build each, not a layout each, so which ones get made real is a decision, not a backlog.",
   },
   {
     name: "Website Chooser (original)",

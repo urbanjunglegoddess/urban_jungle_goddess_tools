@@ -1,0 +1,124 @@
+---
+import DemoBase from "../../layouts/DemoBase.astro";
+import { BRAND, NAV, SERVICES, WORKS, CTA, TAGLINE } from "../../lib/demoContent";
+
+const BANDS = [
+  { text: "IDENTITY · INTERFACE · MOTION · ", tone: "gold", dir: "l", tilt: "-3deg" },
+  { text: "MERIDIAN SIX · EST 2016 · ATLANTA · ", tone: "plum", dir: "r", tilt: "2.5deg" },
+  { text: "WORK THAT IS WATCHED · ", tone: "orange", dir: "l", tilt: "-1.5deg" },
+];
+---
+
+<DemoBase
+  slug="kinetic"
+  name="Kinetic Marquee Bands"
+  premise="Crossing ribbons of giant moving type used as the page's actual structure, with the motion stopped dead under reduced-motion."
+>
+  <style is:global>
+    /* Two accessibility landmines here, both defused deliberately:
+       1. The moving text is duplicated for seamlessness, so the copy is marked
+          aria-hidden and the real heading is a normal, still <h1>.
+       2. Under prefers-reduced-motion the bands do not slow down — they stop,
+          and the type is re-sized so nothing is mid-word at rest. */
+    body { background: #0A0A0A; color: #E8E6E1; }
+
+    .bar { position: fixed; inset: 0 0 auto 0; z-index: 70; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; padding: 14px 22px; background: rgba(10,10,10,0.9); }
+    .mark { font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700; font-size: 18px; }
+    .bar ul { list-style: none; display: flex; gap: 16px; margin: 0; padding: 0; font-size: 12.5px; }
+    .bar a { color: #cfcbc2; text-decoration: none; }
+    .bar a:hover { color: #DCA424; }
+
+    .stage { position: relative; padding: 96px 0 30px; overflow: hidden; }
+
+    .band { overflow: hidden; white-space: nowrap; padding: 10px 0; margin: -8px 0; }
+    .band .run { display: inline-flex; will-change: transform; }
+    .band span {
+      font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700;
+      font-size: clamp(38px, 9vw, 108px); line-height: 1; letter-spacing: -0.02em;
+      padding-right: 0.2em;
+    }
+    .band.gold { background: #DCA424; color: #0A0A0A; }
+    .band.plum { background: #5F2C82; color: #E8E6E1; }
+    .band.orange { background: #E86100; color: #0A0A0A; }
+    .band.t-l .run { animation: slideL 22s linear infinite; }
+    .band.t-r .run { animation: slideR 26s linear infinite; }
+
+    @keyframes slideL { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes slideR { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+    .headline {
+      position: relative; z-index: 5; max-width: 1000px; margin: 0 auto;
+      padding: 54px 24px 30px;
+    }
+    .headline h1 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(30px, 5vw, 56px); line-height: 1; margin: 0 0 14px; letter-spacing: -0.02em; }
+    .headline p { max-width: 44ch; margin: 0; font-size: 17px; line-height: 1.6; color: #cfcbc2; }
+
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 60px 24px 110px; }
+    h2 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase; color: #9a958c; margin: 44px 0 20px; }
+    .svc { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+    .s { border: 1px solid #2a2a2a; padding: 22px; }
+    .s .n { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: #DCA424; }
+    .s h3 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 20px; margin: 7px 0 8px; }
+    .s p { margin: 0; font-size: 14.5px; line-height: 1.55; color: #cfcbc2; }
+    .wrow { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-top: 1px solid #2a2a2a; font-size: 15px; }
+    .wrow span:last-child { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: #9a958c; }
+    .go { display: inline-block; margin-top: 28px; background: #DCA424; color: #0A0A0A; padding: 13px 26px; text-decoration: none; font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 600; }
+    .go:hover { background: #E8E6E1; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .band .run { animation: none !important; transform: none !important; }
+      .band span { font-size: clamp(22px, 4vw, 40px); }
+    }
+  </style>
+
+  <header class="bar">
+    <span class="mark">{BRAND}</span>
+    <nav aria-label="Primary">
+      <ul>{NAV.map((n) => <li><a href="#services">{n}</a></li>)}</ul>
+    </nav>
+  </header>
+
+  <div class="stage">
+    {
+      BANDS.map((b) => (
+        <div class={"band " + b.tone + " t-" + b.dir} style={"transform: rotate(" + b.tilt + ")"} aria-hidden="true">
+          <div class="run">
+            <span>{b.text.repeat(4)}</span>
+            <span>{b.text.repeat(4)}</span>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <section class="headline">
+    <h1>Type as the structure</h1>
+    <p>{TAGLINE}</p>
+  </section>
+
+  <div class="wrap">
+    <h2 id="services">Services</h2>
+    <div class="svc">
+      {
+        SERVICES.map((s) => (
+          <article class="s">
+            <span class="n">{s.n}</span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <h2>Selected work</h2>
+    {
+      WORKS.map((w) => (
+        <div class="wrow">
+          <span>{w.client} — {w.line}</span>
+          <span>{w.year}</span>
+        </div>
+      ))
+    }
+    <a class="go" href="#services">{CTA.label}</a>
+  </div>
+</DemoBase>

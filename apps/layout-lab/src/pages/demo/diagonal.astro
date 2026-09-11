@@ -1,0 +1,138 @@
+---
+import DemoBase from "../../layouts/DemoBase.astro";
+import { BRAND, NAV, SERVICES, STATS, CTA, TAGLINE, INTRO } from "../../lib/demoContent";
+---
+
+<DemoBase
+  slug="diagonal"
+  name="Diagonal / Skewed Sections"
+  premise="Sections divided by angled cuts instead of flat rules, with the type counter-rotated back to level."
+>
+  <style is:global>
+    /* One angle, declared once, used everywhere. The section skews; a wrapper
+       inside skews back by the same amount so no letterform is ever on a slant.
+       That counter-rotation is the entire discipline of this layout. */
+    :root { --tilt: -4deg; }
+    body { background: #E8E6E1; color: #0A0A0A; font-size: 16px; }
+
+    .band { position: relative; padding: 92px 0; overflow: hidden; }
+    .band > .inner { max-width: 1060px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+    /* The skewed plane is a pseudo-element, so it can overshoot the section
+       without the section's own content overflowing with it. */
+    .band::before {
+      content: ""; position: absolute; inset: -90px 0; transform: skewY(var(--tilt)); z-index: 1;
+    }
+    .band.dark::before { background: #0A0A0A; }
+    .band.green::before { background: #042D1D; }
+    .band.gold::before { background: #DCA424; }
+    .band.dark, .band.green { color: #E8E6E1; }
+    .band.gold { color: #0A0A0A; }
+
+    .bar { position: relative; z-index: 5; max-width: 1060px; margin: 0 auto; padding: 22px 24px; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .mark { font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700; font-size: 19px; }
+    .bar ul { list-style: none; display: flex; gap: 18px; margin: 0; padding: 0; font-size: 13px; }
+    .bar a { color: #5f5a52; text-decoration: none; }
+    .bar a:hover { color: #7E3209; }
+
+    h1 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(38px, 7vw, 78px); line-height: 0.95; margin: 0 0 18px; letter-spacing: -0.02em; }
+    h2 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(26px, 4vw, 40px); margin: 0 0 16px; }
+    .lede { max-width: 46ch; font-size: 18px; line-height: 1.55; margin: 0; }
+    .dark .lede, .green .lede { color: #cfcbc2; }
+
+    .go {
+      display: inline-block; margin-top: 28px; padding: 13px 26px; border-radius: 2px;
+      background: #E86100; color: #0A0A0A; font-family: "Chakra Petch", system-ui, sans-serif;
+      font-weight: 600; text-decoration: none;
+    }
+    .go:hover { background: #DCA424; }
+
+    .cols { display: grid; gap: 26px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 34px; }
+    /* The accent has to follow the band it sits on: Goldenrod only ever on a
+       dark ground, Sienna on the two light ones. */
+    .col .n { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; letter-spacing: 0.2em; color: #7E3209; }
+    .dark .col .n, .green .col .n { color: #DCA424; }
+    .col h3 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 20px; margin: 8px 0 8px; }
+    .col p { margin: 0; font-size: 14.5px; line-height: 1.55; }
+    .dark .col p, .green .col p { color: #cfcbc2; }
+
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 22px; }
+    .stat .v { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 40px; line-height: 1; }
+    .stat .k { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 6px; color: #3d3a34; }
+
+    footer { padding: 60px 24px 90px; max-width: 1060px; margin: 0 auto; font-size: 13px; color: #5f5a52; }
+
+    @media (max-width: 700px) {
+      /* Below this the cuts eat more height than the content they frame. */
+      :root { --tilt: -2.5deg; }
+      .band { padding: 62px 0; }
+    }
+  </style>
+
+  <header class="bar">
+    <span class="mark">{BRAND}</span>
+    <nav aria-label="Primary">
+      <ul>{NAV.map((n) => <li><a href="#services">{n}</a></li>)}</ul>
+    </nav>
+  </header>
+
+  <section class="band dark">
+    <div class="inner">
+      <h1>Everything here<br />is on an angle</h1>
+      <p class="lede">{TAGLINE} The sections cut across each other; the words never do.</p>
+      <a class="go" href="#services">{CTA.label}</a>
+    </div>
+  </section>
+
+  <section class="band" id="services">
+    <div class="inner">
+      <h2>What we do</h2>
+      <p class="lede">{INTRO}</p>
+      <div class="cols">
+        {
+          SERVICES.map((s) => (
+            <article class="col">
+              <span class="n">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p>{s.line}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="band green">
+    <div class="inner">
+      <h2>How we work</h2>
+      <div class="cols">
+        {
+          SERVICES.map((s) => (
+            <article class="col">
+              <span class="n">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="band gold">
+    <div class="inner">
+      <h2>The studio, in numbers</h2>
+      <div class="stats">
+        {
+          STATS.map((s) => (
+            <div class="stat">
+              <div class="v">{s.v}</div>
+              <div class="k">{s.k}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <footer>{CTA.address} · {CTA.email}</footer>
+</DemoBase>

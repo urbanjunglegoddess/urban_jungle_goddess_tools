@@ -1,0 +1,135 @@
+---
+import DemoBase from "../../layouts/DemoBase.astro";
+import { BRAND, SERVICES, WORKS, STATS, CTA, JOURNAL } from "../../lib/demoContent";
+---
+
+<DemoBase
+  slug="newspaper"
+  name="Newspaper Density (multi-column)"
+  premise="A masthead, rules, and real multi-column text set at print density rather than web spacing."
+>
+  <style is:global>
+    /* Print density is not just narrow columns — it is the hierarchy that makes
+       them scannable: a masthead rule, a deck, a drop cap, hairline column
+       rules, and headings that step down in three clear sizes. Take any one of
+       those out and dense columns become a wall. */
+    body { background: #f4f1ea; color: #16130f; }
+    .paper { max-width: 1180px; margin: 0 auto; padding: 26px 22px 90px; }
+
+    .masthead { text-align: center; border-bottom: 3px double #16130f; padding-bottom: 12px; }
+    .masthead .dateline { display: flex; justify-content: space-between; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #4a453d; padding-bottom: 10px; border-bottom: 1px solid #16130f; }
+    .masthead h1 { font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700; font-size: clamp(34px, 8vw, 90px); line-height: 1; margin: 14px 0 8px; letter-spacing: -0.02em; text-transform: uppercase; }
+    .masthead .motto { font-size: 12.5px; font-style: italic; color: #4a453d; margin: 0 0 4px; }
+
+    .lead { display: grid; gap: 22px; padding: 22px 0; border-bottom: 1px solid #cec8bb; }
+    @media (min-width: 900px) { .lead { grid-template-columns: 2.2fr 1fr; } }
+    .lead h2 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(26px, 4.2vw, 46px); line-height: 1.02; margin: 0 0 8px; }
+    .lead .deck { font-size: 16px; font-style: italic; color: #3a352d; margin: 0 0 14px; max-width: 54ch; }
+    .lead .byline { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #7E3209; margin: 0 0 12px; }
+
+    .cols { column-width: 15.5rem; column-gap: 1.7rem; column-rule: 1px solid #cec8bb; }
+    .cols p { margin: 0 0 0.72em; font-size: 14.5px; line-height: 1.46; text-align: justify; hyphens: auto; }
+    .cols p:first-of-type::first-letter {
+      float: left; font-family: "Chakra Petch", system-ui, sans-serif; font-size: 3.3em;
+      line-height: 0.8; padding: 0.06em 0.1em 0 0; color: #7E3209;
+    }
+    .cols h3 {
+      font-family: "Chakra Petch", system-ui, sans-serif; font-size: 15px; margin: 1.1em 0 0.35em;
+      text-transform: uppercase; letter-spacing: 0.06em; break-after: avoid;
+    }
+
+    aside .box { border: 1px solid #16130f; padding: 14px 16px; margin-bottom: 16px; }
+    aside h4 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; margin: 0 0 10px; padding-bottom: 6px; border-bottom: 1px solid #cec8bb; }
+    aside dl { margin: 0; font-size: 13.5px; }
+    aside dt { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #4a453d; margin-top: 8px; }
+    aside dd { margin: 1px 0 0; font-family: "Chakra Petch", system-ui, sans-serif; font-size: 22px; }
+    aside ul { margin: 0; padding-left: 1.1em; font-size: 13.5px; line-height: 1.5; }
+
+    .strap { border-top: 3px double #16130f; border-bottom: 1px solid #16130f; margin-top: 26px; padding: 8px 0; font-family: "Chakra Petch", system-ui, sans-serif; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; text-align: center; }
+
+    .second { padding: 22px 0; }
+    .second .cols h3 { font-size: 17px; }
+
+    .classified { margin-top: 26px; border-top: 1px solid #16130f; padding-top: 14px; }
+    .classified .cols p { font-size: 12.5px; line-height: 1.4; }
+
+    .go { display: inline-block; margin-top: 18px; border: 1px solid #16130f; background: #7E3209; color: #f4f1ea; padding: 10px 22px; text-decoration: none; font-family: "Chakra Petch", system-ui, sans-serif; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .go:hover { background: #16130f; }
+
+    @media (max-width: 620px) {
+      /* One column, bigger type. Dense columns at phone width are unreadable,
+         and the masthead is the only part of the idea that survives. */
+      .cols { column-width: auto; column-count: 1; }
+      .cols p { font-size: 16px; line-height: 1.6; text-align: left; }
+    }
+  </style>
+
+  <div class="paper">
+    <header class="masthead">
+      <div class="dateline">
+        <span>Vol. X — No. 6</span>
+        <span>Atlanta, Georgia</span>
+        <span>Studio Edition</span>
+      </div>
+      <h1>{BRAND}</h1>
+      <p class="motto">A design studio for things that have to work in public</p>
+    </header>
+
+    <section class="lead">
+      <article>
+        <p class="byline">Studio report — {SERVICES[0].title}, {SERVICES[1].title}, {SERVICES[2].title}</p>
+        <h2>Six people, ninety-four projects, and a standing objection to the brief</h2>
+        <p class="deck">Why a studio that could have doubled in size four times has not, and what that costs the work.</p>
+        <div class="cols">
+          <p>{SERVICES[0].body}</p>
+          <h3>{SERVICES[1].title}</h3>
+          <p>{SERVICES[1].body}</p>
+          <p>The clients who come to us tend to arrive with the same sentence: the thing works, but nobody can tell what it is. That is not a branding problem and it is rarely a product problem. It is almost always a problem of a system that grew one decision at a time.</p>
+          <h3>{SERVICES[2].title}</h3>
+          <p>{SERVICES[2].body}</p>
+          <p>We do not run a pitch process. If a project is not a fit we say so in the first call, and we will usually name two studios who would be better for it. That has cost us work. It has never cost us a client we wanted.</p>
+        </div>
+      </article>
+
+      <aside>
+        <div class="box">
+          <h4>The studio</h4>
+          <dl>
+            {STATS.map((s) => <><dt>{s.k}</dt><dd>{s.v}</dd></>)}
+          </dl>
+        </div>
+        <div class="box">
+          <h4>From the journal</h4>
+          <ul>
+            {JOURNAL.map((j) => <li>{j.title} <em>({j.date})</em></li>)}
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <div class="strap">Selected work — 2023 to 2025</div>
+
+    <section class="second">
+      <div class="cols">
+        {
+          WORKS.map((w) => (
+            <>
+              <h3>{w.client}</h3>
+              <p>{w.line} {w.kind}, delivered {w.year}. The engagement ran to the studio's usual shape: a fortnight of reading, a fortnight of argument, and the remainder spent making the argument hold up in production.</p>
+            </>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="classified">
+      <div class="strap" style="margin-top:0">Notices</div>
+      <div class="cols" style="margin-top:14px">
+        <p><strong>{CTA.label}.</strong> {CTA.line} Write to {CTA.email}, or call at the studio, {CTA.address}.</p>
+        <p><strong>Freelance leads.</strong> Two taken on each quarter — writers, motion, front-end. Send one project you are proud of and one you are not.</p>
+        <p><strong>Speaking.</strong> The studio takes four talks a year, none of them about process.</p>
+      </div>
+      <a class="go" href="#">{CTA.label}</a>
+    </section>
+  </div>
+</DemoBase>

@@ -1,0 +1,130 @@
+---
+import DemoBase from "../../layouts/DemoBase.astro";
+import { BRAND, NAV, SERVICES, WORKS, CTA, TAGLINE } from "../../lib/demoContent";
+---
+
+<DemoBase
+  slug="parallax"
+  name="Parallax Depth Stack"
+  premise="Three layers moving at different speeds to fake depth — few, slow, and off entirely under reduced motion."
+>
+  <style is:global>
+    /* Three layers is the budget. The sheet's warning is about performance and
+       motion sickness, so: transform only (never top/left), one rAF-batched
+       handler, and the whole thing disabled when reduced motion is asked for. */
+    body { background: #0A0A0A; color: #E8E6E1; }
+
+    .bar { position: fixed; inset: 0 0 auto 0; z-index: 50; display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; padding: 15px 22px; background: linear-gradient(rgba(10,10,10,0.9), rgba(10,10,10,0)); }
+    .mark { font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700; font-size: 18px; }
+    .bar ul { list-style: none; display: flex; gap: 16px; margin: 0; padding: 0; font-size: 12.5px; }
+    .bar a { color: #cfcbc2; text-decoration: none; }
+    .bar a:hover { color: #DCA424; }
+
+    .stage { position: relative; height: 100vh; overflow: hidden; display: grid; place-items: center; }
+    .lyr { position: absolute; inset: 0; will-change: transform; }
+    .l-far { background: radial-gradient(120% 90% at 50% 90%, #042D1D 0%, #0A0A0A 62%); }
+    .l-mid { display: grid; place-items: center; }
+    .l-mid .ring { width: min(62vmin, 520px); aspect-ratio: 1; border-radius: 50%; border: 1px solid rgba(220,164,36,0.4); box-shadow: 0 0 120px rgba(95,44,130,0.45) inset; }
+    .l-near { display: grid; place-items: end center; padding-bottom: 6vh; }
+    .l-near .ridge { width: 140%; height: 34vh; background: #0A0A0A; border-top: 1px solid #2a2a2a; border-radius: 50% 50% 0 0; }
+
+    .hero { position: relative; z-index: 5; text-align: center; padding: 0 24px; }
+    .hero h1 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(40px, 9vw, 108px); line-height: 0.92; margin: 0 0 14px; letter-spacing: -0.03em; }
+    .hero p { max-width: 40ch; margin: 0 auto; font-size: 17px; line-height: 1.6; color: #cfcbc2; }
+
+    .body { position: relative; z-index: 6; background: #0A0A0A; border-top: 1px solid #2a2a2a; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 90px 24px 110px; }
+    h2 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase; color: #9a958c; margin: 0 0 22px; }
+    .svc { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin-bottom: 70px; }
+    .s { border: 1px solid #2a2a2a; padding: 22px; border-radius: 12px; }
+    .s .n { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: #DCA424; }
+    .s h3 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 20px; margin: 7px 0 8px; }
+    .s p { margin: 0; font-size: 14.5px; line-height: 1.55; color: #cfcbc2; }
+    .wrow { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-top: 1px solid #2a2a2a; font-size: 15px; }
+    .wrow span:last-child { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: #9a958c; }
+    .go { display: inline-block; margin-top: 30px; background: #E86100; color: #0A0A0A; padding: 13px 26px; text-decoration: none; font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 600; }
+    .go:hover { background: #DCA424; }
+  </style>
+
+  <header class="bar">
+    <span class="mark">{BRAND}</span>
+    <nav aria-label="Primary">
+      <ul>{NAV.map((n) => <li><a href="#work">{n}</a></li>)}</ul>
+    </nav>
+  </header>
+
+  <section class="stage" id="stage">
+    <div class="lyr l-far" data-depth="0.12" aria-hidden="true"></div>
+    <div class="lyr l-mid" data-depth="0.3" aria-hidden="true"><div class="ring"></div></div>
+    <div class="hero">
+      <h1>Depth,<br />not distance</h1>
+      <p>{TAGLINE}</p>
+    </div>
+    <div class="lyr l-near" data-depth="0.55" aria-hidden="true"><div class="ridge"></div></div>
+  </section>
+
+  <div class="body">
+    <div class="wrap">
+      <h2>Services</h2>
+      <div class="svc">
+        {
+          SERVICES.map((s) => (
+            <article class="s">
+              <span class="n">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <h2 id="work">Selected work</h2>
+      {
+        WORKS.map((w) => (
+          <div class="wrow">
+            <span>{w.client} — {w.line}</span>
+            <span>{w.year}</span>
+          </div>
+        ))
+      }
+      <a class="go" href="#work">{CTA.label}</a>
+    </div>
+  </div>
+
+  <script>
+    /** Three layers, transform only, one rAF in flight, and nothing at all
+     *  when the visitor has asked for reduced motion. */
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const layers = Array.from(document.querySelectorAll<HTMLElement>(".lyr"));
+    const stage = document.getElementById("stage") as HTMLElement;
+    let raf = 0;
+
+    function paint() {
+      raf = 0;
+      const y = window.scrollY;
+      // Past the stage there is nothing to parallax, so the work stops.
+      if (y > stage.offsetHeight) return;
+      for (const l of layers) {
+        const d = Number(l.dataset.depth ?? 0);
+        l.style.transform = "translate3d(0," + (y * d).toFixed(1) + "px,0)";
+      }
+    }
+
+    function onScroll() {
+      if (!raf) raf = requestAnimationFrame(paint);
+    }
+
+    function apply() {
+      if (reduced.matches) {
+        window.removeEventListener("scroll", onScroll);
+        for (const l of layers) l.style.transform = "";
+      } else {
+        window.addEventListener("scroll", onScroll, { passive: true });
+        paint();
+      }
+    }
+
+    reduced.addEventListener("change", apply);
+    apply();
+  </script>
+</DemoBase>

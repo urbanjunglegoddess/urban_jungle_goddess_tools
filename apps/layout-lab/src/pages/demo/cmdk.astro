@@ -1,0 +1,229 @@
+---
+import DemoBase from "../../layouts/DemoBase.astro";
+import { BRAND, SERVICES, WORKS, STATS, CTA, TAGLINE, JOURNAL } from "../../lib/demoContent";
+
+const ACTIONS = [
+  ...SERVICES.map((s) => ({ group: "Services", label: s.title, hint: s.line, target: "services" })),
+  ...WORKS.map((w) => ({ group: "Work", label: w.client, hint: w.kind + " · " + w.year, target: "work" })),
+  ...JOURNAL.map((j) => ({ group: "Journal", label: j.title, hint: j.date, target: "journal" })),
+  { group: "Studio", label: "Contact the studio", hint: CTA.email, target: "contact" },
+  { group: "Studio", label: "Studio numbers", hint: STATS.map((s) => s.k).join(", "), target: "studio" },
+];
+---
+
+<DemoBase
+  slug="cmdk"
+  name="Command-Palette-First (⌘K)"
+  premise="A palette as the primary way around the site, with a permanently visible entry point and a first-run hint."
+>
+  <style is:global>
+    /* The discoverability tax the sheet warns about is paid up front: the
+       palette's trigger is a real button in the header at every width, the
+       shortcut is printed on it, and the palette opens by itself on a first
+       visit. Keyboard people get ⌘K; everyone else gets a button that says
+       exactly what it does. */
+    body { background: #0A0A0A; color: #E8E6E1; }
+
+    .bar { position: sticky; top: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 13px 22px; background: rgba(10,10,10,0.92); border-bottom: 1px solid #2a2a2a; backdrop-filter: blur(6px); }
+    .mark { font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700; font-size: 18px; }
+    .trigger {
+      display: flex; align-items: center; gap: 10px; background: #151515; color: #cfcbc2;
+      border: 1px solid #2a2a2a; border-radius: 8px; padding: 8px 12px; cursor: pointer;
+      font-family: inherit; font-size: 13.5px; min-width: 210px; text-align: left;
+    }
+    .trigger:hover { border-color: #DCA424; color: #E8E6E1; }
+    .trigger kbd { margin-left: auto; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; background: #0A0A0A; border: 1px solid #2a2a2a; border-radius: 4px; padding: 2px 6px; color: #9a958c; }
+
+    .wrap { max-width: 900px; margin: 0 auto; padding: 70px 22px 120px; }
+    h1 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(34px, 6vw, 66px); line-height: 0.98; margin: 0 0 14px; letter-spacing: -0.02em; }
+    .lede { max-width: 50ch; margin: 0; font-size: 17px; line-height: 1.6; color: #cfcbc2; }
+    h2 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase; color: #9a958c; margin: 60px 0 16px; scroll-margin-top: 76px; }
+    .row { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-top: 1px solid #2a2a2a; font-size: 15px; }
+    .row span:last-child { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: #9a958c; white-space: nowrap; }
+    .svc { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+    .svc h3 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 19px; margin: 5px 0 7px; }
+    .svc p { margin: 0; font-size: 14px; line-height: 1.6; color: #cfcbc2; }
+    .svc .n { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: #DCA424; }
+
+    /* --- the palette --- */
+    dialog.pal {
+      width: min(560px, calc(100vw - 32px)); padding: 0; border: 1px solid #2a2a2a;
+      border-radius: 12px; background: #111; color: #E8E6E1;
+      margin-top: 12vh; box-shadow: 0 40px 90px rgba(0,0,0,0.7);
+    }
+    dialog.pal::backdrop { background: rgba(5,5,5,0.72); }
+    .pal input {
+      width: 100%; border: 0; border-bottom: 1px solid #2a2a2a; background: transparent;
+      color: #E8E6E1; font-family: inherit; font-size: 16px; padding: 16px 18px; outline: none;
+    }
+    .pal ul { list-style: none; margin: 0; padding: 6px; max-height: 52vh; overflow-y: auto; }
+    .pal .grp { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #9a958c; padding: 10px 12px 4px; }
+    .pal li button {
+      display: flex; width: 100%; gap: 12px; align-items: baseline; justify-content: space-between;
+      background: transparent; border: 0; color: #E8E6E1; font-family: inherit; font-size: 14.5px;
+      text-align: left; padding: 9px 12px; border-radius: 7px; cursor: pointer;
+    }
+    .pal li button .hint { font-size: 12px; color: #9a958c; font-family: "JetBrains Mono", ui-monospace, monospace; white-space: nowrap; }
+    .pal li button:hover, .pal li button[data-active="true"] { background: #1e1e1e; }
+    .pal li button[data-active="true"] { outline: 1px solid #DCA424; }
+    .pal .none { padding: 22px 14px; color: #9a958c; font-size: 14px; }
+    .pal footer { display: flex; gap: 16px; padding: 10px 14px; border-top: 1px solid #2a2a2a; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10.5px; color: #9a958c; letter-spacing: 0.08em; }
+  </style>
+
+  <header class="bar">
+    <span class="mark">{BRAND}</span>
+    <button class="trigger" id="open" type="button">
+      Search or jump to…<kbd>⌘K</kbd>
+    </button>
+  </header>
+
+  <div class="wrap">
+    <h1>Everything is one<br />keystroke away</h1>
+    <p class="lede">{TAGLINE} There is no menu on this site — there is a palette, and a button that opens it.</p>
+
+    <h2 id="services">Services</h2>
+    <div class="svc">
+      {
+        SERVICES.map((s) => (
+          <article>
+            <span class="n">{s.n}</span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <h2 id="work">Selected work</h2>
+    {WORKS.map((w) => <div class="row"><span>{w.client} — {w.line}</span><span>{w.kind} {w.year}</span></div>)}
+
+    <h2 id="journal">Journal</h2>
+    {JOURNAL.map((j) => <div class="row"><span>{j.title}</span><span>{j.date}</span></div>)}
+
+    <h2 id="studio">The studio</h2>
+    {STATS.map((s) => <div class="row"><span>{s.k}</span><span>{s.v}</span></div>)}
+
+    <h2 id="contact">Contact</h2>
+    <p class="lede">{CTA.line} — {CTA.email}</p>
+  </div>
+
+  <dialog class="pal" id="pal" aria-label="Command palette">
+    <input id="q" type="search" placeholder="Search services, work, journal…" autocomplete="off" aria-label="Search" aria-controls="results" />
+    <ul id="results"></ul>
+    <footer><span>↑↓ move</span><span>↵ go</span><span>esc close</span></footer>
+  </dialog>
+
+  <script>
+    /** A palette that is discoverable: visible trigger, printed shortcut, and
+     *  one automatic opening on a first visit so nobody has to guess. */
+    interface Action { group: string; label: string; hint: string; target: string }
+
+    const pal = document.getElementById("pal") as HTMLDialogElement;
+    const q = document.getElementById("q") as HTMLInputElement;
+    const list = document.getElementById("results") as HTMLElement;
+    const openBtn = document.getElementById("open") as HTMLButtonElement;
+
+    const ACTIONS: Action[] = Array.from(document.querySelectorAll<HTMLElement>("[data-action]")).map((el) => ({
+      group: el.dataset.group ?? "",
+      label: el.dataset.label ?? "",
+      hint: el.dataset.hint ?? "",
+      target: el.dataset.target ?? "",
+    }));
+
+    let shown: Action[] = [];
+    let active = 0;
+
+    function render(term: string) {
+      const t = term.trim().toLowerCase();
+      shown = t
+        ? ACTIONS.filter((a) => (a.label + " " + a.hint + " " + a.group).toLowerCase().includes(t))
+        : ACTIONS;
+      active = 0;
+      list.replaceChildren();
+      if (!shown.length) {
+        const li = document.createElement("li");
+        li.className = "none";
+        li.textContent = "Nothing matches “" + term + "”.";
+        list.appendChild(li);
+        return;
+      }
+      let group = "";
+      shown.forEach((a, i) => {
+        if (a.group !== group) {
+          group = a.group;
+          const g = document.createElement("li");
+          g.className = "grp";
+          g.textContent = group;
+          list.appendChild(g);
+        }
+        const li = document.createElement("li");
+        const b = document.createElement("button");
+        b.type = "button";
+        b.dataset.i = String(i);
+        b.dataset.active = String(i === active);
+        const lab = document.createElement("span");
+        lab.textContent = a.label;
+        const hint = document.createElement("span");
+        hint.className = "hint";
+        hint.textContent = a.hint;
+        b.append(lab, hint);
+        li.appendChild(b);
+        list.appendChild(li);
+      });
+    }
+
+    function mark() {
+      for (const b of list.querySelectorAll<HTMLButtonElement>("button")) {
+        b.dataset.active = String(Number(b.dataset.i) === active);
+      }
+      list.querySelector<HTMLButtonElement>('button[data-active="true"]')?.scrollIntoView({ block: "nearest" });
+    }
+
+    function go(a: Action | undefined) {
+      if (!a) return;
+      pal.close();
+      document.getElementById(a.target)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function open() {
+      if (!pal.open) pal.showModal();
+      q.value = "";
+      render("");
+      q.focus();
+    }
+
+    openBtn.addEventListener("click", open);
+    q.addEventListener("input", () => render(q.value));
+
+    list.addEventListener("click", (e) => {
+      const b = (e.target as HTMLElement).closest("button");
+      if (b instanceof HTMLButtonElement) go(shown[Number(b.dataset.i)]);
+    });
+
+    pal.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") { e.preventDefault(); active = Math.min(active + 1, shown.length - 1); mark(); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); active = Math.max(active - 1, 0); mark(); }
+      else if (e.key === "Enter") { e.preventDefault(); go(shown[active]); }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); open(); }
+    });
+
+    // First visit only: show people the thing exists, then never again.
+    try {
+      if (!sessionStorage.getItem("m6-pal-seen")) {
+        sessionStorage.setItem("m6-pal-seen", "1");
+        setTimeout(open, 700);
+      }
+    } catch { /* storage blocked — the trigger button is still right there */ }
+  </script>
+
+  <div hidden>
+    {
+      ACTIONS.map((a) => (
+        <span data-action data-group={a.group} data-label={a.label} data-hint={a.hint} data-target={a.target} />
+      ))
+    }
+  </div>
+</DemoBase>

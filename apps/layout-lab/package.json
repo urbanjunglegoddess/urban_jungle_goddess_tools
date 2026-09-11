@@ -1,0 +1,26 @@
+{
+  "name": "@ujg/layout-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Layout Lab — the section playbook and the avant-garde layouts, as pages you can actually open.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check",
+    "test": "node scripts/catalog-check.mjs",
+    "extract": "node scripts/extract.mjs",
+    "a11y": "node scripts/a11y.mjs",
+    "isolation": "node scripts/isolation-check.mjs",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "@ujg/brand": "workspace:*",
+    "astro": "^5.16.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.5",
+    "typescript": "^5.9.3"
+  }
+}

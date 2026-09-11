@@ -1,0 +1,117 @@
+---
+import DemoBase from "../../layouts/DemoBase.astro";
+import { BRAND, SERVICES, WORKS, CTA, TAGLINE } from "../../lib/demoContent";
+
+/** The orbit and the list are the same six items, in the same order. */
+const ORBIT = [
+  ...SERVICES.map((s) => ({ label: s.title, hint: s.line })),
+  ...WORKS.slice(0, 3).map((w) => ({ label: w.client, hint: w.kind + " · " + w.year })),
+];
+---
+
+<DemoBase
+  slug="radial"
+  name="Radial / Orbital Layout"
+  premise="Content orbiting a central hub, with the identical content also present as an ordinary list."
+>
+  <style is:global>
+    /* The sheet: impossible to linearise cleanly for mobile and screen readers,
+       provide a list fallback. So the list is the real content — a plain <ol>
+       in source order — and the orbit is a presentation of it, marked
+       aria-hidden and switched off entirely below 760px. Nothing is lost. */
+    body { background: #0A0A0A; color: #E8E6E1; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 26px 22px 110px; }
+
+    .bar { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .mark { font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700; font-size: 18px; }
+    .bar .k { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #9a958c; }
+
+    .orbit { display: none; }
+    @media (min-width: 760px) {
+      .orbit {
+        display: grid; place-items: center; position: relative;
+        width: min(680px, 82vw); aspect-ratio: 1; margin: 40px auto 10px;
+      }
+      /* Two rings drawn as borders, not images, so they scale with the box. */
+      .orbit::before, .orbit::after {
+        content: ""; position: absolute; border-radius: 50%; border: 1px solid #232323;
+      }
+      .orbit::before { inset: 16%; }
+      .orbit::after { inset: 2%; }
+      .hub {
+        position: relative; z-index: 3; width: 30%; aspect-ratio: 1; border-radius: 50%;
+        background: #042D1D; border: 1px solid #DCA424; display: grid; place-items: center;
+        text-align: center; padding: 14px;
+      }
+      .hub h1 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(18px, 2.6vw, 28px); margin: 0; line-height: 1.05; }
+      .node {
+        position: absolute; left: 50%; top: 50%; z-index: 2;
+        width: 132px; margin: -40px 0 0 -66px; text-align: center;
+      }
+      .node .disc {
+        width: 54px; height: 54px; border-radius: 50%; margin: 0 auto 8px;
+        background: #151515; border: 1px solid #2a2a2a; display: grid; place-items: center;
+        font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: #DCA424;
+      }
+      .node b { display: block; font-family: "Chakra Petch", system-ui, sans-serif; font-size: 14px; font-weight: 600; }
+      .node span { display: block; font-size: 11.5px; color: #9a958c; line-height: 1.35; margin-top: 2px; }
+    }
+
+    h2 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase; color: #9a958c; margin: 56px 0 16px; }
+    .lede { max-width: 50ch; margin: 26px auto 0; text-align: center; font-size: 16.5px; line-height: 1.6; color: #cfcbc2; }
+    @media (max-width: 759px) { .lede { text-align: left; margin-left: 0; } }
+
+    ol.list { list-style: none; counter-reset: n; margin: 0; padding: 0; }
+    ol.list li { counter-increment: n; display: flex; gap: 16px; align-items: baseline; padding: 15px 0; border-top: 1px solid #2a2a2a; }
+    ol.list li::before { content: counter(n, decimal-leading-zero); font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: #DCA424; }
+    ol.list b { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 18px; font-weight: 600; }
+    ol.list span { display: block; font-size: 14px; color: #9a958c; margin-top: 2px; }
+
+    .go { display: inline-block; margin-top: 30px; background: #E86100; color: #0A0A0A; padding: 13px 26px; text-decoration: none; font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 600; }
+    .go:hover { background: #DCA424; }
+  </style>
+
+  <div class="wrap">
+    <header class="bar">
+      <span class="mark">{BRAND}</span>
+      <span class="k">Six things in orbit</span>
+    </header>
+
+    <div class="orbit" aria-hidden="true">
+      <div class="hub"><h1>Meridian Six</h1></div>
+      {
+        ORBIT.map((o, i) => {
+          const angle = (i / ORBIT.length) * 2 * Math.PI - Math.PI / 2;
+          const r = 39;
+          const x = 50 + r * Math.cos(angle);
+          const y = 50 + r * Math.sin(angle);
+          return (
+            <div class="node" style={`left:${x}%;top:${y}%`}>
+              <span class="disc">{String(i + 1).padStart(2, "0")}</span>
+              <b>{o.label}</b>
+              <span>{o.hint}</span>
+            </div>
+          );
+        })
+      }
+    </div>
+
+    <p class="lede">{TAGLINE} The ring above is a picture of the list below — and the list is what the page actually is.</p>
+
+    <h2>Everything, in order</h2>
+    <ol class="list">
+      {
+        ORBIT.map((o) => (
+          <li>
+            <div>
+              <b>{o.label}</b>
+              <span>{o.hint}</span>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
+    <a class="go" href="#">{CTA.label}</a>
+  </div>
+</DemoBase>

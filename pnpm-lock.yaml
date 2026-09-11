@@ -72,6 +72,22 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  apps/layout-lab:
+    dependencies:
+      '@ujg/brand':
+        specifier: workspace:*
+        version: link:../../packages/brand
+      astro:
+        specifier: ^5.16.2
+        version: 5.18.2(rollup@4.63.1)(typescript@5.9.3)(yaml@2.9.0)
+    devDependencies:
+      '@astrojs/check':
+        specifier: ^0.9.5
+        version: 0.9.10(prettier@3.9.6)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
   packages/brand: {}
 
 packages:
