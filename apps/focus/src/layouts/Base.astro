@@ -1,0 +1,48 @@
+---
+import "../styles/site.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Which tool this page is, for the nav's current state. */
+  tool?: "fit" | "planner" | "combined" | "live" | null;
+}
+const { title, description, tool = null } = Astro.props;
+
+const TOOLS = [
+  { id: "fit", href: "/fit", label: "1 · Fit" },
+  { id: "planner", href: "/planner", label: "2 · Planner" },
+  { id: "combined", href: "/combined", label: "3 · Combined" },
+  { id: "live", href: "/live", label: "4 · Live" },
+] as const;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#060a08" />
+  </head>
+  <body>
+    <div class="wrap">
+      <nav aria-label="Focus tools">
+        <ul class="toolnav">
+          <li><a href="/" aria-current={tool === null ? "page" : undefined}>All four</a></li>
+          {
+            TOOLS.map((t) => (
+              <li>
+                <a href={t.href} aria-current={tool === t.id ? "page" : undefined}>
+                  {t.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <slot />
+    </div>
+  </body>
+</html>

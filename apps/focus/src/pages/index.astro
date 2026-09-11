@@ -1,0 +1,50 @@
+---
+import Base from "../layouts/Base.astro";
+
+const LADDER = [
+  { n: "01", href: "/fit", name: "Fit", blurb: "Window in → a breakdown of every session style at once. A calculator." },
+  { n: "02", href: "/planner", name: "Planner", blurb: "Window + one style + your blocks → a static timed plan." },
+  { n: "03", href: "/combined", name: "Combined", blurb: "The compare grid becomes the dial: tap a style, it feeds the plan." },
+  { n: "04", href: "/live", name: "Live", blurb: "Combined + Start: locks to the clock, live now-line, hand-off chime." },
+];
+---
+
+<Base title="Focus Window" description="Four focus tools over one shared core.">
+  <p class="eyebrow">Urban Jungle Goddess · Work assist</p>
+  <h1>Focus <span>Window</span></h1>
+  <p class="sub">
+    Say when you have to stop. See which session style fits the time you actually have,
+    load what you need to get through, and let it keep time.
+  </p>
+
+  <p class="sec-h">The ladder</p>
+  <p class="sec-sub">
+    Four tools, one shared core. Each rung adds one thing to the one before it — Live is the
+    superset, so if you only ever open one, open that.
+  </p>
+
+  <ul class="ladder">
+    {
+      LADDER.map((t) => (
+        <li>
+          <a href={t.href}>
+            <span class="n">{t.n}</span>
+            <h2>{t.name}</h2>
+            <p>{t.blurb}</p>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="note">
+    <b>Where the maths lives:</b> one file, <code>src/lib/focusCore.ts</code> — pure functions,
+    no DOM, no framework. Sessions run back to back with a break between each; the trailing
+    break is dropped unless you ask to rest after the last one. Fix a bug there and every tool
+    on this page is fixed.
+    <br /><br />
+    <b>What it remembers:</b> your blocks and settings save in this browser when storage is
+    available. The badge under your list tells you the truth for wherever you're running it —
+    a private window or blocked site data means the list is good for this session only.
+  </p>
+</Base>

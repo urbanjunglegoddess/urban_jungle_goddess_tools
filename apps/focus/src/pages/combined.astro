@@ -1,0 +1,32 @@
+---
+import Base from "../layouts/Base.astro";
+import Window from "../components/Window.astro";
+import Compare from "../components/Compare.astro";
+import Blocks from "../components/Blocks.astro";
+---
+
+<Base
+  title="Combined — Focus Window"
+  description="The comparison becomes the dial that builds the plan."
+  tool="combined"
+>
+  <div data-variant="combined">
+    <p class="eyebrow">Tool 03</p>
+    <h1>Combined</h1>
+    <p class="sub">
+      The compare grid stops being a readout and becomes the dial. Tap a style and the plan
+      below rebuilds on it.
+    </p>
+
+    <Window />
+    <Compare interactive={true} />
+    <Blocks />
+
+    <p class="sec-h">The plan</p>
+    <p class="sec-sub" id="runSub">Timed, using the style you tapped above.</p>
+    <div class="card" id="runCard"></div>
+  </div>
+  <script>
+    import "../scripts/focus.ts";
+  </script>
+</Base>

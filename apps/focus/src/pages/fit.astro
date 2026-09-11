@@ -1,0 +1,29 @@
+---
+import Base from "../layouts/Base.astro";
+import Window from "../components/Window.astro";
+import Compare from "../components/Compare.astro";
+---
+
+<Base title="Fit — Focus Window" description="Which session style fits the time you have." tool="fit">
+  <div data-variant="fit">
+    <p class="eyebrow">Tool 01</p>
+    <h1>Fit</h1>
+    <p class="sub">
+      A calculator. Put the window in, see every session style measured against it at once —
+      how many sessions, how much real focus, and what's left over.
+    </p>
+
+    <Window />
+    <Compare interactive={false} />
+
+    <p class="note">
+      <b>Reading it:</b> "Left over" is time the style can't use — a 25/5 Classic in 70 minutes
+      fits two sessions and strands 10 minutes. The style with the most focus is marked, but the
+      most focus is not always the right answer: a long session you abandon beats nothing only
+      if you finish it.
+    </p>
+  </div>
+  <script>
+    import "../scripts/focus.ts";
+  </script>
+</Base>

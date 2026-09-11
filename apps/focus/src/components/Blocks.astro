@@ -1,0 +1,41 @@
+---
+/** The task list. Blocks drop onto sessions in order, top of the list first. */
+---
+<p class="sec-h">Your blocks</p>
+<p class="sec-sub">What you want to get through. Top of the list runs first.</p>
+<div class="card">
+  <div class="add-row">
+    <label class="sr-only" for="blockInput">Add a block</label>
+    <input
+      class="text"
+      id="blockInput"
+      placeholder="What's a session for?"
+      enterkeyhint="done"
+      maxlength="80"
+      autocomplete="off"
+    />
+    <button class="add-btn" id="addBtn" type="button">Add</button>
+  </div>
+  <ul class="blocks" id="blockList"></ul>
+  <p class="empty-blocks" id="emptyBlocks">
+    No blocks yet. Add tasks and they'll drop onto the sessions below.
+  </p>
+  <div class="blocks-foot">
+    <span class="held" id="heldNote" aria-live="polite"></span>
+    <button class="clearall" id="clearAll" type="button" hidden>Clear all</button>
+  </div>
+</div>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

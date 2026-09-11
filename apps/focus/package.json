@@ -1,0 +1,24 @@
+{
+  "name": "@ujg/focus",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Focus Window \u2014 four focus tools over one shared core.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check",
+    "test": "node scripts/core-check.mjs",
+    "a11y": "node scripts/a11y.mjs",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "@ujg/brand": "workspace:*",
+    "astro": "^5.16.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.5",
+    "typescript": "^5.9.3"
+  }
+}

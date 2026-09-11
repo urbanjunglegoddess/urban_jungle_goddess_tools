@@ -1,0 +1,22 @@
+---
+interface Props {
+  /** In Fit the cards are a readout; in Combined and Live they are the dial. */
+  interactive: boolean;
+}
+const { interactive } = Astro.props;
+---
+<p class="sec-h">Which style fits</p>
+<p class="sec-sub">
+  {
+    interactive
+      ? "Every style measured against your window. Tap one to build the plan with it."
+      : "Every style measured against your window, side by side."
+  }
+</p>
+{interactive && <p class="lock" id="compareLock" hidden>Running — stop the run to change style.</p>}
+<div id="compare"></div>
+<p class="legend">
+  <span><i class="w"></i>Focus</span>
+  <span><i class="b"></i>Break</span>
+  <span><i class="s"></i>Left over</span>
+</p>

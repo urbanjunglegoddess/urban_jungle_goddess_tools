@@ -1,0 +1,40 @@
+---
+import Base from "../layouts/Base.astro";
+import Window from "../components/Window.astro";
+import Compare from "../components/Compare.astro";
+import Blocks from "../components/Blocks.astro";
+---
+
+<Base
+  title="Live — Focus Window"
+  description="Locks to the clock, keeps time, chimes every hand-off."
+  tool="live"
+>
+  <div data-variant="live">
+    <p class="eyebrow">Tool 04</p>
+    <h1>Live</h1>
+    <p class="sub">
+      Everything in Combined, plus Start. The plan locks to the clock, a counter shows the block
+      you're in and the time left, and a chime marks every hand-off so you never have to watch
+      the screen.
+    </p>
+
+    <Window />
+    <Compare interactive={true} />
+    <Blocks />
+
+    <p class="sec-h">The run</p>
+    <p class="sec-sub" id="runSub">Timed, using the style you tapped above.</p>
+    <div class="card" id="runCard"></div>
+
+    <p class="note">
+      <b>Once it's running</b> the plan stops sliding — it's pinned to the wall clock, so a
+      session that started at 2:15 still ends at 2:40 whether or not this tab was in front. Stop
+      returns you to planning. A run survives a reload; the chime needs one tap to start,
+      because browsers won't let a page make sound before you ask.
+    </p>
+  </div>
+  <script>
+    import "../scripts/focus.ts";
+  </script>
+</Base>
