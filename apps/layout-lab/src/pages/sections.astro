@@ -1,0 +1,53 @@
+---
+import Base from "../layouts/Base.astro";
+import { SECTIONS, GROUPS } from "../lib/catalog";
+
+const variantCount = SECTIONS.reduce((n, s) => n + s.variants.length, 0);
+---
+
+<Base
+  title="Section playbook — Layout Lab"
+  description="29 page sections in 142 variants: the parts a page is assembled from, and the shapes each one can take."
+>
+  <p class="crumb"><a href="/">← Layout Lab</a></p>
+
+  <header class="mast">
+    <p class="eyebrow">Layout Lab</p>
+    <h1>Section playbook</h1>
+    <p class="standfirst">
+      The layouts are how a page behaves. This is what it is made of. Twenty-nine sections,
+      each one with the variants it can take — the menu you pick from when a client says
+      "we need a pricing page" and you need to know what a pricing page can be.
+    </p>
+    <p class="mastfoot">
+      <span><b>{SECTIONS.length}</b> sections</span>
+      <span><b>{variantCount}</b> variants</span>
+      <span><b>{GROUPS.length}</b> groups</span>
+    </p>
+  </header>
+
+  {
+    GROUPS.map((group) => {
+      const inGroup = SECTIONS.filter((s) => s.group === group);
+      return (
+        <section>
+          <div class="round-head">
+            <h2>{group}</h2>
+            <span class="n">{inGroup.length} sections</span>
+          </div>
+          <ul class="seclist">
+            {inGroup.map((s) => (
+              <li>
+                <a href={`/section/${s.slug}`}>
+                  <h3>{s.name}</h3>
+                  <p>{s.blurb}</p>
+                  <span class="n">{s.variants.length} variants</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      );
+    })
+  }
+</Base>

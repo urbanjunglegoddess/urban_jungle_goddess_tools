@@ -1,0 +1,132 @@
+---
+import DemoBase from "../../layouts/DemoBase.astro";
+import { BRAND, NAV, WORKS, SERVICES, CTA, TAGLINE } from "../../lib/demoContent";
+---
+
+<DemoBase
+  slug="overlap"
+  name="Overlapping Layers / Depth Collage"
+  premise="Cards and plates stacked with real z-depth and shadow, with a flat reflow below the fold of the breakpoint."
+>
+  <style is:global>
+    /* Depth here is three z-planes and nothing more: back (0), mid (2),
+       front (4). Shadows get heavier as the plane comes forward, which is the
+       only cue that keeps a collage readable rather than muddled. */
+    body { background: #0A0A0A; color: #E8E6E1; }
+    .page { max-width: 1120px; margin: 0 auto; padding: 26px 24px 120px; }
+
+    .bar { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .mark { font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700; font-size: 19px; }
+    .bar ul { list-style: none; display: flex; gap: 18px; margin: 0; padding: 0; font-size: 13px; }
+    .bar a { color: #9a958c; text-decoration: none; }
+    .bar a:hover { color: #DCA424; }
+
+    .stack { position: relative; margin-top: 60px; min-height: 520px; }
+    .layer { position: absolute; }
+    .back  { z-index: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.45); }
+    .mid   { z-index: 2; box-shadow: 0 22px 54px rgba(0,0,0,0.6); }
+    .front { z-index: 4; box-shadow: 0 34px 80px rgba(0,0,0,0.72); }
+
+    .l-photo { left: 0; top: 0; width: 62%; aspect-ratio: 16 / 10; background: linear-gradient(140deg, #5F2C82, #042D1D); }
+    .l-band  { right: 0; top: 96px; width: 46%; height: 148px; background: #DCA424; }
+    .l-card {
+      left: 26%; top: 220px; width: 52%; background: #151515;
+      border: 1px solid #2a2a2a; padding: 26px 28px;
+    }
+    .l-card h1 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(30px, 4.4vw, 52px); line-height: 1; margin: 0 0 14px; }
+    .l-card p { margin: 0; color: #cfcbc2; font-size: 16px; line-height: 1.55; }
+    .l-chip {
+      left: 6%; top: 430px; background: #E86100; color: #0A0A0A; padding: 11px 22px;
+      font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 600; text-decoration: none;
+    }
+    .l-chip:hover { background: #DCA424; }
+
+    h2 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase; color: #9a958c; margin: 0 0 24px; }
+
+    .work { margin-top: 170px; }
+    .wgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 44px 26px; }
+    /* Within the grid the overlap is a controlled negative margin, not absolute
+       positioning — so it collapses to a normal stack on its own. */
+    .w { position: relative; }
+    .w .slab { aspect-ratio: 4 / 3; background: #1d1d1d; border: 1px solid #2a2a2a; }
+    .w:nth-child(odd) .slab { background: linear-gradient(160deg, #042D1D, #0A0A0A); }
+    .w .plate {
+      position: relative; margin: -38px 0 0 18px; background: #151515;
+      border: 1px solid #2a2a2a; padding: 15px 17px; box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+    }
+    .w h3 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 17px; margin: 0 0 4px; }
+    .w p { margin: 0; font-size: 13px; color: #9a958c; }
+
+    .svc { margin-top: 110px; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 22px; }
+    .s { background: #151515; border: 1px solid #2a2a2a; padding: 22px; }
+    .s:nth-child(2) { transform: translateY(26px); }
+    .s:nth-child(3) { transform: translateY(-14px); }
+    .s .n { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: #DCA424; }
+    .s h3 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 20px; margin: 7px 0 8px; }
+    .s p { margin: 0; font-size: 14px; color: #cfcbc2; line-height: 1.55; }
+
+    footer { margin-top: 140px; padding-top: 20px; border-top: 1px solid #2a2a2a; font-size: 13px; color: #9a958c; }
+
+    @media (max-width: 820px) {
+      /* The collage is a composition for one canvas size. Under it, the layers
+         are unstacked into ordinary blocks rather than shrunk into a pile. */
+      .stack { min-height: 0; display: grid; gap: 16px; }
+      .layer { position: static; width: auto !important; box-shadow: none; }
+      .l-band { height: 74px; }
+      .l-chip { justify-self: start; }
+      .w .plate { margin: 12px 0 0; }
+      .s { transform: none !important; }
+      .work, .svc { margin-top: 70px; }
+    }
+  </style>
+
+  <div class="page">
+    <header class="bar">
+      <span class="mark">{BRAND}</span>
+      <nav aria-label="Primary">
+        <ul>{NAV.map((n) => <li><a href="#work">{n}</a></li>)}</ul>
+      </nav>
+    </header>
+
+    <section class="stack">
+      <div class="layer back l-photo" aria-hidden="true"></div>
+      <div class="layer back l-band" aria-hidden="true"></div>
+      <div class="layer mid l-card">
+        <h1>Layers, not rows</h1>
+        <p>{TAGLINE}</p>
+      </div>
+      <a class="layer front l-chip" href="#work">{CTA.label}</a>
+    </section>
+
+    <section class="work" id="work">
+      <h2>Selected work</h2>
+      <div class="wgrid">
+        {
+          WORKS.map((w) => (
+            <article class="w">
+              <div class="slab"></div>
+              <div class="plate">
+                <h3>{w.client}</h3>
+                <p>{w.kind} · {w.year}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="svc">
+      {
+        SERVICES.map((s) => (
+          <article class="s">
+            <span class="n">{s.n}</span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </article>
+        ))
+      }
+    </section>
+
+    <footer>{CTA.address} · {CTA.email}</footer>
+  </div>
+</DemoBase>

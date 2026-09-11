@@ -19,8 +19,10 @@ business — opened during a scoping call, not published as marketing.
 |---|---|---|
 | [`apps/field-guide`](apps/field-guide) | **Live** | 228 website platforms with cost, who runs it after launch, exit path and ceiling. Opened during a client scoping call. |
 | [`apps/home`](apps/home) | **Live** | This list, as a page. Says what each tool does *and* what it doesn't do yet. |
+| [`apps/focus`](apps/focus) | In the repo | Focus Window: four focus tools over one shared core — fit, planner, combined dial, live session. Builds and tests; no deploy yet. |
+| [`apps/layout-lab`](apps/layout-lab) | In the repo | 74 avant-garde layouts and 29 sections in 142 variants, catalogued — with the 24 Rule-Breakers built as real pages. No deploy yet. |
 | [`packages/brand`](packages/brand) | In use | `@ujg/brand` — the UJG palette, type stack and theme switching. Every tool imports it. |
-| [`work-assist/`](work-assist) | In the repo | Focus Window: four focus tools over one shared core, in five stacks. Real and working, but not yet a workspace app. |
+| [`work-assist/`](work-assist) | Superseded | The Focus Window prototypes in five stacks. `apps/focus` is the one that gets maintained now. |
 | [`colors/`](colors) | Superseded | The original colour-system export. `packages/brand` replaced it for new work; not yet folded in or retired. |
 | [`operations/`](operations) | Superseded | The original single-file Field Guide. Still the only place Compare, Decide and Cost work end to end; stays until the site carries them. |
 
@@ -40,7 +42,12 @@ pnpm check          # typecheck, test, build and verify every app
 | `pnpm dev` | Dev servers for every app |
 | `pnpm build` | Build every app |
 | `pnpm test` | Every package's tests |
-| `pnpm check` | typecheck + test + build + blueprint |
+| `pnpm check` | typecheck + test + build + blueprint + isolation |
+
+Two checks need a Chromium binary and so are deliberately outside `pnpm check`.
+Run them when a colour token, a text size or a demo changes:
+`pnpm --filter @ujg/layout-lab a11y` and `... smoke`, and the same `a11y` script
+in `apps/focus` and `apps/field-guide`.
 
 To work on one app: `pnpm --filter @ujg/field-guide dev`.
 
@@ -110,6 +117,19 @@ directions.
 
 ---
 
+## The lab does not claim what it has not built
+
+`apps/layout-lab` catalogues 74 layouts and has built 24 of them. Every card
+says which it is, and `pnpm --filter @ujg/layout-lab isolation` **fails the
+build** if a card ever says "Demo" without a page behind it — the same instinct
+as "Not documented", applied to work rather than to facts.
+
+Its demos are separate documents rather than components, so a demo can write
+`body` and bare element selectors the way a real page does with no chance of
+leaking into the catalogue around it. The isolation check proves that in both
+directions on the built output, which is how a 62KB CSS leak into every
+catalogue page got caught.
+
 ## Adding a tool
 
 1. `apps/<name>/` with its own `package.json`.
@@ -142,9 +162,11 @@ every link 404s while the index still looks perfect.
 Vercel validates `vercel.json` against a strict schema and rejects any key it
 doesn't recognise — including a `//` comment key. Keep notes in the app README.
 
-`apps/home` links to the Field Guide via `PUBLIC_FIELD_GUIDE_URL`. Unset is a
-valid state: the card renders without an Open button rather than with a guessed
-link. See `apps/home/.env.example`.
+`apps/home` links to each deployed tool via a `PUBLIC_*_URL` variable —
+`PUBLIC_FIELD_GUIDE_URL`, `PUBLIC_FOCUS_URL`, `PUBLIC_LAYOUT_LAB_URL`. They are
+set on the **home** project, not on the project they point at. Unset is a valid
+state: the card renders without an Open button rather than with a guessed link.
+See `apps/home/.env.example`.
 
 **Before any of this takes a real domain**, look at Deployment Protection. These
 pages carry build notes, stack flags and comparison reasoning, and preview URLs

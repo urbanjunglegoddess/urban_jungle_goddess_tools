@@ -1,0 +1,38 @@
+---
+import Base from "../../layouts/Base.astro";
+import { SECTIONS } from "../../lib/catalog";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (() =>
+  SECTIONS.map((section) => ({ params: { slug: section.slug }, props: { section } }))) satisfies GetStaticPaths;
+
+const { section } = Astro.props;
+---
+
+<Base title={`${section.name} — Section playbook`} description={section.blurb}>
+  <p class="crumb"><a href="/sections">← Section playbook</a></p>
+
+  <header class="lhead">
+    <p class="lpath">{section.group}</p>
+    <h1>{section.name}</h1>
+    <p class="standfirst">{section.blurb}</p>
+    <p class="mastfoot"><span><b>{section.variants.length}</b> variants</span></p>
+  </header>
+
+  <section class="sect">
+    <h2>Variants</h2>
+    <div class="var-grid">
+      {
+        section.variants.map((v) => (
+          <figure class="var">
+            {v.wireframe && <Fragment set:html={v.wireframe} />}
+            <figcaption>
+              <h5>{v.name}</h5>
+              <p>{v.blurb}</p>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,110 @@
+---
+import DemoBase from "../../layouts/DemoBase.astro";
+import { BRAND, NAV, SERVICES, WORKS, CTA, TAGLINE } from "../../lib/demoContent";
+---
+
+<DemoBase
+  slug="vertical"
+  name="Vertical / Rotated Labels"
+  premise="Section titles running sideways along the edges — decorative only, with every rotated label duplicated upright."
+>
+  <style is:global>
+    /* The sheet's rule, enforced: nothing you need is only available rotated.
+       Primary navigation is upright at the top. The sideways type is section
+       ornament, and each rotated label has an upright twin in the content it
+       labels, so a screen reader or a narrow screen loses nothing. */
+    body { background: #E8E6E1; color: #0A0A0A; }
+
+    .bar { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; padding: 16px clamp(20px, 4vw, 48px); border-bottom: 1px solid #d8d4cb; }
+    .mark { font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700; font-size: 18px; }
+    .bar ul { list-style: none; display: flex; gap: 18px; margin: 0; padding: 0; font-size: 12.5px; }
+    .bar a { color: #5f5a52; text-decoration: none; }
+    .bar a:hover { color: #7E3209; }
+
+    .band { display: grid; grid-template-columns: 1fr; border-bottom: 1px solid #d8d4cb; }
+    @media (min-width: 780px) { .band { grid-template-columns: 58px 1fr 58px; } }
+
+    .edge {
+      display: none; align-items: center; justify-content: center;
+      writing-mode: vertical-rl; font-family: "Chakra Petch", system-ui, sans-serif;
+      font-size: 13px; letter-spacing: 0.42em; text-transform: uppercase; color: #7E3209;
+      border-right: 1px solid #d8d4cb;
+    }
+    .edge.r { border-right: 0; border-left: 1px solid #d8d4cb; transform: rotate(180deg); color: #5f5a52; }
+    @media (min-width: 780px) { .edge { display: flex; } }
+
+    .body { padding: clamp(34px, 6vw, 76px) clamp(22px, 4vw, 52px); }
+    .k { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: #7E3209; }
+    h1 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(36px, 6.5vw, 76px); line-height: 0.98; margin: 12px 0 16px; letter-spacing: -0.02em; }
+    h2 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(24px, 3.6vw, 38px); margin: 10px 0 14px; }
+    p.lede { max-width: 48ch; margin: 0; font-size: 17px; line-height: 1.6; color: #3d3a34; }
+
+    .svc { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin-top: 26px; }
+    .s h3 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 20px; margin: 6px 0 8px; }
+    .s p { margin: 0; font-size: 14.5px; line-height: 1.6; color: #3d3a34; }
+
+    .wrow { display: flex; justify-content: space-between; gap: 16px; padding: 15px 0; border-top: 1px solid #d8d4cb; }
+    .wrow h3 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 19px; margin: 0; font-weight: 600; }
+    .wrow span { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11.5px; color: #5f5a52; white-space: nowrap; }
+
+    .go { display: inline-block; margin-top: 26px; background: #7E3209; color: #E8E6E1; padding: 13px 26px; text-decoration: none; font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 600; }
+    .go:hover { background: #0A0A0A; }
+  </style>
+
+  <header class="bar">
+    <span class="mark">{BRAND}</span>
+    <nav aria-label="Primary">
+      <ul>{NAV.map((n) => <li><a href="#work">{n}</a></li>)}</ul>
+    </nav>
+  </header>
+
+  <section class="band">
+    <span class="edge" aria-hidden="true">Introduction</span>
+    <div class="body">
+      <span class="k">Introduction</span>
+      <h1>Sideways on<br />the margins only</h1>
+      <p class="lede">{TAGLINE} Every rotated word on this page is repeated upright inside the section it names.</p>
+    </div>
+    <span class="edge r" aria-hidden="true">Atlanta — 2016</span>
+  </section>
+
+  <section class="band">
+    <span class="edge" aria-hidden="true">Services</span>
+    <div class="body">
+      <span class="k">Services</span>
+      <h2>Three things, done properly</h2>
+      <div class="svc">
+        {
+          SERVICES.map((s) => (
+            <article class="s">
+              <span class="k">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+    <span class="edge r" aria-hidden="true">Identity · Interface · Motion</span>
+  </section>
+
+  <section class="band" id="work">
+    <span class="edge" aria-hidden="true">Selected work</span>
+    <div class="body">
+      <span class="k">Selected work</span>
+      <h2>Six projects</h2>
+      <div style="margin-top:16px">
+        {
+          WORKS.map((w) => (
+            <div class="wrow">
+              <h3>{w.client}</h3>
+              <span>{w.kind} · {w.year}</span>
+            </div>
+          ))
+        }
+      </div>
+      <a class="go" href="#work">{CTA.label}</a>
+    </div>
+    <span class="edge r" aria-hidden="true">{CTA.email}</span>
+  </section>
+</DemoBase>

@@ -1,0 +1,127 @@
+---
+import DemoBase from "../../layouts/DemoBase.astro";
+import { BRAND, NAV, SERVICES, WORKS, STATS, CTA, TAGLINE } from "../../lib/demoContent";
+
+/** The wordmark is the layout, so the name is split rather than retyped. */
+const [first, second] = BRAND.split(" ");
+---
+
+<DemoBase
+  slug="wordmark"
+  name="Oversized Wordmark Hero"
+  premise="The studio name set as large as the screen allows, and nothing else above the fold."
+>
+  <style is:global>
+    /* The name has to carry the whole first screen, so it is set the way a
+       wordmark is set, not the way a heading is: negative tracking, optical
+       line breaks, and a size that fills the measure at every width. The
+       clamp is tuned so the two words always land on two lines. */
+    body { background: #0A0A0A; color: #E8E6E1; }
+
+    .bar { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; padding: 18px clamp(20px, 4vw, 44px); }
+    .bar .small { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #9a958c; }
+    .bar ul { list-style: none; display: flex; gap: 18px; margin: 0; padding: 0; font-size: 12.5px; }
+    .bar a { color: #9a958c; text-decoration: none; }
+    .bar a:hover { color: #DCA424; }
+
+    .hero {
+      min-height: calc(100vh - 62px); display: flex; flex-direction: column;
+      justify-content: center; padding: 0 clamp(20px, 4vw, 44px) 40px;
+      /* Sized against this box, not the viewport — see below. */
+      container-type: inline-size;
+    }
+    .hero h1 {
+      font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700;
+      /* A wordmark that overflows is not a wordmark, it is a bug. Viewport
+         units do not know about the hero's own padding, so at 380px a vw-sized
+         name pushed 51px past the edge. cqi measures the container's inline
+         size, padding already subtracted, and the value is set low enough that
+         the name still fits in the fallback stack when the webfont has not
+         loaded — which is wider than Chakra Petch. The vw clamp stays as the
+         floor for anything without container queries. */
+      font-size: clamp(44px, 17vw, 300px);
+      font-size: min(19cqi, 300px);
+      line-height: 0.78; letter-spacing: -0.045em; margin: 0;
+      text-transform: uppercase;
+    }
+    .hero h1 .two { display: block; color: #DCA424; text-indent: 0.02em; }
+    .hero .under {
+      display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+      margin-top: 34px; padding-top: 18px; border-top: 1px solid #2a2a2a;
+    }
+    .hero .under p { max-width: 40ch; margin: 0; font-size: 16px; line-height: 1.55; color: #cfcbc2; }
+    .hero .under .k { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #9a958c; }
+
+    main { padding: 0 clamp(20px, 4vw, 44px) 120px; }
+    h2 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase; color: #9a958c; margin: 90px 0 22px; }
+    .svc { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .s h3 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(26px, 3.4vw, 40px); margin: 0 0 8px; }
+    .s p { margin: 0; font-size: 15px; line-height: 1.6; color: #cfcbc2; }
+    .s .n { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: #DCA424; }
+
+    .wrow { display: flex; justify-content: space-between; gap: 16px; padding: 18px 0; border-top: 1px solid #2a2a2a; }
+    .wrow h3 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(20px, 2.6vw, 30px); margin: 0; font-weight: 600; }
+    .wrow span { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: #9a958c; white-space: nowrap; }
+
+    .stats { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    .stat .v { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 46px; line-height: 1; color: #DCA424; }
+    .stat .k { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #9a958c; margin-top: 6px; }
+
+    .go { display: inline-block; margin-top: 34px; background: #E86100; color: #0A0A0A; padding: 14px 28px; text-decoration: none; font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 600; font-size: 17px; }
+    .go:hover { background: #DCA424; }
+  </style>
+
+  <header class="bar">
+    <span class="small">Atlanta · est 2016</span>
+    <nav aria-label="Primary">
+      <ul>{NAV.map((n) => <li><a href="#services">{n}</a></li>)}</ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>{first}<span class="two">{second}</span></h1>
+    <div class="under">
+      <p>{TAGLINE}</p>
+      <span class="k">Scroll for the work</span>
+    </div>
+  </section>
+
+  <main>
+    <h2 id="services">Services</h2>
+    <div class="svc">
+      {
+        SERVICES.map((s) => (
+          <article class="s">
+            <span class="n">{s.n}</span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <h2>Selected work</h2>
+    {
+      WORKS.map((w) => (
+        <div class="wrow">
+          <h3>{w.client}</h3>
+          <span>{w.kind} · {w.year}</span>
+        </div>
+      ))
+    }
+
+    <h2>The studio</h2>
+    <div class="stats">
+      {
+        STATS.map((s) => (
+          <div class="stat">
+            <div class="v">{s.v}</div>
+            <div class="k">{s.k}</div>
+          </div>
+        ))
+      }
+    </div>
+
+    <a class="go" href="#services">{CTA.label}</a>
+  </main>
+</DemoBase>

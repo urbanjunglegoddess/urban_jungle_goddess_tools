@@ -1,0 +1,159 @@
+---
+import DemoBase from "../../layouts/DemoBase.astro";
+import { BRAND, NAV, SERVICES, WORKS, CTA, TAGLINE } from "../../lib/demoContent";
+---
+
+<DemoBase
+  slug="broken"
+  name="Deconstructed / Broken Grid"
+  premise="A studio page where every element is deliberately off its column — offset, overlapped, tilted."
+>
+  <style is:global>
+    /* The grid still exists. That is the whole trick: elements are placed on a
+       real 12-column grid and then pushed off it by a fixed set of offsets, so
+       the wrongness is systematic rather than random. Four offsets, no more. */
+    body { background: #E8E6E1; color: #0A0A0A; }
+    .page { max-width: 1140px; margin: 0 auto; padding: 28px 22px 110px; }
+
+    .bar { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
+    .mark { font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700; font-size: 19px; letter-spacing: -0.01em; }
+    .bar nav ul { list-style: none; display: flex; gap: 18px; margin: 0; padding: 0; font-size: 13px; }
+    .bar nav a { color: #5f5a52; text-decoration: none; }
+    .bar nav a:hover { color: #7E3209; }
+
+    .hero { position: relative; margin-top: 54px; min-height: 460px; }
+    .hero h1 {
+      font-family: "Chakra Petch", system-ui, sans-serif;
+      font-size: clamp(44px, 10vw, 128px);
+      line-height: 0.82; margin: 0; letter-spacing: -0.03em; text-transform: uppercase;
+    }
+    /* offset 1 — the second word slides right and down off its own baseline */
+    .hero h1 .drop { display: block; margin-left: 22%; color: #7E3209; }
+    /* offset 2 — the standfirst sits under the first word, not the block */
+    .hero .stand {
+      position: relative; z-index: 3; max-width: 30ch; margin: 26px 0 0 4%;
+      font-size: 17px; line-height: 1.5; color: #2b2721;
+    }
+    /* offset 3 — a tilted plate crossing the type */
+    .plate {
+      position: absolute; right: 0; top: 28px; width: min(46%, 420px); aspect-ratio: 4 / 5;
+      background: #042D1D; transform: rotate(-4deg); z-index: 2;
+      display: grid; place-items: center;
+    }
+    .plate span {
+      color: #DCA424; font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 12px; letter-spacing: 0.3em; transform: rotate(4deg);
+    }
+    /* offset 4 — a disc that belongs to no column at all */
+    .disc {
+      position: absolute; left: 54%; top: 330px; width: 96px; height: 96px; border-radius: 50%;
+      background: #E86100; z-index: 4;
+    }
+
+    .works { margin-top: 130px; }
+    .works h2 {
+      font-family: "Chakra Petch", system-ui, sans-serif; font-size: 13px; letter-spacing: 0.24em;
+      text-transform: uppercase; color: #5f5a52; margin: 0 0 26px;
+    }
+    .wgrid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px 16px; }
+    .w { grid-column: span 4; }
+    /* Each card takes one of the four offsets. Nothing is random. */
+    .w:nth-child(1) { grid-column: 1 / span 4; transform: translateY(0); }
+    .w:nth-child(2) { grid-column: 6 / span 4; transform: translateY(46px); }
+    .w:nth-child(3) { grid-column: 10 / span 3; transform: translateY(-22px); }
+    .w:nth-child(4) { grid-column: 2 / span 4; transform: translateY(28px); }
+    .w:nth-child(5) { grid-column: 7 / span 5; transform: translateY(74px) rotate(-1.2deg); }
+    .w:nth-child(6) { grid-column: 1 / span 3; transform: translateY(96px); }
+    .w .slab { aspect-ratio: 3 / 2; background: #cfcbc2; margin-bottom: 10px; }
+    .w:nth-child(2) .slab { background: #5F2C82; }
+    .w:nth-child(5) .slab { background: #042D1D; }
+    .w h3 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 16px; margin: 0 0 3px; }
+    .w p { margin: 0; font-size: 13px; color: #5f5a52; }
+
+    .services { margin-top: 190px; border-top: 2px solid #0A0A0A; padding-top: 22px; }
+    .sgrid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
+    .s:nth-child(1) { grid-column: 1 / span 3; }
+    .s:nth-child(2) { grid-column: 5 / span 3; margin-top: 40px; }
+    .s:nth-child(3) { grid-column: 9 / span 4; margin-top: 12px; }
+    /* Sienna, not Spanish Orange: orange on Platinum is 2.7:1, nowhere near
+       the 4.5:1 this size of text answers to. The disc above is orange because
+       a disc is a graphic and answers to 3:1 instead. */
+    .s .n { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: #7E3209; }
+    .s h3 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 22px; margin: 6px 0 8px; }
+    .s p { margin: 0; font-size: 14px; line-height: 1.5; color: #2b2721; }
+
+    .end { margin-top: 200px; position: relative; }
+    .end a {
+      display: inline-block; background: #0A0A0A; color: #E8E6E1; text-decoration: none;
+      font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(26px, 5vw, 52px);
+      padding: 14px 30px; margin-left: 18%; transform: rotate(-1.5deg);
+    }
+    .end p { max-width: 34ch; margin: 24px 0 0; font-size: 14px; color: #5f5a52; }
+
+    @media (max-width: 760px) {
+      /* The offsets are a desktop composition. Below this they stop being a
+         choice and start being a pile, so the grid is restored outright. */
+      .hero { min-height: 0; }
+      .hero h1 .drop { margin-left: 0; }
+      .plate { position: static; width: 100%; transform: none; margin-top: 26px; aspect-ratio: 16 / 9; }
+      .plate span { transform: none; }
+      .disc { display: none; }
+      .wgrid, .sgrid { grid-template-columns: 1fr; }
+      .w, .s { grid-column: 1 / -1 !important; transform: none !important; margin-top: 0 !important; }
+      .works, .services, .end { margin-top: 64px; }
+      .end a { margin-left: 0; transform: none; }
+    }
+  </style>
+
+  <div class="page">
+    <header class="bar">
+      <span class="mark">{BRAND}</span>
+      <nav aria-label="Primary">
+        <ul>
+          {NAV.map((n) => <li><a href="#work">{n}</a></li>)}
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>Built<span class="drop">Crooked</span></h1>
+      <div class="plate"><span>MERIDIAN SIX</span></div>
+      <div class="disc" aria-hidden="true"></div>
+      <p class="stand">{TAGLINE} Nothing here sits where the grid says it should, and all of it is on the grid.</p>
+    </section>
+
+    <section class="works" id="work">
+      <h2>Selected work</h2>
+      <div class="wgrid">
+        {
+          WORKS.map((w) => (
+            <article class="w">
+              <div class="slab"></div>
+              <h3>{w.client}</h3>
+              <p>{w.kind} · {w.year}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="services">
+      <div class="sgrid">
+        {
+          SERVICES.map((s) => (
+            <article class="s">
+              <span class="n">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="end">
+      <a href="#work">{CTA.label}</a>
+      <p>{CTA.line}</p>
+    </section>
+  </div>
+</DemoBase>

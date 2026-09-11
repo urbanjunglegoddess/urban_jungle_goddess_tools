@@ -1,0 +1,176 @@
+---
+import DemoBase from "../../layouts/DemoBase.astro";
+import { BRAND, NAV, SERVICES, WORKS, CTA, TAGLINE } from "../../lib/demoContent";
+---
+
+<DemoBase
+  slug="hscroll"
+  name="Horizontal-Scroll Site"
+  premise="The page runs sideways as you scroll down — with a real vertical fallback you can switch to at any time."
+>
+  <style is:global>
+    /* The sheet calls this reckless and it is right, so the fallback is not an
+       afterthought: the vertical layout is the default in the markup, and the
+       sideways behaviour is added by script only when the viewport is wide
+       enough and the visitor has not asked for reduced motion. The toggle is
+       always visible, and the choice sticks for the session. */
+    body { background: #0A0A0A; color: #E8E6E1; }
+
+    .topbar {
+      position: fixed; inset: 0 0 auto 0; z-index: 40; display: flex; gap: 16px;
+      align-items: center; justify-content: space-between; flex-wrap: wrap;
+      padding: 14px 20px; background: rgba(10,10,10,0.88);
+      border-bottom: 1px solid #2a2a2a; backdrop-filter: blur(6px);
+    }
+    .mark { font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700; font-size: 18px; }
+    .topbar ul { list-style: none; display: flex; gap: 16px; margin: 0; padding: 0; font-size: 12.5px; }
+    .topbar a { color: #9a958c; text-decoration: none; }
+    .topbar a:hover { color: #DCA424; }
+    .modebtn {
+      font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.1em;
+      background: transparent; color: #DCA424; border: 1px solid #DCA424; border-radius: 999px;
+      padding: 6px 14px; cursor: pointer;
+    }
+    .modebtn:hover { background: #DCA424; color: #0A0A0A; }
+
+    /* --- default: an ordinary vertical page --- */
+    .rail { display: grid; gap: 0; padding-top: 62px; }
+    .panel {
+      min-height: 78vh; display: grid; align-content: center; gap: 16px;
+      padding: 60px clamp(24px, 6vw, 90px); border-bottom: 1px solid #2a2a2a;
+    }
+    .panel .k { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #DCA424; }
+    .panel h1 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(38px, 7vw, 86px); line-height: 0.95; margin: 0; letter-spacing: -0.02em; }
+    .panel h2 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(26px, 4vw, 44px); margin: 0; }
+    .panel p { max-width: 44ch; margin: 0; font-size: 16.5px; line-height: 1.6; color: #cfcbc2; }
+    .panel.green { background: #042D1D; }
+    .panel.plum { background: #2a1339; }
+    .go { justify-self: start; background: #E86100; color: #0A0A0A; padding: 12px 24px; text-decoration: none; font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 600; }
+    .go:hover { background: #DCA424; }
+
+    /* --- sideways mode, switched on by script only --- */
+    body.sideways { overflow-x: hidden; }
+    body.sideways .track { position: fixed; inset: 62px 0 0 0; overflow: hidden; }
+    body.sideways .rail {
+      display: flex; height: 100%; padding-top: 0;
+      will-change: transform;
+    }
+    body.sideways .panel {
+      flex: 0 0 clamp(320px, 62vw, 760px); min-height: 0; height: 100%;
+      border-bottom: 0; border-right: 1px solid #2a2a2a; align-content: center;
+    }
+    /* The spacer is what gives the document its scroll length; its height is
+       set from the track's real width, so the mapping is 1:1 and never drifts. */
+    .spacer { display: none; }
+    body.sideways .spacer { display: block; }
+
+    .hint {
+      position: fixed; right: 16px; bottom: 54px; z-index: 40;
+      font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10.5px;
+      letter-spacing: 0.2em; text-transform: uppercase; color: #9a958c;
+    }
+  </style>
+
+  <header class="topbar">
+    <span class="mark">{BRAND}</span>
+    <nav aria-label="Primary">
+      <ul>{NAV.map((n) => <li><a href="#w">{n}</a></li>)}</ul>
+    </nav>
+    <button class="modebtn" id="mode" type="button" aria-pressed="false">Sideways: off</button>
+  </header>
+
+  <div class="track" id="track">
+    <div class="rail" id="rail">
+      <section class="panel">
+        <span class="k">Meridian Six</span>
+        <h1>Read it<br />sideways</h1>
+        <p>{TAGLINE}</p>
+        <a class="go" href="#w">{CTA.label}</a>
+      </section>
+
+      {
+        SERVICES.map((s, i) => (
+          <section class={i === 1 ? "panel green" : i === 2 ? "panel plum" : "panel"}>
+            <span class="k">{s.n} — {s.title}</span>
+            <h2>{s.line}</h2>
+            <p>{s.body}</p>
+          </section>
+        ))
+      }
+
+      <section class="panel" id="w">
+        <span class="k">Selected work</span>
+        <h2>Six projects</h2>
+        <p>{WORKS.map((w) => w.client).join(" · ")}</p>
+      </section>
+
+      <section class="panel green">
+        <span class="k">Contact</span>
+        <h2>{CTA.label}</h2>
+        <p>{CTA.line}</p>
+        <a class="go" href="#w">{CTA.email}</a>
+      </section>
+    </div>
+  </div>
+  <div class="spacer" id="spacer" aria-hidden="true"></div>
+  <p class="hint" id="hint" hidden>Scroll ↓ moves →</p>
+
+  <script>
+    /**
+     * Sideways is opt-in and reversible. Vertical is what ships in the HTML;
+     * this only ever adds behaviour on top of a page that already works.
+     */
+    const btn = document.getElementById("mode") as HTMLButtonElement;
+    const rail = document.getElementById("rail") as HTMLElement;
+    const spacer = document.getElementById("spacer") as HTMLElement;
+    const hint = document.getElementById("hint") as HTMLElement;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const wide = window.matchMedia("(min-width: 780px)");
+    let on = false;
+    let raf = 0;
+
+    function measure() {
+      if (!on) return;
+      // Document scroll length = how far the rail has to travel, plus one screen.
+      const travel = Math.max(rail.scrollWidth - window.innerWidth, 0);
+      spacer.style.height = travel + window.innerHeight + "px";
+      paint();
+    }
+
+    function paint() {
+      raf = 0;
+      if (!on) return;
+      const travel = Math.max(rail.scrollWidth - window.innerWidth, 0);
+      const y = Math.min(Math.max(window.scrollY, 0), travel);
+      rail.style.transform = "translate3d(" + -y + "px,0,0)";
+    }
+
+    function onScroll() {
+      if (!raf) raf = requestAnimationFrame(paint);
+    }
+
+    function set(next: boolean) {
+      on = next && wide.matches && !reduced.matches;
+      document.body.classList.toggle("sideways", on);
+      btn.setAttribute("aria-pressed", String(on));
+      btn.textContent = "Sideways: " + (on ? "on" : "off");
+      hint.hidden = !on;
+      if (on) {
+        window.addEventListener("scroll", onScroll, { passive: true });
+        measure();
+      } else {
+        window.removeEventListener("scroll", onScroll);
+        rail.style.transform = "";
+        spacer.style.height = "";
+      }
+    }
+
+    btn.addEventListener("click", () => set(!on));
+    window.addEventListener("resize", measure);
+    // If the viewport narrows or the visitor turns on reduced motion mid-visit,
+    // sideways switches itself off rather than becoming unusable.
+    wide.addEventListener("change", () => set(on));
+    reduced.addEventListener("change", () => set(on));
+  </script>
+</DemoBase>

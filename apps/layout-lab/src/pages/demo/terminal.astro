@@ -1,0 +1,194 @@
+---
+import DemoBase from "../../layouts/DemoBase.astro";
+import { BRAND, SERVICES, WORKS, STATS, CTA, TAGLINE, JOURNAL } from "../../lib/demoContent";
+
+/** Everything the console can answer also exists as plain HTML below it. */
+const COMMANDS = ["help", "about", "services", "work", "studio", "contact", "gui", "clear"];
+---
+
+<DemoBase
+  slug="terminal"
+  name="Terminal / Command-Line UI"
+  premise="A console you type into — shipped on top of an ordinary page, not instead of one."
+>
+  <style is:global>
+    /* The sheet says this alienates non-technical users completely, and to ship
+       a GUI alongside. That is exactly the structure here: the full page is in
+       the HTML underneath, always reachable by scrolling or by typing `gui`.
+       The console is an alternative route, never the only one. */
+    body { background: #050806; color: #b8ccbf; font-family: "JetBrains Mono", ui-monospace, monospace; }
+    .wrap { max-width: 940px; margin: 0 auto; padding: 26px 20px 110px; }
+
+    .console { border: 1px solid #1d3327; background: #071009; border-radius: 8px; overflow: hidden; }
+    .chrome { display: flex; align-items: center; gap: 8px; padding: 9px 13px; border-bottom: 1px solid #1d3327; background: #0a1a10; font-size: 11.5px; color: #6f8f7c; letter-spacing: 0.1em; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: #1d3327; }
+    .dot.g { background: #3d8b68; }
+
+    .out { padding: 16px 15px; min-height: 300px; max-height: 62vh; overflow-y: auto; font-size: 13.5px; line-height: 1.65; }
+    .out .line { white-space: pre-wrap; word-break: break-word; }
+    .out .you { color: #DCA424; }
+    .out .head { color: #E8E6E1; }
+    .out .dim { color: #6f8f7c; }
+
+    .promptrow { display: flex; align-items: center; gap: 9px; padding: 11px 15px; border-top: 1px solid #1d3327; }
+    .promptrow label { color: #DCA424; font-size: 13.5px; }
+    .promptrow input {
+      flex: 1; background: transparent; border: 0; outline: none;
+      color: #E8E6E1; font-family: inherit; font-size: 13.5px; padding: 4px 0;
+    }
+    .promptrow input:focus-visible { outline: 1px solid #DCA424; outline-offset: 4px; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+    .chips button {
+      background: transparent; border: 1px solid #1d3327; color: #8fb39c;
+      font-family: inherit; font-size: 11.5px; padding: 5px 11px; border-radius: 999px; cursor: pointer;
+    }
+    .chips button:hover { border-color: #DCA424; color: #DCA424; }
+
+    /* --- the ordinary page, always present --- */
+    .gui { margin-top: 60px; border-top: 1px solid #1d3327; padding-top: 40px; }
+    .gui h1 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: clamp(30px, 5vw, 54px); color: #E8E6E1; line-height: 1; margin: 0 0 12px; }
+    .gui > p { max-width: 52ch; font-size: 14.5px; line-height: 1.7; color: #a4bfae; }
+    .gui h2 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase; color: #6f8f7c; margin: 46px 0 16px; }
+    .row { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-top: 1px solid #12231a; font-size: 13.5px; }
+    .row span:last-child { color: #6f8f7c; }
+    .svc { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+    .svc article h3 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 19px; color: #E8E6E1; margin: 5px 0 7px; }
+    .svc article p { margin: 0; font-size: 13px; line-height: 1.65; color: #a4bfae; }
+    .svc .n { color: #DCA424; font-size: 11.5px; letter-spacing: 0.2em; }
+    .go { display: inline-block; margin-top: 26px; border: 1px solid #DCA424; color: #DCA424; padding: 11px 22px; text-decoration: none; font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; }
+    .go:hover { background: #DCA424; color: #050806; }
+  </style>
+
+  <div class="wrap">
+    <div class="console">
+      <div class="chrome">
+        <span class="dot g"></span><span class="dot"></span><span class="dot"></span>
+        <span style="margin-left:8px">{BRAND.toLowerCase().replace(" ", "")} — sh</span>
+      </div>
+      <div class="out" id="out" role="log" aria-live="polite" aria-label="Console output"></div>
+      <form class="promptrow" id="form">
+        <label for="cmd">&gt;</label>
+        <input id="cmd" name="cmd" autocomplete="off" spellcheck="false" placeholder="type help" aria-label="Command" />
+      </form>
+    </div>
+
+    <div class="chips" id="chips">
+      {COMMANDS.map((c) => <button type="button" data-cmd={c}>{c}</button>)}
+    </div>
+
+    <main class="gui" id="gui">
+      <h1>{BRAND}</h1>
+      <p>{TAGLINE} If you would rather not type, this is the whole site — the console above is a shortcut, not a gate.</p>
+
+      <h2>Services</h2>
+      <div class="svc">
+        {
+          SERVICES.map((s) => (
+            <article>
+              <span class="n">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <h2>Selected work</h2>
+      {WORKS.map((w) => <div class="row"><span>{w.client} — {w.line}</span><span>{w.kind} {w.year}</span></div>)}
+
+      <h2>The studio</h2>
+      {STATS.map((s) => <div class="row"><span>{s.k}</span><span>{s.v}</span></div>)}
+
+      <h2>Journal</h2>
+      {JOURNAL.map((j) => <div class="row"><span>{j.title}</span><span>{j.date}</span></div>)}
+
+      <h2>Contact</h2>
+      <p>{CTA.line}</p>
+      <a class="go" href="#gui">{CTA.email}</a>
+    </main>
+  </div>
+
+  <script>
+    /**
+     * The console reads the page it sits on. Every answer is pulled out of the
+     * GUI's own DOM, so the two can never disagree about what the site says.
+     */
+    const out = document.getElementById("out") as HTMLElement;
+    const form = document.getElementById("form") as HTMLFormElement;
+    const input = document.getElementById("cmd") as HTMLInputElement;
+    const gui = document.getElementById("gui") as HTMLElement;
+    const chips = document.getElementById("chips") as HTMLElement;
+
+    function say(text: string, cls = "") {
+      const p = document.createElement("p");
+      p.className = "line " + cls;
+      p.textContent = text;
+      p.style.margin = "0";
+      out.appendChild(p);
+      out.scrollTop = out.scrollHeight;
+    }
+
+    /** Reads a section of the GUI back as lines of text. */
+    function section(heading: string): string[] {
+      const hs = Array.from(gui.querySelectorAll("h2"));
+      const h = hs.find((x) => (x.textContent ?? "").toLowerCase().startsWith(heading));
+      if (!h) return ["nothing under that heading"];
+      const lines: string[] = [];
+      let n = h.nextElementSibling;
+      while (n && n.tagName !== "H2") {
+        const t = (n.textContent ?? "").replace(/\s+/g, " ").trim();
+        if (t) lines.push(t);
+        n = n.nextElementSibling;
+      }
+      return lines;
+    }
+
+    const HELP = ["help", "about", "services", "work", "studio", "contact", "gui", "clear"];
+
+    function run(raw: string) {
+      const cmd = raw.trim().toLowerCase();
+      if (!cmd) return;
+      say("> " + raw, "you");
+      switch (cmd) {
+        case "help":
+          say("commands: " + HELP.join("  "), "dim");
+          say("everything here is also on the page below. scrolling is allowed.", "dim");
+          break;
+        case "about":
+          say((gui.querySelector("p")?.textContent ?? "").trim());
+          break;
+        case "services":
+        case "work":
+        case "studio":
+        case "contact":
+          say(cmd.toUpperCase(), "head");
+          for (const l of section(cmd === "studio" ? "the studio" : cmd)) say(l);
+          break;
+        case "gui":
+          gui.scrollIntoView({ behavior: "smooth", block: "start" });
+          say("scrolled to the ordinary page.", "dim");
+          break;
+        case "clear":
+          out.replaceChildren();
+          break;
+        default:
+          say("no such command: " + cmd + " — try help", "dim");
+      }
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      run(input.value);
+      input.value = "";
+    });
+
+    chips.addEventListener("click", (e) => {
+      const b = (e.target as HTMLElement).closest("button");
+      if (b instanceof HTMLButtonElement && b.dataset.cmd) run(b.dataset.cmd);
+    });
+
+    say("Meridian Six console. This site works perfectly well without it.", "head");
+    say("type help, tap a chip, or just scroll.", "dim");
+  </script>
+</DemoBase>

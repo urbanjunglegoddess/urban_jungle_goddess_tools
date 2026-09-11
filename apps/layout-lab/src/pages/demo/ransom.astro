@@ -1,0 +1,140 @@
+---
+import DemoBase from "../../layouts/DemoBase.astro";
+import { BRAND, NAV, SERVICES, WORKS, CTA, TAGLINE } from "../../lib/demoContent";
+
+/** Each cut-out letter carries its own tone, size and tilt — set, not random. */
+const CUTS = [
+  { c: "C", t: "gold", r: "-6deg", s: "1.12" },
+  { c: "U", t: "plat", r: "3deg", s: "0.92" },
+  { c: "T", t: "plum", r: "-2deg", s: "1.2" },
+  { c: "&", t: "orange", r: "7deg", s: "0.82" },
+  { c: "P", t: "plat", r: "-4deg", s: "1.04" },
+  { c: "A", t: "gold", r: "2deg", s: "0.96" },
+  { c: "S", t: "plum", r: "-7deg", s: "1.15" },
+  { c: "T", t: "orange", r: "4deg", s: "0.9" },
+  { c: "E", t: "plat", r: "-1deg", s: "1.08" },
+];
+---
+
+<DemoBase
+  slug="ransom"
+  name="Ransom-Note / Cutout Collage"
+  premise="Mixed sizes, rotations and torn-paper blocks over a single dark ground — chaos with a tonal anchor."
+>
+  <style is:global>
+    /* Chaos needs a hidden order, says the sheet. The order here is: one dark
+       ground under everything, four fills and no fifth, rotations drawn from a
+       fixed set between -7 and +7 degrees, and body copy that is never tilted.
+       The noise is in the display type only. */
+    body { background: #0A0A0A; color: #E8E6E1; }
+    .page { max-width: 1060px; margin: 0 auto; padding: 22px 20px 120px; }
+
+    .bar { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .mark { font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700; font-size: 18px; background: #E8E6E1; color: #0A0A0A; padding: 3px 10px; transform: rotate(-2deg); display: inline-block; }
+    .bar ul { list-style: none; display: flex; gap: 8px; margin: 0; padding: 0; }
+    .bar a { display: block; background: #E8E6E1; color: #0A0A0A; padding: 4px 10px; font-size: 12.5px; font-weight: 600; text-decoration: none; }
+    .bar li:nth-child(2n) a { background: #DCA424; transform: rotate(1.5deg); }
+    .bar li:nth-child(3n) a { background: #E86100; transform: rotate(-2deg); }
+    .bar a:hover { background: #5F2C82; color: #E8E6E1; }
+
+    .cutline { display: flex; flex-wrap: wrap; gap: 6px; margin: 46px 0 10px; }
+    .cut {
+      font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700;
+      font-size: clamp(40px, 10vw, 116px); line-height: 0.9;
+      padding: 0.02em 0.1em; display: inline-block;
+    }
+    .cut.plat { background: #E8E6E1; color: #0A0A0A; }
+    .cut.gold { background: #DCA424; color: #0A0A0A; }
+    .cut.plum { background: #5F2C82; color: #E8E6E1; }
+    .cut.orange { background: #E86100; color: #0A0A0A; }
+
+    .tag {
+      display: inline-block; background: #E8E6E1; color: #0A0A0A;
+      font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px;
+      letter-spacing: 0.18em; text-transform: uppercase; padding: 4px 10px;
+      transform: rotate(-1.5deg); margin-top: 16px;
+    }
+    .lede { max-width: 46ch; margin: 22px 0 0; font-size: 17px; line-height: 1.6; color: #cfcbc2; }
+
+    h2 {
+      display: inline-block; font-family: "Chakra Petch", system-ui, sans-serif;
+      font-size: 22px; text-transform: uppercase; letter-spacing: 0.04em;
+      background: #DCA424; color: #0A0A0A; padding: 4px 12px;
+      transform: rotate(-1.5deg); margin: 62px 0 20px;
+    }
+
+    .torn { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .scrap { background: #E8E6E1; color: #0A0A0A; padding: 20px 22px; }
+    /* The torn edge — a clip-path with an irregular but fixed set of points. */
+    .scrap:nth-child(1) { clip-path: polygon(0 2%, 100% 0, 99% 97%, 52% 100%, 0 96%); transform: rotate(-1.2deg); }
+    .scrap:nth-child(2) { clip-path: polygon(1% 0, 100% 3%, 97% 100%, 0 97%); transform: rotate(1.6deg); background: #DCA424; }
+    .scrap:nth-child(2) .n { color: #5C2507; } /* Sienna is 4.0:1 on Goldenrod — deepened */
+    .scrap:nth-child(3) { clip-path: polygon(0 0, 99% 2%, 100% 98%, 3% 100%); transform: rotate(-0.8deg); }
+    .scrap .n { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: #7E3209; }
+    .scrap h3 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 22px; text-transform: uppercase; margin: 6px 0 9px; }
+    .scrap p { margin: 0; font-size: 14.5px; line-height: 1.55; }
+
+    .strips { display: grid; gap: 10px; }
+    .strip { display: flex; justify-content: space-between; gap: 14px; background: #E8E6E1; color: #0A0A0A; padding: 11px 16px; font-size: 15px; }
+    .strip:nth-child(2n) { background: #cfcbc2; transform: rotate(0.5deg); }
+    .strip:nth-child(3n) { transform: rotate(-0.7deg); }
+    /* Two paper tones under the same ink, so the ink is set for the darker
+       one: #5f5a52 clears AA on Platinum but only reaches 4.2:1 on #cfcbc2. */
+    .strip span:last-child { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: #4a453d; }
+
+    .go {
+      display: inline-block; margin-top: 34px; background: #E86100; color: #0A0A0A;
+      font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700; font-size: 22px;
+      text-transform: uppercase; padding: 12px 26px; text-decoration: none; transform: rotate(-2deg);
+    }
+    .go:hover { background: #DCA424; }
+    footer { margin-top: 60px; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: #9a958c; }
+  </style>
+
+  <div class="page">
+    <header class="bar">
+      <span class="mark">{BRAND}</span>
+      <nav aria-label="Primary">
+        <ul>{NAV.map((n) => <li><a href="#services">{n}</a></li>)}</ul>
+      </nav>
+    </header>
+
+    <h1 class="cutline">
+      {
+        CUTS.map((c) => (
+          <span class={"cut " + c.t} style={"transform: rotate(" + c.r + ") scale(" + c.s + ")"}>{c.c}</span>
+        ))
+      }
+    </h1>
+    <span class="tag">Assembled, not designed</span>
+    <p class="lede">{TAGLINE} The display type is cut from four papers and nothing else; the reading type never tilts.</p>
+
+    <h2 id="services">What we do</h2>
+    <div class="torn">
+      {
+        SERVICES.map((s) => (
+          <article class="scrap">
+            <span class="n">{s.n}</span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <h2>Work</h2>
+    <div class="strips">
+      {
+        WORKS.map((w) => (
+          <div class="strip">
+            <span>{w.client} — {w.line}</span>
+            <span>{w.year}</span>
+          </div>
+        ))
+      }
+    </div>
+
+    <a class="go" href="#services">{CTA.label}</a>
+    <footer>{CTA.address} · {CTA.email}</footer>
+  </div>
+</DemoBase>

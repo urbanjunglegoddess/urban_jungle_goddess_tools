@@ -1,0 +1,81 @@
+---
+import Base from "../../layouts/Base.astro";
+import { LAYOUTS, RISK_NOTE, hasDemo } from "../../lib/catalog";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (() =>
+  LAYOUTS.map((layout) => ({ params: { slug: layout.slug }, props: { layout } }))) satisfies GetStaticPaths;
+
+const { layout } = Astro.props;
+const live = hasDemo(layout.slug);
+const note = RISK_NOTE[layout.riskName];
+---
+
+<Base title={`${layout.name} — Layout Lab`} description={layout.blurb}>
+  <p class="crumb"><a href="/">← All layouts</a></p>
+
+  <header class="lhead">
+    <p class="lpath">{layout.round} · {layout.category}</p>
+    <h1>{layout.name}</h1>
+    <p class="standfirst">{layout.blurb}</p>
+    <div class="rowtags" style="margin-top:14px">
+      <span class="risk">
+        <span class="rdots" aria-hidden="true">
+          {[1, 2, 3, 4, 5].map((i) => <span class={i <= layout.risk ? "rd on" : "rd"} />)}
+        </span>
+        <span class="rname">
+          <span class="sr">Risk {layout.risk} of 5: </span>{layout.riskName}
+        </span>
+      </span>
+      <span class={live ? "pill live" : "pill wire"}>{live ? "Demo built" : "Wireframe only"}</span>
+    </div>
+    {note && <p class="standfirst" style="margin-top:10px;font-size:14px">{note}</p>}
+  </header>
+
+  <section class="sect">
+    <h2>{live ? "The page" : "The wireframe"}</h2>
+    {
+      live ? (
+        <>
+          <p class="demo-bar">
+            <a href={`/demo/${layout.slug}`} target="_blank" rel="noopener">
+              Open full screen ↗
+            </a>
+            <span>Drag the frame's bottom-right corner to test narrower widths.</span>
+          </p>
+          <div class="demo-frame">
+            <iframe src={`/demo/${layout.slug}`} title={`${layout.name} demo`} loading="lazy" />
+          </div>
+        </>
+      ) : (
+        <>
+          {layout.wireframe && <div class="wfwrap" set:html={layout.wireframe} />}
+          <div class="nodemo" style="margin-top:14px">
+            <b>Not built yet.</b>
+            This one is catalogued from the reference sheet but has no page behind it. The
+            wireframe above is the sheet's own sketch, carried across unchanged — it shows the
+            shape, not the build.
+          </div>
+        </>
+      )
+    }
+  </section>
+
+  <section class="sect">
+    <h2>What the sheet says</h2>
+    <dl class="facts">
+      <div class="fact">
+        <dt>Rare because</dt>
+        <dd>{layout.rareBecause ?? "Not documented"}</dd>
+      </div>
+      <div class="fact">
+        <dt>Reach for it when</dt>
+        <dd>{layout.reachFor ?? "Not documented"}</dd>
+      </div>
+      <div class="fact warn">
+        <dt>Watch out</dt>
+        <dd>{layout.watchOut ?? "Not documented"}</dd>
+      </div>
+    </dl>
+  </section>
+</Base>

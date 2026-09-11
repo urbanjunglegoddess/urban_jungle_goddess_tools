@@ -1,0 +1,93 @@
+---
+/**
+ * The shell every demo page sits in.
+ *
+ * A demo is its own document, not a component embedded in the catalog. That is
+ * deliberate: isolation is by document, so a demo can write plain global CSS
+ * (`<style is:global>`) and reach for `body`, `:root` and element selectors the
+ * way a real page would, with no chance of leaking into the chrome. Only two
+ * things are shared — the brand webfonts and a minimal reset.
+ */
+import "@ujg/brand/fonts.css";
+
+interface Props {
+  /** Layout slug, so the chip can point back at the catalog entry. */
+  slug: string;
+  /** The layout's name, as the catalog knows it. */
+  name: string;
+  /** One line on what this demo is pretending to be. */
+  premise: string;
+}
+const { slug, name, premise } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{name} — Layout Lab demo</title>
+    <meta name="description" content={premise} />
+    <meta name="robots" content="noindex" />
+    <style is:global>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: #0A0A0A;
+        font-family: Urbanist, system-ui, -apple-system, "Segoe UI", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      img {
+        max-width: 100%;
+      }
+      :focus-visible {
+        outline: 2px solid #DCA424;
+        outline-offset: 2px;
+      }
+      /* Every demo honours this. Motion is the point of several of them, so the
+         reduced-motion path has to be built, not bolted on. */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+      .lab-chip {
+        position: fixed;
+        right: 12px;
+        bottom: 12px;
+        z-index: 9999;
+        display: inline-block;
+        padding: 7px 13px;
+        border-radius: 999px;
+        border: 1px solid #DCA424;
+        background: #0A0A0A;
+        color: #DCA424;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-decoration: none;
+      }
+      .lab-chip:hover {
+        background: #DCA424;
+        color: #0A0A0A;
+      }
+    </style>
+  </head>
+  <body>
+    <slot />
+    <a class="lab-chip" href={`/layout/${slug}`} target="_top">← Layout Lab</a>
+  </body>
+</html>

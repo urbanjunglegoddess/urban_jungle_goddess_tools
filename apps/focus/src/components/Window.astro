@@ -1,0 +1,34 @@
+---
+/** The window control — every tool starts here. */
+---
+<div class="card">
+  <p class="lbl" id="windowLbl">The window</p>
+  <div class="seg-tog" id="modeTog" role="group" aria-labelledby="windowLbl">
+    <button type="button" data-mode="until" aria-pressed="true">Until a time</button>
+    <button type="button" data-mode="length" aria-pressed="false">For a length</button>
+  </div>
+
+  <div id="untilPane" class="row">
+    <label class="hint" for="untilInput">Free until</label>
+    <input type="time" id="untilInput" />
+  </div>
+
+  <div id="lengthPane" class="row" hidden>
+    <span class="hint">I have</span>
+    <input class="num" id="hh" type="number" min="0" max="24" inputmode="numeric" aria-label="Hours" />
+    <span class="hint">h</span>
+    <input class="num" id="mm" type="number" min="0" max="59" inputmode="numeric" aria-label="Minutes" />
+    <span class="hint">m</span>
+  </div>
+
+  <div style="margin-top:14px">
+    <p class="lbl" id="bufLbl" style="margin-bottom:9px">Buffer at the end</p>
+    <div class="chips" id="bufChips" role="group" aria-labelledby="bufLbl"></div>
+  </div>
+
+  <button type="button" class="toggle" id="restToggle" role="switch" aria-checked="false">
+    <span class="switch"></span><span>Rest after the last session too</span>
+  </button>
+
+  <p class="window-line" id="windowLine" aria-live="polite"></p>
+</div>

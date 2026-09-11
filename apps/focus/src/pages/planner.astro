@@ -1,0 +1,31 @@
+---
+import Base from "../layouts/Base.astro";
+import Window from "../components/Window.astro";
+import Blocks from "../components/Blocks.astro";
+---
+
+<Base title="Planner — Focus Window" description="A static timed plan for the window you have." tool="planner">
+  <div data-variant="planner">
+    <p class="eyebrow">Tool 02</p>
+    <h1>Planner</h1>
+    <p class="sub">
+      One style, your blocks, a timed plan. Every session gets a clock time and the task you
+      put against it.
+    </p>
+
+    <Window />
+    <Blocks />
+
+    <p class="sec-h">The plan</p>
+    <p class="sec-sub" id="runSub">Timed, from now.</p>
+    <div class="card" id="runCard"></div>
+
+    <p class="note">
+      <b>Blocks that don't fit</b> are called out at the bottom rather than silently dropped —
+      the window is the constraint, and the list is what you carry into the next one.
+    </p>
+  </div>
+  <script>
+    import "../scripts/focus.ts";
+  </script>
+</Base>

@@ -1,0 +1,183 @@
+---
+import DemoBase from "../../layouts/DemoBase.astro";
+import { BRAND, SERVICES, WORKS, STATS, CTA, TAGLINE, JOURNAL } from "../../lib/demoContent";
+
+/** Cards are placed on the canvas by hand; x/y are canvas coordinates. */
+const NODES = [
+  { x: 0, y: 0, w: 340, tone: "green", k: "Start here", h: BRAND, p: TAGLINE },
+  ...SERVICES.map((s, i) => ({ x: 440 + i * 60, y: -260 + i * 250, w: 300, tone: i === 1 ? "plum" : "dark", k: s.n, h: s.title, p: s.body })),
+  ...WORKS.slice(0, 4).map((w, i) => ({ x: -420 + (i % 2) * 300, y: 320 + Math.floor(i / 2) * 230, w: 260, tone: "dark", k: w.year, h: w.client, p: w.line })),
+  { x: 980, y: 420, w: 300, tone: "gold", k: "Contact", h: CTA.label, p: CTA.line },
+  { x: -460, y: -280, w: 280, tone: "dark", k: "Journal", h: JOURNAL[0].title, p: JOURNAL.map((j) => j.title).join(" · ") },
+  { x: 120, y: 620, w: 300, tone: "dark", k: "Studio", h: "By the numbers", p: STATS.map((s) => s.k + ": " + s.v).join(" · ") },
+];
+---
+
+<DemoBase
+  slug="infinite"
+  name="Infinite Canvas / Spatial"
+  premise="A pannable, zoomable plane instead of a page — with onboarding, a reset-view control, and a full document list for anything that cannot pan."
+>
+  <style is:global>
+    /* Every one of the sheet's warnings has a countermeasure here:
+       no clear start/end → a "You are here" node and a Reset view button;
+       brutal for SEO → all content is real DOM, readable in source order;
+       brutal for mobile → the whole canvas becomes a plain scrolling list
+       under 760px, where pinch-panning a page is nobody's idea of navigation. */
+    body { background: #0c0f0d; color: #E8E6E1; }
+
+    .hud {
+      position: fixed; inset: 0 0 auto 0; z-index: 30; display: flex; gap: 12px;
+      align-items: center; justify-content: space-between; flex-wrap: wrap;
+      padding: 13px 18px; background: rgba(12,15,13,0.9); border-bottom: 1px solid #1e2622;
+    }
+    .mark { font-family: "Chakra Petch", system-ui, sans-serif; font-weight: 700; font-size: 17px; }
+    .tools { display: flex; gap: 8px; align-items: center; }
+    .tools button {
+      background: transparent; border: 1px solid #2c3733; color: #cfcbc2;
+      font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11.5px;
+      padding: 6px 12px; border-radius: 999px; cursor: pointer;
+    }
+    .tools button:hover { border-color: #DCA424; color: #DCA424; }
+    .zoom { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; color: #8a958f; min-width: 48px; text-align: right; }
+
+    .viewport {
+      position: fixed; inset: 56px 0 0 0; overflow: hidden; cursor: grab;
+      background-image: radial-gradient(#1c2420 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .viewport.dragging { cursor: grabbing; }
+    .canvas { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-origin: 0 0; }
+
+    .node {
+      position: absolute; border: 1px solid #2c3733; border-radius: 14px;
+      padding: 20px 22px; background: #131816;
+    }
+    .node.green { background: #042D1D; border-color: #DCA424; }
+    .node.plum { background: #2a1339; }
+    .node.gold { background: #DCA424; color: #0A0A0A; border-color: #DCA424; }
+    .node .k { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #DCA424; }
+    .node.gold .k { color: #7E3209; }
+    .node h2 { font-family: "Chakra Petch", system-ui, sans-serif; font-size: 21px; margin: 7px 0 8px; line-height: 1.1; }
+    .node p { margin: 0; font-size: 14px; line-height: 1.55; color: #b6bfba; }
+    .node.gold p { color: #2b2721; }
+
+    .onboard {
+      position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 40;
+      display: flex; gap: 14px; align-items: center;
+      background: #131816; border: 1px solid #2c3733; border-radius: 999px;
+      padding: 9px 18px; font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 11.5px; color: #b6bfba; letter-spacing: 0.06em; max-width: calc(100vw - 32px);
+    }
+    .onboard button { background: transparent; border: 0; color: #DCA424; font-family: inherit; font-size: 11.5px; cursor: pointer; }
+
+    /* --- the list, which is the canvas's own content in source order --- */
+    .listing { display: none; }
+    @media (max-width: 759px) {
+      .viewport, .onboard, .tools { display: none; }
+      .listing { display: block; padding: 74px 20px 100px; max-width: 640px; margin: 0 auto; }
+      .listing .node { position: static; margin-bottom: 14px; }
+    }
+  </style>
+
+  <header class="hud">
+    <span class="mark">{BRAND}</span>
+    <div class="tools">
+      <button type="button" id="zout">−</button>
+      <span class="zoom" id="zlabel">100%</span>
+      <button type="button" id="zin">+</button>
+      <button type="button" id="reset">Reset view</button>
+    </div>
+  </header>
+
+  <div class="viewport" id="viewport">
+    <div class="canvas" id="canvas">
+      {
+        NODES.map((n) => (
+          <article class={"node " + n.tone} style={`left:${n.x}px;top:${n.y}px;width:${n.w}px`}>
+            <span class="k">{n.k}</span>
+            <h2>{n.h}</h2>
+            <p>{n.p}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="onboard" id="onboard">
+    <span>Drag to pan · scroll to zoom</span>
+    <button type="button" id="gotit">Got it</button>
+  </div>
+
+  <div class="listing">
+    {
+      NODES.map((n) => (
+        <article class={"node " + n.tone}>
+          <span class="k">{n.k}</span>
+          <h2>{n.h}</h2>
+          <p>{n.p}</p>
+        </article>
+      ))
+    }
+  </div>
+
+  <script>
+    /** Pan and zoom, kept deliberately small: one transform, clamped scale,
+     *  and a reset that always returns the visitor to the start node. */
+    const vp = document.getElementById("viewport") as HTMLElement;
+    const canvas = document.getElementById("canvas") as HTMLElement;
+    const zlabel = document.getElementById("zlabel") as HTMLElement;
+    const onboard = document.getElementById("onboard") as HTMLElement;
+
+    const HOME = { x: 140, y: 40, s: 1 };
+    let view = { ...HOME };
+    let drag: { x: number; y: number; vx: number; vy: number } | null = null;
+
+    function paint() {
+      canvas.style.transform =
+        "translate(" + view.x + "px," + view.y + "px) scale(" + view.s + ")";
+      zlabel.textContent = Math.round(view.s * 100) + "%";
+    }
+
+    function zoom(factor: number) {
+      view.s = Math.min(2, Math.max(0.35, view.s * factor));
+      paint();
+    }
+
+    vp.addEventListener("pointerdown", (e) => {
+      drag = { x: e.clientX, y: e.clientY, vx: view.x, vy: view.y };
+      vp.classList.add("dragging");
+      vp.setPointerCapture(e.pointerId);
+    });
+    vp.addEventListener("pointermove", (e) => {
+      if (!drag) return;
+      view.x = drag.vx + (e.clientX - drag.x);
+      view.y = drag.vy + (e.clientY - drag.y);
+      paint();
+    });
+    for (const ev of ["pointerup", "pointercancel"] as const) {
+      vp.addEventListener(ev, () => { drag = null; vp.classList.remove("dragging"); });
+    }
+    vp.addEventListener("wheel", (e) => { e.preventDefault(); zoom(e.deltaY < 0 ? 1.1 : 0.9); }, { passive: false });
+
+    document.getElementById("zin")!.addEventListener("click", () => zoom(1.2));
+    document.getElementById("zout")!.addEventListener("click", () => zoom(1 / 1.2));
+    document.getElementById("reset")!.addEventListener("click", () => { view = { ...HOME }; paint(); });
+    document.getElementById("gotit")!.addEventListener("click", () => { onboard.hidden = true; });
+
+    // Arrow keys pan, so the canvas is reachable without a pointer at all.
+    vp.tabIndex = 0;
+    vp.addEventListener("keydown", (e) => {
+      const step = 60;
+      if (e.key === "ArrowLeft") view.x += step;
+      else if (e.key === "ArrowRight") view.x -= step;
+      else if (e.key === "ArrowUp") view.y += step;
+      else if (e.key === "ArrowDown") view.y -= step;
+      else return;
+      e.preventDefault();
+      paint();
+    });
+
+    paint();
+  </script>
+</DemoBase>
